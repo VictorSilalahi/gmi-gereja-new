@@ -22,7 +22,7 @@
                         </div>
                         <div class="card-body">
 
-                            <form method="post" action="/validasi">
+                            <form method="post" action="<?php echo(base_url()); ?>administrasi/validasi">
                                 <div class="mb-3">
                                 <label for="emailDosen" class="form-label">Username/Email</label>
                                 <input type="text" class="form-control" id="emailDosen" name="uname" aria-describedby="emailHelp">
