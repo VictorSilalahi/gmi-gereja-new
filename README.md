@@ -1,4 +1,4 @@
-# Aplikasi Pendataan Jemaat Gereja | GMI Wil-I
+# Aplikasi Pendataan Jemaat Gereja | GMI Wil-I | SIGMI
 
 ## Pengguna Aplikasi
 Aplikasi ini digunakan disetiap gereja Resort di lingkungan GMI Wil-I dimana dengan aplikasi ini maka resort tersebut dapat didaftarkan, sehingga mendapatkan login dan password.
