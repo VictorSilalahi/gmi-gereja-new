@@ -98,6 +98,7 @@ class Pendaftaran extends BaseController
         helper('text');
 
         $pwd = random_string('alnum', 8);
+        $db_id = "g-".random_string('alnum', 8);
 
         $img_sk = $this->request->getFile("fileSK");
         $new_img_sk = $img_sk->getRandomName();
@@ -132,8 +133,8 @@ class Pendaftaran extends BaseController
         $path_img_sk = 'public/uploads/pendeta/'.$new_img_sk;
         
         // simpan ke tgereja 
-        $sql = "insert into tgereja (gereja_id, distrik, email, password, nama_gereja, alamat, kondisi_bangunan, kepemilikan, created_at, updated_at)";
-        $sql = $sql . " values ('".$gereja_id."','".$distrik."','".$email_gereja."','".$pwd."','".$gereja."','".$alamat."','".$kondisi_bangunan."','".$kepemilikan_bangunan."'";
+        $sql = "insert into tgereja (gereja_id, distrik, email, password, nama_gereja, alamat, kondisi_bangunan, kepemilikan, db_id, created_at, updated_at)";
+        $sql = $sql . " values ('".$gereja_id."','".$distrik."','".$email_gereja."','".$pwd."','".$gereja."','".$alamat."','".$kondisi_bangunan."','".$kepemilikan_bangunan."','".$db_id."'";
         $sql = $sql . ",'".$created_at."','".$updated_at."')";
 
         $db->query($sql);
@@ -156,6 +157,11 @@ class Pendaftaran extends BaseController
         }
     }
     
+    public function buat_database($db_id)
+    {
+
+
+    }
 
     public function kirim_email($email_gereja, $pwd)
     {
