@@ -40,7 +40,7 @@
                     <div class="card mb-3" style="max-width: 100%;">
                     <div class="row g-0">
                         <div class="col-md-4">
-                        <img src="https://www.nextlevelworship.com/wp-content/uploads/2019/01/Cross-Easter-scaled.jpg" class="img-fluid rounded-start" alt="...">
+                        <img src="https://www.nextlevelworship.com/wp-content/uploads/2019/01/Cross-Easter-scaled.jpg" class="img-fluid rounded-start" width="100%" height="100%" alt="...">
                         </div>
                         <div class="col-md-8">
                         <div class="card-body">

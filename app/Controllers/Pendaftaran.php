@@ -103,7 +103,7 @@ class Pendaftaran extends BaseController
 
         $pwd = random_string('alnum', 8);
         $db_id = "g-".random_string('alnum', 6);
-        $link_identity_id = random_string('alnum', 12);
+        $identity_link = random_string('alnum', 12);
 
         $img_sk = $this->request->getFile("fileSK");
         $new_img_sk = $img_sk->getRandomName();
@@ -121,9 +121,9 @@ class Pendaftaran extends BaseController
         $path_img_sk = 'public/uploads/pendeta/'.$new_img_sk;
         
         // simpan ke tgereja 
-        $sql = "insert into tgereja (gereja_id, distrik, email, password, nama_gereja, alamat, kondisi_bangunan, kepemilikan, db_id, link_identity_id, created_at, updated_at)";
+        $sql = "insert into tgereja (gereja_id, distrik, email, password, nama_gereja, alamat, kondisi_bangunan, kepemilikan, db_id, identity_link, created_at, updated_at)";
         $sql = $sql . " values ('".$gereja_id."','".$distrik."','".$email_gereja."','".$pwd."','".$gereja."','".$alamat."','".$kondisi_bangunan."','".$kepemilikan_bangunan."','".$db_id."'";
-        $sql = $sql . ",'".$link_identity_id."','".$created_at."','".$updated_at."')";
+        $sql = $sql . ",'".$identity_link."','".$created_at."','".$updated_at."')";
 
         $db->query($sql);
 
