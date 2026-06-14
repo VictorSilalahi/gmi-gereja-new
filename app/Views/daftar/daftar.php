@@ -84,7 +84,7 @@
                             <label for="slcKondisi" class="col-sm-8 col-form-label">Kondisi Bangunan Gereja</label>
                             <div class="col-sm-10">
                                 <select class="form-control" name="slcKondisi" id="slcKondisi">
-                                    <option value="Permanan">Permanen</option>
+                                    <option value="Permanen">Permanen</option>
                                     <option value="Semi Permanen">Semi Permanen</option>
                                     <option value="Sementara">Sementara</option>
                                 </select>

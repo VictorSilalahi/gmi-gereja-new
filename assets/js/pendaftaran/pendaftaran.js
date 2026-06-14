@@ -102,7 +102,7 @@ $(document).on("click", ".btn-daftar", function() {
     let cek_ada_email = cek_keberadaan_email("gereja", email_gereja);
     
     if (cek_ada_email==true) {
-        alert("Email Gereja sudah terdaftar!");
+        pesan_error("Email Gereja sudah terdaftar!");
         return false;
     }
 
@@ -110,7 +110,7 @@ $(document).on("click", ".btn-daftar", function() {
     cek_ada_email = cek_keberadaan_email("pendeta", email_pendeta);
     
     if (cek_ada_email==true) {
-        alert("Email Pendeta sudah terdaftar!");
+        pesan_error("Email Pendeta sudah terdaftar!");
         return false;
     }
 

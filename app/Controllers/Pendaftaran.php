@@ -6,6 +6,8 @@ use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\I18n\Time;
 use Ramsey\Uuid\Uuid;
 
+use Config\Database;
+
 class Pendaftaran extends BaseController
 {
     
@@ -60,18 +62,20 @@ class Pendaftaran extends BaseController
 
         $db = \Config\Database::connect();
 
-        $resort = $this->request->getPost("gereja");
+        $gereja = $this->request->getPost("gereja");
         $distrik = $this->request->getPost("distrik");
-
         
-        $query = $db->query("select count(*) as jumlah from tresort where nama_resort='".$resort."' and distrik='".$distrik."'");
+        $query = $db->query("select count(*) as jumlah from tgereja where nama_gereja='".$gereja."' and distrik='".$distrik."'");
+
         if ($query) {
             $result = $query->getResultArray();
-            $data = array("status"=>"ok", "judul"=>"cek keberadaan resort", "jumlah"=>$result[0]['jumlah']);
+            $data = array("status"=>"ok", "judul"=>"cek keberadaan gereja", "jumlah"=>$result[0]['jumlah']);
             return $this->respond($data, 200);
+
         } else {
-            $data = array("status"=>"error", "judul"=>"cek keberadaan resort", "pesan"=>"Error operasi!");
+            $data = array("status"=>"error", "judul"=>"cek keberadaan gereja", "pesan"=>"Error operasi!");
             return $this->respond($data, 422);
+
         }
 
     
@@ -89,7 +93,7 @@ class Pendaftaran extends BaseController
 
         $gereja_id = $uuid->toString();
         $gereja = $this->request->getPost("txtNamaGereja");
-        $alamat = $this->request->getPost("txtAlamatResort");
+        $alamat = $this->request->getPost("txtAlamatGereja");
         $distrik = $this->request->getPost("slcDistrik");
         $email_gereja = $this->request->getPost("txtEmailGereja");
         $kondisi_bangunan = $this->request->getPost("slcKondisi");
@@ -98,7 +102,8 @@ class Pendaftaran extends BaseController
         helper('text');
 
         $pwd = random_string('alnum', 8);
-        $db_id = "g-".random_string('alnum', 8);
+        $db_id = "g-".random_string('alnum', 6);
+        $link_identity_id = random_string('alnum', 12);
 
         $img_sk = $this->request->getFile("fileSK");
         $new_img_sk = $img_sk->getRandomName();
@@ -110,32 +115,15 @@ class Pendaftaran extends BaseController
         $nama_pendeta = $this->request->getPost("txtNamaPendeta");
         $email_pendeta = $this->request->getPost("txtEmailPendeta");
 
-        // $new_gereja = new ResortModel();
-
-        // $new_data = [
-        //     'resort_id'=> $resort_id,
-        //     'nama_resort'=> $resort, 
-        //     'alamat'=> $alamat,
-        //     'distrik'=>$distrik,
-        //     'email'=>$email_resort,            
-        //     'password'=>$pwd, 
-        //     'nama_operator'=>$operator, 
-        //     'mobile_phone'=>$mobile_phone, 
-        //     'path_sk'=>$new_img_sk, 
-        //     'tanggal_daftar'=>$tanggal_daftar, 
-        //     'created_at'=>$created_at, 
-        //     'updated_at'=>$updated_at
-        // ];
-
         // pindahkan file ke folder
         $img_sk->move(ROOTPATH . 'public/uploads/pendeta', $new_img_sk);
         // path penyimpanan image SK
         $path_img_sk = 'public/uploads/pendeta/'.$new_img_sk;
         
         // simpan ke tgereja 
-        $sql = "insert into tgereja (gereja_id, distrik, email, password, nama_gereja, alamat, kondisi_bangunan, kepemilikan, db_id, created_at, updated_at)";
+        $sql = "insert into tgereja (gereja_id, distrik, email, password, nama_gereja, alamat, kondisi_bangunan, kepemilikan, db_id, link_identity_id, created_at, updated_at)";
         $sql = $sql . " values ('".$gereja_id."','".$distrik."','".$email_gereja."','".$pwd."','".$gereja."','".$alamat."','".$kondisi_bangunan."','".$kepemilikan_bangunan."','".$db_id."'";
-        $sql = $sql . ",'".$created_at."','".$updated_at."')";
+        $sql = $sql . ",'".$link_identity_id."','".$created_at."','".$updated_at."')";
 
         $db->query($sql);
 
@@ -144,6 +132,12 @@ class Pendaftaran extends BaseController
 
         $db->query($sql);
 
+        $db->close();
+
+        // proses membuat database untuk gereja yg baru
+        $this->buat_database_gereja($db_id);
+
+        // kirim email pemberitahuan ke email gereja
         try {
 
             $this->kirim_email($email_gereja, $pwd);
@@ -157,9 +151,83 @@ class Pendaftaran extends BaseController
         }
     }
     
-    public function buat_database($db_id)
+    public function buat_database_gereja($db_id)
     {
 
+        $customConfig = [
+            'DSN'      => '',
+            'hostname' => getenv('database.default.hostname'),
+            'username' => getenv('database.default.username'),
+            'password' => getenv('database.default.password'),
+            'database' => 'g-core',
+            'DBDriver' => getenv('database.default.DBDriver'),
+            'pConnect' => false,
+            'DBDebug'  => true,
+            'charset'  => 'utf8mb4',
+            'DBCollat' => 'utf8mb4_general_ci',
+            'port'     => 3306,
+        ];
+
+        // Establish connection using the custom array parameters
+        $sourceDb = \Config\Database::connect($customConfig, false);    
+        $forge = \Config\Database::forge($sourceDb);
+
+        // Create the new target database
+        try {
+            if ($forge->createDatabase($db_id)) {
+                // echo "Database '{$db_id}' created successfully.<br>";
+            }
+        } catch (\Exception $e) {
+
+            // Standard exceptions
+            log_message('error', $e->getMessage());
+
+        }
+
+        // 4. Create a dynamic connection array for the new database
+        $targetConfig = [
+            'DSN'      => '',
+            'hostname' => getenv('database.default.hostname'),
+            'username' => getenv('database.default.username'),
+            'password' => getenv('database.default.password'),
+            'database' => $db_id,
+            'DBDriver' => getenv('database.default.DBDriver'),
+            'pConnect' => false,
+            'DBDebug'  => true,
+            'charset'  => 'utf8mb4',
+            'DBCollat' => 'utf8mb4_general_ci',
+            'port'     => 3306,
+        ];
+        
+        // // Connect to the newly created database
+        $targetDb = \Config\Database::connect($targetConfig, false);
+
+        // // 5. Retrieve all tables from the source database
+        $tables = $sourceDb->listTables();
+
+        foreach ($tables as $table) {
+            // Ignore system migration tables if you do not want history duplicated
+            if ($table === 'migrations') {
+                continue;
+            }
+
+            // echo "Cloning table: {$table}... ";
+
+            // 6. Duplicate the structure using raw SQL
+            // (Note: This syntax is specific to MySQL/MariaDB)
+            $targetDb->query("CREATE TABLE `{$db_id}`.`{$table}` LIKE `{$sourceDb->database}`.`{$table}`");
+
+            // 7. Clone data using CodeIgniter 4 Query Builder
+            $sourceData = $sourceDb->table($table)->get()->getResultArray();
+
+            if (!empty($sourceData)) {
+                // Batch insert into the new clone database table
+                $targetDb->table($table)->insertBatch($sourceData);
+            }
+
+        }
+
+        return true;    
 
     }
 
@@ -216,8 +284,9 @@ class Pendaftaran extends BaseController
 
         } else {
 
-            error_log($this->email->print_debugger());
-            echo($email->printDebugger(['headers', 'subject', 'body']));
+            log_message('error', $this->email->print_debugger());
+            // error_log($this->email->print_debugger());
+            // echo($email->printDebugger(['headers', 'subject', 'body']));
     
         }
 
