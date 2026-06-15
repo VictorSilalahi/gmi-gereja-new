@@ -11,3 +11,4 @@ $routes->post('/daftar/cek_gereja', 'Pendaftaran::cek_gereja');
 $routes->post('/daftar/tambah_gereja', 'Pendaftaran::tambah_gereja');
 
 $routes->get('/', 'Administrasi::index');
+$routes->post('/validasi', 'Administrasi::validasi');

@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2026 at 10:19 AM
--- Server version: 10.4.32-MariaDB
+-- Generation Time: Jun 15, 2026 at 01:37 PM
+-- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -63,6 +63,19 @@ CREATE TABLE `thistoryjabatan` (
   `anggotajemaat_id` int(11) NOT NULL,
   `tanggal_aktif` date NOT NULL,
   `tanggal_berhenti` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `thistoryjemaat`
+--
+
+CREATE TABLE `thistoryjemaat` (
+  `historyjemaat_id` bigint(20) UNSIGNED NOT NULL,
+  `anggotajemaat_id` int(11) NOT NULL,
+  `jenis_operasi` varchar(100) NOT NULL,
+  `tanggal_operasi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -211,6 +224,12 @@ ALTER TABLE `thistoryjabatan`
   ADD UNIQUE KEY `historyjabatan_id` (`historyjabatan_id`);
 
 --
+-- Indexes for table `thistoryjemaat`
+--
+ALTER TABLE `thistoryjemaat`
+  ADD UNIQUE KEY `historyjemaat_id` (`historyjemaat_id`);
+
+--
 -- Indexes for table `tjabatan`
 --
 ALTER TABLE `tjabatan`
@@ -291,6 +310,12 @@ ALTER TABLE `tanggotaorganisasi`
 --
 ALTER TABLE `thistoryjabatan`
   MODIFY `historyjabatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `thistoryjemaat`
+--
+ALTER TABLE `thistoryjemaat`
+  MODIFY `historyjemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tjabatan`
