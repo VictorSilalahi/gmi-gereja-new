@@ -211,13 +211,10 @@ class Pendaftaran extends BaseController
                 continue;
             }
 
-            // echo "Cloning table: {$table}... ";
-
-            // 6. Duplicate the structure using raw SQL
-            // (Note: This syntax is specific to MySQL/MariaDB)
+            // cloning databse
             $targetDb->query("CREATE TABLE `{$db_id}`.`{$table}` LIKE `{$sourceDb->database}`.`{$table}`");
 
-            // 7. Clone data using CodeIgniter 4 Query Builder
+            // ambil data
             $sourceData = $sourceDb->table($table)->get()->getResultArray();
 
             if (!empty($sourceData)) {
