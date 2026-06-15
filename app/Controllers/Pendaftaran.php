@@ -102,7 +102,7 @@ class Pendaftaran extends BaseController
         helper('text');
 
         $pwd = random_string('alnum', 8);
-        $db_id = "g-".random_string('alnum', 6);
+        $db_id = "g-".strtolower(random_string('alnum', 6));
         $identity_link = random_string('alnum', 12);
 
         $img_sk = $this->request->getFile("fileSK");
@@ -199,10 +199,10 @@ class Pendaftaran extends BaseController
             'port'     => 3306,
         ];
         
-        // // Connect to the newly created database
+        // Connect to the newly created database
         $targetDb = \Config\Database::connect($targetConfig, false);
 
-        // // 5. Retrieve all tables from the source database
+        // ambil semua daftar tabel dari g-core
         $tables = $sourceDb->listTables();
 
         foreach ($tables as $table) {
