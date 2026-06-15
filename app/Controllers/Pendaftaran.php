@@ -184,7 +184,7 @@ class Pendaftaran extends BaseController
 
         }
 
-        // 4. Create a dynamic connection array for the new database
+        // koneksikan ke database yg baru dibentuk
         $targetConfig = [
             'DSN'      => '',
             'hostname' => getenv('database.default.hostname'),
