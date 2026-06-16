@@ -116,14 +116,14 @@ class Pendaftaran extends BaseController
         $email_pendeta = $this->request->getPost("txtEmailPendeta");
 
         // pindahkan file ke folder
-        $img_sk->move(ROOTPATH . 'public/uploads/pendeta', $new_img_sk);
+        $img_sk->move(ROOTPATH . 'public/uploads/sk', $new_img_sk);
         // path penyimpanan image SK
-        $path_img_sk = 'public/uploads/pendeta/'.$new_img_sk;
+        $path_img_sk = 'public/uploads/sk/'.$new_img_sk;
         
         // simpan ke tgereja 
-        $sql = "insert into tgereja (gereja_id, distrik, email, password, nama_gereja, alamat, kondisi_bangunan, kepemilikan, db_id, identity_link, created_at, updated_at)";
+        $sql = "insert into tgereja (gereja_id, distrik, email, password, nama_gereja, alamat, kondisi_bangunan, kepemilikan, db_id, identity_link, path_sk, created_at, updated_at)";
         $sql = $sql . " values ('".$gereja_id."','".$distrik."','".$email_gereja."','".$pwd."','".$gereja."','".$alamat."','".$kondisi_bangunan."','".$kepemilikan_bangunan."','".$db_id."'";
-        $sql = $sql . ",'".$identity_link."','".$created_at."','".$updated_at."')";
+        $sql = $sql . ",'".$identity_link."','".$path_img_sk."','".$created_at."','".$updated_at."')";
 
         $db->query($sql);
 
