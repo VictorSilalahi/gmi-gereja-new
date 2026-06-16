@@ -11,6 +11,10 @@ use Firebase\JWT\Key;
 
 class Administrasi extends BaseController
 {
+
+    use ResponseTrait;
+
+    
     public function index(): string
     {
         return view('administrasi/login');
