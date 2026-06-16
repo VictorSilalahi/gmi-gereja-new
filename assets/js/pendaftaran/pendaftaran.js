@@ -123,6 +123,8 @@ $(document).on("click", ".btn-daftar", function() {
     }
 
     
+    $.LoadingOverlay("show");
+
     $("#formDaftar").submit();
 
 

@@ -24,14 +24,14 @@
 
                             <form method="post" action="<?php echo(base_url()); ?>administrasi/validasi">
                                 <div class="mb-3">
-                                <label for="emailDosen" class="form-label">Username/Email</label>
-                                <input type="text" class="form-control" id="emailDosen" name="uname" aria-describedby="emailHelp">
+                                <label for="txtEmail" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="txtEmail" name="txtEmail" aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-3">
-                                <label for="passwordDosen" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="passwordDosen" name="pword">
+                                <label for="txtPassword" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="txtPassword" name="txtPassword">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Login</button>
+                                <button type="submit" class="btn btn-primary btn-login">Login</button>
                             </form>                        
 
                         </div>

@@ -16,6 +16,7 @@ class Administrasi extends BaseController
         return view('administrasi/login');
     }
 
+    
     public function validasi() 
     {
 
@@ -33,7 +34,7 @@ class Administrasi extends BaseController
             if ($result[0]['jumlah']==1) 
             {
 
-                $query = $db->query("select gereja_id, nama_gereja, distrik, email, db_id from tgereja where email='".$email."' and password='".$password."'");
+                $query = $db->query("select gereja_id, nama_gereja, distrik, email, db_id, identity_link from tgereja where email='".$email."' and password='".$password."'");
                 $result = $query->getResultArray();
 
                 $key = getenv('jwt.encryption.key');
@@ -41,7 +42,14 @@ class Administrasi extends BaseController
 
                 $iat = time(); // Issued at time
                 $exp = $iat + intval(getenv('jwt.expiration')); // Expiration time
-                $isi_sub = ["gereja_id"=>$result[0]['gereja_id'], "nama_gereja"=>$result[0]['nama_gereja'], "distrik"=>$result[0]['distrik'], "email"=>$result[0]['email']];
+                $isi_sub = [
+                    "gereja_id"=>$result[0]['gereja_id'], 
+                    "nama_gereja"=>$result[0]['nama_gereja'], 
+                    "distrik"=>$result[0]['distrik'], 
+                    "email"=>$result[0]['email'],
+                    "db_id"=>$result[0]['db_id'],
+                    "identity_link"=>$result[0]['identity_link']
+                ];
 
                 $payload = [
                     'sub' => $isi_sub,
