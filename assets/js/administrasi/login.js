@@ -38,7 +38,19 @@ $(document).on("click", ".btn-login", function() {
     $.LoadingOverlay("show");
 
     temp = ajax_post(base_url+"validasi", {"email": email, "password": password});
-    console.log(temp);
+    
+    if (temp.status==200) {
+        
+        localStorage.setItem('4pp_t0k3n', temp.token);
+        window.location.replace(base_url+"jemaat");
+
+    
+    } else {
+
+        $.LoadingOverlay("hide");
+        pesan_error("Login dan password salah!");
+
+    }
 
 });
 

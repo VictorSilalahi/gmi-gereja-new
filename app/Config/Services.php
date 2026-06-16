@@ -3,6 +3,8 @@
 namespace Config;
 
 use CodeIgniter\Config\BaseService;
+use App\Libraries\Servicedb;
+
 
 /**
  * Services Configuration file.
@@ -29,4 +31,13 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+
+    public static function myServicedb(bool $getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('myServicedb');
+        }
+
+        return new Servicedb();
+    }
 }

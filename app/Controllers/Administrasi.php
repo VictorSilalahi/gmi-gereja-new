@@ -14,7 +14,7 @@ class Administrasi extends BaseController
 
     use ResponseTrait;
 
-    
+
     public function index(): string
     {
         return view('administrasi/login');
@@ -46,7 +46,7 @@ class Administrasi extends BaseController
 
                 $iat = time(); // Issued at time
                 $exp = $iat + intval(getenv('jwt.expiration')); // Expiration time
-                $isi_sub = [
+                $isi_data = [
                     "gereja_id"=>$result[0]['gereja_id'], 
                     "nama_gereja"=>$result[0]['nama_gereja'], 
                     "distrik"=>$result[0]['distrik'], 
@@ -56,15 +56,42 @@ class Administrasi extends BaseController
                 ];
 
                 $payload = [
-                    'sub' => $isi_sub,
                     'iat' => $iat,
                     'exp' => $exp,
+                    'data' => $isi_data,
                     'email' => $result[0]["email"]
                 ];
 
                 $token = JWT::encode($payload, $key, 'HS256');
 
-                // echo($token);
+                $db->close();
+
+                // bertukar database menjadi database gereja
+                // $dbGerejaSettings = [
+                //     'DSN'      => '',
+                //     'hostname' => getenv('database.default.hostname'),
+                //     'username' => getenv('database.default.username'),
+                //     'password' => getenv('database.default.password'),
+                //     'database' => $result[0]['db_id'],
+                //     'DBDriver' => 'MySQLi',
+                //     'pConnect' => false,
+                //     'DBDebug'  => true,
+                //     'charset'  => 'utf8mb4',
+                //     'DBCollat' => 'utf8mb4_general_ci',
+                //     'port'     => 3306
+                // ];
+
+                // $dbGereja = \Config\Database::connect($dbGerejaSettings, false);
+
+                // $db->setDatabase($result[0]['db_id']);
+
+                // gunakan service untuk menyimpan koneksi ke database baru
+                // $myServiceDb = \Config\Services::myServicedb();
+                // $myServiceDb->setDbGereja($result[0]['db_id']);
+
+                $globalVars = config('GlobalVars');
+                $globalVars->db_id = $result[0]['db_id'];
+                // echo($globalVars->db_id);
                 return $this->respond([
                     'status'  => 200,
                     'pesan' => 'Login sukses',
@@ -92,7 +119,17 @@ class Administrasi extends BaseController
         }
 
 
+    }
 
+    public function jemaat() 
+    {
+        return view('administrasi/jemaat');
+    }
+
+
+    public function sektor() 
+    {
+        return view('administrasi/sektor');
     }
 
 

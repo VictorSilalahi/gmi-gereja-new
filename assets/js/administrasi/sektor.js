@@ -1,7 +1,12 @@
-import { ajax_get, ajax_post } from "../ajx.js";
+import { ajax_get, ajax_post, check_token } from "../ajx.js";
+import { set_tanggal, set_tanggal_indo, set_tanggal_database } from "../format.js";
+import { pesan_error, pesan_sukses, pesan_tanya } from "../pesan.js";
 
 $(document).ready(function () {
+
+  check_token();
   loadData();
+
 });
 
 $(document).on("click", ".btn-delete", function () {
@@ -77,7 +82,9 @@ $(document).on("click", "#btnOKSektor", function () {
 function loadData() {
   $("#tblSektor tbody tr").remove();
 
-  var data = ajax_get("sektor/all", "");
+  let base_url = $("#base_url").val()+"api/intern/sektor/all"
+
+  var data = ajax_get(base_url, "");
 
   if (data.msg == "ok") {
     var isi_tabel = "";

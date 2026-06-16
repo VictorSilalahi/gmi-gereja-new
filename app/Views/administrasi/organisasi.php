@@ -156,6 +156,8 @@
       </div>
     </div>
 
+    <input type="hidden" id="base_url" value="<?php echo(base_url()); ?>">
+
 </body>
   <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>

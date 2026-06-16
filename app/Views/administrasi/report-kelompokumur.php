@@ -146,7 +146,7 @@
 
     </div>
 
-
+    <input type="hidden" id="base_url" value="<?php echo(base_url()); ?>">
 
 </body>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

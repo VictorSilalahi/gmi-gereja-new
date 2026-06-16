@@ -1,11 +1,15 @@
-import { ajax_get, ajax_post } from "../ajx.js";
+import { ajax_get, ajax_post, check_token } from "../ajx.js";
 import { set_tanggal, set_tanggal_indo, set_tanggal_database } from "../format.js";
+import { pesan_error, pesan_sukses, pesan_tanya } from "../pesan.js";
 
 
 $(document).ready(function () {
 
-  loadDataSektor();
-  loadDataSektorForm();
+  
+  check_token();
+   
+  // loadDataSektor();
+  // loadDataSektorForm();
 
   $("#tblJemaat tbody").html("");
 
