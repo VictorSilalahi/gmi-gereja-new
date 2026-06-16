@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2026 at 01:37 PM
--- Server version: 10.4.27-MariaDB
+-- Generation Time: Jun 16, 2026 at 07:03 AM
+-- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -55,27 +55,26 @@ CREATE TABLE `tanggotaorganisasi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `thistoryjabatan`
+-- Table structure for table `thistoryapp`
 --
 
-CREATE TABLE `thistoryjabatan` (
-  `historyjabatan_id` bigint(20) UNSIGNED NOT NULL,
-  `anggotajemaat_id` int(11) NOT NULL,
-  `tanggal_aktif` date NOT NULL,
-  `tanggal_berhenti` int(11) NOT NULL
+CREATE TABLE `thistoryapp` (
+  `historyapp_id` bigint(20) UNSIGNED NOT NULL,
+  `operasi` varchar(50) NOT NULL,
+  `tanggal_operasi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `thistoryjemaat`
+-- Table structure for table `thistorypejabat`
 --
 
-CREATE TABLE `thistoryjemaat` (
-  `historyjemaat_id` bigint(20) UNSIGNED NOT NULL,
+CREATE TABLE `thistorypejabat` (
+  `historypejabat_id` bigint(20) UNSIGNED NOT NULL,
   `anggotajemaat_id` int(11) NOT NULL,
-  `jenis_operasi` varchar(100) NOT NULL,
-  `tanggal_operasi` date NOT NULL
+  `tanggal_pengangkatan` date NOT NULL,
+  `tanggal_berhenti` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -218,16 +217,16 @@ ALTER TABLE `tanggotaorganisasi`
   ADD UNIQUE KEY `anggotaorganisasi_id` (`anggotaorganisasi_id`);
 
 --
--- Indexes for table `thistoryjabatan`
+-- Indexes for table `thistoryapp`
 --
-ALTER TABLE `thistoryjabatan`
-  ADD UNIQUE KEY `historyjabatan_id` (`historyjabatan_id`);
+ALTER TABLE `thistoryapp`
+  ADD UNIQUE KEY `historyapp_id` (`historyapp_id`);
 
 --
--- Indexes for table `thistoryjemaat`
+-- Indexes for table `thistorypejabat`
 --
-ALTER TABLE `thistoryjemaat`
-  ADD UNIQUE KEY `historyjemaat_id` (`historyjemaat_id`);
+ALTER TABLE `thistorypejabat`
+  ADD UNIQUE KEY `historypejabat_id` (`historypejabat_id`);
 
 --
 -- Indexes for table `tjabatan`
@@ -306,16 +305,16 @@ ALTER TABLE `tanggotaorganisasi`
   MODIFY `anggotaorganisasi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `thistoryjabatan`
+-- AUTO_INCREMENT for table `thistoryapp`
 --
-ALTER TABLE `thistoryjabatan`
-  MODIFY `historyjabatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `thistoryapp`
+  MODIFY `historyapp_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `thistoryjemaat`
+-- AUTO_INCREMENT for table `thistorypejabat`
 --
-ALTER TABLE `thistoryjemaat`
-  MODIFY `historyjemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `thistorypejabat`
+  MODIFY `historypejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tjabatan`
