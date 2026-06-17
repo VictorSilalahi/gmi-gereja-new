@@ -5,15 +5,21 @@ import { pesan_error, pesan_sukses, pesan_tanya } from "../pesan.js";
 $(document).ready(function () {
 
   check_token();
-  loadData();
 
+  $.LoadingOverlay("show");
+  loadData();
+  $.LoadingOverlay("hide");
+  
 });
 
 $(document).on("click", ".btn-delete", function () {
+
+  let base_url = $("#base_url").val()+"api/intern/";
+
   if (confirm("Apakah akan menghapus data sektor ini?")) {
     var sektor_id = $(this).parent().parent().attr("id");
 
-    var jawab = ajax_post("sektor/del", { sektor_id: sektor_id });
+    var jawab = ajax_post(base_url+"sektor/del", { sektor_id: sektor_id });
     if (jawab.msg == "error") {
       alert("Data sektor ini tidak bisa dihapus! Telah dipakai!");
       return false;
@@ -25,6 +31,8 @@ $(document).on("click", ".btn-delete", function () {
 });
 
 $(document).on("click", ".btn-edit", function () {
+
+    
     var sektor_id = $(this).parent().parent().attr("id");
     var no_sektor = $(this).parent().parent().find("td:eq(1)").text();
     var nama_sektor = $(this).parent().parent().find("td:eq(2)").text();
@@ -44,6 +52,9 @@ $(document).on("click", "#btnTambahSektor", function () {
 });
 
 $(document).on("click", "#btnOKSektor", function () {
+
+  let base_url = $("#base_url").val()+"api/intern/";
+
   if ($("#txtNomorSektor").val() == "") {
     alert("Masukkan nomor Sektor!");
     $("#txtNomorSektor").focus();
@@ -57,7 +68,7 @@ $(document).on("click", "#btnOKSektor", function () {
   }
 
   if ($("#txtJenisOpSektor").val() == "tambah") {
-    var data = ajax_post("sektor/add", { no_sektor: $("#txtNomorSektor").val(), nama_sektor: $("#txtNamaSektor").val() });
+    var data = ajax_post(base_url+"sektor/add", { no_sektor: $("#txtNomorSektor").val(), nama_sektor: $("#txtNamaSektor").val() });
     if (data.msg == "error") {
       alert(data.data);
     } else {
@@ -67,7 +78,7 @@ $(document).on("click", "#btnOKSektor", function () {
       $("#AddEditSektor").modal("hide");
     }
   } else {
-    var data = ajax_post("sektor/change", { sektor_id: $("#txtSektorID").val(), no_sektor: $("#txtNomorSektor").val(), nama_sektor: $("#txtNamaSektor").val() });
+    var data = ajax_post(base_url+"sektor/change", { sektor_id: $("#txtSektorID").val(), no_sektor: $("#txtNomorSektor").val(), nama_sektor: $("#txtNamaSektor").val() });
     if (data.msg == "error") {
       alert(data.data);
     } else {
@@ -82,9 +93,9 @@ $(document).on("click", "#btnOKSektor", function () {
 function loadData() {
   $("#tblSektor tbody tr").remove();
 
-  let base_url = $("#base_url").val()+"api/intern/sektor/all"
+  let api_url = $("#base_url").val()+"api/intern/sektor/all"
 
-  var data = ajax_get(base_url, "");
+  var data = ajax_get(api_url, "");
 
   if (data.msg == "ok") {
     var isi_tabel = "";

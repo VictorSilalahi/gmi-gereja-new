@@ -32,10 +32,10 @@ class Services extends BaseService
      * }
      */
 
-    public static function myServicedb(bool $getShared = true)
+    public static function myServiceDb(bool $getShared = true)
     {
         if ($getShared) {
-            return static::getSharedInstance('myServicedb');
+            return static::getSharedInstance('myServiceDb');
         }
 
         return new Servicedb();

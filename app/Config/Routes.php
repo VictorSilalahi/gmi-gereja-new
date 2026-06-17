@@ -18,8 +18,19 @@ $routes->post('/validasi', 'Administrasi::validasi');
 $routes->get('/jemaat', 'Administrasi::jemaat');
 $routes->get('/sektor', 'Administrasi::sektor');
 
-// route api internal
-$routes->post('/intern/api/periksa_token', 'Webapiv1::periksa_token');
-$routes->get('/api/intern/sektor/all', 'Webapiv1::sektor_all');
+// daftar route api internal
+$routes->post('/api/intern/periksa_token', 'Administrasi::periksa_token');
+
+// Sektor
+$routes->get('/api/intern/sektor/all', 'Sektor\Sektorcontroller::sektor_all');
+$routes->post('/api/intern/sektor/del', 'Sektor\Sektorcontroller::sektor_del');
+$routes->post('/api/intern/sektor/change', 'Sektor\Sektorcontroller::sektor_change');
+$routes->post('/api/intern/sektor/add', 'Sektor\Sektorcontroller::sektor_add');
+
+// Jemaat
+$routes->get('/api/intern/jemaat/sektor', 'Jemaat\Jemaatcontroller::jemaat_per_sektor');
+
+
+
 
 

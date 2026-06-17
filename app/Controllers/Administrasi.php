@@ -7,7 +7,7 @@ use CodeIgniter\RESTful\ResourceController;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-
+use Config\Services;
 
 class Administrasi extends BaseController
 {
@@ -15,7 +15,7 @@ class Administrasi extends BaseController
     use ResponseTrait;
 
 
-    public function index(): string
+    public function index()
     {
         return view('administrasi/login');
     }
@@ -66,32 +66,9 @@ class Administrasi extends BaseController
 
                 $db->close();
 
-                // bertukar database menjadi database gereja
-                // $dbGerejaSettings = [
-                //     'DSN'      => '',
-                //     'hostname' => getenv('database.default.hostname'),
-                //     'username' => getenv('database.default.username'),
-                //     'password' => getenv('database.default.password'),
-                //     'database' => $result[0]['db_id'],
-                //     'DBDriver' => 'MySQLi',
-                //     'pConnect' => false,
-                //     'DBDebug'  => true,
-                //     'charset'  => 'utf8mb4',
-                //     'DBCollat' => 'utf8mb4_general_ci',
-                //     'port'     => 3306
-                // ];
-
-                // $dbGereja = \Config\Database::connect($dbGerejaSettings, false);
-
-                // $db->setDatabase($result[0]['db_id']);
-
-                // gunakan service untuk menyimpan koneksi ke database baru
-                // $myServiceDb = \Config\Services::myServicedb();
-                // $myServiceDb->setDbGereja($result[0]['db_id']);
-
-                $globalVars = config('GlobalVars');
-                $globalVars->db_id = $result[0]['db_id'];
-                // echo($globalVars->db_id);
+                $session = session();
+                $session->set('db_id', $result[0]['db_id']);
+                
                 return $this->respond([
                     'status'  => 200,
                     'pesan' => 'Login sukses',
@@ -118,7 +95,48 @@ class Administrasi extends BaseController
 
         }
 
+    }
 
+    public function periksa_token()
+    {
+
+        $authHeader = $this->request->getServer('HTTP_AUTHORIZATION');
+
+        if (!$authHeader) {
+            // Alternative fetch method for some apache environments
+            $authHeader = $this->request->getHeaderLine('Authorization');
+        }
+
+        // Pemisahan Bearer
+        if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
+            $token = $matches[1];
+        } else {
+
+            return $this->respond([
+                    'status'  => 401,
+                    'pesan' => 'Token tidak ada'
+            ]);
+        }
+
+        try {
+            $key = getenv('jwt.encryption.key');
+            // Decode the token using firebase/php-jwt (v6+ syntax)
+            $decoded = JWT::decode($token, new Key($key, 'HS256'));
+            
+            // Optional: Pass the decoded payload data into the request object for use in controllers
+            return $this->respond([
+                    'status'  => 200,
+                    'data' => $decoded
+            ]);
+
+        } catch (Exception $e) {
+
+            return $this->respond([
+                    'status'  => 401,
+                    'pesan' => 'Token tidak valid'
+            ]);
+
+        }
     }
 
     public function jemaat() 

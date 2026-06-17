@@ -7,11 +7,16 @@ $(document).ready(function () {
 
   
   check_token();
-   
-  // loadDataSektor();
-  // loadDataSektorForm();
+  
+  $.LoadingOverlay("show");
+
+  loadDataSektor();
+
+  loadDataSektorForm();
 
   $("#tblJemaat tbody").html("");
+
+  $.LoadingOverlay("hide");
 
 });
 
@@ -36,7 +41,12 @@ $(document).on("click", ".ul-edit li", function() {
 $(document).on("change", "#slcSektor", function() {
 
   var sektor_id = $("#slcSektor").val();
+
+  $.LoadingOverlay("show");
+
   loadDataJemaat(sektor_id);
+
+  $.LoadingOverlay("hide");
 
 });
 
@@ -384,7 +394,9 @@ $(document).on("click", ".nick", function() {
 
 function loadDataSektor() {
 
-  var data = ajax_get("sektor/all", "");
+  let base_url = $("#base_url").val()+"api/intern/";
+
+  var data = ajax_get(base_url+"sektor/all", "");
 
   var opt = "<option value=''>-</option>";
   if (data['data'].length>0) {
@@ -399,7 +411,9 @@ function loadDataSektor() {
 
 function loadDataSektorForm() {
 
-  var data = ajax_get("sektor/all", "");
+  let base_url = $("#base_url").val()+"api/intern/";
+
+  var data = ajax_get(base_url+"sektor/all", "");
 
   var opt = "";
   for (var i=0; i<data['data'].length; i++) {
@@ -411,7 +425,9 @@ function loadDataSektorForm() {
 
 function loadDataJemaat(sektor_id) {
 
-  var temp = ajax_get("jemaat/sektor", {"sektor_id": sektor_id});
+  let base_url = $("#base_url").val()+"api/intern/";
+
+  var temp = ajax_get(base_url+"jemaat/sektor", {"sektor_id": sektor_id});
   var jumlah = 0;
 
   $("#tblJemaat tbody").html("");
@@ -427,7 +443,9 @@ function loadDataJemaat(sektor_id) {
     var total_orang = 0;
 
     for (var i=0; i<jumlah; i++) {
-      isi = isi + "<tr id='"+temp['data'][i]['jemaat_id']+"'><td><h5 class='nick'>"+temp['data'][i]['nik']+"</h5></td><td>"+temp['data'][i]['mobile_phone']+"</td><td>"+temp['data'][i]['alamat']+"</td><td>"+temp['data'][i]['jumlah']+"</td><td>"+temp['data'][i]['status_keanggotaan']+"</td><td>";
+      let nama_keluarga = temp['data'][i]['keluarga'][0]['pasangan'];
+      let jumlah = temp['data'][i]['keluarga'][0]['jumlah'];
+      isi = isi + "<tr id='"+temp['data'][i]['jemaat_id']+"'><td><h5 class='nick'>"+temp['data'][i]['nik']+"</h5></td><td>"+temp['data'][i]['mobile_phone']+"</td><td>"+nama_keluarga+"</td><td>"+temp['data'][i]['alamat']+"</td><td>"+jumlah+"</td><td>"+temp['data'][i]['status_keanggotaan']+"</td><td>";
       isi = isi + "<div class='dropdown'>";
       isi = isi + "<button class='btn btn-secondary dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>";
       isi = isi + "Edit</button>";
@@ -437,10 +455,10 @@ function loadDataJemaat(sektor_id) {
       isi = isi + "</ul>";
       isi = isi + "&nbsp;<button class='btn btn-danger btn-hapus-jemaat'>Hapus</button></ul>";
       isi = isi + "</div></td></tr>";
-      total_orang = total_orang + parseInt(temp['data'][i]['jumlah']);
+      total_orang = total_orang + parseInt(jumlah);
     }
 
-    isi = isi + "<tr><td colspan='3'>T o t a l</td><td>"+total_orang+"<td colspan='3'></td></tr>";
+    isi = isi + "<tr><td colspan='4'>T o t a l</td><td>"+total_orang+"<td colspan='3'></td></tr>";
     $("#tblJemaat tbody").html(isi);
 
   }

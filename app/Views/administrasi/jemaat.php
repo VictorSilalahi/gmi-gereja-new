@@ -18,7 +18,10 @@
     cursor: grabbing;
   }
   
- 
+  .modal-super-big {
+    max-width: 95%; /* Adjust percentage as needed */
+    width: 95%;
+  }
 
 </style>
 <body>
@@ -100,6 +103,7 @@
                       <tr>
                         <th scope="col">NIK</th>
                         <th scope="col">Mobile Phone</th>
+                        <th scope="col">Pimpinan Keluarga</th>
                         <th scope="col">Alamat</th>
                         <th scope="col">Jumlah Anggota Keluarga</th>
                         <th scope="col">Status Keanggotaan</th>
@@ -113,6 +117,7 @@
                         <td>Otto</td>
                         <td>Mark</td>
                         <td>Otto</td>
+                        <td>Mark</td>
                         <td>Mark</td>
                         <td><button type="button" class="btn btn-secondary">Edit</button>&nbsp;<button type="button" class="btn btn-danger">Hapus</button></td>
                       </tr>
@@ -131,7 +136,7 @@
     </div>
 
     <div class="modal fade" id="AddEditJemaat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl">
+      <div class="modal-dialog modal-super-big">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="opJemaat">New message</h1>

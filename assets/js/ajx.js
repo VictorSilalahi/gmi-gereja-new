@@ -151,7 +151,7 @@ export function check_token()
 
     // Periksa token melalui ajax
     $.ajax({
-        url: base_url+'intern/api/periksa_token', // Replace with your backend verification endpoint
+        url: base_url+'api/intern/periksa_token', // Replace with your backend verification endpoint
         type: 'POST',
         async: false,
         headers: {
@@ -169,4 +169,5 @@ export function check_token()
             window.location.href = base_url;
         }
     });
+    
 }
