@@ -30,6 +30,9 @@ $routes->post('/api/intern/sektor/add', 'Sektor\Sektorcontroller::sektor_add');
 
 // Jemaat
 $routes->get('/api/intern/jemaat/sektor', 'Jemaat\Jemaatcontroller::jemaat_per_sektor');
+$routes->post('/api/intern/jemaat/add', 'Jemaat\Jemaatcontroller::jemaat_add');
+$routes->get('/api/intern/jemaat/anggota', 'Jemaat\Jemaatcontroller::jemaat_anggota');
+$routes->get('/api/intern/jemaat/nik', 'Jemaat\Jemaatcontroller::jemaat_nik');
 
 
 

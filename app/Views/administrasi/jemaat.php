@@ -167,9 +167,11 @@
                 <div class="col-sm-2">
                   <input type="date" class="form-control" id="txtTanggalTerdaftar">
                 </div>
-
+                
+                <hr>
+                
                 <label for="txtMobilePhone" class="col-form-label col-sm-1">Mobile Phone:</label>
-                <div class="col-sm-2">
+                <div class="col-sm-1">
                   <input type="text" class="form-control" id="txtMobilePhone">
                 </div>
 
@@ -190,7 +192,7 @@
 
               </div>
 
-              <hr style="border: 2px solid rgb(40, 43, 40); border-radius: 2px;">
+              <hr>
 
               <div class="mb-3 row">
                 <label for="txtNama" class="col-form-label col-sm-1">Nama:</label>
@@ -216,29 +218,29 @@
                   </select>
                 </div>
 
-                <label for="txtTanggalLahir" class="col-form-label col-sm-1">Tanggal Lahir:</label>
+                <label for="txtTanggalLahir" class="col-form-label col-sm-1">Lahir:</label>
                 <div class="col-sm-2">
                   <input type="date" class="form-control" id="txtTanggalLahir">
                 </div>
                 
                 <hr>
 
-                <label for="txtTanggalBaptis" class="col-form-label col-sm-1">Tanggal Baptis:</label>
+                <label for="txtTanggalBaptis" class="col-form-label col-sm-1">Baptis:</label>
                 <div class="col-sm-2">
                   <input type="date" class="form-control" id="txtTanggalBaptis">
                 </div>
 
-                <label for="txtTanggalSidi" class="col-form-label col-sm-1">Tanggal Sidi:</label>
+                <label for="txtTanggalSidi" class="col-form-label col-sm-1">Sidi:</label>
                 <div class="col-sm-2">
                   <input type="date" class="form-control" id="txtTanggalSidi">
                 </div>
 
-                <label for="txtTanggalMenikah" class="col-form-label col-sm-1">Tanggal Menikah:</label>
+                <label for="txtTanggalMenikah" class="col-form-label col-sm-1">Menikah:</label>
                 <div class="col-sm-2">
                   <input type="date" class="form-control" id="txtTanggalMenikah">
                 </div>
 
-                <label for="slcPosisi" class="col-form-label col-sm-1">Posisi dalam keluarga:</label>
+                <label for="slcPosisi" class="col-form-label col-sm-1">Posisi:</label>
                 <div class="col-sm-2">
                   <select class="form-select" aria-label="Default select example" id="slcPosisi">
                       <option value="Mandiri">Mandiri</option>
@@ -381,7 +383,7 @@
     </div>
 
     <div class="modal fade" id="editJemaatAnggota" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-      <div class="modal-dialog modal-xl">
+      <div class="modal-dialog modal-super-big">
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="titleShow">Edit Data Anggota Keluarga</h1>
@@ -455,12 +457,15 @@
                   <tr>
                     <th scope="col">Nama</th>
                     <th scope="col">JK</th>
+                    <th scope="col">Gol Darah</th>
                     <th scope="col">Tanggal Lahir</th>
                     <th scope="col">Tanggal Baptis</th>
                     <th scope="col">Tanggal Sidi</th>
                     <th scope="col">Tanggal Menikah</th>
                     <th scope="col">Tanggal Wafat</th>
                     <th scope="col">Posisi</th>
+                    <th scope="col">Pend.Terakhir</th>
+                    <th scope="col">Pekerjaan</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
