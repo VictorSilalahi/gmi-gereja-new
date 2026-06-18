@@ -77,10 +77,14 @@ $(document).on("click", ".btn-tambah-calon-anggota", function() {
 
   var nama = $("#txtNama").val();
   var jk = $("#slcJenisKelamin").val();
+  var gol_darah = $("#slcGolonganDarah").val();
   var tgl_lahir = '';
   var tgl_baptis = '';
   var tgl_sidi = '';
   var tgl_menikah = '';
+  var pendidikan_terakhir = $("#slcPendidikanTerakhir").val();
+  var pekerjaan = $("#slcPekerjaan").val();
+    
 
   if ($("#txtTanggalLahir").val()) {
     tgl_lahir = set_tanggal_indo($("#txtTanggalLahir").val());
@@ -97,7 +101,7 @@ $(document).on("click", ".btn-tambah-calon-anggota", function() {
 
   var posisi_keluarga = $("#slcPosisi").val();
 
-  var row_to_add = "<tr><td>"+nama+"</td><td>"+jk+"</td><td>"+tgl_lahir+"</td><td>"+tgl_baptis+"</td><td>"+tgl_sidi+"</td><td>"+tgl_menikah+"</td><td>"+posisi_keluarga+"</td><td><button class='btn btn-danger btn-hapus-calon'>Hapus</button></td></tr>";
+  var row_to_add = "<tr><td>"+nama+"</td><td>"+jk+"</td><td>"+gol_darah+"</td><td>"+tgl_lahir+"</td><td>"+tgl_baptis+"</td><td>"+tgl_sidi+"</td><td>"+tgl_menikah+"</td><td>"+posisi_keluarga+"</td><td>"+pendidikan_terakhir+"</td><td>"+pekerjaan+"</td><td><button class='btn btn-danger btn-hapus-calon'>Hapus</button></td></tr>";
   $("#tblDaftarCalonJemaat tbody").append(row_to_add);
   $("#txtNama").val("");
   $("#txtTanggalLahir").val("");
@@ -149,6 +153,7 @@ $(document).on("click", "#btnOKJemaat", function () {
 
   var daftar = [];
   var nama = '';
+  var gol_darah = '';
   var jk = '';
   var tgl_lahir = '';
   var tgl_baptis = '';
@@ -156,30 +161,34 @@ $(document).on("click", "#btnOKJemaat", function () {
   var tgl_menikah = '';
 
   for (var i=0; i<$("#tblDaftarCalonJemaat tbody tr").length; i++) {
+
     nama = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(0)").text();
     jk = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(1)").text();
+    gol_darah = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(2)").text();
 
     var temp = '';
 
     if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(2)").text()) {
-      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(2)").text();
+      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(3)").text();
       tgl_lahir = set_tanggal_database(temp);
     }
     if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(3)").text()) {
-      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(3)").text();
+      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(4)").text();
       tgl_baptis = set_tanggal_database(temp);
     }
     if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(4)").text()) {
-      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(4)").text();
+      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(5)").text();
       tgl_sidi = set_tanggal_database(temp);
     }
     if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(5)").text()) {
-      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(5)").text();
+      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(6)").text();
       tgl_menikah = set_tanggal_database(temp);
     }
-    var posisi = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(6)").text();
+    var posisi = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(7)").text();
+    var pendidikan_terakhir = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(8)").text();
+    var pekerjaan = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(9)").text();
 
-    daftar.push({"nama": nama, "jk": jk, "tgl_lahir": tgl_lahir, "tgl_baptis": tgl_baptis, "tgl_sidi": tgl_sidi, "tgl_menikah": tgl_menikah, "posisi": posisi});
+    daftar.push({"nama": nama, "jk": jk, "gol_darah": gol_darah, "tgl_lahir": tgl_lahir, "tgl_baptis": tgl_baptis, "tgl_sidi": tgl_sidi, "tgl_menikah": tgl_menikah, "posisi": posisi, "pendidikan_terakhir": pendidikan_terakhir, "pekerjaan": pekerjaan});
 
   }
 

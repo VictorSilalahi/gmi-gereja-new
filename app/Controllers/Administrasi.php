@@ -20,6 +20,14 @@ class Administrasi extends BaseController
         return view('administrasi/login');
     }
 
+    public function logout()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->to('/');
+
+    }
+
     
     public function validasi() 
     {
@@ -45,7 +53,7 @@ class Administrasi extends BaseController
                
 
                 $iat = time(); // Issued at time
-                $exp = $iat + intval(getenv('jwt.expiration')); // Expiration time
+                $exp = $iat + 3600; // Expiration time
                 $isi_data = [
                     "gereja_id"=>$result[0]['gereja_id'], 
                     "nama_gereja"=>$result[0]['nama_gereja'], 
@@ -109,7 +117,9 @@ class Administrasi extends BaseController
 
         // Pemisahan Bearer
         if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
+            
             $token = $matches[1];
+            
         } else {
 
             return $this->respond([
@@ -119,6 +129,7 @@ class Administrasi extends BaseController
         }
 
         try {
+
             $key = getenv('jwt.encryption.key');
             // Decode the token using firebase/php-jwt (v6+ syntax)
             $decoded = JWT::decode($token, new Key($key, 'HS256'));

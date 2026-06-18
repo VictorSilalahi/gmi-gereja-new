@@ -147,17 +147,7 @@ class Jemaatcontroller extends BaseController
 
         $db = $this->set_db();
 
-        $no_sektor = $this->request->getPost("no_sektor");
-        $nama_sektor = $this->request->getPost("nama_sektor");
-
-        $sql = "insert into tsektor(no_sektor, nama_sektor) values ('".$no_sektor."','".$nama_sektor."')";
-
-        $db->query($sql); 
-
-        return $this->respond([
-            "msg"=>"ok", 
-            "data"=>"Data sektor telah ditambah!"
-        ]);
+        
         
     }
 

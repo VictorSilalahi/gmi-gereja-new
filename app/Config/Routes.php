@@ -14,6 +14,7 @@ $routes->post('/daftar/tambah_gereja', 'Pendaftaran::tambah_gereja');
 
 // route ke dalam aplikasi
 $routes->get('/', 'Administrasi::index');
+$routes->get('/logout', 'Administrasi::logout');
 $routes->post('/validasi', 'Administrasi::validasi');
 $routes->get('/jemaat', 'Administrasi::jemaat');
 $routes->get('/sektor', 'Administrasi::sektor');

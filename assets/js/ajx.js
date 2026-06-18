@@ -159,11 +159,9 @@ export function check_token()
         },
         success: function(response) {
             // console.log('Token is valid, user is authenticated.');
-            // // Proceed with loading page content or showing the dashboard
             // console.log(response);
         },
         error: function(xhr, status, error) {
-            console.error('Token verification failed:', error);
             // Clear the token and redirect to login
             localStorage.removeItem('4pp_t0k3n');
             window.location.href = base_url;
