@@ -309,7 +309,8 @@
                   <th scope="col">Baptis</th>
                   <th scope="col">Sidi</th>
                   <th scope="col">Menikah</th>
-                  <th scope="col">Posisi Keluarga</th>
+                  <th scope="col">Wafat</th>
+                  <th scope="col">Posisi</th>
                   <th scope="col">Pend.Terakhir</th>
                   <th scope="col">Pekerjaan</th>
                   <th scope="col">Action</th>
@@ -407,11 +408,23 @@
                   </select>
                 </div>
 
+                <label for="slcGolonganDarahEdit" class="col-form-label col-sm-1">Golongan Darah:</label>
+                <div class="col-sm-1">
+                  <select id="slcGolonganDarahEdit">
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="AB">AB</option>
+                    <option value="O">O</option>
+                  </select>
+                </div>
+
+                <hr>
 
                 <label for="txtTanggalLahir" class="col-form-label col-sm-1">Tanggal Lahir:</label>
                 <div class="col-sm-2">
                   <input type="date" class="form-control" id="txtTanggalLahirEdit">
                 </div>
+
 
                 <label for="txtTanggalBaptis" class="col-form-label col-sm-1">Tanggal Baptis:</label>
                 <div class="col-sm-2">
@@ -423,10 +436,13 @@
                   <input type="date" class="form-control" id="txtTanggalSidiEdit">
                 </div>
 
+
                 <label for="txtTanggalBaptis" class="col-form-label col-sm-1">Tanggal Menikah:</label>
                 <div class="col-sm-2">
                   <input type="date" class="form-control" id="txtTanggalMenikahEdit">
                 </div>
+
+                <hr>
 
                 <label class="col-form-label col-sm-1">Posisi:</label>
                 <div class="col-sm-2">
@@ -436,6 +452,35 @@
                       <option value="Istri">Istri</option>
                       <option value="Anak">Anak</option>
                       <option value="AKL">Anggota Keluarga Lainnya</option>
+                  </select>
+                </div>
+
+
+                <label for="slcPendidikanTerakhirEdit" class="col-form-label col-sm-1">Pendidikan Terakhir:</label>
+                <div class="col-sm-2">
+                  <select class="form-select" aria-label="Default select example" id="slcPendidikanTerakhirEdit">
+                      <option value="SD">SD</option>
+                      <option value="SMP">SMP</option>
+                      <option value="SMA-SMK">SMA-SMK</option>
+                      <option value="D3">D3</option>
+                      <option value="S1">S1</option>
+                      <option value="S2">S2</option>
+                      <option value="S3">S3</option>
+                      <option value="None">None</option>
+                  </select>
+                </div>
+                
+                <label for="slcPekerjaanEdit" class="col-form-label col-sm-1">Pekerjaan:</label>
+                <div class="col-sm-2">
+                  <select class="form-select" aria-label="Default select example" id="slcPekerjaanEdit">
+                      <option value="ASN">ASN</option>
+                      <option value="TNI-Polri">TNI-Polri</option>
+                      <option value="Karyawan-Swasta">Karyawan Swasta</option>
+                      <option value="Pedagang">Pedagang</option>
+                      <option value="Wiraswasta">Wiraswasta</option>
+                      <option value="Dokter">Dokter</option>
+                      <option value="Petani">Petani</option>
+                      <option value="None">None</option>
                   </select>
                 </div>
 
@@ -486,35 +531,6 @@
       </div>
     </div>
 
-   <div class="modal" id="modalEditTanggal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modalEditTanggalTitle">Edit Tanggal
-                      
-                    </h4>
-                    <button type="button" class="close close-x" data-dismiss="modal" aria-hidden="true">×</button>
-                </div>
-                <div class="container"></div>
-                <div class="modal-body">
-                    <p>
-
-                      <label class="col-form-label col-sm-2">Tanggal :</label>
-                        <div class="col-sm-4">
-                          <input type="date" class="form-control" id="txtEditTanggal">
-                        </div>
-                      <input type="hidden" id="txtJenisTanggal">
-                      <input type="hidden" id="txtAnggotaJemaatID">
-                      
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" data-dismiss="modal" class="btn btn-close-edit-tanggal">Batal</a>
-                    <a href="#" class="btn btn-primary btn-simpan-tanggal-edit">Simpan</a>
-                </div>
-            </div>
-        </div>
-    </div>    
 
    <div class="modal" id="modalShowAnggotaJemaat">
         <div class="modal-dialog">

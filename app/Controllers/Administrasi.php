@@ -53,7 +53,7 @@ class Administrasi extends BaseController
                
 
                 $iat = time(); // Issued at time
-                $exp = $iat + 3600; // Expiration time
+                $exp = $iat + 7200; // Expiration time
                 $isi_data = [
                     "gereja_id"=>$result[0]['gereja_id'], 
                     "nama_gereja"=>$result[0]['nama_gereja'], 
@@ -161,5 +161,19 @@ class Administrasi extends BaseController
         return view('administrasi/sektor');
     }
 
+    public function jabatan() 
+    {
+        return view('administrasi/jabatan');
+    }
+
+    public function organisasi() 
+    {
+        return view('administrasi/organisasi');
+    }
+
+    public function kegiatan() 
+    {
+        return view('administrasi/kegiatan');
+    }
 
 }

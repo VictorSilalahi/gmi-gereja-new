@@ -190,15 +190,6 @@ class Jemaatcontroller extends BaseController
                         "status_keanggotaan"=>$result->status_keanggotaan
             );
 
-            // array_push($data, 
-            //     array(
-            //         "jemaat_id"=>$result->jemaat_id,
-            //         "nik"=>$result->nik,
-            //         "alamat"=>$result->alamat,
-            //         "status_keanggotaan"=>$result->status_keanggotaan
-            //     )
-            // );
-
             return $this->respond([
                 "msg"=>"ok", 
                 "data"=>$data
@@ -257,6 +248,7 @@ class Jemaatcontroller extends BaseController
 
                 array_push($data, 
                     array(
+                        "anggotajemaat_id"=>$row->anggotajemaat_id,
                         "nama"=>$row->nama,
                         "jk"=>$row->jk,
                         "golongan_darah"=>$row->golongan_darah,
@@ -267,7 +259,8 @@ class Jemaatcontroller extends BaseController
                         "tgl_wafat"=>$tanggal_wafat,
                         "posisi"=>$row->posisi,
                         "pendidikan_terakhir"=>$row->pendidikan_terakhir,
-                        "pekerjaan"=>$row->pekerjaan
+                        "pekerjaan"=>$row->pekerjaan,
+                        "status"=>$status
                     )
                 );
 
@@ -285,17 +278,239 @@ class Jemaatcontroller extends BaseController
     }    
 
 
-    public function jemaat_change()
+    public function jemaat_anggota_add()
     {
 
-    
-    }
+        $jemaat_id = $this->request->getPost("jemaat_id");
 
-    public function jemaat_del()
-    {
+        $nama = $this->request->getPost("nama");
+        $jk = $this->request->getPost("jk");
+        $gol_darah = $this->request->getPost("golongan_darah");
+        $tgl_lahir = $this->request->getPost("tgl_lahir");
+        $tgl_baptis = $this->request->getPost("tgl_baptis");
+        $tgl_sidi = $this->request->getPost("tgl_sidi");
+        $tgl_menikah = $this->request->getPost("tgl_menikah");
+        $posisi = $this->request->getPost("posisi");
+        $pendidikan_terakhir = $this->request->getPost("pendidikan_terakhir");
+        $pekerjaan = $this->request->getPost("pekerjaan");
+
+        $sql = "insert into tanggotajemaat (nama, jk, golongan_darah, tanggal_lahir, tanggal_baptis, posisi, pendidikan_terakhir, pekerjaan, jemaat_id) values ";
+        $sql = $sql . "('".$nama."','".$jk."','".$gol_darah."','".$tgl_lahir."','".$tgl_baptis."','".$posisi."','".$pendidikan_terakhir."','".$pekerjaan."',".$jemaat_id.")";
 
         $db = $this->set_db();
 
+        $db->query($sql);
+
+        $anggotajemaat_id = $db->insertID();
+
+        if ($tgl_sidi) {
+
+            $sql = "insert into tsidi (anggotajemaat_id, tanggal_sidi) values (".$anggotajemaat_id.",'".$tgl_sidi."')";
+            $db->query($sql);
+        }
+
+        if ($tgl_menikah) {
+
+            $sql = "insert into tmenikah (anggotajemaat_id, tanggal_menikah) values (".$anggotajemaat_id.",'".$tgl_menikah."')";
+            $db->query($sql);
+
+        }
+
+
+        return $this->respond([
+            "msg"=>"ok", 
+            "data"=>"Anggota keluarga baru telah disimpan"
+        ]);
+
+    }
+
+    public function jemaat_anggota_ubah_simpan()
+    {
+
+        $anggotajemaat_id = $this->request->getPost("anggotajemaat_id");
+
+        $data = $this->request->getPost("data");
+
+        $jk = $data['jk'];
+        $gol_darah = $data['gol_darah'];
+        $tgl_lahir = $data['tgl_lahir'];
+        $tgl_baptis = $data['tgl_baptis'];
+        $tgl_sidi = $data['tgl_sidi'];
+        $tgl_menikah = $data['tgl_menikah'];
+        $tgl_wafat = $data['tgl_wafat'];
+        $posisi = $data['posisi'];
+        $pendidikan_terakhir = $data['pendidikan_terakhir'];
+        $pekerjaan = $data['pekerjaan'];
+        $anggotajemaat_id = $data['anggotajemaat_id'];
+
+        $db = $this->set_db();
+
+
+        if ($jk) {
+
+            $sql = "update tanggotajemaat set jk='".$jk."' where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+        }
+
+        
+        if ($gol_darah) {
+
+            $sql = "update tanggotajemaat set golongan_darah='".$gol_darah."' where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+        }
+
+
+        if ($tgl_lahir) {
+
+            $sql = "update tanggotajemaat set tanggal_lahir='".$tgl_lahir."' where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+        }
+
+
+
+        if ($tgl_baptis) {
+
+            $sql = "update tanggotajemaat set tanggal_baptis='".$tgl_baptis."' where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+        }
+
+
+        if ($tgl_sidi) {
+
+            $sql = "select count(*) as jumlah from tsidi where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+            // update status sidi
+            if ($query) {
+
+                $row = $query->getRow();
+
+                if ($row->jumlah==0) {
+
+                    $sql = "insert into tsidi (anggotajemaat_id, tanggal_sidi) values (".$anggotajemaat_id.",'".$tgl_sidi."')";
+                    $db->query($sql);
+
+                }
+
+                if ($row->jumlah==1) {
+
+                    $sql = "update tsidi set tanggal_sidi='".$tgl_sidi."' where anggotajemaat_id=".$anggotajemaat_id;
+                    $db->query($sql);
+
+                }
+
+            }
+
+        }
+
+
+        if ($tgl_menikah) {
+
+            $sql = "select count(*) as jumlah from twafat where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+            // update status menikah
+            if ($query) {
+
+                $row = $query->getRow();
+
+                if ($row->jumlah==0) {
+
+                    $sql = "insert into tmenikah (anggotajemaat_id, tanggal_menikah) values (".$anggotajemaat_id.",'".$tgl_menikah."')";
+                    $db->query($sql);
+
+                }
+
+                if ($row->jumlah==1) {
+
+                    $sql = "update tmenikah set tangggal_menikah='".$tgl_menikah."' where anggotajemaat_id=".$anggotajemaat_id;
+                    $db->query($sql);
+
+                }
+
+            }
+
+        }
+
+
+        if ($tgl_wafat) {
+
+            $sql = "select count(*) as jumlah from twafat where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+            // update status meninggal
+            if ($query) {
+
+                $row = $query->getRow();
+                if ($row->jumlah==0) {
+
+                    $sql = "insert into twafat (anggotajemaat_id, tanggal_wafat) values (".$anggotajemaat_id.",'".$tgl_wafat."')";
+                    $db->query($sql);
+
+                }
+            }
+
+        }
+
+
+        if ($posisi) {
+
+            $sql = "update tanggotajemaat set posisi='".$posisi."' where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+        }
+
+        if ($pendidikan_terakhir) {
+
+            $sql = "update tanggotajemaat set pendidikan_terakhir='".$pendidikan_terakhir."' where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+        }
+
+        if ($pekerjaan) {
+
+            $sql = "update tanggotajemaat set pekerjaan='".$pekerjaan."' where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+        }
+
+        return $this->respond([
+            "msg"=>"ok", 
+            "data"=>"Perubahan data keluarga jemaat telah disimpan."
+        ]);
+
+    }
+
+
+    public function jemaat_anggota_del()
+    {
+
+        $anggotajemaat_id = $this->request->getPost("anggotajemaat_id");
+
+        $db = $this->set_db();
+
+        $sql = "delete from tanggotajemaat where anggotajemaat_id=".$anggotajemaat_id;
+
+        $db->query($sql);
+
+        return $this->respond([
+            "msg"=>"ok", 
+            "data"=>"Anggota keluarga telah dihapus"
+        ]);
 
 
     }

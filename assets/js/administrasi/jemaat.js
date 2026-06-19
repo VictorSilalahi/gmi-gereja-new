@@ -216,6 +216,8 @@ $(document).on("click", "#btnOKJemaat", function () {
 
 $(document).on("click", ".btn-tambah-calon-anggota-edit", function() {
 
+  let base_url = $("#base_url").val()+"api/intern/";
+
   if ($("#txtNamaEdit").val()=='') {
     alert("Masukkan nama calon anggota!");
     $("#txtNamaEdit").focus();
@@ -225,15 +227,19 @@ $(document).on("click", ".btn-tambah-calon-anggota-edit", function() {
 
   var nama = $("#txtNamaEdit").val();
   var jk = $("#slcJenisKelaminEdit").val();
+  var gol_darah = $("#slcGolonganDarahEdit").val();
   var tgl_lahir = $("#txtTanggalLahirEdit").val();
   var tgl_baptis = $("#txtTanggalBaptisEdit").val();
   var tgl_sidi = $("#txtTanggalSidiEdit").val();
   var tgl_menikah = $("#txtTanggalMenikahEdit").val();
   var posisi_keluarga = $("#slcPosisiEdit").val();
+  var pendidikan_terakhir = $("#slcPendidikanTerakhirEdit").val();
+  var pekerjaan = $("#slcPekerjaanEdit").val();
   var jemaat_id = $("#txtJemaatIDEdit").val();
 
 
-  var jawab = ajax_post("jemaat/anggota/add", {"nama": nama, "jk": jk, "tgl_lahir": tgl_lahir, "tgl_baptis": tgl_baptis, "tgl_sidi": tgl_sidi, "tgl_menikah": tgl_menikah, "posisi": posisi_keluarga, "jemaat_id": jemaat_id} );
+  var jawab = ajax_post(base_url+"jemaat/anggota/add", {"nama": nama, "jk": jk, "golongan_darah": gol_darah, "tgl_lahir": tgl_lahir, "tgl_baptis": tgl_baptis, "tgl_sidi": tgl_sidi, "tgl_menikah": tgl_menikah, "posisi": posisi_keluarga, "pendidikan_terakhir": pendidikan_terakhir, "pekerjaan": pekerjaan, "jemaat_id": jemaat_id} );
+
 
   if (jawab["msg"]=="ok") {
 
@@ -245,7 +251,9 @@ $(document).on("click", ".btn-tambah-calon-anggota-edit", function() {
     $("#txtTanggalMenikahEdit").val("");
 
   } else {
+
     alert("Anggota keluarga tidak berhasil ditambahkan!");
+  
   }
 
 });
@@ -350,14 +358,16 @@ $(document).on("click", ".btn-wafat-jemaat", function () {
 
 $(document).on("click", ".btn-hapus-anggota", function () {
 
+  let base_url = $("#base_url").val()+"api/intern/";
+
   var anggotajemaat_id = $(this).parent().parent().attr("id");
-  // console.log(anggotajemaat_id);
+  console.log(anggotajemaat_id);
   var jemaat_id = $("#txtJemaatIDEdit").val();
   var sektor_id = $("#slcSektor").val();
 
   const ask = confirm("Hapus data anggota keluarga ini?"); 
   if (ask) {
-    var jawab = ajax_post("jemaat/anggota/del", { "anggotajemaat_id": anggotajemaat_id });
+    var jawab = ajax_post(base_url+"jemaat/anggota/del", { "anggotajemaat_id": anggotajemaat_id });
     if (jawab['msg']=='ok') {
       loadDataAnggotaKeluarga(jemaat_id, "edit");
       loadDataJemaat(sektor_id);
@@ -370,19 +380,38 @@ $(document).on("click", ".btn-hapus-anggota", function () {
 
 $(document).on("click", ".btn-simpan-perubahan-anggota", function () {
 
-  var anggotajemaat_id = $(this).parent().parent().attr("id");
-  var jk = $(this).parent().prev().prev().prev().prev().prev().prev().prev().find("option:selected").val();
-  var tgl_lahir = $(this).parent().prev().prev().prev().prev().prev().prev().find("input").val();
-  var tgl_baptis = $(this).parent().prev().prev().prev().prev().prev().find("input").val();
-  var tgl_sidi = $(this).parent().prev().prev().prev().prev().find("input").val();
-  var tgl_menikah = $(this).parent().prev().prev().prev().find("input").val();
-  var tgl_wafat = $(this).parent().prev().prev().find("input").val();
-  var posisi = $(this).parent().prev().find("option:selected").val();
+  let base_url = $("#base_url").val()+"api/intern/";
 
-  var data = {"jk": jk, "tgl_lahir": tgl_lahir, "tgl_baptis": tgl_baptis, "tgl_sidi": tgl_sidi, "tgl_menikah": tgl_menikah, "tgl_wafat": tgl_wafat, "posisi": posisi};
+  var anggotajemaat_id = $(this).parent().parent().attr("id");
+  var jk = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().find("option:selected").val();
+  var gol_darah = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().find("option:selected").val();
+  var tgl_lahir = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().find("input").val();
+  var tgl_baptis = $(this).parent().prev().prev().prev().prev().prev().prev().prev().find("input").val();
+  var tgl_sidi = $(this).parent().prev().prev().prev().prev().prev().prev().find("input").val();
+  var tgl_menikah = $(this).parent().prev().prev().prev().prev().prev().find("input").val();
+  var tgl_wafat = $(this).parent().prev().prev().prev().prev().find("input").val();
+  var posisi = $(this).parent().prev().prev().prev().find("option:selected").val();
+  var pendidikan_terakhir = $(this).parent().prev().prev().find("option:selected").val();
+  var pekerjaan = $(this).parent().prev().find("option:selected").val();
+
+  var data = {
+              "jk": jk, 
+              "gol_darah": gol_darah, 
+              "tgl_lahir": tgl_lahir, 
+              "tgl_baptis": tgl_baptis, 
+              "tgl_sidi": tgl_sidi, 
+              "tgl_menikah": tgl_menikah, 
+              "tgl_wafat": tgl_wafat, 
+              "posisi": posisi,
+              "pendidikan_terakhir": pendidikan_terakhir,
+              "pekerjaan": pekerjaan,
+              "anggotajemaat_id": anggotajemaat_id
+  };
+
   const ask = confirm("Simpan perubahan data anggota keluarga ini?"); 
+  
   if (ask) {
-    var jawab = ajax_post("jemaat/anggota/savechange", { "anggotajemaat_id": anggotajemaat_id, "data": data });
+    var jawab = ajax_post(base_url+"jemaat/anggota/savechange", { "anggotajemaat_id": anggotajemaat_id, "data": data });
     if (jawab['msg']=='ok') {
       alert("Perubahan data anggota keluarga telah disimpan!");
     }
@@ -567,9 +596,6 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
             }
 
             var slcPosisi ='';
-            if (data[i]['posisi'] == '') {
-              slcPosisi = "<select style='width:70px;'><option value=''></option><option value='Suami'>Suami</option><option value='Istri'>Istri</option><option value='Anak'>Anak</option><option value='AKL'>Anggota Keluarga Lain</option><option value='Mandiri'>Mandiri</option></select>";
-            }
             if (data[i]['posisi'] == 'Suami') {
               slcPosisi = "<select style='width:70px;'><option value='Suami' selected>Suami</option><option value='Istri'>Istri</option><option value='Anak'>Anak</option><option value='AKL'>Anggota Keluarga Lain</option><option value='Mandiri'>Mandiri</option></select>";
             }
@@ -588,29 +614,32 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
 
             let slcPendidikanTerakhir = '';
             if (data[i]['pendidikan_terakhir'] == 'SD') {
-              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD' selected>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3'>D3</option><option value='S1'>S1</option><option value='S2'>S2</option><option value='S3'>S3</option></select>";
+              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD' selected>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3'>D3</option><option value='S1'>S1</option><option value='S2'>S2</option><option value='S3'>S3</option><option value='None'>None</option></select>";
             }
             if (data[i]['pendidikan_terakhir'] == 'SMP') {
-              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP' selected>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3'>D3</option><option value='S1'>S1</option><option value='S2'>S2</option><option value='S3'>S3</option></select>";
+              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP' selected>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3'>D3</option><option value='S1'>S1</option><option value='S2'>S2</option><option value='S3'>S3</option><option value='None'>None</option></select>";
             }
             if (data[i]['pendidikan_terakhir'] == 'SMA-SMK') {
-              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK' selected>SMA-SMK</option><option value='D3'>D3</option><option value='S1'>S1</option><option value='S2'>S2</option><option value='S3'>S3</option></select>";
+              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK' selected>SMA-SMK</option><option value='D3'>D3</option><option value='S1'>S1</option><option value='S2'>S2</option><option value='S3'>S3</option><option value='None'>None</option></select>";
             }
             if (data[i]['pendidikan_terakhir'] == 'D3') {
-              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3' selected>D3</option><option value='S1'>S1</option><option value='S2'>S2</option><option value='S3'>S3</option></select>";
+              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3' selected>D3</option><option value='S1'>S1</option><option value='S2'>S2</option><option value='S3'>S3</option><option value='None'>None</option></select>";
             }
             if (data[i]['pendidikan_terakhir'] == 'S1') {
-              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3'>D3</option><option value='S1' selected>S1</option><option value='S2'>S2</option><option value='S3'>S3</option></select>";
+              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3'>D3</option><option value='S1' selected>S1</option><option value='S2'>S2</option><option value='S3'>S3</option><option value='None'>None</option></select>";
             }
             if (data[i]['pendidikan_terakhir'] == 'S2') {
-              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3'>D3</option><option value='S1'>S1</option><option value='S2' selected>S2</option><option value='S3'>S3</option></select>";
+              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3'>D3</option><option value='S1'>S1</option><option value='S2' selected>S2</option><option value='S3'>S3</option><option value='None'>None</option></select>";
             }
-            if (data[i]['pendidikan_terakhir'] == 'S2') {
-              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3'>D3</option><option value='S1'>S1</option><option value='S2'>S2</option><option value='S3' selected>S3</option></select>";
+            if (data[i]['pendidikan_terakhir'] == 'S3') {
+              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3'>D3</option><option value='S1'>S1</option><option value='S2'>S2</option><option value='S3' selected>S3</option><option value='None'>None</option></select>";
+            }
+            if (data[i]['pendidikan_terakhir'] == 'None') {
+              slcPendidikanTerakhir = "<select style='width:70px;'><option value='SD'>SD</option><option value='SMP'>SMP</option><option value='SMA-SMK'>SMA-SMK</option><option value='D3'>D3</option><option value='S1'>S1</option><option value='S2'>S2</option><option value='S3'>S3</option><option value='None' selected>None</option></select>";
             }
 
             let slcPekerjaan = '';
-            if (data[i]['pekerjaan'] == '') {
+            if (data[i]['pekerjaan'] == 'None') {
               slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None' selected>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'ASN') {
@@ -620,21 +649,20 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
               slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri' selected>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'Karyawan-Swasta') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polir'>TNI-Polri</option><option value='Karyawan-Swasta' selected>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta' selected>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'Pedagang') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polir'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang' selected>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang' selected>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'Wiraswasta') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polir'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta' selected>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta' selected>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'Dokter') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polir'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter' selected>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter' selected>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'Petani') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polir'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani' selected>Petani</option><option value='None'>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani' selected>Petani</option><option value='None'>None</option></select>";
             }
-
 
             if (data[i]['jk']==undefined) {
               isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td><select><option></option><option value='L'>L</option><option value='P'>P</option></select></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";

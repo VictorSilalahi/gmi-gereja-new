@@ -18,6 +18,12 @@ $routes->get('/logout', 'Administrasi::logout');
 $routes->post('/validasi', 'Administrasi::validasi');
 $routes->get('/jemaat', 'Administrasi::jemaat');
 $routes->get('/sektor', 'Administrasi::sektor');
+$routes->get('/jabatan', 'Administrasi::jabatan');
+$routes->get('/organisasi', 'Administrasi::organisasi');
+$routes->get('/kegiatan', 'Administrasi::kegiatan');
+$routes->get('/report/sektor', 'Administrasi::report_sektor');
+$routes->get('/report/akumulasi', 'Administrasi::report_akumulasi');
+$routes->get('/report/seting', 'Administrasi::seting');
 
 // daftar route api internal
 // =========================
@@ -33,7 +39,12 @@ $routes->post('/api/intern/sektor/add', 'Sektor\Sektorcontroller::sektor_add');
 $routes->get('/api/intern/jemaat/sektor', 'Jemaat\Jemaatcontroller::jemaat_per_sektor');
 $routes->post('/api/intern/jemaat/add', 'Jemaat\Jemaatcontroller::jemaat_add');
 $routes->get('/api/intern/jemaat/anggota', 'Jemaat\Jemaatcontroller::jemaat_anggota');
+$routes->post('/api/intern/jemaat/anggota/add', 'Jemaat\Jemaatcontroller::jemaat_anggota_add');
+$routes->post('/api/intern/jemaat/anggota/del', 'Jemaat\Jemaatcontroller::jemaat_anggota_del');
+$routes->post('/api/intern/jemaat/anggota/savechange', 'Jemaat\Jemaatcontroller::jemaat_anggota_ubah_simpan');
 $routes->get('/api/intern/jemaat/nik', 'Jemaat\Jemaatcontroller::jemaat_nik');
+
+// Jabatan
 
 
 
