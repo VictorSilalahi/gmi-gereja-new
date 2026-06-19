@@ -176,4 +176,39 @@ class Administrasi extends BaseController
         return view('administrasi/kegiatan');
     }
 
+    public function report_sektor() 
+    {
+        return view('administrasi/report-sektor');
+    }
+
+    public function report_jabatan() 
+    {
+        return view('administrasi/report-jabatan');
+    }
+
+    public function report_kelompok_umur() 
+    {
+        return view('administrasi/report-kelompokumur');
+    }
+
+    public function report_pernikahan() 
+    {
+        return view('administrasi/report-pernikahan');
+    }
+
+    public function report_statistik() 
+    {
+        return view('administrasi/report-statistik');
+    }
+
+    public function report_status_keanggotaan() 
+    {
+        return view('administrasi/report-statuskeanggotaan');
+    }
+
+    public function report_ulang_tahun() 
+    {
+        return view('administrasi/report-ulangtahun');
+    }
+
 }

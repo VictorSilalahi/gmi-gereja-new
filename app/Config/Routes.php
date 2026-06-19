@@ -21,8 +21,13 @@ $routes->get('/sektor', 'Administrasi::sektor');
 $routes->get('/jabatan', 'Administrasi::jabatan');
 $routes->get('/organisasi', 'Administrasi::organisasi');
 $routes->get('/kegiatan', 'Administrasi::kegiatan');
+$routes->get('/report/jabatan', 'Administrasi::report_jabatan');
+$routes->get('/report/kelompokumur', 'Administrasi::report_kelompok_umur');
+$routes->get('/report/pernikahan', 'Administrasi::report_pernikahan');
 $routes->get('/report/sektor', 'Administrasi::report_sektor');
-$routes->get('/report/akumulasi', 'Administrasi::report_akumulasi');
+$routes->get('/report/statistik', 'Administrasi::report_statistik');
+$routes->get('/report/statuskeanggotaan', 'Administrasi::report_status_keanggotaan');
+$routes->get('/report/ulangtahun', 'Administrasi::report_ulang_tahun');
 $routes->get('/report/seting', 'Administrasi::seting');
 
 // daftar route api internal

@@ -27,14 +27,14 @@
                           </button>
                           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
-                              <a class="nav-link" href="/administrasi/jemaat">Jemaat</a>
-                              <a class="nav-link" href="/administrasi/sektor">Sektor</a>
-                              <a class="nav-link" href="/administrasi/jabatan">Jabatan</a>
-                              <a class="nav-link active" aria-current="page"  href="/administrasi/organisasi">Organisasi</a>
-                              <a class="nav-link" href="/administrasi/kegiatan">Kegiatan</a>
-                              <a class="nav-link" href="/administrasi/report/sektor">Report</a>
-                              <a class="nav-link" href="/administrasi/seting">Seting</a>
-                              <a class="nav-link" href="/administrasi/logout"><span class="badge text-bg-danger">Logout</span></a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>jemaat">Jemaat</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>sektor">Sektor</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>jabatan">Jabatan</a>
+                              <a class="nav-link active" aria-current="page" href="<?php echo(base_url()); ?>organisasi">Organisasi</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>kegiatan">Kegiatan</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>report/sektor">Report</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>seting">Seting</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>logout"><span class="badge text-bg-danger">Logout</span></a>
 
 
                             </div>
