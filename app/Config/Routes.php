@@ -20,6 +20,7 @@ $routes->get('/jemaat', 'Administrasi::jemaat');
 $routes->get('/sektor', 'Administrasi::sektor');
 
 // daftar route api internal
+// =========================
 $routes->post('/api/intern/periksa_token', 'Administrasi::periksa_token');
 
 // Sektor

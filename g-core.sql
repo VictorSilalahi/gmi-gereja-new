@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2026 at 07:03 AM
+-- Generation Time: Jun 19, 2026 at 06:42 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -26,355 +26,112 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `tanggotajemaat`
 --
-
-CREATE TABLE `tanggotajemaat` (
-  `anggotajemaat_id` bigint(20) UNSIGNED NOT NULL,
-  `jemaat_id` int(11) NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `jk` varchar(10) NOT NULL,
-  `golongan_darah` varchar(2) NOT NULL,
-  `tanggal_lahir` date NOT NULL,
-  `tanggal_baptis` date NOT NULL,
-  `posisi` varchar(10) NOT NULL,
-  `pendidikan_terakhir` varchar(20) NOT NULL,
-  `pekerjaan` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.tanggotajemaat: #1932 - Table &#039;g-core.tanggotajemaat&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.tanggotajemaat: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`tanggotajemaat`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tanggotaorganisasi`
 --
-
-CREATE TABLE `tanggotaorganisasi` (
-  `anggotaorganisasi_id` bigint(20) UNSIGNED NOT NULL,
-  `anggotajemaat_id` int(11) NOT NULL,
-  `organisasi_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.tanggotaorganisasi: #1932 - Table &#039;g-core.tanggotaorganisasi&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.tanggotaorganisasi: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`tanggotaorganisasi`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `thistoryapp`
 --
-
-CREATE TABLE `thistoryapp` (
-  `historyapp_id` bigint(20) UNSIGNED NOT NULL,
-  `operasi` varchar(50) NOT NULL,
-  `tanggal_operasi` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.thistoryapp: #1932 - Table &#039;g-core.thistoryapp&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.thistoryapp: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`thistoryapp`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `thistorypejabat`
 --
-
-CREATE TABLE `thistorypejabat` (
-  `historypejabat_id` bigint(20) UNSIGNED NOT NULL,
-  `anggotajemaat_id` int(11) NOT NULL,
-  `tanggal_pengangkatan` date NOT NULL,
-  `tanggal_berhenti` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.thistorypejabat: #1932 - Table &#039;g-core.thistorypejabat&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.thistorypejabat: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`thistorypejabat`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tjabatan`
 --
-
-CREATE TABLE `tjabatan` (
-  `jabatan_id` bigint(20) UNSIGNED NOT NULL,
-  `jabatan` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.tjabatan: #1932 - Table &#039;g-core.tjabatan&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.tjabatan: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`tjabatan`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tjemaat`
 --
-
-CREATE TABLE `tjemaat` (
-  `jemaat_id` bigint(20) UNSIGNED NOT NULL,
-  `nik` varchar(20) NOT NULL,
-  `status_keanggotaan` varchar(20) NOT NULL,
-  `sektor_id` int(11) NOT NULL,
-  `alamat` varchar(200) NOT NULL,
-  `mobile_phone` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.tjemaat: #1932 - Table &#039;g-core.tjemaat&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.tjemaat: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`tjemaat`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tkegiatan`
 --
-
-CREATE TABLE `tkegiatan` (
-  `kegiatan_id` bigint(20) UNSIGNED NOT NULL,
-  `tanggal` date NOT NULL,
-  `judul_kegiatan` varchar(200) NOT NULL,
-  `deskripsi` varchar(1024) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.tkegiatan: #1932 - Table &#039;g-core.tkegiatan&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.tkegiatan: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`tkegiatan`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tkeluar`
 --
-
-CREATE TABLE `tkeluar` (
-  `keluar_id` bigint(20) UNSIGNED NOT NULL,
-  `anggotajemaat_id` int(11) NOT NULL,
-  `tanggal_keluar` date NOT NULL,
-  `alasan` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.tkeluar: #1932 - Table &#039;g-core.tkeluar&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.tkeluar: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`tkeluar`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tmenikah`
 --
-
-CREATE TABLE `tmenikah` (
-  `menikah_id` bigint(20) UNSIGNED NOT NULL,
-  `anggotajemaat_id` int(11) NOT NULL,
-  `tanggal_menikah` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.tmenikah: #1932 - Table &#039;g-core.tmenikah&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.tmenikah: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`tmenikah`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `torganisasi`
 --
-
-CREATE TABLE `torganisasi` (
-  `organisasi_id` bigint(20) UNSIGNED NOT NULL,
-  `organisasi` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.torganisasi: #1932 - Table &#039;g-core.torganisasi&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.torganisasi: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`torganisasi`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tpejabat`
 --
-
-CREATE TABLE `tpejabat` (
-  `pejabat_id` bigint(20) UNSIGNED NOT NULL,
-  `anggotajemaat_id` int(11) NOT NULL,
-  `jabatan_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.tpejabat: #1932 - Table &#039;g-core.tpejabat&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.tpejabat: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`tpejabat`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tsektor`
 --
-
-CREATE TABLE `tsektor` (
-  `sektor_id` bigint(20) UNSIGNED NOT NULL,
-  `no_sektor` varchar(10) NOT NULL,
-  `nama_sektor` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.tsektor: #1932 - Table &#039;g-core.tsektor&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.tsektor: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`tsektor`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `tsidi`
 --
-
-CREATE TABLE `tsidi` (
-  `sidi_id` bigint(20) UNSIGNED NOT NULL,
-  `anggotajemaat_id` int(11) NOT NULL,
-  `tanggal_sidi` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Error reading structure for table g-core.tsidi: #1932 - Table &#039;g-core.tsidi&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.tsidi: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`tsidi`&#039; at line 1
 
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `twafat`
 --
-
-CREATE TABLE `twafat` (
-  `wafat_id` bigint(20) UNSIGNED NOT NULL,
-  `anggotajemaat_id` int(11) NOT NULL,
-  `tanggal_wafat` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tanggotajemaat`
---
-ALTER TABLE `tanggotajemaat`
-  ADD UNIQUE KEY `anggotajemaat_id` (`anggotajemaat_id`);
-
---
--- Indexes for table `tanggotaorganisasi`
---
-ALTER TABLE `tanggotaorganisasi`
-  ADD UNIQUE KEY `anggotaorganisasi_id` (`anggotaorganisasi_id`);
-
---
--- Indexes for table `thistoryapp`
---
-ALTER TABLE `thistoryapp`
-  ADD UNIQUE KEY `historyapp_id` (`historyapp_id`);
-
---
--- Indexes for table `thistorypejabat`
---
-ALTER TABLE `thistorypejabat`
-  ADD UNIQUE KEY `historypejabat_id` (`historypejabat_id`);
-
---
--- Indexes for table `tjabatan`
---
-ALTER TABLE `tjabatan`
-  ADD UNIQUE KEY `jabatan_id` (`jabatan_id`);
-
---
--- Indexes for table `tjemaat`
---
-ALTER TABLE `tjemaat`
-  ADD UNIQUE KEY `jemaat_id` (`jemaat_id`);
-
---
--- Indexes for table `tkegiatan`
---
-ALTER TABLE `tkegiatan`
-  ADD UNIQUE KEY `kegiatan_id` (`kegiatan_id`);
-
---
--- Indexes for table `tkeluar`
---
-ALTER TABLE `tkeluar`
-  ADD UNIQUE KEY `keluar_id` (`keluar_id`);
-
---
--- Indexes for table `tmenikah`
---
-ALTER TABLE `tmenikah`
-  ADD UNIQUE KEY `menikah_id` (`menikah_id`);
-
---
--- Indexes for table `torganisasi`
---
-ALTER TABLE `torganisasi`
-  ADD UNIQUE KEY `organisasi_id` (`organisasi_id`);
-
---
--- Indexes for table `tpejabat`
---
-ALTER TABLE `tpejabat`
-  ADD UNIQUE KEY `pejabat_id` (`pejabat_id`);
-
---
--- Indexes for table `tsektor`
---
-ALTER TABLE `tsektor`
-  ADD UNIQUE KEY `sektor_id` (`sektor_id`);
-
---
--- Indexes for table `tsidi`
---
-ALTER TABLE `tsidi`
-  ADD UNIQUE KEY `sidi_id` (`sidi_id`);
-
---
--- Indexes for table `twafat`
---
-ALTER TABLE `twafat`
-  ADD UNIQUE KEY `wafat_id` (`wafat_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tanggotajemaat`
---
-ALTER TABLE `tanggotajemaat`
-  MODIFY `anggotajemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tanggotaorganisasi`
---
-ALTER TABLE `tanggotaorganisasi`
-  MODIFY `anggotaorganisasi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `thistoryapp`
---
-ALTER TABLE `thistoryapp`
-  MODIFY `historyapp_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `thistorypejabat`
---
-ALTER TABLE `thistorypejabat`
-  MODIFY `historypejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tjabatan`
---
-ALTER TABLE `tjabatan`
-  MODIFY `jabatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tjemaat`
---
-ALTER TABLE `tjemaat`
-  MODIFY `jemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tkegiatan`
---
-ALTER TABLE `tkegiatan`
-  MODIFY `kegiatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tkeluar`
---
-ALTER TABLE `tkeluar`
-  MODIFY `keluar_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tmenikah`
---
-ALTER TABLE `tmenikah`
-  MODIFY `menikah_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `torganisasi`
---
-ALTER TABLE `torganisasi`
-  MODIFY `organisasi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tpejabat`
---
-ALTER TABLE `tpejabat`
-  MODIFY `pejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tsektor`
---
-ALTER TABLE `tsektor`
-  MODIFY `sektor_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tsidi`
---
-ALTER TABLE `tsidi`
-  MODIFY `sidi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `twafat`
---
-ALTER TABLE `twafat`
-  MODIFY `wafat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+-- Error reading structure for table g-core.twafat: #1932 - Table &#039;g-core.twafat&#039; doesn&#039;t exist in engine
+-- Error reading data for table g-core.twafat: #1064 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near &#039;FROM `g-core`.`twafat`&#039; at line 1
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
