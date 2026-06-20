@@ -516,6 +516,37 @@ class Jemaatcontroller extends BaseController
     }
 
 
+    public function jemaat_anggota_all()
+    {
+
+        $db = $this->set_db();
+
+        $sql = "select anggotajemaat_id, nama from tanggotajemaat";
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $data = [];
+
+            $result = $query->getResult();
+
+            foreach($result as $row) {
+                array_push($data, array("nama"=>$row->nama));
+
+            }
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$data
+            ]);
+
+        }
+
+
+    }
+
+
 
     public function set_db()
     {

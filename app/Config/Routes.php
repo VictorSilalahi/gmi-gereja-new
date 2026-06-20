@@ -47,9 +47,17 @@ $routes->get('/api/intern/jemaat/anggota', 'Jemaat\Jemaatcontroller::jemaat_angg
 $routes->post('/api/intern/jemaat/anggota/add', 'Jemaat\Jemaatcontroller::jemaat_anggota_add');
 $routes->post('/api/intern/jemaat/anggota/del', 'Jemaat\Jemaatcontroller::jemaat_anggota_del');
 $routes->post('/api/intern/jemaat/anggota/savechange', 'Jemaat\Jemaatcontroller::jemaat_anggota_ubah_simpan');
+$routes->get('/api/intern/jemaat/anggota/all', 'Jemaat\Jemaatcontroller::jemaat_anggota_all');
 $routes->get('/api/intern/jemaat/nik', 'Jemaat\Jemaatcontroller::jemaat_nik');
 
 // Jabatan
+$routes->get('/api/intern/jabatan/all', 'Jabatan\Jabatancontroller::jabatan_all');
+$routes->post('/api/intern/jabatan/add', 'Jabatan\Jabatancontroller::jabatan_add');
+$routes->post('/api/intern/jabatan/change', 'Jabatan\Jabatancontroller::jabatan_change');
+$routes->post('/api/intern/jabatan/del', 'Jabatan\Jabatancontroller::jabatan_del');
+$routes->get('/api/intern/jabatan/pejabat/all', 'Jabatan\Jabatancontroller::pejabat_all');
+$routes->post('/api/intern/jabatan/pejabat/add', 'Jabatan\Jabatancontroller::pejabat_add');
+$routes->post('/api/intern/jabatan/pejabat/del', 'Jabatan\Jabatancontroller::pejabat_del');
 
 
 
