@@ -59,6 +59,9 @@ $routes->get('/api/intern/jabatan/pejabat/all', 'Jabatan\Jabatancontroller::peja
 $routes->post('/api/intern/jabatan/pejabat/add', 'Jabatan\Jabatancontroller::pejabat_add');
 $routes->post('/api/intern/jabatan/pejabat/del', 'Jabatan\Jabatancontroller::pejabat_del');
 
+// Organisasi
+
+
 
 
 
