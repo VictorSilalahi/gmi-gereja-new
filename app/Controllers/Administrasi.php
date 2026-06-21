@@ -7,7 +7,6 @@ use CodeIgniter\RESTful\ResourceController;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-use Config\Services;
 
 class Administrasi extends BaseController
 {
@@ -76,6 +75,7 @@ class Administrasi extends BaseController
 
                 $session = session();
                 $session->set('db_id', $result[0]['db_id']);
+                $session->set('identity_link', $result[0]['identity_link']);
                 
                 return $this->respond([
                     'status'  => 200,
@@ -209,6 +209,11 @@ class Administrasi extends BaseController
     public function report_ulang_tahun() 
     {
         return view('administrasi/report-ulangtahun');
+    }
+
+    public function seting()
+    {
+        return view('administrasi/seting');
     }
 
 }

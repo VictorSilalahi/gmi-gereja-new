@@ -1,15 +1,20 @@
-import { ajax_get, ajax_post } from "../ajx.js";
+import { ajax_get, ajax_post, check_token } from "../ajx.js";
+
+
+let base_url = $("#base_url").val()+"api/intern/";
 
 $(document).ready(function () {
+  check_token();
   loadDataOrganisasi();
   loadDataAnggotaOrganisasi();
   loadAutoComplete();
+
 });
 
 $(document).on("click", ".btn-delete", function () {
   if (confirm("Apakah akan menghapus data organisasi ini?")) {
     var organisasi_id = $(this).parent().parent().attr("id");
-    var jawab = ajax_post("organisasi/del", { organisasi_id: organisasi_id });
+    var jawab = ajax_post(base_url+"organisasi/del", { organisasi_id: organisasi_id });
 
     if (jawab.msg == "error") {
       alert("Data organisasi ini tidak bisa dihapus! Telah dipakai!");
@@ -20,6 +25,7 @@ $(document).on("click", ".btn-delete", function () {
     }
 
   }
+
 });
 
 $(document).on("click", ".btn-edit", function () {
@@ -37,6 +43,7 @@ $(document).on("click", "#btnTambahOrganisasi", function () {
   $("#opOrganisasi").text("Tambah Organisasi");
   $("#txtJenisOpOrganisasi").val("tambah");
   $("#AddEditOrganisasi").modal("show");
+
 });
 
 $(document).on("click", "#btnOKOrganisasi", function () {
@@ -48,26 +55,33 @@ $(document).on("click", "#btnOKOrganisasi", function () {
 
 
   if ($("#txtJenisOpOrganisasi").val() == "tambah") {
-    var data = ajax_post("organisasi/add", { nama: $("#txtNamaOrganisasi").val() });
+    var data = ajax_post(base_url+"organisasi/add", { nama: $("#txtNamaOrganisasi").val() });
     if (data.msg == "error") {
       alert(data.data);
+
     } else {
       loadDataOrganisasi();
       loadDataAnggotaOrganisasi();
       $("#txtNamaOrganisasi").val("");
       $("#AddEditOrganisasi").modal("hide");
+
     }
+
   } else {
-    var data = ajax_post("organisasi/change", { organisasi_id: $("#txtOrganisasiID").val(), nama: $("#txtNamaOrganisasi").val() });
+    var data = ajax_post(base_url+"organisasi/change", { organisasi_id: $("#txtOrganisasiID").val(), nama: $("#txtNamaOrganisasi").val() });
     if (data.msg == "error") {
       alert(data.data);
+
     } else {
       loadDataOrganisasi();
       loadDataAnggotaOrganisasi();
       $("#txtNamaOrganisasi").val("");
       $("#AddEditOrganisasi").modal("hide");
+
     }
+
   }
+
 });
 
 $(document).on("click", ".btn-delete-anggota_organisasi", function() {
@@ -76,7 +90,7 @@ $(document).on("click", ".btn-delete-anggota_organisasi", function() {
   if (confirm("Apakah akan menghapus data anggota organisasi ini?")==true) {
     var anggotaorganisasi_id = $(this).parent().parent().attr("id");
 
-    var jawab = ajax_post("organisasi/anggota/del", {"anggotaorganisasi_id": anggotaorganisasi_id });
+    var jawab = ajax_post(base_url+"organisasi/anggota/del", {"anggotaorganisasi_id": anggotaorganisasi_id });
 
     if (jawab.msg=="ok") {
       loadDataAnggotaOrganisasi();
@@ -101,7 +115,7 @@ $(".btn-ok-tambah-anggota-organisasi").on("click", function() {
   if (confirm("Apakah akan menginput data anggota organisasi?")==true) {
     var nama = $("#txtNamaCalonAnggota").val();
     var organisasi_id = $("#slcOrganisasiForm").val();
-    var jawab = ajax_post("organisasi/anggota/add", {"nama":nama, "organisasi_id": organisasi_id });
+    var jawab = ajax_post(base_url+"organisasi/anggota/add", {"nama":nama, "organisasi_id": organisasi_id });
 
     if (jawab.msg=="ok") {
       loadDataAnggotaOrganisasi();
@@ -119,7 +133,7 @@ $(".btn-ok-tambah-anggota-organisasi").on("click", function() {
 function loadDataOrganisasi() {
   $("#tblOrganisasi tbody tr").remove();
 
-  var data = ajax_get("organisasi/all", "");
+  var data = ajax_get(base_url+"organisasi/all", "");
 
   if (data.msg == "ok") {
     var isi_tabel = "";
@@ -133,23 +147,26 @@ function loadDataOrganisasi() {
         "'><td>" +
         no +
         "</td><td>" +
-        data.data[i]["nama"] +
+        data.data[i]["organisasi"] +
         "</td>" +
         "<td><button class='btn btn-secondary btn-edit'>Edit</button>&nbsp;<button class='btn btn-danger btn-delete'>Hapus</button></td></tr>";
       no++;
 
-      isi_select = isi_select + "<option value='"+data.data[i]['organisasi_id']+"'>"+data.data[i]['nama']+"</option>";
+      isi_select = isi_select + "<option value='"+data.data[i]['organisasi_id']+"'>"+data.data[i]['organisasi']+"</option>";
 
     }
+
     $("#tblOrganisasi tbody").html(isi_tabel);
     $("#slcOrganisasiForm").html(isi_select);
+
   }
+
 }
 
 function loadDataAnggotaOrganisasi() {
   $("#tblAnggotaOrganisasi tbody tr").remove();
 
-  var data = ajax_get("organisasi/anggota", "");
+  var data = ajax_get(base_url+"organisasi/anggota", "");
 
   if (data.msg == "ok") {
     var isi_tabel = "";
@@ -174,7 +191,7 @@ function loadDataAnggotaOrganisasi() {
 }
 
 function loadAutoComplete() {
-  var data = ajax_get("jemaat/anggota/all", "");
+  var data = ajax_get(base_url+"jemaat/anggota/all", "");
 
   var daftar_nama  = [];
 

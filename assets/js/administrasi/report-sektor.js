@@ -1,10 +1,13 @@
-import { ajax_get, ajax_post } from "../ajx.js";
+import { ajax_get, ajax_post, check_token } from "../ajx.js";
 import { set_tanggal_indo, set_tanggal, set_tanggal_database } from "../format.js";
 import { createPDF } from "../report.js";
 
+let base_url = $("#base_url").val()+"api/intern/";
 
 $(document).ready(function () {
 
+  check_token();
+  
   $(".btn-print").hide();
 
   loadDataSektor();
@@ -30,7 +33,7 @@ $(document).on("click", ".btn-print", function(e) {
 
 function loadDataSektor() {
 
-  var data = ajax_get("/administrasi/sektor/all", "");
+  var data = ajax_get(base_url+"sektor/all", "");
 
   if (data.msg == "ok") {
     var isi_select = "<option value=''>-</option>";

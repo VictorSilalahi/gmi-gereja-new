@@ -26,14 +26,14 @@
                           </button>
                           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav">
-                              <a class="nav-link" href="/administrasi/jemaat">Jemaat</a>
-                              <a class="nav-link" href="/administrasi/sektor">Sektor</a>
-                              <a class="nav-link" href="/administrasi/jabatan">Jabatan</a>
-                              <a class="nav-link" href="/administrasi/organisasi">Organisasi</a>
-                              <a class="nav-link" href="/administrasi/kegiatan">Kegiatan</a>
-                              <a class="nav-link active" aria-current="page" href="/administrasi/report/sektor">Report</a>
-                              <a class="nav-link" href="/administrasi/seting">Seting</a>
-                              <a class="nav-link" href="/administrasi/logout"><span class="badge text-bg-danger">Logout</span></a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>jemaat">Jemaat</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>sektor">Sektor</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>jabatan">Jabatan</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>organisasi">Organisasi</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>kegiatan">Kegiatan</a>
+                              <a class="nav-link active" aria-current="page" href="<?php echo(base_url()); ?>report/sektor">Report</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>seting">Seting</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>logout"><span class="badge text-bg-danger">Logout</span></a>
 
 
                             </div>
@@ -58,25 +58,25 @@
 
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link" aria-current="page" href="/administrasi/report/sektor">Sektor</a>
+                                <a class="nav-link" href="<?php echo(base_url()); ?>report/sektor">Sektor</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/administrasi/report/jabatan">Jabatan</a>
+                                <a class="nav-link active" aria-current="page" href="<?php echo(base_url()); ?>report/jabatan">Jabatan</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/administrasi/report/kelompokumur">Kelompok Umur</a>
+                                <a class="nav-link" href="<?php echo(base_url()); ?>report/kelompokumur">Kelompok Umur</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/administrasi/report/statuskeanggotaan">Status Keanggotaan</a>
+                                <a class="nav-link" href="<?php echo(base_url()); ?>report/statuskeanggotaan">Status Keanggotaan</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/administrasi/report/ulangtahun">Ulang Tahun</a>
+                                <a class="nav-link" href="<?php echo(base_url()); ?>report/ulangtahun">Ulang Tahun</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/administrasi/report/pernikahan">Pernikahan</a>
+                                <a class="nav-link" href="<?php echo(base_url()); ?>report/pernikahan">Pernikahan</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/administrasi/report/statistik">Statistik</a>
+                                <a class="nav-link" href="<?php echo(base_url()); ?>report/statistik">Statistik</a>
                             </li>
                         </ul>                    
 

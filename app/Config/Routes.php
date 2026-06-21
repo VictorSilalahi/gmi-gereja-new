@@ -21,6 +21,7 @@ $routes->get('/sektor', 'Administrasi::sektor');
 $routes->get('/jabatan', 'Administrasi::jabatan');
 $routes->get('/organisasi', 'Administrasi::organisasi');
 $routes->get('/kegiatan', 'Administrasi::kegiatan');
+$routes->get('/seting', 'Administrasi::seting');
 $routes->get('/report/jabatan', 'Administrasi::report_jabatan');
 $routes->get('/report/kelompokumur', 'Administrasi::report_kelompok_umur');
 $routes->get('/report/pernikahan', 'Administrasi::report_pernikahan');
@@ -60,8 +61,23 @@ $routes->post('/api/intern/jabatan/pejabat/add', 'Jabatan\Jabatancontroller::pej
 $routes->post('/api/intern/jabatan/pejabat/del', 'Jabatan\Jabatancontroller::pejabat_del');
 
 // Organisasi
+$routes->get('/api/intern/organisasi/all', 'Organisasi\Organisasicontroller::organisasi_all');
+$routes->post('/api/intern/organisasi/add', 'Organisasi\Organisasicontroller::organisasi_add');
+$routes->post('/api/intern/organisasi/change', 'Organisasi\Organisasicontroller::organisasi_change');
+$routes->post('/api/intern/organisasi/del', 'Organisasi\Organisasicontroller::organisasi_del');
+$routes->get('/api/intern/organisasi/anggota', 'Organisasi\Organisasicontroller::organisasi_anggota');
+$routes->post('/api/intern/organisasi/anggota/add', 'Organisasi\Organisasicontroller::organisasi_anggota_add');
+$routes->post('/api/intern/organisasi/anggota/del', 'Organisasi\Organisasicontroller::organisasi_anggota_del');
 
+// Kegiatan
+$routes->get('/api/intern/kegiatan/all', 'Kegiatan\Kegiatancontroller::kegiatan_all');
+$routes->post('/api/intern/kegiatan/add', 'Kegiatan\Kegiatancontroller::kegiatan_add');
+$routes->post('/api/intern/kegiatan/del', 'Kegiatan\Kegiatancontroller::kegiatan_del');
 
+// Seting
+$routes->post('/api/intern/seting/password/change', 'Seting\Setingcontroller::password_change');
+
+// Report
 
 
 

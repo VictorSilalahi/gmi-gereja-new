@@ -1,8 +1,11 @@
 import { ajax_get, ajax_post } from "../ajx.js";
 import { set_tanggal } from "../format.js";
 
+let base_url = $("#base_url").val()+"api/intern/"
+
 $(document).ready(function () {
   loadDataKegiatan();
+
 });
 
 
@@ -11,6 +14,7 @@ $(document).on("click", "#btnTambahKegiatan", function () {
   $("#opKegiatan").text("Tambah Kegiatan");
   $("#txtJenisOpKegiatan").val("tambah");
   $("#AddEditKegiatan").modal("show");
+
 });
 
 
@@ -42,7 +46,7 @@ $(document).on("click", "#btnOKKegiatan", function () {
 
   if ($("#txtJenisOpKegiatan").val()=='tambah') {
 
-    jawab = ajax_post("kegiatan/add", {"tanggal": tanggal, "judul": judul, "deskripsi": deskripsi});
+    jawab = ajax_post(base_url+"kegiatan/add", {"tanggal": tanggal, "judul": judul, "deskripsi": deskripsi});
 
   } else {
 
@@ -62,47 +66,24 @@ $(document).on("click", "#btnOKKegiatan", function () {
     $("#txtTanggal").focus();
 
   }
+
+
 });
 
-function loadDataKegiatan() {
-  $("#tblKegiatan tbody tr").remove();
-
-  var data = ajax_get("kegiatan/all", "");
-
-  // console.log(data);
-
-  if (data.msg == "ok") {
-    var isi_tabel = "";
-    var no = 1;
-    for (var i = 0; i < data.data.length; i++) {
-      isi_tabel =
-        isi_tabel +
-        "<tr id='" +
-        data.data[i]["kegiatan_id"] +
-        "'><td>" +
-        no +
-        "</td><td>" +
-        set_tanggal(data.data[i]["tanggal"]) +
-        "</td><td>" +
-        data.data[i]["judul"] +
-        "<td><button class='btn btn-secondary btn-edit'>Edit</button>&nbsp;<button class='btn btn-danger btn-delete'>Hapus</button></td></tr>";
-      no++;
-    }
-    $("#tblKegiatan tbody").html(isi_tabel);
-  }
-}
 
 $(document).on("click", ".btn-delete", function() {
 
   if (confirm("Apakah akan menghapus data kegiatan ini?")) {
     var kegiatan_id = $(this).parent().parent().attr("id");
-    var jawab = ajax_post("kegiatan/del", {kegiatan_id: kegiatan_id });
+    var jawab = ajax_post(base_url+"kegiatan/del", {kegiatan_id: kegiatan_id });
 
+    loadDataKegiatan();
+    
     if (jawab.msg == "error") {
       alert("Data kegiatan ini tidak bisa dihapus!");
       return false;
 
-    }
+    } 
 
   }
 
@@ -131,3 +112,33 @@ $(document).on("click", ".btn-edit", function () {
     }
 
 });
+
+
+function loadDataKegiatan() {
+  $("#tblKegiatan tbody tr").remove();
+
+  var data = ajax_get(base_url+"kegiatan/all", "");
+
+  // console.log(data);
+
+  if (data.msg == "ok") {
+    var isi_tabel = "";
+    var no = 1;
+    for (var i = 0; i < data.data.length; i++) {
+      isi_tabel =
+        isi_tabel +
+        "<tr id='" +
+        data.data[i]["kegiatan_id"] +
+        "'><td>" +
+        no +
+        "</td><td>" +
+        set_tanggal(data.data[i]["tanggal"]) +
+        "</td><td>" +
+        data.data[i]["judul_kegiatan"] +
+        "<td><button class='btn btn-secondary btn-edit'>Edit</button>&nbsp;<button class='btn btn-danger btn-delete'>Hapus</button></td></tr>";
+      no++;
+    }
+    $("#tblKegiatan tbody").html(isi_tabel);
+  }
+}
+
