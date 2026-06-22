@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2026 at 05:52 AM
+-- Generation Time: Jun 22, 2026 at 07:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -74,7 +74,8 @@ CREATE TABLE `thistorypejabat` (
   `historypejabat_id` bigint(20) UNSIGNED NOT NULL,
   `anggotajemaat_id` int(11) NOT NULL,
   `tanggal_pengangkatan` date NOT NULL,
-  `tanggal_berhenti` date NOT NULL
+  `tanggal_berhenti` date NOT NULL,
+  `jabatan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -150,7 +151,7 @@ CREATE TABLE `tmenikah` (
 
 CREATE TABLE `torganisasi` (
   `organisasi_id` bigint(20) UNSIGNED NOT NULL,
-  `organisasi` int(11) NOT NULL
+  `organisasi` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
