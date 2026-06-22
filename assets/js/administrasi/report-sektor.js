@@ -49,14 +49,14 @@ function loadDataSektor() {
 
 function loadDataPerSektor(sektor_id) {
 
-  var jawab = ajax_get("/administrasi/jemaat/sektor", {"sektor_id": sektor_id });
+  var jawab = ajax_get(base_url+"report/jemaat/sektor", {"sektor_id": sektor_id });
 
   $("#tblJemaat tbody").html("");
   $(".btn-print").hide();
   
   if (jawab.msg=="ok") {
 
-    // console.log(jawab.data);
+    console.log(jawab.data);
     var jumlah = jawab['data'].length;
 
     var isi = '';

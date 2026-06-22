@@ -78,6 +78,8 @@ $routes->post('/api/intern/kegiatan/del', 'Kegiatan\Kegiatancontroller::kegiatan
 $routes->post('/api/intern/seting/password/change', 'Seting\Setingcontroller::password_change');
 
 // Report
+$routes->get('/api/intern/report/jemaat/sektor', 'Report\Reportcontroller::jemaat_sektor');
+
 
 
 
