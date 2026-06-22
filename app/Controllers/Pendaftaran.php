@@ -258,7 +258,7 @@ class Pendaftaran extends BaseController
         $message = $message . '             <p><h2>Proses Pendaftaran telah selesai.</h2></p>';
         $message = $message . '             <p>Anda dapat melakukan login ke aplikasi dengan menggunakan keterangan di bawah ini:</p>';
         $message = $message . '             <hr>';
-        $message = $message . '             <p>Link: https://app.gmiwilayah1.org</p>';
+        $message = $message . '             <p>Link: http://38.103.170.27/gmi/gereja/</p>';
         $message = $message . '             <p>Login: ' .$email_gereja. '</p>';
         $message = $message . '             <p>Password: ' .$pwd. '</p>';
         $message = $message . '             <hr>';
