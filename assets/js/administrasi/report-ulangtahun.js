@@ -1,9 +1,12 @@
-import { ajax_get, ajax_post } from "../ajx.js";
+import { ajax_get, ajax_post, check_token } from "../ajx.js";
 import { createPDF } from "../report.js";
 import { set_tanggal } from "../format.js";
 
+let base_url = $("#base_url").val()+"api/intern/";
 
 $(document).ready(function () {
+
+    check_token();
 
     $(".btn-print").hide();
 
@@ -26,7 +29,7 @@ $(document).on("click", ".btn-prosesdata", function () {
     var tgl_awal = $("#tglAwal").val();
     var tgl_akhir = $("#tglAkhir").val();
 
-    var jawab = ajax_post("/administrasi/jemaat/berulangtahun", {"tgl_awal": tgl_awal, "tgl_akhir": tgl_akhir });
+    var jawab = ajax_post(base_url+"report/jemaat/berulangtahun", {"tgl_awal": tgl_awal, "tgl_akhir": tgl_akhir });
 
     $("#tblJemaat tbody").html("");
     $(".btn-print").hide();
@@ -39,7 +42,7 @@ $(document).on("click", ".btn-prosesdata", function () {
         
         var no = 1;
         for (var i=0; i<jumlah; i++) {
-            var tgl_lahir = set_tanggal(jawab['data'][i]['tgl_lahir']);
+            var tgl_lahir = set_tanggal(jawab['data'][i]['tanggal_lahir']);
             isi = isi + "<tr><td>"+no+"</td><td>"+jawab['data'][i]['nama']+"</td><td>"+tgl_lahir+"</td><td>"+jawab['data'][i]['alamat']+"</td><td>"+jawab['data'][i]['sektor']+"</td></tr>";
             no++;
         }

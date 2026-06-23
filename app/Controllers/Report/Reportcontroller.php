@@ -6,6 +6,7 @@ use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use CodeIgniter\I18n\Time;
+use DateTime;
 use Exception;
 
 use App\Controllers\BaseController;
@@ -153,7 +154,7 @@ class Reportcontroller extends BaseController
 
                 $interval = date_diff($tanggal_lahir, $tanggal_sekarang);
 
-                echo($interval->format('%y'));
+                // echo($interval->format('%y')."<br>");
 
                 // anak-anak
                 if ($interval->format('%y')<=12) {
@@ -231,9 +232,133 @@ class Reportcontroller extends BaseController
 
         }
 
+    }
 
+
+    public function ulang_tahun()
+    {
+        helper('html');
+
+        $tgl_awal = date_create($this->request->getPost("tgl_awal"));
+        $tgl_akhir = date_create($this->request->getPost("tgl_akhir"));
+
+
+        $sql = "select tsektor.nama_sektor, tjemaat.nik, tanggotajemaat.nama, tjemaat.alamat, tanggotajemaat.tanggal_lahir from tjemaat, tanggotajemaat, tsektor where tjemaat.jemaat_id=tanggotajemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id";
+        
+        $db = $this->set_db();
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getResult();
+
+            $data = [];
+
+            foreach ($result as $row) {
+                
+                $tanggal_lahir = date_create($row->tanggal_lahir);
+
+                $temp = $this->isDayMonthBetween($row->tanggal_lahir, $this->request->getPost("tgl_awal"), $this->request->getPost("tgl_akhir"));
+
+                if ($temp==true) {
+                    array_push($data, 
+                            array(
+                                "nik"=>$row->nik,
+                                "nama"=>$row->nama,
+                                "tanggal_lahir"=>$row->tanggal_lahir,
+                                "alamat"=>$row->alamat,
+                                "sektor"=>$row->nama_sektor
+                            )
+                    );
+
+                }
+                
+            }
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$data
+            ]);
+
+        }
+    
 
     }
+
+
+    public function pernikahan()
+    {
+        helper('html');
+
+        $tgl_awal = $this->request->getPost("tgl_awal");
+        $tgl_akhir = $this->request->getPost("tgl_akhir");
+
+
+        $sql = "select tsektor.nama_sektor, tjemaat.nik, tanggotajemaat.nama, tjemaat.alamat, tmenikah.tanggal_menikah from tjemaat, tanggotajemaat, tsektor, tmenikah where tjemaat.jemaat_id=tanggotajemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id and tanggotajemaat.anggotajemaat_id=tmenikah.anggotajemaat_id";
+        
+        $db = $this->set_db();
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getResult();
+
+            $data = [];
+
+            foreach ($result as $row) {
+                
+                $tanggal_menikah = $row->tanggal_menikah;
+
+                $temp = $this->isDayMonthBetween($tanggal_menikah, $tgl_awal, $tgl_akhir);
+
+                if ($temp==true) {
+                    array_push($data, 
+                            array(
+                                "nik"=>$row->nik,
+                                "nama"=>$row->nama,
+                                "tanggal_menikah"=>$row->tanggal_menikah,
+                                "alamat"=>$row->alamat,
+                                "sektor"=>$row->nama_sektor
+                            )
+                    );
+
+                }
+                
+            }
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$data
+            ]);
+
+        }
+    
+
+    }
+
+
+
+    function isDayMonthBetween($checkDate, $startDate, $endDate) {
+        // 1. Convert all inputs to DateTime objects
+        $check = date_create($checkDate);
+        $start = date_create($startDate);
+        $end   = date_create($endDate);
+
+        // 2. Extract only the month and day components
+        $checkMonthDay = $check->format('m-d');
+        $startMonthDay = $start->format('m-d');
+        $endMonthDay   = $end->format('m-d');
+
+        // 3. Handle standard chronological ranges (e.g., May 1st to July 15th)
+        if ($startMonthDay <= $endMonthDay) {
+            return ($checkMonthDay >= $startMonthDay && $checkMonthDay <= $endMonthDay);
+        }
+
+        // 4. Handle ranges spanning across the New Year (e.g., Dec 25th to Jan 5th)
+        return ($checkMonthDay >= $startMonthDay || $checkMonthDay <= $endMonthDay);
+    }    
 
 
     public function set_db()
