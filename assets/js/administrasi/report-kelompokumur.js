@@ -1,6 +1,7 @@
 import { ajax_get, ajax_post } from "../ajx.js";
 import { createPDF } from "../report.js";
 
+let base_url = $("#base_url").val()+"api/intern/";
 
 $(document).ready(function () {
 
@@ -29,20 +30,43 @@ $(document).on("click", ".btn-print", function(e) {
 
 function loadDataJemaat(kelompok_umur) {
 
-  var jawab = ajax_post("/administrasi/jemaat/kelompokumur", {"kelompok_umur": kelompok_umur });
+  var jawab = ajax_post(base_url+"report/jemaat/kelompokumur", {"kelompok_umur": kelompok_umur });
 
+  // console.log(kelompok_umur);
   $("#tblJemaat tbody").html("");
   $(".btn-print").hide();
   
   if (jawab.msg=="ok") {
 
-    var jumlah = jawab['data'].length;
+    let jumlah = 0;
+    let data = null;
+
+    if (kelompok_umur=='anak-anak') {
+      jumlah = jawab['data']['anak-anak'].length;
+      data = jawab['data']['anak-anak'];
+    }
+    if (kelompok_umur=='remaja') {
+      jumlah = jawab['data']['remaja'].length;
+      data = jawab['data']['remaja'];
+    }
+    if (kelompok_umur=='pemuda') {
+      jumlah = jawab['data']['pemuda'].length;
+      data = jawab['data']['pemuda'];
+    }
+    if (kelompok_umur=='dewasa') {
+      jumlah = jawab['data']['dewasa'].length;
+      data = jawab['data']['dewasa'];
+    }
+    if (kelompok_umur=='lansia') {
+      jumlah = jawab['data']['lansia'].length;
+      data = jawab['data']['lansia'];
+    }
 
     var isi = '';
     
     var no = 1;
     for (var i=0; i<jumlah; i++) {
-        isi = isi + "<tr><td>"+no+"</td><td>"+jawab['data'][i]['nik']+"</td><td>"+jawab['data'][i]['nama']+"</td><td>"+jawab['data'][i]['alamat']+"</td><td>"+jawab['data'][i]['sektor']+"</td><td>"+jawab['data'][i]['status_keanggotaan']+"</td></tr>";
+        isi = isi + "<tr><td>"+no+"</td><td>"+data[i]['nik']+"</td><td>"+data[i]['nama']+"</td><td>"+data[i]['alamat']+"</td><td>"+data[i]['sektor']+"</td><td>"+data[i]['status_keanggotaan']+"</td></tr>";
         no++;
     }
 

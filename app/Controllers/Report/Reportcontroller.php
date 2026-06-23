@@ -5,6 +5,7 @@ namespace App\Controllers\Report;
 use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use CodeIgniter\I18n\Time;
 use Exception;
 
 use App\Controllers\BaseController;
@@ -31,7 +32,7 @@ class Reportcontroller extends BaseController
 
             foreach($result as $row) {
 
-                $sql = "select nama, jk, golongan_darah, tanggal_lahir, tanggal_baptis, posisi, pendidikan_terakhir, pekerjaan from tanggotajemaat where jemaat_id=".$row->jemaat_id;
+                $sql = "select anggotajemaat_id, nama, jk, golongan_darah, tanggal_lahir, tanggal_baptis, posisi, pendidikan_terakhir, pekerjaan from tanggotajemaat where jemaat_id=".$row->jemaat_id;
                 $query2 = $db->query($sql);
 
                 if ($query2) {
@@ -41,18 +42,52 @@ class Reportcontroller extends BaseController
 
                     foreach($result2 as $row2) {
 
+                        $tgl_sidi = '';
+                        $tgl_menikah = '';
+
+                        // periksa apakah ada tgl sidi
+                        $sql = "select tanggal_sidi from tsidi where anggotajemaat_id=".$row2->anggotajemaat_id;
+                        $query3 = $db->query($sql);
+
+                        if ($query3) {
+
+                            $result3 = $query3->getRow();
+
+                            if ($result3->tanggal_sidi) {
+                                $tgl_sidi = $result3->tanggal_sidi;
+                            }
+
+                        }
+
+                        // periksa apakah ada tgl menikah
+                        $sql = "select tanggal_menikah from tmenikah where anggotajemaat_id=".$row2->anggotajemaat_id;
+                        $query3 = $db->query($sql);
+
+                        if ($query3) {
+
+                            $result3 = $query3->getRow();
+
+                            if ($result3->tanggal_menikah) {
+                                $tgl_menikah = $result3->tanggal_menikah;
+                            }
+
+                        }
+
                         array_push($keluarga,
                             array(
                                 "nama"=>$row2->nama,
                                 "jk"=>$row2->jk,
                                 "golongan_darah"=>$row2->golongan_darah,
-                                "tanggal_lahir"=>$row2->tanggal_lahir,
-                                "tanggal_baptis"=>$row2->tanggal_baptis,
+                                "tgl_lahir"=>$row2->tanggal_lahir,
+                                "tgl_baptis"=>$row2->tanggal_baptis,
+                                "tgl_sidi"=>$tgl_sidi,
+                                "tgl_menikah"=>$tgl_menikah,
                                 "posisi"=>$row2->posisi,
                                 "pendidikan_terakhir"=>$row2->pendidikan_terakhir,
                                 "pekerjaan"=>$row2->pekerjaan
                             )
                         );
+
                     }
 
                     $jumlah_keluarga = count($keluarga);
@@ -85,6 +120,118 @@ class Reportcontroller extends BaseController
             ]);
 
         }
+
+    }
+
+
+    public function kelompok_umur()
+    {
+
+        $kelompok_umur = $this->request->getPost("kelompok_umur");
+
+        $sql = "select tsektor.nama_sektor, tjemaat.nik, tanggotajemaat.nama, tjemaat.alamat, tanggotajemaat.tanggal_lahir, tjemaat.status_keanggotaan from tjemaat, tanggotajemaat, tsektor where tjemaat.jemaat_id=tanggotajemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id";
+        
+        $db = $this->set_db();
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getResult();
+
+            $data = [];
+            $anak_anak = [];
+            $remaja = [];
+            $pemuda = [];
+            $dewasa = [];
+            $lansia = [];
+
+            foreach ($result as $row) {
+
+                $tanggal_lahir = date_create($row->tanggal_lahir);
+                $tanggal_sekarang = Time::now();
+
+                $interval = date_diff($tanggal_lahir, $tanggal_sekarang);
+
+                echo($interval->format('%y'));
+
+                // anak-anak
+                if ($interval->format('%y')<=12) {
+                    array_push($anak_anak, 
+                        array(
+                            "nik"=>$row->nik,
+                            "nama"=>$row->nama,
+                            "alamat"=>$row->alamat,
+                            "sektor"=>$row->nama_sektor,
+                            "status_keanggotaan"=>$row->status_keanggotaan
+                        )
+                    );
+                } 
+
+                // remaja
+                if ($interval->format('%y')<=17 && $interval->format('%y')>=13) {
+                    array_push($remaja, 
+                        array(
+                            "nik"=>$row->nik,
+                            "nama"=>$row->nama,
+                            "alamat"=>$row->alamat,
+                            "sektor"=>$row->nama_sektor,
+                            "status_keanggotaan"=>$row->status_keanggotaan
+                        )
+                    );
+                } 
+
+                // pemuda
+                if ($interval->format('%y')<=29 && $interval->format('%y')>=18) {
+                    array_push($pemuda, 
+                        array(
+                            "nik"=>$row->nik,
+                            "nama"=>$row->nama,
+                            "alamat"=>$row->alamat,
+                            "sektor"=>$row->nama_sektor,
+                            "status_keanggotaan"=>$row->status_keanggotaan
+                        )
+                    );
+                }             
+
+                // dewasa
+                if ($interval->format('%y')<=64 && $interval->format('%y')>=30) {
+                    array_push($dewasa, 
+                        array(
+                            "nik"=>$row->nik,
+                            "nama"=>$row->nama,
+                            "alamat"=>$row->alamat,
+                            "sektor"=>$row->nama_sektor,
+                            "status_keanggotaan"=>$row->status_keanggotaan
+                        )
+                    );
+                }  
+                
+                // lansia
+                if ($interval->format('%y')>=65) {
+                    array_push($lansia, 
+                        array(
+                            "nik"=>$row->nik,
+                            "nama"=>$row->nama,
+                            "alamat"=>$row->alamat,
+                            "sektor"=>$row->nama_sektor,
+                            "status_keanggotaan"=>$row->status_keanggotaan
+                        )
+                    );
+                }  
+                
+            }
+
+            $data = array("anak-anak"=>$anak_anak, "remaja"=>$remaja, "pemuda"=>$pemuda, "dewasa"=>$dewasa, "lansia"=>$lansia);
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$data
+            ]);
+
+        }
+
+
 
     }
 

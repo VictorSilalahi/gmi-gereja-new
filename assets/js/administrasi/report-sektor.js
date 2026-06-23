@@ -72,25 +72,25 @@ function loadDataPerSektor(sektor_id) {
           let tgl_sidi = '...';
           let tgl_menikah = '...';
 
-          console.log("data:", jawab['data'][i]['nama_anggota_keluarga'][j]);
+          // console.log("data:", jawab['data'][i]['nama_anggota_keluarga'][j]);
 
-          if (jawab['data'][i]['nama_anggota_keluarga'][j]['tgl_lahir']) {
-            tgl_lahir = set_tanggal(jawab['data'][i]['nama_anggota_keluarga'][j]['tgl_lahir']);
+          if (jawab['data'][i]['keluarga'][j]['tgl_lahir']) {
+            tgl_lahir = set_tanggal(jawab['data'][i]['keluarga'][j]['tgl_lahir']);
           }
 
-          if (jawab['data'][i]['nama_anggota_keluarga'][j]['tgl_baptis']) {
-            tgl_baptis = set_tanggal(jawab['data'][i]['nama_anggota_keluarga'][j]['tgl_baptis']);
+          if (jawab['data'][i]['keluarga'][j]['tgl_baptis']) {
+            tgl_baptis = set_tanggal(jawab['data'][i]['keluarga'][j]['tgl_baptis']);
           }
 
-          if (jawab['data'][i]['nama_anggota_keluarga'][j]['tgl_sidi']) {
-            tgl_sidi = set_tanggal(jawab['data'][i]['nama_anggota_keluarga'][j]['tgl_sidi']);
+          if (jawab['data'][i]['keluarga'][j]['tgl_sidi']) {
+            tgl_sidi = set_tanggal(jawab['data'][i]['keluarga'][j]['tgl_sidi']);
           }
 
-          if (jawab['data'][i]['nama_anggota_keluarga'][j]['tgl_menikah']) {
-            tgl_menikah = set_tanggal(jawab['data'][i]['nama_anggota_keluarga'][j]['tgl_menikah']);
+          if (jawab['data'][i]['keluarga'][j]['tgl_menikah']) {
+            tgl_menikah = set_tanggal(jawab['data'][i]['keluarga'][j]['tgl_menikah']);
           }
 
-          isi = isi + "<tr style='font-size:14px'><td></td><td></td><td></td><td>"+jawab['data'][i]['nama_anggota_keluarga'][j]['nama']+"</td><td>"+tgl_lahir+"</td><td>"+tgl_baptis+"</td><td>"+tgl_sidi+"</td><td>"+tgl_menikah+"</td><td></td><td></td></tr>";
+          isi = isi + "<tr style='font-size:14px'><td></td><td></td><td></td><td>"+jawab['data'][i]['keluarga'][j]['nama']+"</td><td>"+tgl_lahir+"</td><td>"+tgl_baptis+"</td><td>"+tgl_sidi+"</td><td>"+tgl_menikah+"</td><td></td><td></td></tr>";
         }
 
         no++;
