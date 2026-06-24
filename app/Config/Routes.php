@@ -82,6 +82,8 @@ $routes->get('/api/intern/report/jemaat/sektor', 'Report\Reportcontroller::jemaa
 $routes->post('/api/intern/report/jemaat/kelompokumur', 'Report\Reportcontroller::kelompok_umur');
 $routes->post('/api/intern/report/jemaat/berulangtahun', 'Report\Reportcontroller::ulang_tahun');
 $routes->post('/api/intern/report/jemaat/pernikahan', 'Report\Reportcontroller::pernikahan');
+$routes->get('/api/intern/report/statistik/getdata', 'Report\Reportcontroller::get_data_statistik');
+
 
 
 

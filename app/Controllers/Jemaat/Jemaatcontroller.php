@@ -216,11 +216,14 @@ class Jemaatcontroller extends BaseController
             $result = $query->getResult();
 
             $data = [];
+            
             foreach ($result as $row) {
 
                 $tanggal_sidi = null;
                 $tanggal_menikah = null;
                 $tanggal_wafat = null;
+                $meninggal = false;
+
 
                 $sql = "select tsidi.tanggal_sidi from tsidi where tsidi.anggotajemaat_id=".$row->anggotajemaat_id;
                 $query = $db->query($sql);
@@ -242,7 +245,11 @@ class Jemaatcontroller extends BaseController
                 $query = $db->query($sql);
                 if ($query) {
                     $res = $query->getRow();
-                    $tanggal_wafat = $res?->tanggal_wafat;
+                    if (is_null($res)) {
+                        $meninggal = true;
+                    } else {
+                        $tanggal_wafat = $res?->tanggal_wafat;
+                    }
 
                 }
 
@@ -260,7 +267,7 @@ class Jemaatcontroller extends BaseController
                         "posisi"=>$row->posisi,
                         "pendidikan_terakhir"=>$row->pendidikan_terakhir,
                         "pekerjaan"=>$row->pekerjaan,
-                        "status"=>$status
+                        "meninggal"=>$meninggal
                     )
                 );
 

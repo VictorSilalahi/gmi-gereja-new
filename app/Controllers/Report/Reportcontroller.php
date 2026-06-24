@@ -117,7 +117,7 @@ class Reportcontroller extends BaseController
             log_message('error', $e->getMessage());
             return $this->respond([
                 "msg"=>"error", 
-                "pesan"=>""
+                "pesan"=>$e->getMessage()
             ]);
 
         }
@@ -230,6 +230,15 @@ class Reportcontroller extends BaseController
                 "data"=>$data
             ]);
 
+        } else {
+
+            log_message('error', $e->getMessage());
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$e->getMessage()
+            ]);
+
+
         }
 
     }
@@ -281,6 +290,14 @@ class Reportcontroller extends BaseController
                 "data"=>$data
             ]);
 
+        } else {
+
+            log_message('error', $e->getMessage());
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$e->getMessage()
+            ]);
+        
         }
     
 
@@ -333,12 +350,26 @@ class Reportcontroller extends BaseController
                 "data"=>$data
             ]);
 
+        } else {
+
+            log_message('error', $e->getMessage());
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$e->getMessage()
+            ]);
+
         }
     
 
     }
 
 
+    public function get_data_statistik()
+    {
+
+
+
+    }
 
     function isDayMonthBetween($checkDate, $startDate, $endDate) {
         // 1. Convert all inputs to DateTime objects
