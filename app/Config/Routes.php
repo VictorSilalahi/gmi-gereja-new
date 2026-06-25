@@ -85,6 +85,11 @@ $routes->post('/api/intern/report/jemaat/berulangtahun', 'Report\Reportcontrolle
 $routes->post('/api/intern/report/jemaat/pernikahan', 'Report\Reportcontroller::pernikahan');
 $routes->get('/api/intern/report/statistik/getdata', 'Report\Reportcontroller::get_data_statistik');
 
+// API
+// ===
+// Jemaat
+$routes->get('/webapi/jemaat/all/status', 'Webapi\Jemaatapi::jemaat_status');
+
 
 
 
