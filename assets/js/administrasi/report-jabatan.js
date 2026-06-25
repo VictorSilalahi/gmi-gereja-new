@@ -1,9 +1,12 @@
-import { ajax_get, ajax_post } from "../ajx.js";
+import { ajax_get, ajax_post, check_token } from "../ajx.js";
 import { createPDF } from "../report.js";
 
+let base_url = $("#base_url").val()+"api/intern/";
 
 $(document).ready(function () {
 
+  check_token();
+  
   $(".btn-print").hide();
   
   loadDataPejabat();
@@ -20,7 +23,7 @@ $(document).on("click", ".btn-print", function(e) {
 
 function loadDataPejabat() {
 
-  var jawab = ajax_get("/administrasi/pejabat/all", {});
+  var jawab = ajax_get(base_url+"report/pejabat/all", {});
 
   $("#tblPejabat tbody").html("");
   $(".btn-print").hide();

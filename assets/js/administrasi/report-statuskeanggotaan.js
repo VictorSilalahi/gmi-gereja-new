@@ -12,8 +12,11 @@ $(document).on("change", "#slcStatusKeanggotaan", function () {
 
   var status = $(this).val();
 
+  $.LoadingOverlay("show");
+
   loadDataJemaat(status);
 
+  $.LoadingOverlay("hide");
 });
 
 $(document).on("click", ".btn-print", function(e) {

@@ -13,8 +13,12 @@ $(document).on("change", "#slcKelompokUmur", function () {
 
   var kelompok_umur = $(this).val();
 
+  $.LoadingOverlay("show");
+  
   loadDataJemaat(kelompok_umur);
 
+  $.LoadingOverlay("hide");
+  
 });
 
 $(document).on("click", ".btn-print", function(e) {

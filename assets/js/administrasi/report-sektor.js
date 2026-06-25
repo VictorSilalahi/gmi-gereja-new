@@ -49,6 +49,7 @@ function loadDataSektor() {
 
 function loadDataPerSektor(sektor_id) {
 
+  $.LoadingOverlay("show");
   var jawab = ajax_get(base_url+"report/jemaat/sektor", {"sektor_id": sektor_id });
 
   $("#tblJemaat tbody").html("");
@@ -56,14 +57,13 @@ function loadDataPerSektor(sektor_id) {
   
   if (jawab.msg=="ok") {
 
-    console.log(jawab.data);
     var jumlah = jawab['data'].length;
 
     var isi = '';
     
     var no = 1;
     for (var i=0; i<jumlah; i++) {
-        isi = isi + "<tr class='table-primary'><td>"+no+"</td><td>"+jawab['data'][i]['nik']+"</td><td colspan='6'>"+jawab['data'][i]['alamat']+"</td><td>"+jawab['data'][i]['jumlah']+"</td><td>"+jawab['data'][i]['status_keanggotaan']+"</td></tr>";
+        isi = isi + "<tr class='table-primary'><td></td><td>"+jawab['data'][i]['nik']+"</td><td colspan='6'>Alamat : "+jawab['data'][i]['alamat']+"</td><td>"+jawab['data'][i]['jumlah']+"</td><td>"+jawab['data'][i]['status_keanggotaan']+"</td></tr>";
         // console.log("Jumlah anggota keluarga = ", jawab['data'][i]['jumlah']);
         for (var j=0; j<parseInt(jawab['data'][i]['jumlah']); j++) {
           
@@ -90,14 +90,18 @@ function loadDataPerSektor(sektor_id) {
             tgl_menikah = set_tanggal(jawab['data'][i]['keluarga'][j]['tgl_menikah']);
           }
 
-          isi = isi + "<tr style='font-size:14px'><td></td><td></td><td></td><td>"+jawab['data'][i]['keluarga'][j]['nama']+"</td><td>"+tgl_lahir+"</td><td>"+tgl_baptis+"</td><td>"+tgl_sidi+"</td><td>"+tgl_menikah+"</td><td></td><td></td></tr>";
+          isi = isi + "<tr style='font-size:14px'><td></td><td>"+no+"</td><td></td><td>"+jawab['data'][i]['keluarga'][j]['nama']+"</td><td>"+tgl_lahir+"</td><td>"+tgl_baptis+"</td><td>"+tgl_sidi+"</td><td>"+tgl_menikah+"</td><td></td><td></td></tr>";
+
+          no++;
         }
 
-        no++;
+
     }
 
     $("#tblJemaat tbody").html(isi);
-  
+    
+    $.LoadingOverlay("hide");
+
     $(".btn-print").show();
   }
 }

@@ -79,6 +79,7 @@ $routes->post('/api/intern/seting/password/change', 'Seting\Setingcontroller::pa
 
 // Report
 $routes->get('/api/intern/report/jemaat/sektor', 'Report\Reportcontroller::jemaat_sektor');
+$routes->get('/api/intern/report/pejabat/all', 'Report\Reportcontroller::pejabat_all');
 $routes->post('/api/intern/report/jemaat/kelompokumur', 'Report\Reportcontroller::kelompok_umur');
 $routes->post('/api/intern/report/jemaat/berulangtahun', 'Report\Reportcontroller::ulang_tahun');
 $routes->post('/api/intern/report/jemaat/pernikahan', 'Report\Reportcontroller::pernikahan');

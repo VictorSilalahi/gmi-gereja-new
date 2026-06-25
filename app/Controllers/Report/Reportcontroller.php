@@ -124,13 +124,19 @@ class Reportcontroller extends BaseController
 
     }
 
+    public function pejabat_all()
+    {
+
+        
+
+    }
 
     public function kelompok_umur()
     {
 
         $kelompok_umur = $this->request->getPost("kelompok_umur");
 
-        $sql = "select tsektor.nama_sektor, tjemaat.nik, tanggotajemaat.nama, tjemaat.alamat, tanggotajemaat.tanggal_lahir, tjemaat.status_keanggotaan from tjemaat, tanggotajemaat, tsektor where tjemaat.jemaat_id=tanggotajemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id";
+        $sql = "select tsektor.nama_sektor, tjemaat.nik, tanggotajemaat.nama, tjemaat.alamat, tanggotajemaat.tanggal_lahir, tjemaat.status_keanggotaan from tjemaat, tanggotajemaat, tsektor where tjemaat.jemaat_id=tanggotajemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id and tanggotajemaat.anggotajemaat_id not in (select twafat.anggotajemaat_id from twafat)";
         
         $db = $this->set_db();
 

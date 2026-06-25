@@ -28,6 +28,8 @@ $(document).on("click", ".btn-prosesdata", function () {
     var tgl_awal = $("#tglAwal").val();
     var tgl_akhir = $("#tglAkhir").val();
 
+    $.LoadingOverlay("show");
+
     var jawab = ajax_post(base_url+"report/jemaat/pernikahan", {"tgl_awal": tgl_awal, "tgl_akhir": tgl_akhir });
 
     console.log(jawab);
@@ -49,6 +51,8 @@ $(document).on("click", ".btn-prosesdata", function () {
         }
 
         $("#tblJemaat tbody").html(isi);
+
+        $.LoadingOverlay("hide");
     
         $(".btn-print").show();
 
