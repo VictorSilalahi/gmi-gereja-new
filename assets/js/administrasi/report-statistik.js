@@ -1,9 +1,11 @@
-import { ajax_get, ajax_post } from "../ajx.js";
+import { ajax_get, ajax_post, check_token } from "../ajx.js";
 // import { createPDF } from "../report.js";
 
 let base_url = $("#base_url").val()+"api/intern/";
 
 $(document).ready(function () {
+
+    check_token();
 
     var jawab = ajax_get(base_url+"report/statistik/getdata", {});
 
@@ -44,7 +46,7 @@ $(document).ready(function () {
 
         // grafik utk kelompok umur
         const ctx_kelompok_umur = document.getElementById('KelompokUmur');
-        const data_kelompok_umur = jawab.data[1]['kelompok umur'];
+        const data_kelompok_umur = jawab.data[0]['kelompok umur'];
         new Chart(ctx_kelompok_umur, {
                 type: 'pie',
                 data: {
@@ -66,7 +68,7 @@ $(document).ready(function () {
 
         // grafik utk sifat keanggotaan
         const ctx_sifat_keanggotaan = document.getElementById('SifatKeanggotaan');
-        const data_sifat_keanggotaan = jawab.data[3]['sifat keanggotaan'];
+        const data_sifat_keanggotaan = jawab.data[0]['sifat keanggotaan'];
         new Chart(ctx_sifat_keanggotaan, {
                 type: 'pie',
                 data: {
@@ -88,7 +90,7 @@ $(document).ready(function () {
 
         // grafik jemaat per sektor
         const ctx_per_sektor = document.getElementById('JemaatPerSektor');
-        const data_per_sektor = jawab.data[2]['data_sektor'];
+        const data_per_sektor = jawab.data[0]['data_sektor'];
         var kolom_graph = [];
         var nilai = [];
         for (var i=0; i<data_per_sektor.length; i++) {

@@ -84,8 +84,8 @@
                       </div>
                       <div class="card-body">
                         <div style="height: 150px;">
-                          <h1>Jumlah KK: <span class="badge bg-primary" id="bgKK">New</span></h1>
-                          <h1>Jumlah Jiwa: <span class="badge bg-warning text-dark" id="bgJiwa">New</span></h1>
+                          <h1>Jumlah KK: <span class="badge bg-primary" id="bgKK"></span></h1>
+                          <h1>Jumlah Jiwa: <span class="badge bg-warning text-dark" id="bgJiwa"></span></h1>
 
                         </div>
                       </div>

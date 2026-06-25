@@ -367,8 +367,238 @@ class Reportcontroller extends BaseController
     public function get_data_statistik()
     {
 
+        $data = [];
+
+        $jumlah_kk_aktif = 0;
+        $jumlah_kk_tidak_aktif = 0;
+
+        $jumlah_anggota_kk_aktif = 0;
+        $jumlah_anggota_kk_tidak_aktif = 0;
+
+        $anak_anak = 0;
+        $remaja = 0;
+        $pemuda = 0;
+        $dewasa = 0;
+        $lansia = 0;
+
+        $penuh = 0;
+        $persiapan = 0;
+
+        $data_sektor = [];       
+
+        $db = $this->set_db();
+
+        // mencari anggota KK aktif/tidak aktif dan anggota KK aktif/tidak aktif
+        // kk aktif
+        $sql = "select count(*) as jumlah from tjemaat where status_keanggotaan='Aktif'";
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getRow();
+
+            $jumlah_kk_aktif = $result->jumlah;
 
 
+        } else {
+
+            log_message('error', $e->getMessage());
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$e->getMessage()
+            ]);
+
+        }
+
+
+        // kk tidak aktif
+        $sql = "select count(*) as jumlah from tjemaat where status_keanggotaan='Tidak Aktif'";
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getRow();
+
+            $jumlah_kk_tidak_aktif = $result->jumlah;
+
+
+        } else {
+
+            log_message('error', $e->getMessage());
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$e->getMessage()
+            ]);
+
+        }
+
+
+        // anggota kk aktif
+        $sql = "select count(*) as jumlah from tjemaat, tanggotajemaat where tjemaat.jemaat_id=tanggotajemaat.jemaat_id and tjemaat.status_keanggotaan='Aktif'";
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getRow();
+
+            $jumlah_anggota_kk_aktif = $result->jumlah;
+
+
+        } else {
+
+            log_message('error', $e->getMessage());
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$e->getMessage()
+            ]);
+
+        }
+
+
+        // anggota kk tidak aktif
+        $sql = "select count(*) as jumlah from tjemaat, tanggotajemaat where tjemaat.jemaat_id=tanggotajemaat.jemaat_id and tjemaat.status_keanggotaan='Tidak Aktif'";
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getRow();
+
+            $jumlah_anggota_kk_tidak_aktif = $result->jumlah;
+
+
+        } else {
+
+            log_message('error', $e->getMessage());
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$e->getMessage()
+            ]);
+
+        }
+
+
+        // kelompok umur
+        $sql = "select tanggal_lahir from tanggotajemaat where tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getResult();
+
+            foreach ($result as $row) {
+
+                $tanggal_lahir = date_create($row->tanggal_lahir);
+                $tanggal_sekarang = Time::now();
+
+                $interval = date_diff($tanggal_lahir, $tanggal_sekarang);
+
+                // echo($interval->format('%y')."<br>");
+
+                // anak-anak
+                if ($interval->format('%y')<=12) {
+                    $anak_anak = $anak_anak + 1;
+                } 
+
+                // remaja
+                if ($interval->format('%y')<=17 && $interval->format('%y')>=13) {
+                    $remaja = $remaja + 1;
+                } 
+
+                // pemuda
+                if ($interval->format('%y')<=29 && $interval->format('%y')>=18) {
+                    $pemuda = $pemuda + 1;
+                }             
+
+                // dewasa
+                if ($interval->format('%y')<=64 && $interval->format('%y')>=30) {
+                    $dewasa = $dewasa + 1;
+                }  
+                
+                // lansia
+                if ($interval->format('%y')>=65) {
+                    $lansia = $lansia + 1;
+                }  
+
+            }
+
+        }
+
+
+        // sifat keanggotaan
+        $sql = "select tanggal_lahir, tanggal_baptis from tanggotajemaat where tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getResult();
+
+            foreach ($result as $row) {
+
+                if (is_null($row->tanggal_baptis) || $row->tanggal_baptis==='0000-00-00') {
+                    $persiapan = $persiapan + 1;
+                } else {
+                    $penuh = $penuh + 1;
+                }
+
+            }
+
+        }
+
+
+        // jemaat per sektor
+        $sql = "select count(*) as jumlah, tsektor.no_sektor, tsektor.nama_sektor from tanggotajemaat, tjemaat, tsektor where tanggotajemaat.jemaat_id=tjemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id group by tsektor.nama_sektor and tanggotajemaat.anggotajemaat_id not in (select twafat.anggotajemaat_id from twafat)";
+
+        $query = $db->query($sql);
+
+ 
+        if ($query) {
+
+            $result = $query->getResult();
+
+            foreach($result as $row) {
+                array_push($data_sektor, array(
+                    "sektor"=>$row->nama_sektor,
+                    "jumlah"=>$row->jumlah
+
+                ));
+            }
+
+
+        }
+
+
+
+        array_push($data, 
+            array(
+                "kk"=>array(
+                    "jumlah kk jemaat aktif"=>$jumlah_kk_aktif, 
+                    "jumlah kk jemaat tidak aktif"=>$jumlah_kk_tidak_aktif
+                ),
+                "anggota"=>array(
+                    "jumlah anggota jemaat kk aktif"=>$jumlah_anggota_kk_aktif, 
+                    "jumlah anggota jemaat kk tidak aktif"=>$jumlah_anggota_kk_tidak_aktif
+                ),
+                "kelompok umur"=>array(
+                    "anak-anak"=>$anak_anak,
+                    "remaja"=>$remaja,
+                    "pemuda"=>$pemuda,
+                    "dewasa"=>$dewasa,
+                    "lansia"=>$lansia
+                ),
+                "sifat keanggotaan"=>array(
+                    "penuh"=>$penuh,
+                    "persiapan"=>$persiapan
+                ),
+                "data_sektor"=>$data_sektor
+            )
+        );
+
+        return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$data
+        ]);
     }
 
     function isDayMonthBetween($checkDate, $startDate, $endDate) {
