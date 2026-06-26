@@ -5,6 +5,8 @@ use CodeIgniter\Router\RouteCollection;
 /** @var RouteCollection $routes */
 // $routes->get('/', 'Home::index');
 
+// FrontEnd
+// ++++++++++++++++++++++++++++++++++++++++++++++++
 // route pendaftaran
 $routes->get('/daftar', 'Pendaftaran::index');
 $routes->get('/daftar/terima_kasih', 'Pendaftaran::terima_kasih');
@@ -12,6 +14,8 @@ $routes->post('/daftar/cek_email', 'Pendaftaran::cek_email');
 $routes->post('/daftar/cek_gereja', 'Pendaftaran::cek_gereja');
 $routes->post('/daftar/tambah_gereja', 'Pendaftaran::tambah_gereja');
 
+// Backend Internal
+// ++++++++++++++++++++++++++++++++++++++++++++++++
 // route ke dalam aplikasi
 $routes->get('/', 'Administrasi::index');
 $routes->get('/logout', 'Administrasi::logout');
@@ -85,8 +89,10 @@ $routes->post('/api/intern/report/jemaat/berulangtahun', 'Report\Reportcontrolle
 $routes->post('/api/intern/report/jemaat/pernikahan', 'Report\Reportcontroller::pernikahan');
 $routes->get('/api/intern/report/statistik/getdata', 'Report\Reportcontroller::get_data_statistik');
 
+
 // API
-// ===
+// +++++++++++++++++++++++++++++++++++++++++++++++++
+
 // Jemaat
 $routes->get('/webapi/jemaat/all/status', 'Webapi\Jemaatapi::jemaat_status');
 

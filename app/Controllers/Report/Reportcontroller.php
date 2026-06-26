@@ -440,7 +440,7 @@ class Reportcontroller extends BaseController
 
 
         // anggota kk aktif
-        $sql = "select count(*) as jumlah from tjemaat, tanggotajemaat where tjemaat.jemaat_id=tanggotajemaat.jemaat_id and tjemaat.status_keanggotaan='Aktif'";
+        $sql = "select count(*) as jumlah from tjemaat, tanggotajemaat where tjemaat.jemaat_id=tanggotajemaat.jemaat_id and tjemaat.status_keanggotaan='Aktif' and tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
         $query = $db->query($sql);
 
         if ($query) {
