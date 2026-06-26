@@ -149,9 +149,41 @@ $(".btn-ok-tambah-pejabat").on("click", function() {
   var data = ajax_post(base_url+"jabatan/pejabat/add", { "nama": nama_pejabat, "jabatan_id": jabatan_id, "tanggal_pengangkatan": tgl_pengangkatan });
 
   if (data.msg=='ok') {
+    $("#txtNamaPejabat").val("");
     loadDataPejabat()
   
   }  
+
+});
+
+
+$(document).on("click", ".btn-berhenti-pejabat", function() {
+
+  let historyjabatan_id = $(this).parent().parent().attr("id");
+
+  $("#txtHistoryJabatanID").val(historyjabatan_id);
+
+  $("#frmBerhentiJabatan").modal("show");
+
+});
+
+$(document).on("click", "#btnBerhentiJabatan", function() {
+
+  if ($("#txtTanggalBerhenti").val()=='') {
+
+    pesan_error("Masukkan tanggal berhenti!");
+    return false;
+
+  }
+
+  let data = ajax_post(base_url+"api/intern/jabatan/pejabat/del", "");
+
+  if (data.msg=='ok') {
+
+      loadDataPejabat();
+    
+  }  
+
 
 });
 
@@ -201,7 +233,7 @@ function loadDataPejabat() {
     for (var i = 0; i < data.data.length; i++) {
       isi_tabel = isi_tabel+"<tr id='"+data.data[i]["pejabat_id"]+"'><td>"+no+"</td><td>"+data.data[i]["nama"]+"</td>";
       isi_tabel = isi_tabel+"<td>"+data.data[i]["jabatan"]+"</td>";
-      isi_tabel = isi_tabel+"<td>&nbsp;<button class='btn btn-danger btn-delete-pejabat'>Hapus</button></td></tr>";
+      isi_tabel = isi_tabel+"<td>&nbsp;<button class='btn btn-warning btn-berhenti-pejabat'>Berhenti</button></td></tr>";
       no++;
 
 

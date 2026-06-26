@@ -162,6 +162,31 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="frmBerhentiJabatan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="opJabatan">Berhenti</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="txtNIDN" class="col-form-label">Tanggal Berhenti:</label>
+                <input type="date" class="form-control" id="txtTanggalBerhenti">
+              </div>
+              <input type="hidden" value="" id="txtHistoryJabatanID">
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="button" class="btn btn-primary" id="btnBerhentiJabatan">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <input type="hidden" id="base_url" value="<?php echo(base_url()); ?>">
 </body>
   <script src="<?php echo(base_url()); ?>assets/js/administrasi/jabatan.js" type="module"></script>

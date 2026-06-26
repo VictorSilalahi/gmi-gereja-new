@@ -94,7 +94,14 @@ $routes->get('/api/intern/report/statistik/getdata', 'Report\Reportcontroller::g
 // +++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Jemaat
-$routes->get('/webapi/jemaat/all/status', 'Webapi\Jemaatapi::jemaat_status');
+
+$routes->group('webapi', static function ($routes) {
+    $routes->group('v1', static function ($routes) {
+        $routes->get('jemaat/all/status', 'Webapi\Jemaatapiv1::jemaat_status'); // URL: /webapi/v1/products
+    });
+});
+
+
 
 
 

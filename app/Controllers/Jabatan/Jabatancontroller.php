@@ -169,7 +169,8 @@ class Jabatancontroller extends BaseController
 
         $nama = $this->request->getPost("nama");
         $jabatan_id = $this->request->getPost("jabatan_id");
-        $tanggal_pengangkatan = $this->request->getPost("tglPengangkatan");
+        $tanggal_pengangkatan = $this->request->getPost("tanggal_pengangkatan");
+        // echo($tanggal_pengangkatan);
 
         $db = $this->set_db();
 
@@ -185,10 +186,27 @@ class Jabatancontroller extends BaseController
 
             $db->query($sql);
 
-            return $this->respond([
-                "msg"=>"ok", 
-                "data"=>"Data pejabat berhasil ditambah."
-            ]);
+            $sql = "select jabatan from tjabatan where jabatan_id=".$jabatan_id;
+
+            $query = $db->query($sql);
+
+            if ($query) {
+
+                $result = $query->getRow();
+
+                $jabatan = $result->jabatan;
+
+                // masukkan ke history jabatan
+                $sql = "insert into thistorypejabat (nama, jabatan, tanggal_pengangkatan) values ('".$nama."','".$jabatan."','".$tanggal_pengangkatan."')";
+
+                $db->query($sql);
+
+                return $this->respond([
+                    "msg"=>"ok", 
+                    "data"=>"Data pejabat berhasil ditambah."
+                ]);
+
+            }
 
 
         }
@@ -204,14 +222,38 @@ class Jabatancontroller extends BaseController
 
         $db = $this->set_db();
 
-        $sql = "delete from tpejabat where pejabat_id=".$pejabat_id;
+        $sql = "select tanggotajemaat.nama, tjabatan.jabatan_id from tpejabat, tjabatan, tanggotajemaat where tpejabat.anggotajemaat_id=tanggotajemaat.anggotajemaat_id and ";
+        $sql = $sql . "tpejabat.jabatan_id=tjabatan.jabatan_id and tpejabat.pejabat_id=".$pejabat_id;
 
         $query = $db->query($sql);
 
-        return $this->respond([
-                "msg"=>"ok", 
-                "data"=>"Data pejabat berhasil dihapus."
-        ]);
+        if ($query) {
+
+            $result = $query->getRow();
+
+            $nama = $result->nama;
+            $jabatan_id = $result->jabatan_id;
+
+            $sql = "select historyjabatan_id, tanggal_berhenti from thistoryjabatan where nama='".$nama."' and jabatan_id=".$jabatan_id." and tanggal_berhenti='0000-00-00'";
+            
+            $query = $db->query($sql);
+
+            if ($query) {
+
+                $result = $query->getRow();
+
+                $sql = "update thistoryjabatan set tanggal_berhenti='".$tanggal_berhenti."' where historyjabatan_id=".$result->historyjabatan_id;
+
+                return $this->respond([
+                        "msg"=>"ok", 
+                        "data"=>"Data pejabat berhasil dihapus."
+                ]);
+
+            }
+
+
+        }
+
 
     }
 
