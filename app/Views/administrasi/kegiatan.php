@@ -29,7 +29,7 @@
                               <a class="nav-link" href="<?php echo(base_url()); ?>jemaat">Jemaat</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>sektor">Sektor</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>jabatan">Jabatan</a>
-                              <a class="nav-link href="<?php echo(base_url()); ?>organisasi">Organisasi</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>organisasi">Organisasi</a>
                               <a class="nav-link active" aria-current="page" href="<?php echo(base_url()); ?>kegiatan">Kegiatan</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>report/sektor">Report</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>seting">Seting</a>
