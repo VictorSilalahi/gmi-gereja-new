@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2026 at 07:23 AM
--- Server version: 10.4.32-MariaDB
+-- Generation Time: Jun 29, 2026 at 03:04 PM
+-- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `g-core`
+-- Database: `g-f9kyfz`
 --
 
 -- --------------------------------------------------------
@@ -39,6 +39,15 @@ CREATE TABLE `tanggotajemaat` (
   `pendidikan_terakhir` varchar(20) NOT NULL,
   `pekerjaan` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tanggotajemaat`
+--
+
+INSERT INTO `tanggotajemaat` (`anggotajemaat_id`, `jemaat_id`, `nama`, `jk`, `golongan_darah`, `tanggal_lahir`, `tanggal_baptis`, `posisi`, `pendidikan_terakhir`, `pekerjaan`) VALUES
+(12, 7, 'Andi', 'L', 'A', '2026-06-21', '2026-06-22', 'Suami', 'S1', 'TNI-Polri'),
+(13, 7, 'Deby', 'P', 'B', '2026-06-24', '2026-06-22', 'Istri', 'S1', 'ASN'),
+(14, 7, 'Indra', 'P', 'AB', '2026-06-28', '0000-00-00', 'Anak', 'D3', 'Dokter');
 
 -- --------------------------------------------------------
 
@@ -72,10 +81,10 @@ CREATE TABLE `thistoryapp` (
 
 CREATE TABLE `thistorypejabat` (
   `historypejabat_id` bigint(20) UNSIGNED NOT NULL,
-  `anggotajemaat_id` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `jabatan_id` int(11) NOT NULL,
   `tanggal_pengangkatan` date NOT NULL,
-  `tanggal_berhenti` date NOT NULL,
-  `jabatan` varchar(50) NOT NULL
+  `tanggal_berhenti` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -88,6 +97,14 @@ CREATE TABLE `tjabatan` (
   `jabatan_id` bigint(20) UNSIGNED NOT NULL,
   `jabatan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tjabatan`
+--
+
+INSERT INTO `tjabatan` (`jabatan_id`, `jabatan`) VALUES
+(1, 'Majelis'),
+(2, 'Guru Injil');
 
 -- --------------------------------------------------------
 
@@ -104,6 +121,13 @@ CREATE TABLE `tjemaat` (
   `mobile_phone` varchar(200) NOT NULL,
   `tanggal_terdaftar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tjemaat`
+--
+
+INSERT INTO `tjemaat` (`jemaat_id`, `nik`, `status_keanggotaan`, `sektor_id`, `alamat`, `mobile_phone`, `tanggal_terdaftar`) VALUES
+(7, '001-001', 'Aktif', 1, 'Jl Test test test', '876760806', '2026-06-19');
 
 -- --------------------------------------------------------
 
@@ -143,6 +167,15 @@ CREATE TABLE `tmenikah` (
   `tanggal_menikah` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tmenikah`
+--
+
+INSERT INTO `tmenikah` (`menikah_id`, `anggotajemaat_id`, `tanggal_menikah`) VALUES
+(5, 12, '2026-06-24'),
+(6, 13, '2026-06-24'),
+(7, 14, '2026-07-01');
+
 -- --------------------------------------------------------
 
 --
@@ -151,7 +184,7 @@ CREATE TABLE `tmenikah` (
 
 CREATE TABLE `torganisasi` (
   `organisasi_id` bigint(20) UNSIGNED NOT NULL,
-  `organisasi` varchar(20) NOT NULL
+  `organisasi` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -178,6 +211,15 @@ CREATE TABLE `tsektor` (
   `nama_sektor` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tsektor`
+--
+
+INSERT INTO `tsektor` (`sektor_id`, `no_sektor`, `nama_sektor`) VALUES
+(1, '001', 'Sektor 001'),
+(2, '002', 'Sektor 002'),
+(4, '003', 'Sektor 003');
+
 -- --------------------------------------------------------
 
 --
@@ -189,6 +231,16 @@ CREATE TABLE `tsidi` (
   `anggotajemaat_id` int(11) NOT NULL,
   `tanggal_sidi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tsidi`
+--
+
+INSERT INTO `tsidi` (`sidi_id`, `anggotajemaat_id`, `tanggal_sidi`) VALUES
+(6, 12, '2026-06-23'),
+(7, 13, '2026-06-23'),
+(8, 14, '2026-06-30'),
+(9, 17, '2026-06-21');
 
 -- --------------------------------------------------------
 
@@ -298,7 +350,7 @@ ALTER TABLE `twafat`
 -- AUTO_INCREMENT for table `tanggotajemaat`
 --
 ALTER TABLE `tanggotajemaat`
-  MODIFY `anggotajemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `anggotajemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `tanggotaorganisasi`
@@ -316,19 +368,19 @@ ALTER TABLE `thistoryapp`
 -- AUTO_INCREMENT for table `thistorypejabat`
 --
 ALTER TABLE `thistorypejabat`
-  MODIFY `historypejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `historypejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tjabatan`
 --
 ALTER TABLE `tjabatan`
-  MODIFY `jabatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `jabatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tjemaat`
 --
 ALTER TABLE `tjemaat`
-  MODIFY `jemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `jemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tkegiatan`
@@ -346,7 +398,7 @@ ALTER TABLE `tkeluar`
 -- AUTO_INCREMENT for table `tmenikah`
 --
 ALTER TABLE `tmenikah`
-  MODIFY `menikah_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `menikah_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `torganisasi`
@@ -358,25 +410,25 @@ ALTER TABLE `torganisasi`
 -- AUTO_INCREMENT for table `tpejabat`
 --
 ALTER TABLE `tpejabat`
-  MODIFY `pejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `pejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `tsektor`
 --
 ALTER TABLE `tsektor`
-  MODIFY `sektor_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `sektor_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tsidi`
 --
 ALTER TABLE `tsidi`
-  MODIFY `sidi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `sidi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `twafat`
 --
 ALTER TABLE `twafat`
-  MODIFY `wafat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `wafat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
