@@ -10,6 +10,8 @@
   <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
   <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
   <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
 <body>
     <div class="container-fluid">
 
@@ -176,7 +178,8 @@
                 <label for="txtNIDN" class="col-form-label">Tanggal Berhenti:</label>
                 <input type="date" class="form-control" id="txtTanggalBerhenti">
               </div>
-              <input type="hidden" value="" id="txtHistoryJabatanID">
+              <input type="hidden" value="" id="nama_pejabat">
+              <input type="hidden" value="" id="pejabat_id">
             </form>
           </div>
           <div class="modal-footer">

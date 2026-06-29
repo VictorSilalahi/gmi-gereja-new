@@ -159,15 +159,22 @@ $(".btn-ok-tambah-pejabat").on("click", function() {
 
 $(document).on("click", ".btn-berhenti-pejabat", function() {
 
-  let historyjabatan_id = $(this).parent().parent().attr("id");
+  let nama_pejabat = $(this).parent().prev().prev().text();
+  let pejabat_id = $(this).parent().parent().attr("id");
 
-  $("#txtHistoryJabatanID").val(historyjabatan_id);
+  $("#nama_pejabat").val(nama_pejabat);
+  $("#pejabat_id").val(pejabat_id);
 
   $("#frmBerhentiJabatan").modal("show");
 
 });
 
 $(document).on("click", "#btnBerhentiJabatan", function() {
+
+  let nama_pejabat = $("#nama_pejabat").val();
+  let pejabat_id = $("#pejabat_id").val();
+
+  let base_url = $("#base_url").val();
 
   if ($("#txtTanggalBerhenti").val()=='') {
 
@@ -176,10 +183,13 @@ $(document).on("click", "#btnBerhentiJabatan", function() {
 
   }
 
-  let data = ajax_post(base_url+"api/intern/jabatan/pejabat/del", "");
+  let tanggal_berhenti = $("#txtTanggalBerhenti").val();
+
+  let data = ajax_post(base_url+"api/intern/jabatan/pejabat/del", {"nama_pejabat": nama_pejabat, "pejabat_id": pejabat_id, "tanggal_berhenti": tanggal_berhenti});
 
   if (data.msg=='ok') {
 
+      $("#frmBerhentiJabatan").modal("hide");
       loadDataPejabat();
     
   }  
