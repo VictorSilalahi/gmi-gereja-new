@@ -1,10 +1,12 @@
-import { ajax_get, ajax_post } from "../ajx.js";
+import { ajax_get, ajax_post, check_token } from "../ajx.js";
 import { set_tanggal } from "../format.js";
 
 let base_url = $("#base_url").val()+"api/intern/"
 
 $(document).ready(function () {
 
+  check_token();
+  
   $.LoadingOverlay("show");
   
   loadDataKegiatan();
