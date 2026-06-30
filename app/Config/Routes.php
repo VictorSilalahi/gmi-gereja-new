@@ -95,12 +95,13 @@ $routes->get('/api/intern/report/statistik/getdata', 'Report\Reportcontroller::g
 // +++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Jemaat
-
 $routes->group('webapi', static function ($routes) {
     $routes->group('v1', static function ($routes) {
-        // Jemaat
-        $routes->post('distrik/jemaat/all/status', 'Webapi\v1\distrik\Jemaat::jemaat_status'); // URL: /webapi/v1/products
+            $routes->post('distrik/jemaat/all', 'Webapi\v1\distrik\Jemaat::jemaat_all');
+            
     });
+
+
 });
 
 
