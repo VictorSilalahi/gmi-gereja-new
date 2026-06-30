@@ -5,9 +5,14 @@ let base_url = $("#base_url").val()+"api/intern/";
 
 $(document).ready(function () {
   check_token();
+
+  $.LoadingOverlay("show");
+
   loadDataOrganisasi();
   loadDataAnggotaOrganisasi();
   loadAutoComplete();
+
+  $.LoadingOverlay("hide");
 
 });
 

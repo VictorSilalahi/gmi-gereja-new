@@ -85,6 +85,7 @@ $routes->post('/api/intern/seting/password/change', 'Seting\Setingcontroller::pa
 $routes->get('/api/intern/report/jemaat/sektor', 'Report\Reportcontroller::jemaat_sektor');
 $routes->get('/api/intern/report/pejabat/all', 'Report\Reportcontroller::pejabat_all');
 $routes->post('/api/intern/report/jemaat/kelompokumur', 'Report\Reportcontroller::kelompok_umur');
+$routes->post('/api/intern/report/jemaat/statuskeanggotaan', 'Report\Reportcontroller::status_keanggotaan');
 $routes->post('/api/intern/report/jemaat/berulangtahun', 'Report\Reportcontroller::ulang_tahun');
 $routes->post('/api/intern/report/jemaat/pernikahan', 'Report\Reportcontroller::pernikahan');
 $routes->get('/api/intern/report/statistik/getdata', 'Report\Reportcontroller::get_data_statistik');
@@ -97,7 +98,8 @@ $routes->get('/api/intern/report/statistik/getdata', 'Report\Reportcontroller::g
 
 $routes->group('webapi', static function ($routes) {
     $routes->group('v1', static function ($routes) {
-        $routes->get('jemaat/all/status', 'Webapi\Jemaatapiv1::jemaat_status'); // URL: /webapi/v1/products
+        // Jemaat
+        $routes->post('distrik/jemaat/all/status', 'Webapi\v1\distrik\Jemaat::jemaat_status'); // URL: /webapi/v1/products
     });
 });
 

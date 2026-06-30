@@ -7,9 +7,13 @@ $(document).ready(function () {
 
   check_token();
 
+  $.LoadingOverlay("show");
+
   loadDataJabatan();
   loadDataPejabat();
   loadAutoComplete();
+
+  $.LoadingOverlay("hide");
 
 });
 

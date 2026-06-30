@@ -8,9 +8,13 @@ $(document).ready(function () {
   check_token();
   
   $(".btn-print").hide();
-  
+
+  $.LoadingOverlay("show");
+
   loadDataPejabat();
 
+  $.LoadingOverlay("hide");
+  
 });
 
 

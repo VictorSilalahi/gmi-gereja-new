@@ -113,11 +113,12 @@
                           <thead>
                             <tr>
                               <th scope="col">#</th>
+                              <th scope="col">Sektor</th>
                               <th scope="col">NIK</th>
                               <th scope="col">Anggota Keluarga</th>
                               <th scope="col">Alamat</th>
                               <th scope="col">Jumlah Anggota Keluarga</th>
-                              <th scope="col">Status Keanggotaan</th>
+                              <th scope="col">Mobile Phone</th>
                             </tr>
                           </thead>
                           <tbody>

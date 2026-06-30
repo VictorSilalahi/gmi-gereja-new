@@ -4,7 +4,12 @@ import { set_tanggal } from "../format.js";
 let base_url = $("#base_url").val()+"api/intern/"
 
 $(document).ready(function () {
+
+  $.LoadingOverlay("show");
+  
   loadDataKegiatan();
+
+  $.LoadingOverlay("hide");
 
 });
 

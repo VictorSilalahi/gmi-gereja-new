@@ -127,7 +127,117 @@ class Reportcontroller extends BaseController
     public function pejabat_all()
     {
 
+        $db = $this->set_db();
+
+        $sql = "select tanggotajemaat.nama, tjabatan.jabatan from tpejabat, tjabatan, tanggotajemaat where tpejabat.anggotajemaat_id=tanggotajemaat.anggotajemaat_id and tpejabat.jabatan_id=tjabatan.jabatan_id group by tjabatan.jabatan";
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getResult();
+            $data = [];
+
+            foreach($result as $row) {
+
+                array_push($data, array(
+                        "nama"=>$row->nama, 
+                        "jabatan"=>$row->jabatan
+                    )
+                );
+
+            }
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$data
+            ]);
+
+        } else {
+
+            log_message('error', $e->getMessage());
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$e->getMessage()
+            ]);
+
+
+        }
+
+    }
+
+
+    public function status_keanggotaan()
+    {
+
+        $status_keanggotaan = $this->request->getPost("status_keanggotaan");
+
+        $db = $this->set_db();
+
+        $sql = "select tjemaat.jemaat_id, tsektor.no_sektor, tjemaat.nik, tjemaat.alamat, tjemaat.mobile_phone from tjemaat, tsektor where tjemaat.sektor_id=tsektor.sektor_id and tjemaat.status_keanggotaan='".$status_keanggotaan."' group by tsektor.no_sektor";
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getResult();
+            $data = [];
+
+            foreach($result as $row) {
+
+                $sql = "select anggotajemaat_id, nama, posisi from tanggotajemaat where jemaat_id=".$row->jemaat_id." and tanggotajemaat.anggotajemaat_id not in (select twafat.anggotajemaat_id from twafat)";
+                $query2 = $db->query($sql);
+
+                if ($query2) {
+
+                    $result2 = $query2->getResult();
+
+                    $jumlah_anggota_keluarga = $query2->getNumRows();
+                    $pasangan = '';
+
+                    foreach($result2 as $row2) {
+
+                        if ($row2->posisi=='Suami') {
+                            $pasangan = $row2->nama;
+                        }
+                    
+                    }
+
+                    foreach($result2 as $row2) {
+
+                        if ($row2->posisi=='Istri') {
+                                $pasangan = $pasangan."/".$row2->nama;
+                        }
+                    
+                    }
+
+                }
+
+                array_push($data,
+                    array(
+                        "no_sektor"=>$row->no_sektor,
+                        "nik"=>$row->nik, 
+                        "mobile_phone"=>$row->mobile_phone,
+                        "nama_keluarga"=>$pasangan,
+                        "alamat"=>$row->alamat,
+                        "jumlah"=>$jumlah_anggota_keluarga
+                    )
+                );
+
+            }
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$data
+            ]);
         
+        } else {
+
+            log_message('error', $e->getMessage());
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$e->getMessage()
+            ]);
+
+        }
 
     }
 

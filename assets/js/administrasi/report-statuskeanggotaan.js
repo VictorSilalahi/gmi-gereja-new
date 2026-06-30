@@ -1,8 +1,11 @@
-import { ajax_get, ajax_post } from "../ajx.js";
+import { ajax_get, ajax_post, check_token } from "../ajx.js";
 import { createPDF } from "../report.js";
 
+let base_url = $("#base_url").val()+"api/intern/";
 
 $(document).ready(function () {
+
+  check_token();
 
   $(".btn-print").hide();
 
@@ -31,7 +34,9 @@ $(document).on("click", ".btn-print", function(e) {
 
 function loadDataJemaat(status_keanggotaan) {
 
-  var jawab = ajax_post("/administrasi/jemaat/statuskeanggotaan", {"status_keanggotaan": status_keanggotaan });
+  var jawab = ajax_post(base_url+"report/jemaat/statuskeanggotaan", {"status_keanggotaan": status_keanggotaan });
+
+  console.log(jawab);
 
   $("#tblJemaat tbody").html("");
   $(".btn-print").hide();
@@ -44,7 +49,7 @@ function loadDataJemaat(status_keanggotaan) {
     
     var no = 1;
     for (var i=0; i<jumlah; i++) {
-        isi = isi + "<tr><td>"+no+"</td><td>"+jawab['data'][i]['nik']+"</td><td>"+jawab['data'][i]['nama_anggota_keluarga']+"</td><td>"+jawab['data'][i]['alamat']+"</td><td>"+jawab['data'][i]['jumlah']+"</td><td>"+jawab['data'][i]['status_keanggotaan']+"</td></tr>";
+        isi = isi + "<tr><td>"+no+"</td><td>"+jawab['data'][i]['no_sektor']+"</td><td>"+jawab['data'][i]['nik']+"</td><td>"+jawab['data'][i]['nama_keluarga']+"</td><td>"+jawab['data'][i]['alamat']+"</td><td>"+jawab['data'][i]['jumlah']+"</td><td>"+jawab['data'][i]['mobile_phone']+"</td></tr>";
         no++;
     }
 

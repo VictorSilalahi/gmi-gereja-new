@@ -11,6 +11,8 @@ $(document).ready(function () {
 
     console.log(jawab.data);
 
+    $.LoadingOverlay("show");
+
     if (jawab.msg=='ok') {
         // jumlah
 
@@ -118,6 +120,9 @@ $(document).ready(function () {
 
 
     }
+
+    $.LoadingOverlay("hide");
+
 
 });
 
