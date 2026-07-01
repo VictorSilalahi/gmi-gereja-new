@@ -61,8 +61,8 @@
                 <div class="row">
                     <div class="col-3">
                         <label class="col-form-label" for="slcSektor">Sektor:</label>
-                        <div class="">
-                          <select class="form-select" aria-label="Default select example" id="slcSektor">
+                        <div class="col-sm-6">
+                          <select class="form-control" id="slcSektor">
                           </select>
                         </div>
 
@@ -163,11 +163,7 @@
                 </div>
 
 
-                <label for="txtDaftarJemaat" class="col-form-label col-sm-1">Tanggal Terdaftar:</label>
-                <div class="col-sm-2">
-                  <input type="date" class="form-control" id="txtTanggalTerdaftar">
-                </div>
-                
+               
                 <hr>
                 
                 <label for="txtMobilePhone" class="col-form-label col-sm-1">Mobile Phone:</label>

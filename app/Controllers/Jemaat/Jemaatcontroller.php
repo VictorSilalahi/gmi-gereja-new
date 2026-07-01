@@ -3,6 +3,7 @@
 namespace App\Controllers\Jemaat;
 
 use CodeIgniter\API\ResponseTrait;
+use CodeIgniter\I18n\Time;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Exception;
@@ -94,7 +95,8 @@ class Jemaatcontroller extends BaseController
     {
 
         $nik = $this->request->getPost("nik");
-        $tanggal_terdaftar = $this->request->getPost("tanggal_terdaftar");
+        // $tanggal_terdaftar = $this->request->getPost("tanggal_terdaftar");
+        $tanggal_terdaftar = new Time('now');
         $mobile_phone = $this->request->getPost("mobile_phone");
         $alamat = $this->request->getPost("alamat");
         $status_keanggotaan = $this->request->getPost("status_keanggotaan");
