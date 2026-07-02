@@ -676,10 +676,10 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
                 isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td><select><option value='L'>L</option><option value='P' selected>P</option></selec></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
               }
             }
-            if (data[i]['meninggal']==true) {
-              isi = isi + "[Meninggal Dunia]</ul>";
+            if (data[i]['tgl_wafat']===null || data[i]['tgl_wafat']==='') {
+              isi = isi + "&nbsp;<button class='btn btn-info btn-simpan-perubahan-anggota'>Simpan</button>&nbsp;<button class='btn btn-danger btn-hapus-anggota'>Hapus</button></ul>";
             } else {
-              isi = isi + "&nbsp;<button class='btn btn-info btn-simpan-perubahan-anggota'>Simpan</button><button class='btn btn-danger btn-hapus-anggota'>Hapus</button></ul>";
+              isi = isi + "[Meninggal Dunia]</ul>";
             }
             isi = isi + "</div></td></tr>";
           }
@@ -733,10 +733,11 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
             }
 
             isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td>"+data[i]['jk']+"</td><td>"+data[i]['golongan_darah']+"</td><td>"+tgl_lahir+"</td><td>"+tgl_baptis+"</td><td>"+tgl_sidi+"</td><td>"+tgl_menikah+"</td><td>"+data[i]['posisi']+"</td><td>"+data[i]['pendidikan_terakhir']+"</td><td>"+data[i]['pekerjaan']+"</td><td>";
-            if (data[i]['meninggal']==true) {
+            if (data[i]['tgl_wafat']===null || data[i]['tgl_wafat']==='' ) {
+              isi = isi + "</div></td></tr>";
+            } else {
               isi = isi + "[Meninggal Dunia]</ul>";
             }
-            isi = isi + "</div></td></tr>";
           }
 
           $("#txtJemaatIDEdit").val(jemaat_id);
