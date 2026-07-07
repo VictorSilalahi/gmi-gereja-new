@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Webapi;
+namespace App\Controllers\Webapi\V1\Distrik;
 
 use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
@@ -16,9 +16,14 @@ class Jemaatapicontroller extends BaseController
     use ResponseTrait;
     
 
-    public function jemaat_status()
+    public function jemaat_all()
     {
 
+
+        return $this->respond([
+            "msg"=>"ok", 
+            "data"=>"jemaat API!"
+        ]);
 
     }
 
