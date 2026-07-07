@@ -6,6 +6,7 @@ use CodeIgniter\API\ResponseTrait;
 use CodeIgniter\I18n\Time;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Config\Services;
 use Exception;
 
 use App\Controllers\BaseController;
@@ -72,6 +73,7 @@ class Jemaatcontroller extends BaseController
 
 
             }
+
 
             return $this->respond([
                 "msg"=>"ok", 
@@ -161,6 +163,9 @@ class Jemaatcontroller extends BaseController
 
 
         }
+
+        // catat log
+        $this->catat_log($db, "tambah", "jemaat");
 
         return $this->respond([
             "msg"=>"ok", 
@@ -330,6 +335,8 @@ class Jemaatcontroller extends BaseController
 
         }
 
+        // catat log
+        $this->catat_log($db, "tambah", "jemaat-anggota");
 
         return $this->respond([
             "msg"=>"ok", 
@@ -502,6 +509,9 @@ class Jemaatcontroller extends BaseController
 
         }
 
+        // catat log
+        $this->catat_log($db, "ubah", "jemaat-anggota");
+
         return $this->respond([
             "msg"=>"ok", 
             "data"=>"Perubahan data keluarga jemaat telah disimpan."
@@ -520,6 +530,9 @@ class Jemaatcontroller extends BaseController
         $sql = "delete from tanggotajemaat where anggotajemaat_id=".$anggotajemaat_id;
 
         $db->query($sql);
+
+        // catat log
+        $this->catat_log($db, "hapus", "jemaat-anggota");
 
         return $this->respond([
             "msg"=>"ok", 
@@ -575,5 +588,13 @@ class Jemaatcontroller extends BaseController
 
     }
 
+    public function catat_log($db, $operasi, $tujuan)
+    {
+
+        $catatlog = Services::catatlog();
+        $catatlog->setDb($db);
+        $catatlog->catat($operasi, $tujuan);        
+
+    }
 
 }

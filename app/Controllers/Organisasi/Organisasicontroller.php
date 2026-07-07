@@ -5,6 +5,7 @@ namespace App\Controllers\Organisasi;
 use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Config\Services;
 use Exception;
 
 use App\Controllers\BaseController;
@@ -57,6 +58,9 @@ class Organisasicontroller extends BaseController
 
         $db->query($sql);
 
+        // catat log
+        $this->catat_log($db, "tambah", "organisasi");
+        
         return $this->respond([
                 "msg"=>"ok", 
                 "data"=>"data organisasi berhasil ditambahkan"
@@ -76,6 +80,9 @@ class Organisasicontroller extends BaseController
         $db = $this->set_db();
 
         $db->query($sql);
+
+        // catat log
+        $this->catat_log($db, "ubah", "organisasi");
 
         return $this->respond([
                 "msg"=>"ok", 
@@ -112,6 +119,9 @@ class Organisasicontroller extends BaseController
                 $sql = "delete from torganisasi where organisasi_id=".$organisasi_id;
 
                 $db->query($sql);
+
+                // catat log
+                $this->catat_log($db, "hapus", "organisasi");
 
                 return $this->respond([
                         "msg"=>"ok", 
@@ -186,6 +196,9 @@ class Organisasicontroller extends BaseController
 
             $db->query($sql);
 
+            // catat log
+            $this->catat_log($db, "tambah", "anggota-organisasi");
+
             return $this->respond([
                     "msg"=>"ok", 
                     "data"=>"data anggota organisasi berhasil diinput."
@@ -207,6 +220,9 @@ class Organisasicontroller extends BaseController
         $db = $this->set_db();
 
         $query = $db->query($sql);
+
+        // catat log
+        $this->catat_log($db, "hapus", "anggota-organisasi");
 
         return $this->respond([
                     "msg"=>"ok", 
@@ -230,4 +246,12 @@ class Organisasicontroller extends BaseController
 
     }
 
+    public function catat_log($db, $operasi, $tujuan)
+    {
+
+        $catatlog = Services::catatlog();
+        $catatlog->setDb($db);
+        $catatlog->catat($operasi, $tujuan);        
+
+    }
 }

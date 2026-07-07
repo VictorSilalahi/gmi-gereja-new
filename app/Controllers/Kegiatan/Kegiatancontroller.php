@@ -5,6 +5,7 @@ namespace App\Controllers\Kegiatan;
 use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Config\Services;
 use Exception;
 
 use App\Controllers\BaseController;
@@ -62,6 +63,9 @@ class Kegiatancontroller extends BaseController
 
         $db->query($sql);
 
+        // catat log
+        $this->catat_log($db, "tambah", "kegiatan");
+
         return $this->respond([
             "msg"=>"ok", 
             "data"=>"data kegiatan berhasil diinput"
@@ -81,6 +85,9 @@ class Kegiatancontroller extends BaseController
         $db = $this->set_db();
 
         $db->query($sql);
+
+        // catat log
+        $this->catat_log($db, "hapus", "kegiatan");
 
         return $this->respond([
             "msg"=>"ok", 
@@ -102,5 +109,13 @@ class Kegiatancontroller extends BaseController
 
     }
 
+    public function catat_log($db, $operasi, $tujuan)
+    {
+
+        $catatlog = Services::catatlog();
+        $catatlog->setDb($db);
+        $catatlog->catat($operasi, $tujuan);        
+
+    }
 
 }

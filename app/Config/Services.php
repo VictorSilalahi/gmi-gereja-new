@@ -3,7 +3,7 @@
 namespace Config;
 
 use CodeIgniter\Config\BaseService;
-use App\Libraries\Servicedb;
+use App\Services\Catatlog;
 
 
 /**
@@ -32,12 +32,12 @@ class Services extends BaseService
      * }
      */
 
-    public static function myServiceDb(bool $getShared = true)
+    public static function catatlog(bool $getShared = true)
     {
         if ($getShared) {
-            return static::getSharedInstance('myServiceDb');
+            return static::getSharedInstance('catatlog');
         }
 
-        return new Servicedb();
+        return new Catatlog();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controllers\Jabatan;
 use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Config\Services;
 use Exception;
 
 use App\Controllers\BaseController;
@@ -55,7 +56,10 @@ class Jabatancontroller extends BaseController
         $db = $this->set_db();
 
         $query = $db->query($sql);
-    
+
+        // catat log
+        $this->catat_log($db, "tambah", "jabatan");
+
         return $this->respond([
                 "msg"=>"ok", 
                 "data"=>"data jabatan berhasil ditambahkan"
@@ -73,6 +77,9 @@ class Jabatancontroller extends BaseController
         $sql = "update tjabatan set jabatan='".$jabatan."' where jabatan_id=".$jabatan_id;
 
         $db->query($sql);
+
+        // catat log
+        $this->catat_log($db, "ubah", "jabatan");
 
         return $this->respond([
                 "msg"=>"ok", 
@@ -105,6 +112,9 @@ class Jabatancontroller extends BaseController
                 $sql = "delete from tjabatan where jabatan_id=".$jabatan_id;
 
                 $db->query($sql);
+
+                // catat log
+                $this->catat_log($db, "hapus", "jabatan");
 
                 return $this->respond([
                         "msg"=>"ok", 
@@ -201,6 +211,9 @@ class Jabatancontroller extends BaseController
 
                 $db->query($sql);
 
+                // catat log
+                $this->catat_log($db, "tambah", "pejabat");
+
                 return $this->respond([
                     "msg"=>"ok", 
                     "data"=>"Data pejabat berhasil ditambah."
@@ -253,6 +266,9 @@ class Jabatancontroller extends BaseController
                 $sql = "delete from tpejabat where pejabat_id=".$pejabat_id;
 
                 $db->query($sql);
+
+                // catat log
+                $this->catat_log($db, "hapus", "pejabat");
                 
                 return $this->respond([
                         "msg"=>"ok", 
@@ -277,6 +293,15 @@ class Jabatancontroller extends BaseController
         $db->setDatabase($db_id);
 
         return $db;
+
+    }
+
+    public function catat_log($db, $operasi, $tujuan)
+    {
+
+        $catatlog = Services::catatlog();
+        $catatlog->setDb($db);
+        $catatlog->catat($operasi, $tujuan);        
 
     }
 

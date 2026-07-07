@@ -5,6 +5,7 @@ namespace App\Controllers\Sektor;
 use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Config\Services;
 use Exception;
 
 use App\Controllers\BaseController;
@@ -84,6 +85,9 @@ class Sektorcontroller extends BaseController
 
                     $db->query($sql); 
 
+                    // catat log
+                    $this->catat_log($db, "hapus", "sektor");
+
                     return $this->respond([
                         "msg"=>"ok", 
                         "data"=>"Data sektor tidak terpakai!"
@@ -119,6 +123,9 @@ class Sektorcontroller extends BaseController
 
         $db->query($sql); 
 
+        // catat log
+        $this->catat_log($db, "tambah", "sektor");
+
         return $this->respond([
             "msg"=>"ok", 
             "data"=>"Data sektor telah ditambah!"
@@ -138,6 +145,9 @@ class Sektorcontroller extends BaseController
         $sql = "update tsektor set no_sektor='".$no_sektor."', nama_sektor='".$nama_sektor."' where sektor_id=".(int)$sektor_id;
 
         $db->query($sql); 
+
+        // catat log
+        $this->catat_log($db, "ubah", "sektor");
 
         return $this->respond([
             "msg"=>"ok", 
@@ -160,5 +170,13 @@ class Sektorcontroller extends BaseController
 
     }
 
+    public function catat_log($db, $operasi, $tujuan)
+    {
+
+        $catatlog = Services::catatlog();
+        $catatlog->setDb($db);
+        $catatlog->catat($operasi, $tujuan);        
+
+    }
 
 }
