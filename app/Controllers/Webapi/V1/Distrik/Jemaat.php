@@ -10,7 +10,7 @@ use Exception;
 use App\Controllers\BaseController;
 
 
-class Jemaatapicontroller extends BaseController
+class Jemaat extends BaseController
 {
 
     use ResponseTrait;

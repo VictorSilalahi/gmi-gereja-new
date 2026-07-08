@@ -100,7 +100,7 @@ $routes->get('/api/intern/report/statistik/getdata', 'Report\Reportcontroller::g
 
 // });
 
-$routes->get('/webapi/v1/distrik/jemaat/all', 'Webapi\V1\Distrik\Jemaatapicontroller::jemaat_all');
+$routes->get('/webapi/v1/distrik/jemaat/all', 'Webapi\V1\Distrik\Jemaat::jemaat_all');
 
 
 
