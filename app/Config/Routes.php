@@ -91,16 +91,18 @@ $routes->post('/api/intern/report/jemaat/pernikahan', 'Report\Reportcontroller::
 $routes->get('/api/intern/report/statistik/getdata', 'Report\Reportcontroller::get_data_statistik');
 
 
-// API
+// API (V1)
 // +++++++++++++++++++++++++++++++++++++++++++++++++
 
 // Jemaat
-// $routes->group('webapi', ['namespace' => 'App\Controllers\Webapi\V1\Distrik'], static function ($routes) {
-//     $routes->get('/distrik/jemaat/all', 'Webapi\V1\Distrik\Jemaatapicontroller::jemaat_all');
+$routes->group('webapi', static function ($routes) {
+        $routes->group('v1', static function ($routes) {
+            $routes->get('distrik/jemaat/all/(:segment)', 'Webapi\V1\Distrik\Jemaat::jemaat_all/($1)');
+        
+        });
+});
 
-// });
-
-$routes->get('/webapi/v1/distrik/jemaat/all', 'Webapi\V1\Distrik\Jemaat::jemaat_all');
+// $routes->get('/webapi/v1/distrik/jemaat/all', 'Webapi\V1\Distrik\Jemaat::jemaat_all');
 
 
 
