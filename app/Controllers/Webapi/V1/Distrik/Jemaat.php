@@ -36,6 +36,7 @@ class Jemaat extends BaseController
 
             foreach($result as $row) {
 
+                // pindah database menjadi database gereja di dalam distrik
                 $db = $this->set_db($row->db_id);
     
                 // cari jumlah KK
@@ -176,37 +177,39 @@ class Jemaat extends BaseController
 
                     }
 
+
+
                 }
 
+                $data['jumlah_kk'] = $jumlah_kk;
+                $data['jumlah_jiwa'] = $jumlah_jiwa;
+
+                $data['gol_darah']['A'] = $gol_A;
+                $data['gol_darah']['B'] = $gol_B;
+                $data['gol_darah']['AB'] = $gol_AB;
+                $data['gol_darah']['O'] = $gol_O;
+
+                $data['pendidikan']['SD'] = $SD;
+                $data['pendidikan']['SMP'] = $SMP;
+                $data['pendidikan']['SMA_SMK'] = $SMA_SMK;
+                $data['pendidikan']['D3'] = $D3;
+                $data['pendidikan']['S1'] = $S1;
+                $data['pendidikan']['S2'] = $S2;
+                $data['pendidikan']['S3'] = $S3;
+                $data['pendidikan']['None'] = $P_None;
+
+                $data['pekerjaan']['ASN'] = $ASN;
+                $data['pekerjaan']['TNI-Polri'] = $TNI_Polri;
+                $data['pekerjaan']['Karyawan-Swasta'] = $Karyawan_Swasta;
+                $data['pekerjaan']['Pedagang'] = $Pedagang;
+                $data['pekerjaan']['Wiraswasta'] = $Wiraswasta;
+                $data['pekerjaan']['Dokter'] = $Dokter;
+                $data['pekerjaan']['Petani'] = $Petani;
+                $data['pekerjaan']['None'] = $Pek_None;
 
 
             }
             
-            $data['jumlah_kk'] = $jumlah_kk;
-            $data['jumlah_jiwa'] = $jumlah_jiwa;
-
-            $data['gol_darah']['A'] = $gol_A;
-            $data['gol_darah']['B'] = $gol_B;
-            $data['gol_darah']['AB'] = $gol_AB;
-            $data['gol_darah']['O'] = $gol_O;
-
-            $data['pendidikan']['SD'] = $SD;
-            $data['pendidikan']['SMP'] = $SMP;
-            $data['pendidikan']['SMA_SMK'] = $SMA_SMK;
-            $data['pendidikan']['D3'] = $D3;
-            $data['pendidikan']['S1'] = $S1;
-            $data['pendidikan']['S2'] = $S2;
-            $data['pendidikan']['S3'] = $S3;
-            $data['pendidikan']['None'] = $P_None;
-
-            $data['pekerjaan']['ASN'] = $ASN;
-            $data['pekerjaan']['TNI-Polri'] = $TNI_Polri;
-            $data['pekerjaan']['Karyawan-Swasta'] = $Karyawan_Swasta;
-            $data['pekerjaan']['Pedagang'] = $Pedagang;
-            $data['pekerjaan']['Wiraswasta'] = $Wiraswasta;
-            $data['pekerjaan']['Dokter'] = $Dokter;
-            $data['pekerjaan']['Petani'] = $Petani;
-            $data['pekerjaan']['None'] = $Pek_None;
 
 
             return $this->respond([
