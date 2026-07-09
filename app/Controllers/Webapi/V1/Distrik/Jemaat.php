@@ -55,7 +55,7 @@ class Jemaat extends BaseController
 
                 $golongan_darah = [];
 
-                $sql = "select golongan_darah, pendidikan_terakhir, pekerjaan from tanggotajemaat where anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+                $sql = "select golongan_darah, pendidikan_terakhir, pekerjaan, tanggal_lahir, tanggal_baptis from tanggotajemaat where anggotajemaat_id not in (select anggotajemaat_id from twafat)";
 
                 $query = $db->query($sql);
 
@@ -175,6 +175,13 @@ class Jemaat extends BaseController
                             $Pek_None = $Pek_None + 1;
                         }   
 
+
+                        // kelompok umur
+
+
+
+                        // tipe keaonggotaan (persiapan/penuh)
+                        
                     }
 
 
