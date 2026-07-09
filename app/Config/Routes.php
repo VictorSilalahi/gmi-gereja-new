@@ -99,8 +99,7 @@ $routes->group('webapi', static function ($routes) {
         $routes->group('v1', static function ($routes) {
             $routes->post('distrik/jemaat/all', 'Webapi\V1\Distrik\Jemaat::jemaat_all');
             $routes->post('distrik/gereja/all', 'Webapi\V1\Distrik\Gereja::gereja_all');
-        
-
+            $routes->post('distrik/gereja/aktifitas/all', 'Webapi\V1\Distrik\Jemaat::aktifitas_user');
         });
 });
 

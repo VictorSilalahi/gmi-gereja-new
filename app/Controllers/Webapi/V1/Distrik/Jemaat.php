@@ -5,6 +5,7 @@ namespace App\Controllers\Webapi\V1\Distrik;
 use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use CodeIgniter\I18n\Time;
 use Exception;
 
 use App\Controllers\BaseController;
@@ -86,7 +87,14 @@ class Jemaat extends BaseController
                     $Petani = 0;
                     $Pek_None = 0;
 
+                    $anak_anak = 0;
+                    $remaja = 0;
+                    $pemuda = 0;
+                    $dewasa = 0;
+                    $lansia = 0;
 
+                    $penuh = 0;
+                    $persiapan = 0;
 
                     foreach($result as $row) {
 
@@ -177,11 +185,46 @@ class Jemaat extends BaseController
 
 
                         // kelompok umur
+                        $tanggal_lahir = date_create($row->tanggal_lahir);
+                        $tanggal_sekarang = Time::now();
 
+                        $interval = date_diff($tanggal_lahir, $tanggal_sekarang);
 
+                        // anak-anak
+                        if ($interval->format('%y')<=12) {
+                            $anak_anak = $anak_anak + 1;
+                        } 
 
-                        // tipe keaonggotaan (persiapan/penuh)
+                        // remaja
+                        if ($interval->format('%y')<=17 && $interval->format('%y')>=13) {
+                            $remaja = $remaja + 1;
+                        } 
+
+                        // pemuda
+                        if ($interval->format('%y')<=29 && $interval->format('%y')>=18) {
+                            $pemuda = $pemuda + 1;
+                        }             
+
+                        // dewasa
+                        if ($interval->format('%y')<=64 && $interval->format('%y')>=30) {
+                            $dewasa = $dewasa + 1;
+                        }  
                         
+                        // lansia
+                        if ($interval->format('%y')>=65) {
+                            $lansia = $lansia + 1;
+                        }  
+
+                        
+                        // tipe keaonggotaan (persiapan/penuh)
+                        if ($row->tanggal_baptis) {
+                            $penuh = $penuh + 1;
+                        } else {
+                            $persiapan = $persiapan + 1;
+                        }
+                        
+
+
                     }
 
 
@@ -214,6 +257,15 @@ class Jemaat extends BaseController
                 $data['pekerjaan']['Petani'] = $Petani;
                 $data['pekerjaan']['None'] = $Pek_None;
 
+                $data['kelompok_usia']['anak-anak'] = $anak_anak;
+                $data['kelompok_usia']['remaja'] =  $remaja;
+                $data['kelompok_usia']['pemuda'] = $pemuda;
+                $data['kelompok_usia']['dewasa'] = $dewasa;
+                $data['kelompok_usia']['lansia'] = $lansia;
+                
+                $data['tipe_jemaat']['penuh'] = $penuh;
+                $data['tipe_jemaat']['persiapan'] = $persiapan;
+
 
             }
             
@@ -238,6 +290,96 @@ class Jemaat extends BaseController
 
     }
 
+    public function aktifitas_user() 
+    {
+
+        $distrik = $this->request->getPost("distrik");
+        $bulan_mundur = $this->request->getPost("bulan_mundur");
+        $waktu_sekarang = Time::now();
+
+        $db = $this->activate_db();
+        $sql = "select db_id from tgereja where distrik='".$distrik."'";
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getResult();
+
+            // ambil jenis data
+            $tujuan = ['jemaat', 'jabatan', 'pejabat', 'organisasi'];
+            $operasi = ['tambah', 'ubah', 'hapus'];
+
+            $data = [];
+
+            foreach($result as $row) {
+
+                // pindah database menjadi database gereja di dalam distrik
+                $db = $this->set_db($row->db_id);
+
+                $waktu = [];
+
+                for ($i=0; $i<$bulan_mundur; $i++) {
+
+                    $waktu_hitung = $waktu_sekarang->subMonths($i);
+                    
+                    $m = $waktu_hitung->month;
+                    $y = $waktu_hitung->year;
+
+                    $tujuan = [];
+
+                    foreach($tujuan as $t) {
+
+                        $operasi = [];
+
+                        foreach($operasi as $o) {
+
+                            $sql = "select count(*) as jumlah from thistoryapp where tujuan='".$t."' and operasi='".$o."' and MONTH(tanggal_operasi)=".$m." and YEAR(tanggal_operasi)=".$y;
+                            echo($sql).PHP_EOL;
+                            $query = $db->query($sql);
+
+                            if ($query) {
+
+                                $row = $query->getRow();
+
+                            }
+
+                            $operasi[$o][$t] = $row->jumlah;
+
+                        }
+
+                        $tujuan[$t] = $operasi;
+
+                    }
+
+                    array_push($waktu, array(
+                        "masa waktu"=>$m."-".$y,
+                        "data"=>$tujuan
+                    ));
+
+                }
+
+
+                $data = $waktu;
+
+            }
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$data
+            ]);
+        
+        
+        } else {
+
+            log_message('error', $e->getMessage());
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$e->getMessage()
+            ]);
+
+        }
+
+    }
 
 
     public function activate_db()
