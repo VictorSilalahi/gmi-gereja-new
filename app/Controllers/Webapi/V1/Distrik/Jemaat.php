@@ -297,124 +297,66 @@ class Jemaat extends BaseController
         $bulan_mundur = $this->request->getPost("bulan_mundur");
         $waktu_sekarang = Time::now();
 
+        $data = [];
 
+        $operasi = ['tambah', 'ubah', 'hapus'];
+        $tujuan = ['jemaat', 'jabatan', 'pejabat', 'organisasi', 'anggota-organisasi', 'kegiatan'];
+        
         $db = $this->activate_db();
         $sql = "select db_id from tgereja where distrik='".$distrik."'";
         $query = $db->query($sql);
 
-        if ($query) {
+        $result = $query->getResult();
 
-            $result = $query->getResult();
+        foreach($result as $row) {
+
+            // pindah database menjadi database setiap gereja di dalam distrik
+            $db = $this->activate_db();
+            $db = $this->set_db($row->db_id);
+
+            $deskripsi = [];
 
             for ($i=0; $i<$bulan_mundur; $i++) {
 
-                $waktu_hitung = $waktu_sekarang->subMonths($i);
-                        
-                $m = $waktu_hitung->month;
-                $y = $waktu_hitung->year;
+                    $waktu_hitung = $waktu_sekarang->subMonths($i);
+                                    
+                    $m = $waktu_hitung->month;
+                    $y = $waktu_hitung->year;
 
-                // pindah database menjadi database setiap gereja di dalam distrik
-                $db = $this->set_db($row->db_id);
+                    $deskripsi = [];
 
+                    foreach($tujuan as $t) {
+        
+                            foreach($operasi as $o) {
+
+                                $sql = "select count(*) as jumlah from thistoryapp where tujuan='".$t."' and operasi='".$o."' and MONTH(tanggal_operasi)=".$m." and YEAR(tanggal_operasi)=".$y;
+                                $query = $db->query($sql);
+                                $result = $query->getRow();
+                                $deskripsi[$t][$o] = $result->jumlah;
+                                // $deskripsi[$t][$o] = $sql;
+                            }
+
+                    }
+                    
+                array_push($data, array(
+                        "masa_waktu"=>$m."-".$y,
+                        "data"=>$deskripsi
+                ));
 
             }
 
-        } else {
-
-            log_message('error', $e->getMessage());
-            return $this->respond([
-                "msg"=>"error", 
-                "pesan"=>$e->getMessage()
-            ]);
+        
 
         }
 
 
-
-
-        // $db = $this->activate_db();
-        // $sql = "select db_id from tgereja where distrik='".$distrik."'";
-        // $query = $db->query($sql);
-
-        // if ($query) {
-
-        //     $result = $query->getResult();
-
-        //     // ambil jenis data
-        //     $tujuan = ['jemaat', 'jabatan', 'pejabat', 'organisasi'];
-        //     $operasi = ['tambah', 'ubah', 'hapus'];
-
-        //     $data = [];
-
-        //     foreach($result as $row) {
-
-        //         // pindah database menjadi database gereja di dalam distrik
-        //         $db = $this->set_db($row->db_id);
-
-        //         $waktu = [];
-
-        //         for ($i=0; $i<$bulan_mundur; $i++) {
-
-        //             $waktu_hitung = $waktu_sekarang->subMonths($i);
-                    
-        //             $m = $waktu_hitung->month;
-        //             $y = $waktu_hitung->year;
-
-        //             $tujuan = [];
-
-        //             foreach($tujuan as $t) {
-
-        //                 $operasi = [];
-
-        //                 foreach($operasi as $o) {
-
-        //                     $sql = "select count(*) as jumlah from thistoryapp where tujuan='".$t."' and operasi='".$o."' and MONTH(tanggal_operasi)=".$m." and YEAR(tanggal_operasi)=".$y;
-        //                     echo($sql).PHP_EOL;
-        //                     $query = $db->query($sql);
-
-        //                     if ($query) {
-
-        //                         $row = $query->getRow();
-
-        //                     }
-
-        //                     $operasi[$o][$t] = $row->jumlah;
-
-        //                 }
-
-        //                 $tujuan[$t] = $operasi;
-
-        //             }
-
-        //             array_push($waktu, array(
-        //                 "masa waktu"=>$m."-".$y,
-        //                 "data"=>$tujuan
-        //             ));
-
-        //         }
-
-
-        //         $data = $waktu;
-
-        //     }
-
-        //     return $this->respond([
-        //         "msg"=>"ok", 
-        //         "data"=>$data
-        //     ]);
-        
-        
-        // } else {
-
-        //     log_message('error', $e->getMessage());
-        //     return $this->respond([
-        //         "msg"=>"error", 
-        //         "pesan"=>$e->getMessage()
-        //     ]);
-
-        // }
+        return $this->respond([
+            "msg"=>"ok", 
+            "data"=>$data
+        ]);
 
     }
+
 
 
     public function activate_db()
