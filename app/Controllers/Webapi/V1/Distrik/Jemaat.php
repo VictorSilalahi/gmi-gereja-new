@@ -306,54 +306,69 @@ class Jemaat extends BaseController
         $sql = "select db_id from tgereja where distrik='".$distrik."'";
         $query = $db->query($sql);
 
-        $result = $query->getResult();
+        if ($query) {
 
-        foreach($result as $row) {
+            $result = $query->getResult();
 
-            // pindah database menjadi database setiap gereja di dalam distrik
-            $db = $this->activate_db();
-            $db = $this->set_db($row->db_id);
+            foreach($result as $row) {
 
-            $deskripsi = [];
+                // pindah database menjadi database setiap gereja di dalam distrik
+                $db = $this->activate_db();
+                $db = $this->set_db($row->db_id);
 
-            for ($i=0; $i<$bulan_mundur; $i++) {
+                $deskripsi = [];
 
-                    $waktu_hitung = $waktu_sekarang->subMonths($i);
-                                    
-                    $m = $waktu_hitung->month;
-                    $y = $waktu_hitung->year;
+                for ($i=0; $i<$bulan_mundur; $i++) {
 
-                    $deskripsi = [];
+                        $waktu_hitung = $waktu_sekarang->subMonths($i);
+                                        
+                        $m = $waktu_hitung->month;
+                        $y = $waktu_hitung->year;
 
-                    foreach($tujuan as $t) {
-        
-                            foreach($operasi as $o) {
+                        $deskripsi = [];
 
-                                $sql = "select count(*) as jumlah from thistoryapp where tujuan='".$t."' and operasi='".$o."' and MONTH(tanggal_operasi)=".$m." and YEAR(tanggal_operasi)=".$y;
-                                $query = $db->query($sql);
-                                $result = $query->getRow();
-                                $deskripsi[$t][$o] = $result->jumlah;
-                                // $deskripsi[$t][$o] = $sql;
-                            }
+                        foreach($tujuan as $t) {
+            
+                                foreach($operasi as $o) {
 
-                    }
-                    
-                array_push($data, array(
-                        "masa_waktu"=>$m."-".$y,
-                        "data"=>$deskripsi
-                ));
+                                    $sql = "select count(*) as jumlah from thistoryapp where tujuan='".$t."' and operasi='".$o."' and MONTH(tanggal_operasi)=".$m." and YEAR(tanggal_operasi)=".$y;
+                                    $query = $db->query($sql);
+                                    $result = $query->getRow();
+                                    $deskripsi[$t][$o] = $result->jumlah;
+                                    // $deskripsi[$t][$o] = $sql;
+                                }
+
+                        }
+                        
+                    array_push($data, array(
+                            "masa_waktu"=>$m."-".$y,
+                            "data"=>$deskripsi
+                    ));
+
+                }
+
 
             }
 
-        
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$data
+            ]);
+
+
+
+        } else {
+
+            log_message('error', $e->getMessage());
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$e->getMessage()
+            ]);
+
 
         }
 
-
-        return $this->respond([
-            "msg"=>"ok", 
-            "data"=>$data
-        ]);
 
     }
 
