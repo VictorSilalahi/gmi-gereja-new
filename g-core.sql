@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2026 at 03:04 PM
--- Server version: 10.4.27-MariaDB
+-- Generation Time: Jul 31, 2026 at 06:24 AM
+-- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `g-f9kyfz`
+-- Database: `g-dnja1q`
 --
 
 -- --------------------------------------------------------
@@ -45,9 +45,12 @@ CREATE TABLE `tanggotajemaat` (
 --
 
 INSERT INTO `tanggotajemaat` (`anggotajemaat_id`, `jemaat_id`, `nama`, `jk`, `golongan_darah`, `tanggal_lahir`, `tanggal_baptis`, `posisi`, `pendidikan_terakhir`, `pekerjaan`) VALUES
-(12, 7, 'Andi', 'L', 'A', '2026-06-21', '2026-06-22', 'Suami', 'S1', 'TNI-Polri'),
-(13, 7, 'Deby', 'P', 'B', '2026-06-24', '2026-06-22', 'Istri', 'S1', 'ASN'),
-(14, 7, 'Indra', 'P', 'AB', '2026-06-28', '0000-00-00', 'Anak', 'D3', 'Dokter');
+(1, 1, 'Henry XYZ', 'L', 'A', '2026-06-21', '2026-06-22', 'Suami', 'S1', 'ASN'),
+(2, 1, 'Wati Siburian', 'P', 'B', '2026-06-28', '2006-06-29', 'Istri', 'S1', 'Karyawan-Swasta'),
+(3, 1, 'Tony', 'P', 'AB', '2026-06-07', '2026-06-08', 'Istri', 'D3', 'Pedagang'),
+(4, 1, 'Tina', 'L', 'A', '2026-06-14', '2026-06-15', 'Anak', 'D3', 'Dokter'),
+(5, 2, 'Dony', 'L', 'A', '2026-07-05', '2026-07-06', 'Suami', 'S2', 'ASN'),
+(6, 2, 'Siti', 'P', 'B', '2026-06-29', '2026-06-22', 'Istri', 'D3', 'Pedagang');
 
 -- --------------------------------------------------------
 
@@ -61,6 +64,13 @@ CREATE TABLE `tanggotaorganisasi` (
   `organisasi_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tanggotaorganisasi`
+--
+
+INSERT INTO `tanggotaorganisasi` (`anggotaorganisasi_id`, `anggotajemaat_id`, `organisasi_id`) VALUES
+(1, 2, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -70,6 +80,7 @@ CREATE TABLE `tanggotaorganisasi` (
 CREATE TABLE `thistoryapp` (
   `historyapp_id` bigint(20) UNSIGNED NOT NULL,
   `operasi` varchar(50) NOT NULL,
+  `tujuan` varchar(20) NOT NULL,
   `tanggal_operasi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -81,10 +92,10 @@ CREATE TABLE `thistoryapp` (
 
 CREATE TABLE `thistorypejabat` (
   `historypejabat_id` bigint(20) UNSIGNED NOT NULL,
-  `nama` varchar(100) NOT NULL,
-  `jabatan_id` int(11) NOT NULL,
+  `anggotajemaat_id` int(11) NOT NULL,
   `tanggal_pengangkatan` date NOT NULL,
-  `tanggal_berhenti` date DEFAULT NULL
+  `tanggal_berhenti` date NOT NULL,
+  `jabatan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -104,7 +115,7 @@ CREATE TABLE `tjabatan` (
 
 INSERT INTO `tjabatan` (`jabatan_id`, `jabatan`) VALUES
 (1, 'Majelis'),
-(2, 'Guru Injil');
+(3, 'Guru Injil');
 
 -- --------------------------------------------------------
 
@@ -127,7 +138,8 @@ CREATE TABLE `tjemaat` (
 --
 
 INSERT INTO `tjemaat` (`jemaat_id`, `nik`, `status_keanggotaan`, `sektor_id`, `alamat`, `mobile_phone`, `tanggal_terdaftar`) VALUES
-(7, '001-001', 'Aktif', 1, 'Jl Test test test', '876760806', '2026-06-19');
+(1, '01-001', 'Aktif', 1, 'Jl Setia Budi Pasar III no 776', '2222222222', '2026-06-01'),
+(2, '01-002', 'Aktif', 1, 'Jl Darusalam', '33332', '2026-06-01');
 
 -- --------------------------------------------------------
 
@@ -141,6 +153,13 @@ CREATE TABLE `tkegiatan` (
   `judul_kegiatan` varchar(200) NOT NULL,
   `deskripsi` varchar(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tkegiatan`
+--
+
+INSERT INTO `tkegiatan` (`kegiatan_id`, `tanggal`, `judul_kegiatan`, `deskripsi`) VALUES
+(4, '2026-06-03', 'Kongres GMI ke xx', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.');
 
 -- --------------------------------------------------------
 
@@ -172,9 +191,12 @@ CREATE TABLE `tmenikah` (
 --
 
 INSERT INTO `tmenikah` (`menikah_id`, `anggotajemaat_id`, `tanggal_menikah`) VALUES
-(5, 12, '2026-06-24'),
-(6, 13, '2026-06-24'),
-(7, 14, '2026-07-01');
+(1, 1, '2026-06-24'),
+(2, 2, '2026-07-01'),
+(3, 3, '0000-00-00'),
+(4, 4, '0000-00-00'),
+(5, 5, '2026-07-08'),
+(6, 6, '2026-06-30');
 
 -- --------------------------------------------------------
 
@@ -184,8 +206,16 @@ INSERT INTO `tmenikah` (`menikah_id`, `anggotajemaat_id`, `tanggal_menikah`) VAL
 
 CREATE TABLE `torganisasi` (
   `organisasi_id` bigint(20) UNSIGNED NOT NULL,
-  `organisasi` int(11) NOT NULL
+  `organisasi` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `torganisasi`
+--
+
+INSERT INTO `torganisasi` (`organisasi_id`, `organisasi`) VALUES
+(2, 'PWMI'),
+(4, 'P3MI');
 
 -- --------------------------------------------------------
 
@@ -216,9 +246,9 @@ CREATE TABLE `tsektor` (
 --
 
 INSERT INTO `tsektor` (`sektor_id`, `no_sektor`, `nama_sektor`) VALUES
-(1, '001', 'Sektor 001'),
-(2, '002', 'Sektor 002'),
-(4, '003', 'Sektor 003');
+(1, '01', 'Sektor 01'),
+(2, '02', 'Sektor 02'),
+(3, '03', 'Sektor 03');
 
 -- --------------------------------------------------------
 
@@ -237,10 +267,12 @@ CREATE TABLE `tsidi` (
 --
 
 INSERT INTO `tsidi` (`sidi_id`, `anggotajemaat_id`, `tanggal_sidi`) VALUES
-(6, 12, '2026-06-23'),
-(7, 13, '2026-06-23'),
-(8, 14, '2026-06-30'),
-(9, 17, '2026-06-21');
+(1, 1, '2026-06-23'),
+(2, 2, '2026-06-30'),
+(3, 3, '2026-06-09'),
+(4, 4, '2026-06-16'),
+(5, 5, '2026-07-07'),
+(6, 6, '2026-06-24');
 
 -- --------------------------------------------------------
 
@@ -350,13 +382,13 @@ ALTER TABLE `twafat`
 -- AUTO_INCREMENT for table `tanggotajemaat`
 --
 ALTER TABLE `tanggotajemaat`
-  MODIFY `anggotajemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `anggotajemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tanggotaorganisasi`
 --
 ALTER TABLE `tanggotaorganisasi`
-  MODIFY `anggotaorganisasi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `anggotaorganisasi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `thistoryapp`
@@ -368,25 +400,25 @@ ALTER TABLE `thistoryapp`
 -- AUTO_INCREMENT for table `thistorypejabat`
 --
 ALTER TABLE `thistorypejabat`
-  MODIFY `historypejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `historypejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tjabatan`
 --
 ALTER TABLE `tjabatan`
-  MODIFY `jabatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `jabatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tjemaat`
 --
 ALTER TABLE `tjemaat`
-  MODIFY `jemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `jemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tkegiatan`
 --
 ALTER TABLE `tkegiatan`
-  MODIFY `kegiatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `kegiatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tkeluar`
@@ -398,37 +430,37 @@ ALTER TABLE `tkeluar`
 -- AUTO_INCREMENT for table `tmenikah`
 --
 ALTER TABLE `tmenikah`
-  MODIFY `menikah_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `menikah_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `torganisasi`
 --
 ALTER TABLE `torganisasi`
-  MODIFY `organisasi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `organisasi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tpejabat`
 --
 ALTER TABLE `tpejabat`
-  MODIFY `pejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `pejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tsektor`
 --
 ALTER TABLE `tsektor`
-  MODIFY `sektor_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `sektor_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tsidi`
 --
 ALTER TABLE `tsidi`
-  MODIFY `sidi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `sidi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `twafat`
 --
 ALTER TABLE `twafat`
-  MODIFY `wafat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `wafat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

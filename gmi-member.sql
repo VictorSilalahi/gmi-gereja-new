@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 22, 2026 at 07:23 AM
+-- Generation Time: Jul 31, 2026 at 06:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tdistrik`
+--
+
+CREATE TABLE `tdistrik` (
+  `distrik_id` bigint(20) UNSIGNED NOT NULL,
+  `distrik` varchar(10) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `tanggal_terdaftar` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tdistrik`
+--
+
+INSERT INTO `tdistrik` (`distrik_id`, `distrik`, `password`, `email`, `tanggal_terdaftar`) VALUES
+(4, 'D-II', 'test', 'silalahitotok@gmail.com', '2026-07-29');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tgereja`
 --
 
@@ -34,6 +55,8 @@ CREATE TABLE `tgereja` (
   `password` varchar(100) NOT NULL,
   `nama_gereja` varchar(200) NOT NULL,
   `alamat` varchar(200) NOT NULL,
+  `lat` varchar(100) NOT NULL,
+  `lng` varchar(100) NOT NULL,
   `kondisi_bangunan` varchar(20) NOT NULL,
   `kepemilikan` varchar(100) NOT NULL,
   `db_id` varchar(10) NOT NULL,
@@ -47,8 +70,8 @@ CREATE TABLE `tgereja` (
 -- Dumping data for table `tgereja`
 --
 
-INSERT INTO `tgereja` (`gereja_id`, `distrik`, `email`, `password`, `nama_gereja`, `alamat`, `kondisi_bangunan`, `kepemilikan`, `db_id`, `identity_link`, `path_sk`, `created_at`, `updated_at`) VALUES
-('9beaf151-63ee-4d4a-8520-8918f74db30b', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah', 'Permanen', 'Milik Sendiri', 'g-dnja1q', 'QBPh9aPWLoUv', 'public/uploads/sk/1781845451_629fb7490b55adac04f9.jpg', '2026-06-19', '2026-06-19');
+INSERT INTO `tgereja` (`gereja_id`, `distrik`, `email`, `password`, `nama_gereja`, `alamat`, `lat`, `lng`, `kondisi_bangunan`, `kepemilikan`, `db_id`, `identity_link`, `path_sk`, `created_at`, `updated_at`) VALUES
+('9beaf151-63ee-4d4a-8520-8918f74db30b', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah', '', '', 'Permanen', 'Milik Sendiri', 'g-dnja1q', 'QBPh9aPWLoUv', 'public/uploads/sk/1781845451_629fb7490b55adac04f9.jpg', '2026-06-19', '2026-06-19');
 
 -- --------------------------------------------------------
 
@@ -74,6 +97,12 @@ INSERT INTO `tpendeta` (`pendeta_id`, `nama`, `email`) VALUES
 --
 
 --
+-- Indexes for table `tdistrik`
+--
+ALTER TABLE `tdistrik`
+  ADD UNIQUE KEY `distrik_id` (`distrik_id`);
+
+--
 -- Indexes for table `tpendeta`
 --
 ALTER TABLE `tpendeta`
@@ -82,6 +111,12 @@ ALTER TABLE `tpendeta`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `tdistrik`
+--
+ALTER TABLE `tdistrik`
+  MODIFY `distrik_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tpendeta`

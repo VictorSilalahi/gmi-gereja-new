@@ -3,7 +3,14 @@ import { ajax_post, ajax_get, fetch_post, fetch_get, fetch_post2 } from "../ajx.
 
 let fileSize = 0;
 
+let lat = 0;
+let long = 0;
+
+let centerMarker = null;
+
 $(document).ready(function() {
+
+    setMap();
 
 });
 
@@ -30,6 +37,8 @@ $(document).on("click", ".btn-daftar", function() {
     let email_pendeta = '';
     let nama_file = '';
 
+    // let latLang = centerMarker.getLatLng();
+    // console.log(latLang.lat, latLang.lng);
 
     if ($("#txtNamaGereja").val()=='') {
         pesan_error("Masukkan nama gereja");
@@ -122,6 +131,15 @@ $(document).on("click", ".btn-daftar", function() {
         return false;
     }
 
+    let latLang = centerMarker.getLatLng();
+    
+    if (latLang == null) {
+        pesan_error("Koordinat gereja harus ada!");
+        return false;
+    }
+
+    $("#txtLat").val(latLang.lat);
+    $("#txtLong").val(latLang.lng);
     
     $.LoadingOverlay("show");
 
@@ -199,5 +217,37 @@ function cek_keberadaan_gereja(nama_gereja, distrik) {
     }
 
 
+}
+
+function setMap() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error_map);
+  } else {
+    alert("Sorry, browser ini tidak support geolocation.");
+  }
+}
+
+function success(position) {
+
+    lat = position.coords.latitude;
+    long = position.coords.longitude;
+
+    let map = L.map('map').setView([lat, long], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 15,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    centerMarker = L.marker(map.getCenter()).addTo(map);
+
+    // 2. Update marker position every time the map moves
+    map.on('move', function() {
+        centerMarker.setLatLng(map.getCenter());
+    });
+
+}
+
+function error_map() {
+  alert("Sorry, posisi tidak bisa didapatkan.");
 }
 
