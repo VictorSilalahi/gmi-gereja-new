@@ -588,6 +588,8 @@ class Jemaat extends BaseController
                 $db = $this->activate_db();
                 $db = $this->set_db($row->db_id);
 
+                $data[$row->db_id]=[];
+
                 $deskripsi = [];
 
                 for ($i=1; $i<$bulan_mundur; $i=$i+1) {
@@ -612,7 +614,7 @@ class Jemaat extends BaseController
 
                         }
                         
-                        array_push($data, array(
+                        array_push($data[$row->db_id], array(
                                 "masa_waktu"=>$m."-".$y,
                                 "data"=>$deskripsi
                         ));
