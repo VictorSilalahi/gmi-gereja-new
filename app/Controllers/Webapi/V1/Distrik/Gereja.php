@@ -21,7 +21,7 @@ class Gereja extends BaseController
 
         $distrik = $this->request->getPost("distrik");
 
-        $sql = "select gereja_id, email, nama_gereja, alamat, kondisi_bangunan, kepemilikan from tgereja where distrik='".$distrik."'";
+        $sql = "select gereja_id, email, nama_gereja, alamat, lat, lng, kondisi_bangunan, kepemilikan from tgereja where distrik='".$distrik."'";
 
         $db = $this->activate_db();
 
@@ -41,7 +41,9 @@ class Gereja extends BaseController
                     "nama_gereja"=>$row->email,
                     "alamat"=>$row->alamat,
                     "kondisi_bangunan"=>$row->kondisi_bangunan,
-                    "kepemilikan"=>$row->kepemilikan
+                    "kepemilikan"=>$row->kepemilikan,
+                    "lat"=>$row->lat,
+                    "lng"=>$row->lng
                 ));
             }
 
