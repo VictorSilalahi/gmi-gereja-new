@@ -590,7 +590,7 @@ class Jemaat extends BaseController
 
                 $deskripsi = [];
 
-                for ($i=0; $i<$bulan_mundur; $i++) {
+                for ($i=1; $i<$bulan_mundur; $i=$i+1) {
 
                         $waktu_hitung = $waktu_sekarang->subMonths($i);
                                         
@@ -607,26 +607,26 @@ class Jemaat extends BaseController
                                     $query = $db->query($sql);
                                     $result = $query->getRow();
                                     $deskripsi[$t][$o] = $result->jumlah;
-                                    // $deskripsi[$t][$o] = $sql;
+
                                 }
 
                         }
                         
-                    array_push($data, array(
-                            "masa_waktu"=>$m."-".$y,
-                            "data"=>$deskripsi
-                    ));
+                        array_push($data, array(
+                                "masa_waktu"=>$m."-".$y,
+                                "data"=>$deskripsi
+                        ));
 
                 }
 
 
             }
 
-
             return $this->respond([
-                "msg"=>"ok", 
-                "data"=>$data
+                    "msg"=>"ok", 
+                    "data"=>$data
             ]);
+
 
 
 
