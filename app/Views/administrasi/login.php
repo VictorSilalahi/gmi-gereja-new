@@ -28,14 +28,22 @@
 
                             <form">
                                 <div class="mb-3">
-                                <label for="txtEmail" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="txtEmail" name="txtEmail" aria-describedby="emailHelp">
+                                    <label for="txtEmail" class="form-label">Email</label>
+                                    <input type="text" class="form-control" id="txtEmail" name="txtEmail" aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-3">
-                                <label for="txtPassword" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="txtPassword" name="txtPassword">
+                                    <label for="txtPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="txtPassword" name="txtPassword">
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-login">Login</button>
+                                
+                                <br>
+                                <div class="mb-3">
+                                    <p class="text-end">
+                                        Gereja anda belum terdaftar? Klik <a href="<?php echo(base_url()).'daftar'; ?>">disini</a> 
+                                    </p>
+                                </div>
+
                             </form>                        
 
                         </div>
