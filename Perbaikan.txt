@@ -1,7 +1,7 @@
 Perbaikan
 
 1. Perubahan label status keanggotaan "Tipe Jemaat" menjadi "Status Keanggotaan", "Kegiatan" menjadi "Program Kerja"
-2. Status Keanggoatan pada proses penambahan jemaat dihilangkan.
+2. Status Keanggoatan memiliki 2 pilihan yaitu "Lama" dan "Baru". Bila dipilih "Lama" maka dilanjutkan ke menu pengisian Nama Jemaat, bila dipilih "Baru" maka muncul combobox "Alasan" dengan 3 buah pilihan yaitu "Menikah", "Pindah Domisili", "Baptisan".
 3. Golongan darah ditambahkan "None" di posisi atas saat penambahan jemaat
 4 Pembuatan menu "Jemaat Rangkap" pada menu "Jemaat"
 5 Pembuatan option Kepemilikan Gereja yaitu "Hak Pakai"
@@ -14,5 +14,11 @@ Perbaikan
    - Anggota Organisasi
    - Pelayan
    - Seksi
+11. Kolom Wafat di menu Menu Tambah Jemaat dihapus. 
+12. Tanggal Wafat di menu Edit Keluarga digeser ke paling kanan setelah kolom Pekerjaan
+13. Tambahkan kolom Pindah di samping kolom Wafat dengan pilihan tanggal pindah dan alasan pindah (menikah, pekerjaan, Pendidikan, lain-lain) -> otomatis seluruh data jemaat berkurang dan perpindahan tercatat dlm history
+14. Harus ada mekanisme utk pengelompokan penambahan jumlah jemaat berdasarkan alasannya.
+
+
 
  
