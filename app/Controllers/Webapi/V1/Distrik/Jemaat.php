@@ -268,7 +268,6 @@ class Jemaat extends BaseController
 
 
             }
-            
 
 
             return $this->respond([
