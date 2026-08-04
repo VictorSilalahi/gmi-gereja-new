@@ -592,7 +592,7 @@ class Jemaat extends BaseController
 
                 $deskripsi = [];
 
-                for ($i=1; $i<$bulan_mundur; $i=$i+1) {
+                for ($i=0; $i<$bulan_mundur; $i++) {
 
                         $waktu_hitung = $waktu_sekarang->subMonths($i);
                                         
@@ -613,11 +613,11 @@ class Jemaat extends BaseController
                                 }
 
                         }
-                        
-                        array_push($data[$row->db_id], array(
-                                "masa_waktu"=>$m."-".$y,
-                                "data"=>$deskripsi
-                        ));
+
+                    array_push($data[$row->db_id], array(
+                            "masa_waktu"=>$m."-".$y,
+                            "data"=>$deskripsi
+                    ));
 
                 }
 
