@@ -1,0 +1,24 @@
+Perbaikan
+
+1. Perubahan label status keanggotaan "Tipe Jemaat" menjadi "Status Keanggotaan", "Kegiatan" menjadi "Program Kerja"
+2. Status Keanggoatan memiliki 2 pilihan yaitu "Lama" dan "Baru". Bila dipilih "Lama" maka dilanjutkan ke menu pengisian Nama Jemaat, bila dipilih "Baru" maka muncul combobox "Alasan" dengan 3 buah pilihan yaitu "Menikah", "Pindah Domisili", "Baptisan".
+3. Golongan darah ditambahkan "None" di posisi atas saat penambahan jemaat
+4 Pembuatan menu "Jemaat Rangkap" pada menu "Jemaat"
+5 Pembuatan option Kepemilikan Gereja yaitu "Hak Pakai"
+6 Pembuatan input mobile phone pimpinan jemaat pada saat pendaftaran gereja
+7 Menambah Jenis pekerjaan Jemaat: Guru Injil, Pendeta, Buruh Harian Lepas
+8 Menambah menu penelusuran data gereja local di dalam aplikasi Distrik,dimana setiap pemilihan gereja akan membuat new page halaman baru bagi gereja yang dipilih (jumlah KK, jumlah jiwa, kegiatan, seksi)
+9.Menambah menu pada aplikasi Distrik: Program Kerja, Seksi (P2MI, PWMI, P3MI, PRMI, Sekolah MInggu, Lansia)
+10. Menambah menu pada aplikasi Gereja, Listrik dan Wilayah yg merupakan Rekapitulasi Data:
+   - Rekap Jemaat (Jiwa/KK)
+   - Anggota Organisasi
+   - Pelayan
+   - Seksi
+11. Kolom Wafat di menu Menu Tambah Jemaat dihapus. 
+12. Tanggal Wafat di menu Edit Keluarga digeser ke paling kanan setelah kolom Pekerjaan
+13. Tambahkan kolom Pindah di samping kolom Wafat dengan pilihan tanggal pindah dan alasan pindah (menikah, pekerjaan, Pendidikan, lain-lain) -> otomatis seluruh data jemaat berkurang dan perpindahan tercatat dlm history
+14. Harus ada mekanisme utk pengelompokan penambahan jumlah jemaat berdasarkan alasannya.
+
+
+
+ 
