@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2026 at 04:10 PM
+-- Generation Time: Aug 14, 2026 at 04:14 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,18 +40,6 @@ CREATE TABLE `tanggotajemaat` (
   `pekerjaan` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tanggotajemaat`
---
-
-INSERT INTO `tanggotajemaat` (`anggotajemaat_id`, `jemaat_id`, `nama`, `jk`, `golongan_darah`, `tanggal_lahir`, `tanggal_baptis`, `posisi`, `pendidikan_terakhir`, `pekerjaan`) VALUES
-(1, 1, 'Henry XYZ', 'L', 'A', '2026-06-21', '2026-06-22', 'Suami', 'S1', 'ASN'),
-(2, 1, 'Wati Siburian', 'P', 'B', '2026-06-28', '2006-06-29', 'Istri', 'S1', 'Karyawan-Swasta'),
-(3, 1, 'Tony', 'P', 'AB', '2026-06-07', '2026-06-08', 'Istri', 'D3', 'Pedagang'),
-(4, 1, 'Tina', 'L', 'A', '2026-06-14', '2026-06-15', 'Anak', 'D3', 'Dokter'),
-(5, 2, 'Dony', 'L', 'A', '2026-07-05', '2026-07-06', 'Suami', 'S2', 'ASN'),
-(6, 2, 'Siti', 'P', 'B', '2026-06-29', '2026-06-22', 'Istri', 'D3', 'Pedagang');
-
 -- --------------------------------------------------------
 
 --
@@ -63,13 +51,6 @@ CREATE TABLE `tanggotaorganisasi` (
   `anggotajemaat_id` int(11) NOT NULL,
   `organisasi_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tanggotaorganisasi`
---
-
-INSERT INTO `tanggotaorganisasi` (`anggotaorganisasi_id`, `anggotajemaat_id`, `organisasi_id`) VALUES
-(1, 2, 4);
 
 -- --------------------------------------------------------
 
@@ -109,14 +90,6 @@ CREATE TABLE `tjabatan` (
   `jabatan` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tjabatan`
---
-
-INSERT INTO `tjabatan` (`jabatan_id`, `jabatan`) VALUES
-(1, 'Majelis'),
-(3, 'Guru Injil');
-
 -- --------------------------------------------------------
 
 --
@@ -133,14 +106,6 @@ CREATE TABLE `tjemaat` (
   `tanggal_terdaftar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tjemaat`
---
-
-INSERT INTO `tjemaat` (`jemaat_id`, `nik`, `status_keanggotaan`, `sektor_id`, `alamat`, `mobile_phone`, `tanggal_terdaftar`) VALUES
-(1, '01-001', 'Aktif', 1, 'Jl Setia Budi Pasar III no 776', '2222222222', '2026-06-01'),
-(2, '01-002', 'Aktif', 1, 'Jl Darusalam', '33332', '2026-06-01');
-
 -- --------------------------------------------------------
 
 --
@@ -153,13 +118,6 @@ CREATE TABLE `tkegiatan` (
   `judul_kegiatan` varchar(200) NOT NULL,
   `deskripsi` varchar(1024) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tkegiatan`
---
-
-INSERT INTO `tkegiatan` (`kegiatan_id`, `tanggal`, `judul_kegiatan`, `deskripsi`) VALUES
-(4, '2026-06-03', 'Kongres GMI ke xx', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32.');
 
 -- --------------------------------------------------------
 
@@ -186,18 +144,6 @@ CREATE TABLE `tmenikah` (
   `tanggal_menikah` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tmenikah`
---
-
-INSERT INTO `tmenikah` (`menikah_id`, `anggotajemaat_id`, `tanggal_menikah`) VALUES
-(1, 1, '2026-06-24'),
-(2, 2, '2026-07-01'),
-(3, 3, '0000-00-00'),
-(4, 4, '0000-00-00'),
-(5, 5, '2026-07-08'),
-(6, 6, '2026-06-30');
-
 -- --------------------------------------------------------
 
 --
@@ -208,14 +154,6 @@ CREATE TABLE `torganisasi` (
   `organisasi_id` bigint(20) UNSIGNED NOT NULL,
   `organisasi` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `torganisasi`
---
-
-INSERT INTO `torganisasi` (`organisasi_id`, `organisasi`) VALUES
-(2, 'PWMI'),
-(4, 'P3MI');
 
 -- --------------------------------------------------------
 
@@ -241,15 +179,6 @@ CREATE TABLE `tsektor` (
   `nama_sektor` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `tsektor`
---
-
-INSERT INTO `tsektor` (`sektor_id`, `no_sektor`, `nama_sektor`) VALUES
-(1, '01', 'Sektor 01'),
-(2, '02', 'Sektor 02'),
-(3, '03', 'Sektor 03');
-
 -- --------------------------------------------------------
 
 --
@@ -261,18 +190,6 @@ CREATE TABLE `tsidi` (
   `anggotajemaat_id` int(11) NOT NULL,
   `tanggal_sidi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `tsidi`
---
-
-INSERT INTO `tsidi` (`sidi_id`, `anggotajemaat_id`, `tanggal_sidi`) VALUES
-(1, 1, '2026-06-23'),
-(2, 2, '2026-06-30'),
-(3, 3, '2026-06-09'),
-(4, 4, '2026-06-16'),
-(5, 5, '2026-07-07'),
-(6, 6, '2026-06-24');
 
 -- --------------------------------------------------------
 
