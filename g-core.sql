@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2026 at 06:24 AM
--- Server version: 10.4.32-MariaDB
+-- Generation Time: Aug 14, 2026 at 04:10 PM
+-- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `g-dnja1q`
+-- Database: `g-core`
 --
 
 -- --------------------------------------------------------

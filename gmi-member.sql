@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2026 at 07:24 AM
--- Server version: 10.4.32-MariaDB
+-- Generation Time: Aug 14, 2026 at 04:11 PM
+-- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -56,6 +56,7 @@ CREATE TABLE `tgereja` (
   `password` varchar(100) NOT NULL,
   `nama_gereja` varchar(200) NOT NULL,
   `alamat` varchar(200) NOT NULL,
+  `kabupaten_id` int(11) NOT NULL,
   `lat` varchar(100) NOT NULL,
   `lng` varchar(100) NOT NULL,
   `kondisi_bangunan` varchar(20) NOT NULL,
@@ -71,8 +72,9 @@ CREATE TABLE `tgereja` (
 -- Dumping data for table `tgereja`
 --
 
-INSERT INTO `tgereja` (`gereja_id`, `distrik`, `email`, `password`, `nama_gereja`, `alamat`, `lat`, `lng`, `kondisi_bangunan`, `kepemilikan`, `db_id`, `identity_link`, `path_sk`, `created_at`, `updated_at`) VALUES
-('9beaf151-63ee-4d4a-8520-8918f74db30b', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah', '', '', 'Permanen', 'Milik Sendiri', 'g-dnja1q', 'QBPh9aPWLoUv', 'public/uploads/sk/1781845451_629fb7490b55adac04f9.jpg', '2026-06-19', '2026-06-19');
+INSERT INTO `tgereja` (`gereja_id`, `distrik`, `email`, `password`, `nama_gereja`, `alamat`, `kabupaten_id`, `lat`, `lng`, `kondisi_bangunan`, `kepemilikan`, `db_id`, `identity_link`, `path_sk`, `created_at`, `updated_at`) VALUES
+('9beaf151-63ee-4d4a-8520-8918f74db30b', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah', 1077, '', '', 'Permanen', 'Milik Sendiri', 'g-dnja1q', 'QBPh9aPWLoUv', 'public/uploads/sk/1781845451_629fb7490b55adac04f9.jpg', '2026-06-19', '2026-06-19'),
+('6158f1d6-9e21-4c3e-9a54-2dcda0078e32', 'D-II', 'victorbiz766hi@gmail.com', 'MvBf6xEy', 'gmixxx', 'Jl Madong Lubis no 9 Medan', 1077, '3.6097084012021723', '98.64418029785158', 'Permanen', 'Milik Sendiri', 'g-nlvrul', 'YDJWGALoYfR0', 'public/uploads/sk/1786700508_f509d22cb2cb4ccfddb8.jpg', '2026-08-14', '2026-08-14');
 
 -- --------------------------------------------------------
 
@@ -624,7 +626,8 @@ CREATE TABLE `tpendeta` (
 --
 
 INSERT INTO `tpendeta` (`pendeta_id`, `nama`, `email`) VALUES
-(3, 'Pdt Lubis', 'silalahitotok@gmail.com');
+(3, 'Pdt Lubis', 'ilalahitotok@gmail.com'),
+(4, 'Pdt Lubis', 'silalahitotok@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -730,7 +733,7 @@ ALTER TABLE `tkabupaten`
 -- AUTO_INCREMENT for table `tpendeta`
 --
 ALTER TABLE `tpendeta`
-  MODIFY `pendeta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `pendeta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tprovinsi`
