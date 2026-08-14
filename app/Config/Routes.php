@@ -9,10 +9,13 @@ use CodeIgniter\Router\RouteCollection;
 // ++++++++++++++++++++++++++++++++++++++++++++++++
 // route pendaftaran
 $routes->get('/daftar', 'Pendaftaran::index');
+$routes->get('/daftar/provinsi', 'Pendaftaran::provinsi');
+$routes->post('/daftar/kabkota', 'Pendaftaran::kabkota');
 $routes->get('/daftar/terima_kasih', 'Pendaftaran::terima_kasih');
 $routes->post('/daftar/cek_email', 'Pendaftaran::cek_email');
 $routes->post('/daftar/cek_gereja', 'Pendaftaran::cek_gereja');
 $routes->post('/daftar/tambah_gereja', 'Pendaftaran::tambah_gereja');
+
 
 // Backend Internal
 // ++++++++++++++++++++++++++++++++++++++++++++++++

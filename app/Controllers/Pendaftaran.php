@@ -25,6 +25,70 @@ class Pendaftaran extends BaseController
         return view('daftar/terima_kasih');        
     }
 
+    
+    public function provinsi()
+    {
+
+        $db = \Config\Database::connect();
+        $sql = "select provinsi_id, provinsi from tprovinsi";
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            
+            $result = $query->getResult();
+            $data_provinsi = [];
+
+            foreach($result as $row) {
+
+                array_push($data_provinsi, ["provinsi_id"=>$row->provinsi_id, "provinsi"=>$row->provinsi]);
+
+            }
+            $data = array("status"=>"ok", "judul"=>"data provinsi", "data"=>$data_provinsi);
+            return $this->respond($data, 200);
+
+
+        } else {
+            $data = array("status"=>"error", "judul"=>"data provinsi", "pesan"=>"Error operasi!");
+            return $this->respond($data, 422);
+        }
+
+
+    }
+
+    public function kabkota()
+    {
+
+        $provinsi_id = $this->request->getPost("provinsi_id");
+
+        $db = \Config\Database::connect();
+        $sql = "select kabupaten_id, kabupaten from tkabupaten where provinsi_id=".$provinsi_id;
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            
+            $result = $query->getResult();
+            $data_kabupaten = [];
+
+            foreach($result as $row) {
+
+                array_push($data_kabupaten, ["kabupaten_id"=>$row->kabupaten_id, "kabupaten"=>$row->kabupaten]);
+
+            }
+            $data = array("status"=>"ok", "judul"=>"data kabupaten", "data"=>$data_kabupaten);
+            return $this->respond($data, 200);
+
+
+        } else {
+            $data = array("status"=>"error", "judul"=>"data kabupaten", "pesan"=>"Error operasi!");
+            return $this->respond($data, 422);
+        }
+
+
+    }
 
     public function cek_email()
     {
@@ -95,6 +159,7 @@ class Pendaftaran extends BaseController
         $gereja = $this->request->getPost("txtNamaGereja");
         $alamat = $this->request->getPost("txtAlamatGereja");
         $distrik = $this->request->getPost("slcDistrik");
+        $kabupaten_id = $this->request->getPost("slcKabKota");
         $email_gereja = $this->request->getPost("txtEmailGereja");
         $kondisi_bangunan = $this->request->getPost("slcKondisi");
         $kepemilikan_bangunan = $this->request->getPost("slcKepemilikan");
@@ -125,9 +190,9 @@ class Pendaftaran extends BaseController
         $lng = $this->request->getPost("txtLong");
         
         // simpan ke tgereja 
-        $sql = "insert into tgereja (gereja_id, distrik, email, password, nama_gereja, alamat, kondisi_bangunan, kepemilikan, db_id, identity_link, path_sk, lat, lng, created_at, updated_at)";
+        $sql = "insert into tgereja (gereja_id, distrik, email, password, nama_gereja, alamat, kondisi_bangunan, kepemilikan, db_id, identity_link, path_sk, lat, lng, kabupaten_id, created_at, updated_at)";
         $sql = $sql . " values ('".$gereja_id."','".$distrik."','".$email_gereja."','".$pwd."','".$gereja."','".$alamat."','".$kondisi_bangunan."','".$kepemilikan_bangunan."','".$db_id."'";
-        $sql = $sql . ",'".$identity_link."','".$path_img_sk."','".$lat."','".$lng."','".$created_at."','".$updated_at."')";
+        $sql = $sql . ",'".$identity_link."','".$path_img_sk."','".$lat."','".$lng."',".$kabupaten_id.",'".$created_at."','".$updated_at."')";
 
         $db->query($sql);
 

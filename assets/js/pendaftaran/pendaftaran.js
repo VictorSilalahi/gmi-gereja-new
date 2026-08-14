@@ -11,6 +11,7 @@ let centerMarker = null;
 $(document).ready(function() {
 
     setMap();
+    setProvinsi();
 
 });
 
@@ -37,8 +38,6 @@ $(document).on("click", ".btn-daftar", function() {
     let email_pendeta = '';
     let nama_file = '';
 
-    // let latLang = centerMarker.getLatLng();
-    // console.log(latLang.lat, latLang.lng);
 
     if ($("#txtNamaGereja").val()=='') {
         pesan_error("Masukkan nama gereja");
@@ -47,6 +46,11 @@ $(document).on("click", ".btn-daftar", function() {
 
     if ($("#txtAlamatGereja").val()=='') {
         pesan_error("Masukkan alamat gereja");
+        return false;
+    }
+
+    if ($("#slcKabKota").val()=='') {
+        pesan_error("Pilih Kabupaten Kota");
         return false;
     }
 
@@ -159,6 +163,37 @@ $(document).on("change", "#fileSK", function() {
 
 });
 
+$(document).on("change", "#slcProvinsi", function() {
+
+    let provinsi_id = $("#slcProvinsi").val();
+
+    let base_url = $("#base_url").val()
+
+    let temp = ajax_post(base_url+"daftar/kabkota", {"provinsi_id": provinsi_id});
+
+
+    $("#slcKabKota").empty();
+
+    if (temp.status=='ok') {
+
+        if (temp.data.length!=0) {
+            
+            let opts = '';
+            for (let i=0; i<temp.data.length; i++) {
+
+                opts = opts + "<option value='"+temp.data[i]['kabupaten_id']+"'>"+temp.data[i]['kabupaten']+"</option>";
+
+            }
+
+            $("#slcKabKota").html(opts);
+
+        } else {
+
+            return true;
+        }
+    }
+
+});
 
 function isEmail(email) {
     var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -219,6 +254,39 @@ function cek_keberadaan_gereja(nama_gereja, distrik) {
 
 }
 
+
+function setProvinsi() {
+
+    let base_url = $("#base_url").val()
+    let temp = ajax_get(base_url+"daftar/provinsi", {});
+
+    if (temp.status=='ok') {
+
+        if (temp.data.length!=0) {
+            
+            let opts = '';
+            for (let i=0; i<temp.data.length; i++) {
+
+                opts = opts + "<option value='"+temp.data[i]['provinsi_id']+"'>"+temp.data[i]['provinsi']+"</option>";
+
+            }
+
+            $("#slcProvinsi").html(opts);
+
+        } else {
+
+            return true;
+        }
+    }
+
+}
+
+function setKabKota() {
+
+
+}
+
+
 function setMap() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(success, error_map);
@@ -227,22 +295,23 @@ function setMap() {
   }
 }
 
+
+
+
+
 function success(position) {
 
     lat = position.coords.latitude;
     long = position.coords.longitude;
 
     let map = L.map('map').setView([lat, long], 13);
+
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
-    // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    //     maxZoom: 19,
-    //     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    // }).addTo(map);
 
-    centerMarker = L.marker(map.getCenter()).addTo(map);
+    centerMarker = L.marker([lat, long]).addTo(map);
 
     // 2. Update marker position every time the map moves
     map.on('move', function() {

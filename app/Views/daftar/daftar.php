@@ -56,6 +56,20 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="slcProvinsi" class="col-sm-8 col-form-label">Provinsi</label>
+                            <div class="col-sm-10">
+                                <select id="slcProvinsi" name="slcProvinsi" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="slcKabKota" class="col-sm-8 col-form-label">Kabupaten Kota</label>
+                            <div class="col-sm-10">
+                                <select id="slcKabKota" name="slcKabKota" class="form-control"></select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="txtEmailGereja" class="col-sm-8 col-form-label">Email Resmi Gereja</label>
                             <div class="col-sm-10">
                                 <input type="email" class="form-control" name="txtEmailGereja" id="txtEmailGereja">
