@@ -1,6 +1,6 @@
 Perbaikan
 
-1. Perubahan label status keanggotaan "Tipe Jemaat" menjadi "Status Keanggotaan", "Kegiatan" menjadi "Program Kerja" (g)
+//1. Perubahan label status keanggotaan "Tipe Jemaat" menjadi "Status Keanggotaan", "Kegiatan" menjadi "Program Kerja" (g)
 2. Status Keanggoatan memiliki 2 pilihan yaitu "Lama" dan "Baru". Bila dipilih "Lama" maka dilanjutkan ke menu pengisian Nama Jemaat, bila dipilih "Baru" maka muncul combobox "Alasan" dengan 3 buah pilihan yaitu "Menikah", "Pindah Domisili", "Baptisan". (?)
 //3. Golongan darah ditambahkan "None" di posisi atas saat penambahan jemaat (g)
 4 Pembuatan menu "Jemaat Rangkap" pada menu "Jemaat" (g)

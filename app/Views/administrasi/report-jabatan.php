@@ -25,7 +25,7 @@
                 <header>
                     <nav class="navbar navbar-expand-lg bg-body-tertiary">
                         <div class="container-fluid">
-                          <a class="navbar-brand" href="../home">Home</a>
+                          <a class="navbar-brand" href="home">SIGMI</a>
                           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                           </button>
@@ -35,7 +35,7 @@
                               <a class="nav-link" href="<?php echo(base_url()); ?>sektor">Sektor</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>jabatan">Jabatan</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>organisasi">Organisasi</a>
-                              <a class="nav-link" href="<?php echo(base_url()); ?>kegiatan">Kegiatan</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>kegiatan">Program Kerja</a>
                               <a class="nav-link active" aria-current="page" href="<?php echo(base_url()); ?>report/sektor">Report</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>seting">Seting</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>logout"><span class="badge text-bg-danger">Logout</span></a>
