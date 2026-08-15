@@ -113,6 +113,7 @@
                                 <select class="form-control" name="slcKepemilikan" id="slcKepemilikan">
                                     <option value="Milik Sendiri">Milik Sendiri</option>
                                     <option value="Disewa">Disewa</option>
+                                    <option value="Hak Pakai">Hak Pakai</option>
                                 </select>
                             </div>
                         </div>
@@ -142,6 +143,13 @@
                             <label for="txtEmailPendeta" class="col-sm-8 col-form-label">Email</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="txtEmailPendeta" id="txtEmailPendeta">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="txtEmailPendeta" class="col-sm-8 col-form-label">Mobile Phone</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="txtMobilePhonePendeta" id="txtMobilePhonePendeta">
                             </div>
                         </div>
 

@@ -582,8 +582,8 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
             }
 
             var slcGolonganDarah ='';
-            if (data[i]['golongan_darah'] == '') {
-              slcGolonganDarah = "<select style='width:70px;'><option value='' selected></option><option value='A'>A</option><option value='B'>B</option><option value='AB'>AB</option><option value='O'>O</option></select>";
+            if (data[i]['golongan_darah'] == 'None') {
+              slcGolonganDarah = "<select style='width:70px;'><option value='None' selected>None</option><option value='A'>A</option><option value='B'>B</option><option value='AB'>AB</option><option value='O'>O</option></select>";
             }
             if (data[i]['golongan_darah'] == 'A') {
               slcGolonganDarah = "<select style='width:70px;'><option value=''></option><option value='A' selected>A</option><option value='B'>B</option><option value='AB'>AB</option><option value='O'>O</option></select>";
@@ -643,28 +643,37 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
 
             let slcPekerjaan = '';
             if (data[i]['pekerjaan'] == 'None') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None' selected>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='Guru Injil'>Guru Injil</option><option value='Pendeta'>Pendeta</option><option value='Buruh Harian Lepas'>Buruh Harian Lepas</option><option value='None' selected>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'ASN') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN' selected>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN' selected>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='Guru Injil'>Guru Injil</option><option value='Pendeta'>Pendeta</option><option value='Buruh Harian Lepas'>Buruh Harian Lepas</option><option value='None'>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'TNI-Polri') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri' selected>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri' selected>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='Guru Injil'>Guru Injil</option><option value='Pendeta'>Pendeta</option><option value='Buruh Harian Lepas'>Buruh Harian Lepas</option><option value='None'>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'Karyawan-Swasta') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta' selected>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta' selected>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='Guru Injil'>Guru Injil</option><option value='Pendeta'>Pendeta</option><option value='Buruh Harian Lepas'>Buruh Harian Lepas</option><option value='None'>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'Pedagang') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang' selected>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang' selected>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='Guru Injil'>Guru Injil</option><option value='Pendeta'>Pendeta</option><option value='Buruh Harian Lepas'>Buruh Harian Lepas</option><option value='None'>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'Wiraswasta') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta' selected>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta' selected>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='Guru Injil'>Guru Injil</option><option value='Pendeta'>Pendeta</option><option value='Buruh Harian Lepas'>Buruh Harian Lepas</option><option value='None'>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'Dokter') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter' selected>Dokter</option><option value='Petani'>Petani</option><option value='None'>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter' selected>Dokter</option><option value='Petani'>Petani</option><option value='Guru Injil'>Guru Injil</option><option value='Pendeta'>Pendeta</option><option value='Buruh Harian Lepas'>Buruh Harian Lepas</option><option value='None'>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'Petani') {
-              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani' selected>Petani</option><option value='None'>None</option></select>";
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani' selected>Petani</option><option value='Guru Injil'>Guru Injil</option><option value='Pendeta'>Pendeta</option><option value='Buruh Harian Lepas'>Buruh Harian Lepas</option><option value='None'>None</option></select>";
+            }
+            if (data[i]['pekerjaan'] == 'Guru Injil') {
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='Guru Injil' selected>Guru Injil</option><option value='Pendeta'>Pendeta</option><option value='Buruh Harian Lepas'>Buruh Harian Lepas</option><option value='None'>None</option></select>";
+            }
+            if (data[i]['pekerjaan'] == 'Pendeta') {
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='Guru Injil'>Guru Injil</option><option value='Pendeta' selected>Pendeta</option><option value='Buruh Harian Lepas'>Buruh Harian Lepas</option><option value='None'>None</option></select>";
+            }
+            if (data[i]['pekerjaan'] == 'Buruh Harian Lepas') {
+              slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='Guru Injil'>Guru Injil</option><option value='Pendeta'>Pendeta</option><option value='Buruh Harian Lepas' selected>Buruh Harian Lepas</option><option value='None'>None</option></select>";
             }
 
             if (data[i]['jk']==undefined) {
@@ -679,7 +688,7 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
             if (data[i]['tgl_wafat']===null || data[i]['tgl_wafat']==='') {
               isi = isi + "&nbsp;<button class='btn btn-info btn-simpan-perubahan-anggota'>Simpan</button>&nbsp;<button class='btn btn-danger btn-hapus-anggota'>Hapus</button></ul>";
             } else {
-              isi = isi + "[Meninggal Dunia]</ul>";
+              isi = isi + "[Meninggal Dunia]";
             }
             isi = isi + "</div></td></tr>";
           }
@@ -736,7 +745,7 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
             if (data[i]['tgl_wafat']===null || data[i]['tgl_wafat']==='' ) {
               isi = isi + "</div></td></tr>";
             } else {
-              isi = isi + "[Meninggal Dunia]</ul>";
+              isi = isi + "[Meninggal Dunia]</div>";
             }
           }
 

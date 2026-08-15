@@ -140,7 +140,7 @@ class Organisasicontroller extends BaseController
 
         $sql = "select tanggotaorganisasi.anggotaorganisasi_id, tanggotajemaat.nama, torganisasi.organisasi from tanggotaorganisasi, tanggotajemaat, torganisasi ";
         $sql = $sql . "where tanggotaorganisasi.anggotajemaat_id=tanggotajemaat.anggotajemaat_id and tanggotaorganisasi.organisasi_id=torganisasi.organisasi_id";
-        $sql = $sql . " group by torganisasi.organisasi";
+        $sql = $sql . " order by torganisasi.organisasi";
 
         // echo($sql);
 

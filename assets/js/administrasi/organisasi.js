@@ -173,6 +173,8 @@ function loadDataAnggotaOrganisasi() {
 
   var data = ajax_get(base_url+"organisasi/anggota", "");
 
+  console.log(data);
+  
   if (data.msg == "ok") {
     var isi_tabel = "";
     var no = 1;

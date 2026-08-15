@@ -207,6 +207,7 @@
                 <label for="slcGolonganDarah" class="col-form-label col-sm-1">Golongan Darah:</label>
                 <div class="col-sm-1">
                   <select id="slcGolonganDarah">
+                    <option value="None">None</option>
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="AB">AB</option>
@@ -273,6 +274,9 @@
                       <option value="Wiraswasta">Wiraswasta</option>
                       <option value="Dokter">Dokter</option>
                       <option value="Petani">Petani</option>
+                      <option value="Guru Injil">Guru Injil</option>
+                      <option value="Pendeta">Pendeta</option>
+                      <option value="Buruh Harian Lepas">Buruh Harian Lepas</option>
                       <option value="None">None</option>
                   </select>
                 </div>
@@ -407,6 +411,7 @@
                 <label for="slcGolonganDarahEdit" class="col-form-label col-sm-1">Golongan Darah:</label>
                 <div class="col-sm-1">
                   <select id="slcGolonganDarahEdit">
+                    <option value="None">None</option>
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="AB">AB</option>
@@ -476,6 +481,9 @@
                       <option value="Wiraswasta">Wiraswasta</option>
                       <option value="Dokter">Dokter</option>
                       <option value="Petani">Petani</option>
+                      <option value="Guru Injil">Guru Injil</option>
+                      <option value="Pendeta">Pendeta</option>
+                      <option value="Buruh Harian Lepas">Buruh Harian Lepas</option>
                       <option value="None">None</option>
                   </select>
                 </div>

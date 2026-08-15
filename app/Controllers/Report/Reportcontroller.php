@@ -50,7 +50,9 @@ class Reportcontroller extends BaseController
                         $sql = "select tanggal_sidi from tsidi where anggotajemaat_id=".$row2->anggotajemaat_id;
                         $query3 = $db->query($sql);
 
-                        if ($query3) {
+                        // print($sql);
+
+                        if ($query3->getNumRows()>0) {
 
                             $result3 = $query3->getRow();
 
@@ -64,7 +66,7 @@ class Reportcontroller extends BaseController
                         $sql = "select tanggal_menikah from tmenikah where anggotajemaat_id=".$row2->anggotajemaat_id;
                         $query3 = $db->query($sql);
 
-                        if ($query3) {
+                        if ($query3->getNumRows()>0) {
 
                             $result3 = $query3->getRow();
 
@@ -374,7 +376,7 @@ class Reportcontroller extends BaseController
 
         $query = $db->query($sql);
 
-        if ($query) {
+        if ($query->getNumRows()>0) {
 
             $result = $query->getResult();
 

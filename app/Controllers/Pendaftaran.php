@@ -179,6 +179,7 @@ class Pendaftaran extends BaseController
 
         $nama_pendeta = $this->request->getPost("txtNamaPendeta");
         $email_pendeta = $this->request->getPost("txtEmailPendeta");
+        $mobile_phone_pendeta = $this->request->getPost('txtMobilePhonePendeta');
 
         // pindahkan file ke folder
         $img_sk->move(ROOTPATH . 'public/uploads/sk', $new_img_sk);
@@ -197,7 +198,7 @@ class Pendaftaran extends BaseController
         $db->query($sql);
 
         // simpan ke tpendeta 
-        $sql = "insert into tpendeta (nama, email) values ('".$nama_pendeta."','".$email_pendeta."')";
+        $sql = "insert into tpendeta (nama, email, mobile_phone) values ('".$nama_pendeta."','".$email_pendeta."','".$mobile_phone_pendeta."')";
 
         $db->query($sql);
 
