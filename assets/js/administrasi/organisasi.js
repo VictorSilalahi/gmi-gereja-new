@@ -1,4 +1,5 @@
 import { ajax_get, ajax_post, check_token } from "../ajx.js";
+import { pesan_error } from "../pesan.js";
 
 
 let base_url = $("#base_url").val()+"api/intern/";
@@ -120,12 +121,14 @@ $(".btn-ok-tambah-anggota-organisasi").on("click", function() {
   if (confirm("Apakah akan menginput data anggota organisasi?")==true) {
     var nama = $("#txtNamaCalonAnggota").val();
     var organisasi_id = $("#slcOrganisasiForm").val();
+    var nama_organisasi = $("#slcOrganisasiForm option:selected").text();
     var jawab = ajax_post(base_url+"organisasi/anggota/add", {"nama":nama, "organisasi_id": organisasi_id });
 
+   
     if (jawab.msg=="ok") {
       loadDataAnggotaOrganisasi();
     } else {
-      alert(jawab.data);
+      pesan_error("Saudara/i "+nama+" telah masuk di dalam "+nama_organisasi);
     }
   
   }

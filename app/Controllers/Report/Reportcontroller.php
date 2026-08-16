@@ -502,7 +502,28 @@ class Reportcontroller extends BaseController
         $penuh = 0;
         $persiapan = 0;
 
-        $data_sektor = [];       
+        $data_sektor = [];     
+        
+        $jumlah_pekerjaan_ASN = 0;
+        $jumlah_pekerjaan_TNIPolri = 0;
+        $jumlah_pekerjaan_KaryawanSwasta = 0;
+        $jumlah_pekerjaan_Pedagang = 0;
+        $jumlah_pekerjaan_Wiraswasta = 0;
+        $jumlah_pekerjaan_Dokter = 0;
+        $jumlah_pekerjaan_Petani = 0;
+        $jumlah_pekerjaan_GuruInjil = 0;
+        $jumlah_pekerjaan_Pendeta = 0;
+        $jumlah_pekerjaan_BuruhHarianLepas = 0;
+        $jumlah_pekerjaan_None = 0;
+
+        $jumlah_pendidikan_None = 0;
+        $jumlah_pendidikan_SD = 0;
+        $jumlah_pendidikan_SMP = 0;
+        $jumlah_pendidikan_SMASMK = 0;
+        $jumlah_pendidikan_D3 = 0;
+        $jumlah_pendidikan_S1 = 0;
+        $jumlah_pendidikan_S2 = 0;
+        $jumlah_pendidikan_S3 = 0;
 
         $db = $this->set_db();
 
@@ -536,9 +557,7 @@ class Reportcontroller extends BaseController
         if ($query) {
 
             $result = $query->getRow();
-
             $jumlah_kk_tidak_aktif = $result->jumlah;
-
 
         } else {
 
@@ -558,9 +577,7 @@ class Reportcontroller extends BaseController
         if ($query) {
 
             $result = $query->getRow();
-
             $jumlah_anggota_kk_aktif = $result->jumlah;
-
 
         } else {
 
@@ -580,9 +597,7 @@ class Reportcontroller extends BaseController
         if ($query) {
 
             $result = $query->getRow();
-
             $jumlah_anggota_kk_tidak_aktif = $result->jumlah;
-
 
         } else {
 
@@ -608,10 +623,7 @@ class Reportcontroller extends BaseController
 
                 $tanggal_lahir = date_create($row->tanggal_lahir);
                 $tanggal_sekarang = Time::now();
-
                 $interval = date_diff($tanggal_lahir, $tanggal_sekarang);
-
-                // echo($interval->format('%y')."<br>");
 
                 // anak-anak
                 if ($interval->format('%y')<=12) {
@@ -654,7 +666,7 @@ class Reportcontroller extends BaseController
 
             foreach ($result as $row) {
 
-                if (is_null($row->tanggal_baptis) || $row->tanggal_baptis==='0000-00-00') {
+                if (is_null($row->tanggal_baptis) || $row->tanggal_baptis==='0000-00-00' || $row->tanggal_baptis==='') {
                     $persiapan = $persiapan + 1;
                 } else {
                     $penuh = $penuh + 1;
@@ -686,6 +698,167 @@ class Reportcontroller extends BaseController
 
         }
 
+        // sebaran pekerjaan
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='ASN' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pekerjaan_ASN = $result->jumlah;
+        }
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='TNI-Polri' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pekerjaan_TNIPolri = $result->jumlah;
+        }
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='Karyawan-Swasta' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pekerjaan_KaryawanSwasta = $result->jumlah;
+        }
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='Pedagang' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pekerjaan_Pedagang = $result->jumlah;
+        }
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='Wiraswasta' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pekerjaan_Wiraswasta = $result->jumlah;
+        }
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='Dokter' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pekerjaan_Dokter = $result->jumlah;
+        }
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='Petani' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pekerjaan_Petani = $result->jumlah;
+        }
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='Petani' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pekerjaan_Petani = $result->jumlah;
+        }
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='Guru-Injil' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pekerjaan_GuruInjil = $result->jumlah;
+        }
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='Pendeta' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pekerjaan_Pendeta = $result->jumlah;
+        }
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='Buruh-Harian-Lepas' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pekerjaan_BuruhHarianLepas = $result->jumlah;
+        }
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='None' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pekerjaan_None = $result->jumlah;
+        }
+
+        // sebaran pendidikan
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pendidikan_terakhir='SD' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pendidikan_SD = $result->jumlah;
+        }        
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pendidikan_terakhir='SMP' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pendidikan_SMP = $result->jumlah;
+        }        
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pendidikan_terakhir='SMA-SMK' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pendidikan_SMASMK = $result->jumlah;
+        }        
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pendidikan_terakhir='D3' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pendidikan_D3 = $result->jumlah;
+        }        
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pendidikan_terakhir='S1' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pendidikan_S1 = $result->jumlah;
+        }        
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pendidikan_terakhir='S2' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pendidikan_S2 = $result->jumlah;
+        }        
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pendidikan_terakhir='S3' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pendidikan_S3 = $result->jumlah;
+        }        
+
+        $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pendidikan_terakhir='None' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $jumlah_pendidikan_None = $result->jumlah;
+        }        
 
 
         array_push($data, 
@@ -709,7 +882,30 @@ class Reportcontroller extends BaseController
                     "penuh"=>$penuh,
                     "persiapan"=>$persiapan
                 ),
-                "data_sektor"=>$data_sektor
+                "data_sektor"=>$data_sektor,
+                "sebaran pekerjaan"=>array(
+                    "ASN"=>$jumlah_pekerjaan_ASN,
+                    "TNI-Polri"=>$jumlah_pekerjaan_TNIPolri,
+                    "Karyawan Swasta"=>$jumlah_pekerjaan_KaryawanSwasta,
+                    "Pedagang"=>$jumlah_pekerjaan_Pedagang,
+                    "Wiraswasta"=>$jumlah_pekerjaan_Wiraswasta,
+                    "Dokter"=>$jumlah_pekerjaan_Dokter,
+                    "Petani"=>$jumlah_pekerjaan_Petani,
+                    "Guru Injil"=>$jumlah_pekerjaan_GuruInjil,
+                    "Pendeta"=>$jumlah_pekerjaan_Pendeta,
+                    "Buruh Harian Lepas"=>$jumlah_pekerjaan_BuruhHarianLepas,
+                    "None"=>$jumlah_pekerjaan_None
+                ),
+                "sebaran pendidikan"=>array(
+                    "SD"=>$jumlah_pendidikan_SD,
+                    "SMP"=>$jumlah_pendidikan_SMP,
+                    "SMA-SMK"=>$jumlah_pendidikan_SMASMK,
+                    "D3"=>$jumlah_pendidikan_D3,
+                    "S1"=>$jumlah_pendidikan_S1,
+                    "S2"=>$jumlah_pendidikan_S2,
+                    "S3"=>$jumlah_pendidikan_S3,
+                    "None"=>$jumlah_pendidikan_None
+                )
             )
         );
 

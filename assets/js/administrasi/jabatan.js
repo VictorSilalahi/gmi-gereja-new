@@ -153,7 +153,6 @@ $(".btn-ok-tambah-pejabat").on("click", function() {
 
   var data = ajax_post(base_url+"jabatan/pejabat/add", { "nama": nama_pejabat, "jabatan_id": jabatan_id, "tanggal_pengangkatan": tgl_pengangkatan });
 
- 
   if (data.msg=='ok') {
     $("#txtNamaPejabat").val("");
     loadDataPejabat()

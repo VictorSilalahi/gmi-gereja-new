@@ -274,9 +274,9 @@
                       <option value="Wiraswasta">Wiraswasta</option>
                       <option value="Dokter">Dokter</option>
                       <option value="Petani">Petani</option>
-                      <option value="Guru Injil">Guru Injil</option>
+                      <option value="Guru-Injil">Guru Injil</option>
                       <option value="Pendeta">Pendeta</option>
-                      <option value="Buruh Harian Lepas">Buruh Harian Lepas</option>
+                      <option value="Buruh-Harian-Lepas">Buruh Harian Lepas</option>
                       <option value="None">None</option>
                   </select>
                 </div>
@@ -481,9 +481,9 @@
                       <option value="Wiraswasta">Wiraswasta</option>
                       <option value="Dokter">Dokter</option>
                       <option value="Petani">Petani</option>
-                      <option value="Guru Injil">Guru Injil</option>
+                      <option value="Guru-Injil">Guru Injil</option>
                       <option value="Pendeta">Pendeta</option>
-                      <option value="Buruh Harian Lepas">Buruh Harian Lepas</option>
+                      <option value="Buruh-Harian-Lepas">Buruh Harian Lepas</option>
                       <option value="None">None</option>
                   </select>
                 </div>

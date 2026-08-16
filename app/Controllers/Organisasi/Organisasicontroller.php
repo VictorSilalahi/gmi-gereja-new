@@ -192,17 +192,34 @@ class Organisasicontroller extends BaseController
 
             $result = $query->getRow();
 
-            $sql = "insert into tanggotaorganisasi (anggotajemaat_id, organisasi_id) values (".$result->anggotajemaat_id.",".$organisasi_id.")";
+            $sql = "select count(*) as jumlah from tanggotaorganisasi where anggotajemaat_id=".$result->anggotajemaat_id." and organisasi_id=".$organisasi_id;
 
-            $db->query($sql);
+            $res_jumlah = $db->query($sql);
 
-            // catat log
-            $this->catat_log($db, "tambah", "anggota-organisasi");
+            $row_jumlah = $res_jumlah->getRow();
 
-            return $this->respond([
-                    "msg"=>"ok", 
-                    "data"=>"data anggota organisasi berhasil diinput."
-            ]);  
+            if ($row_jumlah->jumlah==0) {
+
+                $sql = "insert into tanggotaorganisasi (anggotajemaat_id, organisasi_id) values (".$result->anggotajemaat_id.",".$organisasi_id.")";
+
+                $db->query($sql);
+
+                // catat log
+                $this->catat_log($db, "tambah", "anggota-organisasi");
+
+                return $this->respond([
+                        "msg"=>"ok", 
+                        "data"=>"data anggota organisasi berhasil diinput."
+                ]);  
+
+            } else {
+
+                return $this->respond([
+                    "status"=>422, 
+                    "pesan"=>"Error operasi!"
+                ]);
+
+            }
 
 
         }

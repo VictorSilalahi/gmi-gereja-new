@@ -9,7 +9,7 @@ $(document).ready(function () {
 
     var jawab = ajax_get(base_url+"report/statistik/getdata", {});
 
-    console.log(jawab.data);
+    // console.log(jawab.data);
 
     $.LoadingOverlay("show");
 
@@ -17,7 +17,7 @@ $(document).ready(function () {
         // jumlah
 
         // grafik utk tipe keanggotaan
-        const ctx_tipe_keanggotaan = document.getElementById('TipeKeanggotaan');
+        // const ctx_tipe_keanggotaan = document.getElementById('TipeKeanggotaan');
         const data_tipe_keanggotaan = jawab.data[0]['anggota'];
         const data_anggota_jemaat = jawab.data[0]['kk'];
 
@@ -27,24 +27,24 @@ $(document).ready(function () {
         $("#bgKK").text(Jiwa);
         $("#bgJiwa").text(KK);
         
-        new Chart(ctx_tipe_keanggotaan, {
-                type: 'pie',
-                data: {
-                labels: ['Aktif', 'Tidak Aktif'],
-                datasets: [{
-                    label: '#',
-                    data: [data_tipe_keanggotaan['jumlah anggota jemaat kk aktif'], data_tipe_keanggotaan['jumlah anggota jemaat kk tidak aktif']],
-                    borderWidth: 1
-                }]
-                },
-                options: {
-                scales: {
-                    y: {
-                    beginAtZero: true
-                    }
-                }
-                }
-        });
+        // new Chart(ctx_tipe_keanggotaan, {
+        //         type: 'pie',
+        //         data: {
+        //         labels: ['Aktif', 'Tidak Aktif'],
+        //         datasets: [{
+        //             label: '#',
+        //             data: [data_tipe_keanggotaan['jumlah anggota jemaat kk aktif'], data_tipe_keanggotaan['jumlah anggota jemaat kk tidak aktif']],
+        //             borderWidth: 1
+        //         }]
+        //         },
+        //         options: {
+        //         scales: {
+        //             y: {
+        //             beginAtZero: true
+        //             }
+        //         }
+        //         }
+        // });
 
         // grafik utk kelompok umur
         const ctx_kelompok_umur = document.getElementById('KelompokUmur');
@@ -69,7 +69,7 @@ $(document).ready(function () {
         });
 
         // grafik utk sifat keanggotaan
-        const ctx_sifat_keanggotaan = document.getElementById('SifatKeanggotaan');
+        const ctx_sifat_keanggotaan = document.getElementById('TipeKeanggotaan');
         const data_sifat_keanggotaan = jawab.data[0]['sifat keanggotaan'];
         new Chart(ctx_sifat_keanggotaan, {
                 type: 'pie',
@@ -118,8 +118,74 @@ $(document).ready(function () {
                 }
         });
 
+        // grafik sebaran pekerjaan
+        const ctx_sebaran_pekerjaan = document.getElementById('Pekerjaan');
+        const data_sebaran_pekerjaan = jawab.data[0]['sebaran pekerjaan'];
+        var kolom_graph = [];
+        var nilai = [];
+
+        for (const key in data_sebaran_pekerjaan) {
+            if (data_sebaran_pekerjaan.hasOwnProperty(key)) { // Ensures the key belongs to the object itself
+                kolom_graph.push(key);
+                nilai.push(data_sebaran_pekerjaan[key]);
+            }            
+        }
+        new Chart(ctx_sebaran_pekerjaan, {
+                type: 'pie',
+                data: {
+                labels: kolom_graph,
+                datasets: [{
+                    label: '#',
+                    data: nilai,
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+                }
+        });
+
+
+        // grafik sebaran pendidikan
+        const ctx_sebaran_pendidikan = document.getElementById('SebaranPendidikan');
+        const data_sebaran_pendidikan = jawab.data[0]['sebaran pendidikan'];
+        var kolom_graph = [];
+        var nilai = [];
+
+        for (const key in data_sebaran_pendidikan) {
+            if (data_sebaran_pendidikan.hasOwnProperty(key)) { // Ensures the key belongs to the object itself
+                kolom_graph.push(key);
+                nilai.push(data_sebaran_pendidikan[key]);
+            }            
+        }
+        new Chart(ctx_sebaran_pendidikan, {
+                type: 'pie',
+                data: {
+                labels: kolom_graph,
+                datasets: [{
+                    label: '#',
+                    data: nilai,
+                    borderWidth: 1
+                }]
+                },
+                options: {
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+                }
+        });
+
 
     }
+
+
+
 
     $.LoadingOverlay("hide");
 

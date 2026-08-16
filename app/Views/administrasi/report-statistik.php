@@ -140,21 +140,38 @@
                       </div>
                     </div>                  
                   </div>
+
                   <div class="col-6">
                     <div class="card">
                       <div class="card-header">
-                        Grafik Sifat Keanggotaan
+                        Grafik Sebaran Pekerjaan
                       </div>
                       <div class="card-body">
                         <div style="height: 500px;">
-                          <canvas id="SifatKeanggotaan"></canvas>
+                          <canvas id="Pekerjaan"></canvas>
+                        </div>
+                      </div>
+                    </div>                  
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <div class="col-6">
+                    <div class="card">
+                      <div class="card-header">
+                        Grafik Sebaran Pendidikan
+                      </div>
+                      <div class="card-body">
+                        <div style="height: 500px;">
+                          <canvas id="SebaranPendidikan"></canvas>
                         </div>
                       </div>
                     </div>                  
                   </div>
 
-                </div>
 
+                </div>
 
             </div>
             <div class="col-1">
