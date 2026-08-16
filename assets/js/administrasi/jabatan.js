@@ -149,14 +149,20 @@ $(".btn-ok-tambah-pejabat").on("click", function() {
   var nama_pejabat = $("#txtNamaPejabat").val();
   var jabatan_id = $("#slcJabatanForm").val();
   var tgl_pengangkatan = $("#tglPengangkatan").val();
+  let jabatan = $("#slcJabatanForm option:selected").text();
 
   var data = ajax_post(base_url+"jabatan/pejabat/add", { "nama": nama_pejabat, "jabatan_id": jabatan_id, "tanggal_pengangkatan": tgl_pengangkatan });
 
+ 
   if (data.msg=='ok') {
     $("#txtNamaPejabat").val("");
     loadDataPejabat()
   
-  }  
+  } else {
+
+    pesan_error("Saudara/i "+nama_pejabat+" sudah menjabat di "+jabatan);
+
+  }
 
 });
 

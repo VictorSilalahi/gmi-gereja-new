@@ -192,34 +192,55 @@ class Jabatancontroller extends BaseController
 
             $result = $query->getRow();
 
-            $sql = "insert into tpejabat (anggotajemaat_id, jabatan_id) values (".$result->anggotajemaat_id.",".$jabatan_id.")";
+            $sql = "select count(*) as jumlah from tpejabat where anggotajemaat_id=".$result->anggotajemaat_id." and jabatan_id=".$jabatan_id;
 
-            $db->query($sql);
+            $res_jumlah = $db->query($sql);
 
-            $sql = "select jabatan from tjabatan where jabatan_id=".$jabatan_id;
+            $row_jumlah = $res_jumlah->getRow();
 
-            $query = $db->query($sql);
+            if ($row_jumlah->jumlah==0) {
 
-            if ($query) {
-
-                $result = $query->getRow();
-
-                $jabatan = $result->jabatan;
-
-                // masukkan ke history jabatan
-                $sql = "insert into thistorypejabat (nama, jabatan_id, tanggal_pengangkatan) values ('".$nama."','".$jabatan_id."','".$tanggal_pengangkatan."')";
+                $sql = "insert into tpejabat (anggotajemaat_id, jabatan_id) values (".$result->anggotajemaat_id.",".$jabatan_id.")";
 
                 $db->query($sql);
 
-                // catat log
-                $this->catat_log($db, "tambah", "pejabat");
+                $sql = "select jabatan from tjabatan where jabatan_id=".$jabatan_id;
+
+                $query = $db->query($sql);
+
+                if ($query) {
+
+                    $result = $query->getRow();
+
+                    $jabatan = $result->jabatan;
+
+                    // masukkan ke history jabatan
+                    $sql = "insert into thistorypejabat (nama, jabatan_id, tanggal_pengangkatan) values ('".$nama."','".$jabatan_id."','".$tanggal_pengangkatan."')";
+
+                    $db->query($sql);
+
+                    // catat log
+                    $this->catat_log($db, "tambah", "pejabat");
+
+                    return $this->respond([
+                        "msg"=>"ok", 
+                        "data"=>"Data pejabat berhasil ditambah."
+                    ]);
+
+                }
+
+
+            } else {
 
                 return $this->respond([
-                    "msg"=>"ok", 
-                    "data"=>"Data pejabat berhasil ditambah."
+                    "status"=>422, 
+                    "pesan"=>"Error operasi!"
                 ]);
 
+
             }
+
+
 
 
         }
