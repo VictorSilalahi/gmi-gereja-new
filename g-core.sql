@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2026 at 04:14 PM
--- Server version: 10.4.27-MariaDB
+-- Generation Time: Aug 16, 2026 at 12:30 PM
+-- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `tanggotajemaat` (
   `anggotajemaat_id` bigint(20) UNSIGNED NOT NULL,
+  `super_id` varchar(100) DEFAULT NULL,
   `jemaat_id` int(11) NOT NULL,
   `nama` varchar(100) NOT NULL,
   `jk` varchar(10) NOT NULL,
@@ -61,7 +62,6 @@ CREATE TABLE `tanggotaorganisasi` (
 CREATE TABLE `thistoryapp` (
   `historyapp_id` bigint(20) UNSIGNED NOT NULL,
   `operasi` varchar(50) NOT NULL,
-  `tujuan` varchar(20) NOT NULL,
   `tanggal_operasi` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -299,13 +299,13 @@ ALTER TABLE `twafat`
 -- AUTO_INCREMENT for table `tanggotajemaat`
 --
 ALTER TABLE `tanggotajemaat`
-  MODIFY `anggotajemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `anggotajemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tanggotaorganisasi`
 --
 ALTER TABLE `tanggotaorganisasi`
-  MODIFY `anggotaorganisasi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `anggotaorganisasi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `thistoryapp`
@@ -323,19 +323,19 @@ ALTER TABLE `thistorypejabat`
 -- AUTO_INCREMENT for table `tjabatan`
 --
 ALTER TABLE `tjabatan`
-  MODIFY `jabatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `jabatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tjemaat`
 --
 ALTER TABLE `tjemaat`
-  MODIFY `jemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `jemaat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tkegiatan`
 --
 ALTER TABLE `tkegiatan`
-  MODIFY `kegiatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `kegiatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tkeluar`
@@ -347,31 +347,31 @@ ALTER TABLE `tkeluar`
 -- AUTO_INCREMENT for table `tmenikah`
 --
 ALTER TABLE `tmenikah`
-  MODIFY `menikah_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `menikah_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `torganisasi`
 --
 ALTER TABLE `torganisasi`
-  MODIFY `organisasi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `organisasi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tpejabat`
 --
 ALTER TABLE `tpejabat`
-  MODIFY `pejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `pejabat_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tsektor`
 --
 ALTER TABLE `tsektor`
-  MODIFY `sektor_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `sektor_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tsidi`
 --
 ALTER TABLE `tsidi`
-  MODIFY `sidi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `sidi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `twafat`
