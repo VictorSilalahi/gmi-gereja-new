@@ -12,8 +12,12 @@ let kab_kota_per_provinsi = [];
 
 $(document).ready(function() {
 
+    $.LoadingOverlay("show");
+
     setMap();
     setProvinsi();
+
+    $.LoadingOverlay("hide");
 
 });
 
