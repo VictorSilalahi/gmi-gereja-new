@@ -678,7 +678,8 @@ class Reportcontroller extends BaseController
 
 
         // jemaat per sektor
-        $sql = "select count(*) as jumlah, tsektor.no_sektor, tsektor.nama_sektor from tanggotajemaat, tjemaat, tsektor where tanggotajemaat.jemaat_id=tjemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id group by tsektor.nama_sektor and tanggotajemaat.anggotajemaat_id not in (select twafat.anggotajemaat_id from twafat)";
+        // $sql = "select count(*) as jumlah, tsektor.no_sektor, tsektor.nama_sektor from tanggotajemaat, tjemaat, tsektor where tanggotajemaat.jemaat_id=tjemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id group by tsektor.nama_sektor and tanggotajemaat.anggotajemaat_id not in (select twafat.anggotajemaat_id from twafat)";
+        $sql = "select count(*) as jumlah, tsektor.no_sektor, tsektor.nama_sektor from tanggotajemaat, tjemaat, tsektor where tanggotajemaat.jemaat_id=tjemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id and tanggotajemaat.anggotajemaat_id not in (select twafat.anggotajemaat_id from twafat)";
 
         $query = $db->query($sql);
 
