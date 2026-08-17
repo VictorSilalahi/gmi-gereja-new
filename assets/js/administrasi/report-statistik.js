@@ -27,24 +27,6 @@ $(document).ready(function () {
         $("#bgKK").text(Jiwa);
         $("#bgJiwa").text(KK);
         
-        // new Chart(ctx_tipe_keanggotaan, {
-        //         type: 'pie',
-        //         data: {
-        //         labels: ['Aktif', 'Tidak Aktif'],
-        //         datasets: [{
-        //             label: '#',
-        //             data: [data_tipe_keanggotaan['jumlah anggota jemaat kk aktif'], data_tipe_keanggotaan['jumlah anggota jemaat kk tidak aktif']],
-        //             borderWidth: 1
-        //         }]
-        //         },
-        //         options: {
-        //         scales: {
-        //             y: {
-        //             beginAtZero: true
-        //             }
-        //         }
-        //         }
-        // });
 
         // grafik utk kelompok umur
         const ctx_kelompok_umur = document.getElementById('KelompokUmur');
@@ -52,12 +34,12 @@ $(document).ready(function () {
         new Chart(ctx_kelompok_umur, {
                 type: 'pie',
                 data: {
-                labels: ['Anak-anak', 'Remaja', 'Pemuda', 'Dewasa', 'Lansia'],
-                datasets: [{
-                    label: '#',
-                    data: [data_kelompok_umur['anak-anak'], data_kelompok_umur['remaja'], data_kelompok_umur['pemuda'], data_kelompok_umur['dewasa'], data_kelompok_umur['lansia']],
-                    borderWidth: 1
-                }]
+                    labels: ['Anak-anak', 'Remaja', 'Pemuda', 'Dewasa', 'Lansia'],
+                    datasets: [{
+                        label: '#',
+                        data: [data_kelompok_umur['anak-anak'], data_kelompok_umur['remaja'], data_kelompok_umur['pemuda'], data_kelompok_umur['dewasa'], data_kelompok_umur['lansia']],
+                        borderWidth: 1
+                    }]
                 },
                 options: {
                 scales: {
@@ -68,27 +50,6 @@ $(document).ready(function () {
                 }
         });
 
-        // grafik utk sifat keanggotaan
-        const ctx_sifat_keanggotaan = document.getElementById('TipeKeanggotaan');
-        const data_sifat_keanggotaan = jawab.data[0]['sifat keanggotaan'];
-        new Chart(ctx_sifat_keanggotaan, {
-                type: 'pie',
-                data: {
-                labels: ['Penuh', 'Persiapan'],
-                datasets: [{
-                    label: '#',
-                    data: [data_sifat_keanggotaan['penuh'], data_sifat_keanggotaan['persiapan']],
-                    borderWidth: 1
-                }]
-                },
-                options: {
-                scales: {
-                    y: {
-                    beginAtZero: true
-                    }
-                }
-            }
-        });
 
         // grafik jemaat per sektor
         const ctx_per_sektor = document.getElementById('JemaatPerSektor');
@@ -102,12 +63,12 @@ $(document).ready(function () {
         new Chart(ctx_per_sektor, {
                 type: 'pie',
                 data: {
-                labels: kolom_graph,
-                datasets: [{
-                    label: '#',
-                    data: nilai,
-                    borderWidth: 1
-                }]
+                    labels: kolom_graph,
+                    datasets: [{
+                        label: '#',
+                        data: nilai,
+                        borderWidth: 1
+                    }]
                 },
                 options: {
                 scales: {
@@ -117,6 +78,30 @@ $(document).ready(function () {
                 }
                 }
         });
+
+
+        // grafik utk sifat keanggotaan
+        const ctx_sifat_keanggotaan = document.getElementById('TipeKeanggotaan');
+        const data_sifat_keanggotaan = jawab.data[0]['sifat keanggotaan'];
+        new Chart(ctx_sifat_keanggotaan, {
+                type: 'pie',
+                data: {
+                    labels: ['Penuh', 'Persiapan'],
+                    datasets: [{
+                        label: '#',
+                        data: [data_sifat_keanggotaan['penuh'], data_sifat_keanggotaan['persiapan']],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                scales: {
+                    y: {
+                    beginAtZero: true
+                    }
+                }
+            }
+        });
+
 
         // grafik sebaran pekerjaan
         const ctx_sebaran_pekerjaan = document.getElementById('Pekerjaan');
@@ -133,12 +118,12 @@ $(document).ready(function () {
         new Chart(ctx_sebaran_pekerjaan, {
                 type: 'pie',
                 data: {
-                labels: kolom_graph,
-                datasets: [{
-                    label: '#',
-                    data: nilai,
-                    borderWidth: 1
-                }]
+                    labels: kolom_graph,
+                    datasets: [{
+                            label: '#',
+                            data: nilai,
+                            borderWidth: 1
+                        }]
                 },
                 options: {
                 scales: {
@@ -162,26 +147,30 @@ $(document).ready(function () {
                 nilai.push(data_sebaran_pendidikan[key]);
             }            
         }
+
         new Chart(ctx_sebaran_pendidikan, {
                 type: 'pie',
                 data: {
-                labels: kolom_graph,
-                datasets: [{
-                    label: '#',
-                    data: nilai,
-                    borderWidth: 1
-                }]
+                    labels: kolom_graph,
+                    datasets: [{
+                        label: '#',
+                        data: nilai,
+                        borderWidth: 1
+                    }]
                 },
                 options: {
-                scales: {
-                    y: {
-                    beginAtZero: true
+                    scales: {
+                        y: {
+                        beginAtZero: true
+                        }
                     }
-                }
                 }
         });
 
 
+    } else {
+
+        
     }
 
 

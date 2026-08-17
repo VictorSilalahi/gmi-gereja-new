@@ -131,7 +131,7 @@ class Reportcontroller extends BaseController
 
         $db = $this->set_db();
 
-        $sql = "select tanggotajemaat.nama, tjabatan.jabatan from tpejabat, tjabatan, tanggotajemaat where tpejabat.anggotajemaat_id=tanggotajemaat.anggotajemaat_id and tpejabat.jabatan_id=tjabatan.jabatan_id group by tjabatan.jabatan";
+        $sql = "select tanggotajemaat.nama, tjabatan.jabatan from tpejabat, tjabatan, tanggotajemaat where tpejabat.anggotajemaat_id=tanggotajemaat.anggotajemaat_id and tpejabat.jabatan_id=tjabatan.jabatan_id";
         $query = $db->query($sql);
 
         if ($query) {
