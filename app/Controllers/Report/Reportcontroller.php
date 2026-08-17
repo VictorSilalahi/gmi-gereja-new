@@ -685,24 +685,37 @@ class Reportcontroller extends BaseController
         // $sql = "select count(*) as jumlah, tsektor.no_sektor, tsektor.nama_sektor from tanggotajemaat, tjemaat, tsektor where tanggotajemaat.jemaat_id=tjemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id group by tsektor.nama_sektor and tanggotajemaat.anggotajemaat_id not in (select twafat.anggotajemaat_id from twafat)";
         $sql = "select count(*) as jumlah, tsektor.nama_sektor from tanggotajemaat, tjemaat, tsektor where tanggotajemaat.jemaat_id=tjemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id and tanggotajemaat.anggotajemaat_id not in (select twafat.anggotajemaat_id from twafat)";
 
+        $sql = "select tsektor.no_sektor, tsektor.nama_sektor from tsektor";
+
         $query = $db->query($sql);
 
- 
-        if ($query) {
+        if ($query->getNumRows()>0) {
 
             $result = $query->getResult();
 
             foreach($result as $row) {
-                array_push($data_sektor, array(
-                    "sektor"=>$row->nama_sektor,
-                    "jumlah"=>$row->jumlah
 
-                ));
+                $sql = "select count(*) as jumlah from tanggotajemaat, tjemaat, tsektor where tanggotajemaat.jemaat_id=tjemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id and tsektor.no_sektor='".$row->no_sektor."'";
+
+                $query2 = $db->query($sql);
+
+                if ($query2) {
+
+                    $result2 = $query2->getRow();
+
+                    array_push($data_sektor, array(
+                        "sektor"=>$row->nama_sektor,
+                        "jumlah"=>$result2->jumlah
+
+                    ));
+
+
+                }
+
             }
-
-
         }
 
+ 
         // sebaran pekerjaan
         $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.pekerjaan='ASN' and anggotajemaat_id not in (select anggotajemaat_id from twafat)";
         $query = $db->query($sql);
