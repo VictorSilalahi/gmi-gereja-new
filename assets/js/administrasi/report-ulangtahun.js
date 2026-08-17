@@ -55,6 +55,10 @@ $(document).on("click", ".btn-prosesdata", function () {
 
         $(".btn-print").show();
 
+    } else {
+
+        $.LoadingOverlay("hide");
+
     }
 
 });
