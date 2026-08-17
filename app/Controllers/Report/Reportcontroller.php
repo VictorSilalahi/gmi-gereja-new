@@ -410,6 +410,10 @@ class Reportcontroller extends BaseController
 
         } else {
 
+            return $this->respond([
+                "msg"=>"error", 
+                "data"=>"Error Operation"
+            ]);
             // log_message('error', $e->getMessage());
             // return $this->respond([
             //     "msg"=>"error", 
