@@ -170,6 +170,8 @@ $(document).ready(function () {
 
     } else {
 
+        $.LoadingOverlay("hide");
+        return false;
         
     }
 
