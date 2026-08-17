@@ -116,11 +116,11 @@ class Reportcontroller extends BaseController
         
         } else {
 
-            log_message('error', $e->getMessage());
-            return $this->respond([
-                "msg"=>"error", 
-                "pesan"=>$e->getMessage()
-            ]);
+            // log_message('error', $e->getMessage());
+            // return $this->respond([
+            //     "msg"=>"error", 
+            //     "pesan"=>$e->getMessage()
+            // ]);
 
         }
 
@@ -156,11 +156,11 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            log_message('error', $e->getMessage());
-            return $this->respond([
-                "msg"=>"error", 
-                "pesan"=>$e->getMessage()
-            ]);
+            // log_message('error', $e->getMessage());
+            // return $this->respond([
+            //     "msg"=>"error", 
+            //     "pesan"=>$e->getMessage()
+            // ]);
 
 
         }
@@ -233,11 +233,11 @@ class Reportcontroller extends BaseController
         
         } else {
 
-            log_message('error', $e->getMessage());
-            return $this->respond([
-                "msg"=>"error", 
-                "pesan"=>$e->getMessage()
-            ]);
+            // log_message('error', $e->getMessage());
+            // return $this->respond([
+            //     "msg"=>"error", 
+            //     "pesan"=>$e->getMessage()
+            // ]);
 
         }
 
@@ -350,11 +350,11 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            log_message('error', $e->getMessage());
-            return $this->respond([
-                "msg"=>"error", 
-                "pesan"=>$e->getMessage()
-            ]);
+            // log_message('error', $e->getMessage());
+            // return $this->respond([
+            //     "msg"=>"error", 
+            //     "pesan"=>$e->getMessage()
+            // ]);
 
 
         }
@@ -410,11 +410,11 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            log_message('error', $e->getMessage());
-            return $this->respond([
-                "msg"=>"error", 
-                "pesan"=>$e->getMessage()
-            ]);
+            // log_message('error', $e->getMessage());
+            // return $this->respond([
+            //     "msg"=>"error", 
+            //     "pesan"=>$e->getMessage()
+            // ]);
         
         }
     
@@ -470,11 +470,11 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            log_message('error', $e->getMessage());
-            return $this->respond([
-                "msg"=>"error", 
-                "pesan"=>$e->getMessage()
-            ]);
+            // log_message('error', $e->getMessage());
+            // return $this->respond([
+            //     "msg"=>"error", 
+            //     "pesan"=>$e->getMessage()
+            // ]);
 
         }
     
@@ -541,11 +541,11 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            log_message('error', $e->getMessage());
-            return $this->respond([
-                "msg"=>"error", 
-                "pesan"=>$e->getMessage()
-            ]);
+            // log_message('error', $e->getMessage());
+            // return $this->respond([
+            //     "msg"=>"error", 
+            //     "pesan"=>$e->getMessage()
+            // ]);
 
         }
 
@@ -561,11 +561,11 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            log_message('error', $e->getMessage());
-            return $this->respond([
-                "msg"=>"error", 
-                "pesan"=>$e->getMessage()
-            ]);
+            // log_message('error', $e->getMessage());
+            // return $this->respond([
+            //     "msg"=>"error", 
+            //     "pesan"=>$e->getMessage()
+            // ]);
 
         }
 
@@ -581,11 +581,11 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            log_message('error', $e->getMessage());
-            return $this->respond([
-                "msg"=>"error", 
-                "pesan"=>$e->getMessage()
-            ]);
+            // log_message('error', $e->getMessage());
+            // return $this->respond([
+            //     "msg"=>"error", 
+            //     "pesan"=>$e->getMessage()
+            // ]);
 
         }
 
@@ -601,11 +601,11 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            log_message('error', $e->getMessage());
-            return $this->respond([
-                "msg"=>"error", 
-                "pesan"=>$e->getMessage()
-            ]);
+            // log_message('error', $e->getMessage());
+            // return $this->respond([
+            //     "msg"=>"error", 
+            //     "pesan"=>$e->getMessage()
+            // ]);
 
         }
 
