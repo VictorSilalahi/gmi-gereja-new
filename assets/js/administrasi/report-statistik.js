@@ -16,13 +16,16 @@ $(document).ready(function () {
     if (jawab.msg=='ok') {
         // jumlah
 
+        // console.log(jawab.data);
+
         // grafik utk tipe keanggotaan
         // const ctx_tipe_keanggotaan = document.getElementById('TipeKeanggotaan');
         const data_tipe_keanggotaan = jawab.data[0]['anggota'];
         const data_anggota_jemaat = jawab.data[0]['kk'];
 
-        let KK = data_tipe_keanggotaan['jumlah anggota jemaat kk aktif'] + data_tipe_keanggotaan['jumlah anggota jemaat kk tidak aktif'];
-        let Jiwa = data_anggota_jemaat['jumlah kk jemaat aktif'] + data_anggota_jemaat['jumlah kk jemaat tidak aktif'];
+        let KK = parseInt(data_tipe_keanggotaan['jumlah anggota jemaat kk aktif'],10) + parseInt(data_tipe_keanggotaan['jumlah anggota jemaat kk tidak aktif'],10);
+        let Jiwa = parseInt(data_anggota_jemaat['jumlah kk jemaat aktif'],10) + parseInt(data_anggota_jemaat['jumlah kk jemaat tidak aktif'],10);
+
 
         $("#bgKK").text(Jiwa);
         $("#bgJiwa").text(KK);
