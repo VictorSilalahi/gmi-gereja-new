@@ -46,6 +46,7 @@
                               <a class="nav-link" href="<?php echo(base_url()); ?>jabatan">Jabatan</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>organisasi">Organisasi</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>kegiatan">Program Kerja</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>kebaktian">Kebaktian</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>report/sektor">Report</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>seting">Seting</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>logout"><span class="badge text-bg-danger">Logout</span></a>
@@ -167,22 +168,14 @@
                 <hr>
                 
                 <label for="txtMobilePhone" class="col-form-label col-sm-1">Mobile Phone:</label>
-                <div class="col-sm-1">
+                <div class="col-sm-2">
                   <input type="text" class="form-control" id="txtMobilePhone">
                 </div>
 
 
                 <label for="txtAlamat" class="col-form-label col-sm-1">Alamat:</label>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                   <input type="text" class="form-control" id="txtAlamat">
-                </div>
-
-                <label for="slcStatus" class="col-form-label col-sm-1">Status Keanggotaan:</label>
-                <div class="col-sm-2">
-                  <select class="form-select" aria-label="Default select example" id="slcStatus">
-                      <option value="Aktif">Aktif</option>
-                      <option value="Tidak Aktif">Tidak Aktif</option>
-                  </select>
                 </div>
 
 
@@ -222,20 +215,24 @@
                 
                 <hr>
 
-                <label for="txtTanggalBaptis" class="col-form-label col-sm-1">Baptis:</label>
-                <div class="col-sm-2">
-                  <input type="date" class="form-control" id="txtTanggalBaptis">
+                <div class="col-sm-3">
+                  <input type="checkbox" id="chkBaptis" name="newsletter" value="no">
+                  <label for="chkBaptis" class="col-form-label col-sm-4">Baptis</label>
+                  <input type="date" id="txtTanggalBaptis" class="col-form-label col-sm-3" />
                 </div>
 
-                <label for="txtTanggalSidi" class="col-form-label col-sm-1">Sidi:</label>
-                <div class="col-sm-2">
-                  <input type="date" class="form-control" id="txtTanggalSidi">
+                <div class="col-sm-3">
+                  <input type="checkbox" id="chkSidi" name="newsletter" value="no">
+                  <label for="chkSidi" class="col-form-label col-sm-4">Sidi</label>
+                  <input type="date" id="txtTanggalSidi" class="col-form-label col-sm-3" />
                 </div>
 
                 <label for="txtTanggalMenikah" class="col-form-label col-sm-1">Menikah:</label>
                 <div class="col-sm-2">
                   <input type="date" class="form-control" id="txtTanggalMenikah">
                 </div>
+
+                <hr>
 
                 <label for="slcPosisi" class="col-form-label col-sm-1">Posisi:</label>
                 <div class="col-sm-2">
@@ -248,11 +245,11 @@
                   </select>
                 </div>
 
-                <hr>
 
                 <label for="slcPendidikanTerakhir" class="col-form-label col-sm-1">Pendidikan Terakhir:</label>
                 <div class="col-sm-2">
                   <select class="form-select" aria-label="Default select example" id="slcPendidikanTerakhir">
+                      <option value="None">None</option>
                       <option value="SD">SD</option>
                       <option value="SMP">SMP</option>
                       <option value="SMA-SMK">SMA-SMK</option>
@@ -260,13 +257,13 @@
                       <option value="S1">S1</option>
                       <option value="S2">S2</option>
                       <option value="S3">S3</option>
-                      <option value="None">None</option>
                   </select>
                 </div>
                 
                 <label for="slcPekerjaan" class="col-form-label col-sm-1">Pekerjaan:</label>
                 <div class="col-sm-2">
                   <select class="form-select" aria-label="Default select example" id="slcPekerjaan">
+                      <option value="None">None</option>
                       <option value="ASN">ASN</option>
                       <option value="TNI-Polri">TNI-Polri</option>
                       <option value="Karyawan-Swasta">Karyawan Swasta</option>
@@ -277,7 +274,6 @@
                       <option value="Guru-Injil">Guru Injil</option>
                       <option value="Pendeta">Pendeta</option>
                       <option value="Buruh-Harian-Lepas">Buruh Harian Lepas</option>
-                      <option value="None">None</option>
                   </select>
                 </div>
 

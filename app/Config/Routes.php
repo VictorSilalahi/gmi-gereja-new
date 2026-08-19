@@ -29,6 +29,7 @@ $routes->get('/sektor', 'Administrasi::sektor');
 $routes->get('/jabatan', 'Administrasi::jabatan');
 $routes->get('/organisasi', 'Administrasi::organisasi');
 $routes->get('/kegiatan', 'Administrasi::kegiatan');
+$routes->get('/kebaktian', 'Administrasi::kebaktian');
 $routes->get('/seting', 'Administrasi::seting');
 $routes->get('/report/jabatan', 'Administrasi::report_jabatan');
 $routes->get('/report/kelompokumur', 'Administrasi::report_kelompok_umur');

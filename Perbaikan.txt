@@ -1,5 +1,5 @@
 1. harus tersedia 2 jenis baptisan. (a) Baptisan anak (b) Baptisan dewasa. Bila dipilih Baptisan dewasa, maka option Sidi harus otomatis di check juga.
-2. Status Aktif dihilangkan 
+2. Status Aktif dihilangkan saat penambahan jemaat
 3. Harus ditambah menu Kebaktian dimana posisinya berada di antara Program Kerja dan Report. Menu ini berfungsi untuk menambah data kebaktian 
    di gereja local tersebut. Data yg diinput adalah : 
 	- memilih jenis ibadah (ibadah I, II, III, IV)

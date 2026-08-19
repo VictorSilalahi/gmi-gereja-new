@@ -23,7 +23,15 @@ class Reportcontroller extends BaseController
 
         $db = $this->set_db();
 
-        $sql = "select jemaat_id, nik, status_keanggotaan, alamat, mobile_phone from tjemaat where sektor_id=".$sektor_id;
+        if ($sektor_id==='') {
+
+            $sql = "select jemaat_id, nik, status_keanggotaan, alamat, mobile_phone from tjemaat";
+
+        } else {
+
+            $sql = "select jemaat_id, nik, status_keanggotaan, alamat, mobile_phone from tjemaat where sektor_id=".$sektor_id;
+        
+        }
         $query = $db->query($sql);
 
         if ($query) {
