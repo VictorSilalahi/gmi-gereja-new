@@ -79,19 +79,25 @@ $(document).on("click", ".btn-tambah-calon-anggota", function() {
   var jk = $("#slcJenisKelamin").val();
   var gol_darah = $("#slcGolonganDarah").val();
   var tgl_lahir = '';
+  var check_baptis = null;
+  var td_baptis = '';
   var tgl_baptis = '';
+  var check_sidi = null;
+  var td_sidi = '';
   var tgl_sidi = '';
   var tgl_menikah = '';
   var pendidikan_terakhir = $("#slcPendidikanTerakhir").val();
   var pekerjaan = $("#slcPekerjaan").val();
     
-
   if ($("#txtTanggalLahir").val()) {
     tgl_lahir = set_tanggal_indo($("#txtTanggalLahir").val());
   }
+  check_baptis = $("#chkBaptis").prop("checked");
+  console.log(check_baptis);
   if ($("#txtTanggalBaptis").val()) {
     tgl_baptis = set_tanggal_indo($("#txtTanggalBaptis").val());
   }
+  check_sidi = $("#chkSidi").prop("checked");
   if ($("#txtTanggalSidi").val()) {
     tgl_sidi = set_tanggal_indo($("#txtTanggalSidi").val());
   }

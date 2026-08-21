@@ -208,28 +208,28 @@
                   </select>
                 </div>
 
-                <label for="txtTanggalLahir" class="col-form-label col-sm-1">Lahir:</label>
-                <div class="col-sm-2">
-                  <input type="date" class="form-control" id="txtTanggalLahir">
-                </div>
-                
                 <hr>
 
-                <div class="col-sm-3">
-                  <input type="checkbox" id="chkBaptis" name="newsletter" value="no">
-                  <label for="chkBaptis" class="col-form-label col-sm-4">Baptis</label>
-                  <input type="date" id="txtTanggalBaptis" class="col-form-label col-sm-3" />
+                <label for="txtTanggalLahir" class="col-form-label col-sm-1">Lahir:</label>
+                <div class="col-sm-2">
+                  <input type="date" id="txtTanggalLahir">
                 </div>
 
-                <div class="col-sm-3">
-                  <input type="checkbox" id="chkSidi" name="newsletter" value="no">
-                  <label for="chkSidi" class="col-form-label col-sm-4">Sidi</label>
-                  <input type="date" id="txtTanggalSidi" class="col-form-label col-sm-3" />
+                <div class="col-sm-2">
+                  <input type="checkbox" id="chkBaptis" value="no">
+                  <label for="chkBaptis" class="col-form-label col-sm-2">Baptis</label>
+                  <input type="date" id="txtTanggalBaptis" />
+                </div>
+
+                <div class="col-sm-2">
+                  <input type="checkbox" id="chkSidi" value="no">
+                  <label for="chkSidi" class="col-form-label col-sm-2">Sidi</label>
+                  <input type="date" id="txtTanggalSidi" />
                 </div>
 
                 <label for="txtTanggalMenikah" class="col-form-label col-sm-1">Menikah:</label>
-                <div class="col-sm-2">
-                  <input type="date" class="form-control" id="txtTanggalMenikah">
+                <div class="col-sm-3">
+                  <input type="date" id="txtTanggalMenikah">
                 </div>
 
                 <hr>
@@ -298,12 +298,20 @@
             <table class="table table-striped" id="tblDaftarCalonJemaat">
               <thead>
                 <tr>
+                  <th colspan='3'></th>
+                  <th colspan='2'>Kelahiran</th>
+                  <th colspan='2'>Baptis</th>
+                  <th colspan='7'></th>
+                </tr>
+                <tr>
                   <th scope="col">Nama</th>
                   <th scope="col">JK</th>
                   <th scope="col">Gol Darah</th>
                   <th scope="col">Lahir</th>
-                  <th scope="col">Baptis</th>
-                  <th scope="col">Sidi</th>
+                  <th scope="col">Check Lahir</th>
+                  <th scope="col">Check Baptis</th>
+                  <th scope="col">Tanggal Baptis</th>
+                  <th scope="col">Tanggal Sidi</th>
                   <th scope="col">Menikah</th>
                   <th scope="col">Wafat</th>
                   <th scope="col">Posisi</th>
