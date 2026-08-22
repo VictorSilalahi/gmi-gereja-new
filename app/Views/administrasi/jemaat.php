@@ -298,9 +298,9 @@
             <table class="table table-striped" id="tblDaftarCalonJemaat">
               <thead>
                 <tr>
-                  <th colspan='3'></th>
-                  <th colspan='2'>Kelahiran</th>
-                  <th colspan='2'>Baptis</th>
+                  <th colspan='4'></th>
+                  <th colspan='2' style="text-align: center;">Baptis</th>
+                  <th colspan='2' style="text-align: center;">Sidi</th>
                   <th colspan='7'></th>
                 </tr>
                 <tr>
@@ -308,9 +308,9 @@
                   <th scope="col">JK</th>
                   <th scope="col">Gol Darah</th>
                   <th scope="col">Lahir</th>
-                  <th scope="col">Check Lahir</th>
-                  <th scope="col">Check Baptis</th>
+                  <th scope="col">Telah Dibaptis</th>
                   <th scope="col">Tanggal Baptis</th>
+                  <th scope="col">Telah Sidi</th>
                   <th scope="col">Tanggal Sidi</th>
                   <th scope="col">Menikah</th>
                   <th scope="col">Wafat</th>

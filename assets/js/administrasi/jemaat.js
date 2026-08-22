@@ -74,6 +74,11 @@ $(document).on("click", ".btn-tambah-calon-anggota", function() {
     return false;
   }
 
+  if ($("#txtTanggalLahir").val()=='') {
+    alert("Masukkan tanggal lahir!");
+    $("#txtTanggalLahir").focus();
+    return false;
+  }
 
   var nama = $("#txtNama").val();
   var jk = $("#slcJenisKelamin").val();
@@ -89,27 +94,39 @@ $(document).on("click", ".btn-tambah-calon-anggota", function() {
   var pendidikan_terakhir = $("#slcPendidikanTerakhir").val();
   var pekerjaan = $("#slcPekerjaan").val();
     
-  if ($("#txtTanggalLahir").val()) {
+  if ($("#txtTanggalLahir").val()!=='') {
     tgl_lahir = set_tanggal_indo($("#txtTanggalLahir").val());
   }
   check_baptis = $("#chkBaptis").prop("checked");
-  console.log(check_baptis);
-  if ($("#txtTanggalBaptis").val()) {
+  if (check_baptis===true) {
+    td_baptis = "<td>&#9989;</td>"
+  } else {
+    td_baptis = "<td></td>";
+  }
+  if ($("#txtTanggalBaptis").val()!=='') {
     tgl_baptis = set_tanggal_indo($("#txtTanggalBaptis").val());
   }
   check_sidi = $("#chkSidi").prop("checked");
-  if ($("#txtTanggalSidi").val()) {
+  if (check_sidi===true) {
+    td_sidi = "<td>&#9989;</td>";
+  } else {
+    td_sidi = "<td></td>";
+  }
+  if ($("#txtTanggalSidi").val()!=='') {
     tgl_sidi = set_tanggal_indo($("#txtTanggalSidi").val());
   }
-  if ($("#txtTanggalMenikah").val()) {
+  if ($("#txtTanggalMenikah").val()!=='') {
     tgl_menikah = set_tanggal_indo($("#txtTanggalMenikah").val());
   }
 
   var posisi_keluarga = $("#slcPosisi").val();
 
-  var row_to_add = "<tr><td>"+nama+"</td><td>"+jk+"</td><td>"+gol_darah+"</td><td>"+tgl_lahir+"</td><td>"+tgl_baptis+"</td><td>"+tgl_sidi+"</td><td>"+tgl_menikah+"</td><td></td><td>"+posisi_keluarga+"</td><td>"+pendidikan_terakhir+"</td><td>"+pekerjaan+"</td><td><button class='btn btn-danger btn-hapus-calon'>Hapus</button></td></tr>";
+  var row_to_add = "<tr><td>"+nama+"</td><td>"+jk+"</td><td>"+gol_darah+"</td><td>"+tgl_lahir+"</td>"+td_baptis+"<td>"+tgl_baptis+"</td>"+td_sidi+"<td>"+tgl_sidi+"</td><td>"+tgl_menikah+"</td><td></td><td>"+posisi_keluarga+"</td><td>"+pendidikan_terakhir+"</td><td>"+pekerjaan+"</td><td><button class='btn btn-danger btn-hapus-calon'>Hapus</button></td></tr>";
   $("#tblDaftarCalonJemaat tbody").append(row_to_add);
+
   $("#txtNama").val("");
+  $("#chkBaptis").prop("checked", false);
+  $("#chkSidi").prop("checked", false);
   $("#txtTanggalLahir").val("");
   $("#txtTanggalBaptis").val("");
   $("#txtTanggalSidi").val("");
@@ -176,25 +193,29 @@ $(document).on("click", "#btnOKJemaat", function () {
 
     var temp = '';
 
-    if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(2)").text()) {
-      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(3)").text();
-      tgl_lahir = set_tanggal_database(temp);
-    }
+    temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(3)").text();
+    tgl_lahir = set_tanggal_database(temp);
+
+
     if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(3)").text()) {
-      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(4)").text();
+      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(5)").text();
       tgl_baptis = set_tanggal_database(temp);
     }
+
     if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(4)").text()) {
-      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(5)").text();
+      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(7)").text();
       tgl_sidi = set_tanggal_database(temp);
     }
+
     if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(5)").text()) {
-      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(6)").text();
+      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(8)").text();
       tgl_menikah = set_tanggal_database(temp);
     }
-    var posisi = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(8)").text();
-    var pendidikan_terakhir = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(9)").text();
-    var pekerjaan = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(10)").text();
+
+
+    var posisi = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(10)").text();
+    var pendidikan_terakhir = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(11)").text();
+    var pekerjaan = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(12)").text();
 
     daftar.push({"nama": nama, "jk": jk, "gol_darah": gol_darah, "tgl_lahir": tgl_lahir, "tgl_baptis": tgl_baptis, "tgl_sidi": tgl_sidi, "tgl_menikah": tgl_menikah, "posisi": posisi, "pendidikan_terakhir": pendidikan_terakhir, "pekerjaan": pekerjaan});
 
