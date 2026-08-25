@@ -53,12 +53,14 @@ $routes->post('/api/intern/sektor/add', 'Sektor\Sektorcontroller::sektor_add');
 // Jemaat
 $routes->get('/api/intern/jemaat/sektor', 'Jemaat\Jemaatcontroller::jemaat_per_sektor');
 $routes->post('/api/intern/jemaat/add', 'Jemaat\Jemaatcontroller::jemaat_add');
+$routes->post('/api/intern/jemaat/del', 'Jemaat\Jemaatcontroller::jemaat_del');
 $routes->get('/api/intern/jemaat/anggota', 'Jemaat\Jemaatcontroller::jemaat_anggota');
 $routes->post('/api/intern/jemaat/anggota/add', 'Jemaat\Jemaatcontroller::jemaat_anggota_add');
 $routes->post('/api/intern/jemaat/anggota/del', 'Jemaat\Jemaatcontroller::jemaat_anggota_del');
 $routes->post('/api/intern/jemaat/anggota/savechange', 'Jemaat\Jemaatcontroller::jemaat_anggota_ubah_simpan');
 $routes->get('/api/intern/jemaat/anggota/all', 'Jemaat\Jemaatcontroller::jemaat_anggota_all');
 $routes->get('/api/intern/jemaat/nik', 'Jemaat\Jemaatcontroller::jemaat_nik');
+$routes->post('/api/intern/jemaat/nik/change', 'Jemaat\Jemaatcontroller::jemaat_nik_ubah_simpan');
 
 // Jabatan
 $routes->get('/api/intern/jabatan/all', 'Jabatan\Jabatancontroller::jabatan_all');

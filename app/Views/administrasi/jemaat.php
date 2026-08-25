@@ -218,13 +218,13 @@
                 <div class="col-sm-2">
                   <input type="checkbox" id="chkBaptis" value="no">
                   <label for="chkBaptis" class="col-form-label col-sm-2">Baptis</label>
-                  <input type="date" id="txtTanggalBaptis" />
+                  <input type="date" id="txtTanggalBaptis" disabled />
                 </div>
 
                 <div class="col-sm-2">
                   <input type="checkbox" id="chkSidi" value="no">
                   <label for="chkSidi" class="col-form-label col-sm-2">Sidi</label>
-                  <input type="date" id="txtTanggalSidi" />
+                  <input type="date" id="txtTanggalSidi" disabled />
                 </div>
 
                 <label for="txtTanggalMenikah" class="col-form-label col-sm-1">Menikah:</label>
@@ -508,14 +508,22 @@
               <table class="table" id="tblDaftarCalonJemaatEdit">
                 <thead>
                   <tr>
+                    <th colspan='4'></th>
+                    <th colspan='2' style="text-align: center;">Baptis</th>
+                    <th colspan='2' style="text-align: center;">Sidi</th>
+                    <th colspan='7'></th>
+                  </tr>
+                  <tr>
                     <th scope="col">Nama</th>
                     <th scope="col">JK</th>
                     <th scope="col">Gol Darah</th>
-                    <th scope="col">Tanggal Lahir</th>
+                    <th scope="col">Lahir</th>
+                    <th scope="col">Telah Dibaptis</th>
                     <th scope="col">Tanggal Baptis</th>
+                    <th scope="col">Telah Sidi</th>
                     <th scope="col">Tanggal Sidi</th>
-                    <th scope="col">Tanggal Menikah</th>
-                    <th scope="col">Tanggal Wafat</th>
+                    <th scope="col">Menikah</th>
+                    <th scope="col">Wafat</th>
                     <th scope="col">Posisi</th>
                     <th scope="col">Pend.Terakhir</th>
                     <th scope="col">Pekerjaan</th>

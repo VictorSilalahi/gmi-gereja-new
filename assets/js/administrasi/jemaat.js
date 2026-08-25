@@ -126,13 +126,33 @@ $(document).on("click", ".btn-tambah-calon-anggota", function() {
 
   $("#txtNama").val("");
   $("#chkBaptis").prop("checked", false);
+  $("#txtTanggalBaptis").prop("disabled", true);
   $("#chkSidi").prop("checked", false);
+  $("#txtTanggalSidi").prop("disabled", true);
   $("#txtTanggalLahir").val("");
   $("#txtTanggalBaptis").val("");
   $("#txtTanggalSidi").val("");
   $("#txtTanggalMenikah").val("");
   $("#txtNama").focus();
 
+});
+
+$(document).on("change", "#chkBaptis", function() {
+
+    if ($("#chkBaptis").is(':checked')) {
+        $("#txtTanggalBaptis").prop("disabled", false);
+    } else {
+        $("#txtTanggalBaptis").prop("disabled", true);
+    }
+});
+
+$(document).on("change", "#chkSidi", function() {
+
+    if ($("#chkSidi").is(':checked')) {
+        $("#txtTanggalSidi").prop("disabled", false);
+    } else {
+        $("#txtTanggalSidi").prop("disabled", true);
+    }
 });
 
 $(document).on("click", "#btnOKJemaat", function () {
@@ -173,19 +193,22 @@ $(document).on("click", "#btnOKJemaat", function () {
   // var tanggal_terdaftar = $("#txtTanggalTerdaftar").val();
   var mobile_phone = $("#txtMobilePhone").val();
   var alamat = $("#txtAlamat").val();
-  var status_keanggotaan = $("#slcStatus").val();
+  // var status_keanggotaan = $("#slcStatus").val();
   var sektor_id = $("#slcSektorForm").val();
 
   var daftar = [];
-  var nama = '';
-  var gol_darah = '';
-  var jk = '';
-  var tgl_lahir = '';
-  var tgl_baptis = '';
-  var tgl_sidi = '';
-  var tgl_menikah = '';
 
   for (var i=0; i<$("#tblDaftarCalonJemaat tbody tr").length; i++) {
+
+    var nama = '';
+    var gol_darah = '';
+    var jk = '';
+    var tgl_lahir = '';
+    var chk_baptis = false;
+    var tgl_baptis = '';
+    var chk_sidi = false;
+    var tgl_sidi = '';
+    var tgl_menikah = '';
 
     nama = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(0)").text();
     jk = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(1)").text();
@@ -193,36 +216,45 @@ $(document).on("click", "#btnOKJemaat", function () {
 
     var temp = '';
 
-    temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(3)").text();
-    tgl_lahir = set_tanggal_database(temp);
-
-
     if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(3)").text()) {
+      temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(3)").text();
+      tgl_lahir = set_tanggal_database(temp);
+    }
+
+    if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(4)").text()) {
+      chk_baptis = true;
+    }
+
+    if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(5)").text()) {
       temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(5)").text();
       tgl_baptis = set_tanggal_database(temp);
     }
 
-    if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(4)").text()) {
+    if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(6)").text()) {
+      chk_sidi = true;
+    }
+
+    if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(7)").text()) {
       temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(7)").text();
       tgl_sidi = set_tanggal_database(temp);
     }
 
-    if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(5)").text()) {
+    if ($("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(8)").text()) {
       temp = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(8)").text();
       tgl_menikah = set_tanggal_database(temp);
     }
-
 
     var posisi = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(10)").text();
     var pendidikan_terakhir = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(11)").text();
     var pekerjaan = $("#tblDaftarCalonJemaat tbody tr:eq("+i+") td:eq(12)").text();
 
-    daftar.push({"nama": nama, "jk": jk, "gol_darah": gol_darah, "tgl_lahir": tgl_lahir, "tgl_baptis": tgl_baptis, "tgl_sidi": tgl_sidi, "tgl_menikah": tgl_menikah, "posisi": posisi, "pendidikan_terakhir": pendidikan_terakhir, "pekerjaan": pekerjaan});
+    daftar.push({"nama": nama, "jk": jk, "gol_darah": gol_darah,"tgl_lahir": tgl_lahir, "chk_baptis": chk_baptis, "tgl_baptis": tgl_baptis,  "chk_sidi": chk_sidi, "tgl_sidi": tgl_sidi, "tgl_menikah": tgl_menikah, "posisi": posisi, "pendidikan_terakhir": pendidikan_terakhir, "pekerjaan": pekerjaan});
 
+    
   }
 
-  // console.log(daftar);
-  var jawab = ajax_post(base_url+"jemaat/add", { "nik": nik, "mobile_phone": mobile_phone, "alamat": alamat, "status_keanggotaan": status_keanggotaan, "sektor_id": sektor_id, "daftar": daftar });
+  console.log(daftar);
+  var jawab = ajax_post(base_url+"jemaat/add", { "nik": nik, "mobile_phone": mobile_phone, "alamat": alamat, "sektor_id": sektor_id, "daftar": daftar });
 
   if (jawab.msg == "error") {
     pesan_error("Data NIK sudah ada!");
@@ -291,6 +323,8 @@ $(document).on("click", ".btn-tambah-calon-anggota-edit", function() {
 
 $(document).on("click", "#btnEditJemaatNIK", function() {
 
+  let base_url = $("#base_url").val()+"api/intern/";
+
   if ($("#txtNIKAwalEdit").val()=='') {
     alert("Masukkan nomor NIK Awal. Pilih Sektor!");
     $("#txtNIKAwalEdit").focus();
@@ -318,11 +352,10 @@ $(document).on("click", "#btnEditJemaatNIK", function() {
 
   var NIK = $("#txtNIKAwalEdit").val() + "-" + $("#txtNIKAkhirEdit").val();
   var alamat = $("#txtAlamatEdit").val();
-  var status_keanggotaan = $("#slcStatusEdit").val();
   var mobile_phone = $("#txtMobilePhoneEdit").val();
   var jemaat_id = $("#txtJemaatEdit").val();
 
-  var jawab = ajax_post("jemaat/nik/change", { "NIK": NIK, "mobile_phone": mobile_phone, "alamat": alamat, "status_keanggotaan": status_keanggotaan, "jemaat_id": jemaat_id });
+  var jawab = ajax_post(base_url+"jemaat/nik/change", { "NIK": NIK, "mobile_phone": mobile_phone, "alamat": alamat, "jemaat_id": jemaat_id });
   
   if (jawab.msg=="ok") {
     $("#txtNIKAkhirEdit").val("");
@@ -344,12 +377,13 @@ $(document).on("click", ".btn-hapus-calon", function () {
 
 $(document).on("click", ".btn-hapus-jemaat", function () {
   
+  var base_url = $("#base_url").val()+"api/intern/";
   var jemaat_id = $(this).parent().parent().parent().attr("id");
   var sektor_id = $("#slcSektor").val();
   
   const ask = confirm("Hapus data jemaat ini?"); 
   if (ask) {
-    var jawab = ajax_post("jemaat/del", { "jemaat_id": jemaat_id });
+    var jawab = ajax_post(base_url+"jemaat/del", { "jemaat_id": jemaat_id });
     if (jawab['msg']=='ok') {
       $(this).parent().parent().parent().remove();
       loadDataJemaat(sektor_id);
@@ -549,7 +583,6 @@ function loadDataUmum(jemaat_id) {
       var nik_lengkap = data_jemaat['nik'];
       var alamat = data_jemaat['alamat'];
       var mobile_phone = data_jemaat['mobile_phone'];
-      var status_keanggotaan = data_jemaat['status_keanggotaan'];
       var jemaat_id = data_jemaat['jemaat_id'];
 
       var nik = nik_lengkap.split("-");
@@ -557,7 +590,6 @@ function loadDataUmum(jemaat_id) {
       $("#txtNIKAkhirEdit").val(nik[1]);
       $("#txtAlamatEdit").val(alamat);
       $("#txtMobilePhoneEdit").val(mobile_phone);
-      $("#slcStatusEdit").val(status_keanggotaan);
       $("#txtJemaatEdit").val(jemaat_id);
       $("#editJemaatNIK").modal("show");
 
@@ -571,7 +603,7 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
 
     var jawab = ajax_get(base_url+"jemaat/anggota", { "jemaat_id": jemaat_id });
     
-    console.log(jenis);
+    // console.log(jenis);
 
     if (jenis!=="show") {
         if (jawab["msg"]=="ok") {
@@ -583,7 +615,9 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
 
           for (var i=0; i<data.length; i++) {
             var tgl_lahir = "...";
+            var chk_baptis = "";
             var tgl_baptis = "...";
+            var chk_sidi = "";
             var tgl_sidi = "...";
             var tgl_menikah = "...";
             var tgl_wafat = "...";
@@ -592,8 +626,20 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
               tgl_lahir = set_tanggal(data[i]['tgl_lahir']);
             }
 
+            if (data[i]['chk_baptis']==true) {
+              chk_baptis = "<input type='checkbox' name='chk_baptis' checked>";
+            } else {
+              chk_baptis = "<input type='checkbox' name='chk_baptis'>";
+            }
+
             if (data[i]['tgl_baptis']) {
               tgl_baptis = set_tanggal(data[i]['tgl_baptis']);
+            }
+
+            if (data[i]['chk_sidi']==true) {
+              chk_sidi = "<input type='checkbox' name='chk_sidi' checked>";
+            } else {
+              chk_sidi = "<input type='checkbox' name='chk_sidi'>";
             }
 
             if (data[i]['tgl_sidi']) {
@@ -704,12 +750,12 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
             }
 
             if (data[i]['jk']==undefined) {
-              isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td><select><option></option><option value='L'>L</option><option value='P'>P</option></select></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
+              isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td><select><option></option><option value='L'>L</option><option value='P'>P</option></select></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"'></td><td>"+chk_baptis+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"'></td><td>"+chk_sidi+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
             } else {
               if (data[i]['jk']=='L') {
-                isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td><select><option value='L' selected>L</option><option value='P'>P</option></selec></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
+                isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td><select><option value='L' selected>L</option><option value='P'>P</option></selec></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"'></td><td>"+chk_baptis+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"'></td><td>"+chk_sidi+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
               } else {
-                isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td><select><option value='L'>L</option><option value='P' selected>P</option></selec></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
+                isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td><select><option value='L'>L</option><option value='P' selected>P</option></selec></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"'></td><td>"+chk_baptis+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"'></td><td>"+chk_sidi+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
               }
             }
             if (data[i]['tgl_wafat']===null || data[i]['tgl_wafat']==='') {
@@ -752,15 +798,15 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
               tgl_lahir = set_tanggal(data[i]['tgl_lahir']);
             }
 
-            if (data[i]['tgl_baptis']) {
+            if (data[i]['tgl_baptis']!=='0000-00-00' && data[i]['tgl_baptis']!=='') {
               tgl_baptis = set_tanggal(data[i]['tgl_baptis']);
             }
 
-            if (data[i]['tgl_sidi']) {
+            if (data[i]['tgl_sidi']!=='0000-00-00' && data[i]['tgl_sidi']!=='') {
               tgl_sidi = set_tanggal(data[i]['tgl_sidi']);
             }
             
-            if (data[i]['tgl_menikah']) {
+            if (data[i]['tgl_menikah']!=='0000-00-00' && data[i]['tgl_menikah']!=='') {
               tgl_menikah = set_tanggal(data[i]['tgl_menikah']);
             }
 
