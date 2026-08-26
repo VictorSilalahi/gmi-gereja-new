@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2026 at 06:51 AM
+-- Generation Time: Aug 26, 2026 at 04:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -73,7 +73,7 @@ CREATE TABLE `tgereja` (
 --
 
 INSERT INTO `tgereja` (`gereja_id`, `distrik`, `email`, `password`, `nama_gereja`, `alamat`, `kabupaten_id`, `lat`, `lng`, `kondisi_bangunan`, `kepemilikan`, `db_id`, `identity_link`, `path_sk`, `created_at`, `updated_at`) VALUES
-('e2946a7f-fc77-459b-82de-d6c544529f4e', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah', 1077, '3.543855', '98.600521', 'Permanen', 'Milik Sendiri', 'g-dnja1q', 'NFe1YNSUiblB', 'public/uploads/sk/1787650212_8cd89eb81abf9d9839d5.jpg', '2026-08-25', '2026-08-25');
+('e2946a7f-fc77-459b-82de-d6c544529f4e', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah', 1077, '3.543855', '98.600521', 'Permanen', 'Milik Sendiri', 'g-f9kyfz', 'NFe1YNSUiblB', 'public/uploads/sk/1787650212_8cd89eb81abf9d9839d5.jpg', '2026-08-25', '2026-08-25');
 
 -- --------------------------------------------------------
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2026 at 06:50 AM
+-- Generation Time: Aug 26, 2026 at 04:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `g-dnja1q`
+-- Database: `g-f9kyfz`
 --
 
 -- --------------------------------------------------------
@@ -92,7 +92,12 @@ CREATE TABLE `tdatakebaktian` (
 
 INSERT INTO `tdatakebaktian` (`datakebaktian_id`, `kebaktian_id`, `no_ibadah`, `kehadiran`, `persembahan`) VALUES
 (1, 1, 'Ibadah I', 20, 1000000),
-(2, 1, 'Ibadah II', 40, 500000);
+(2, 1, 'Ibadah II', 40, 500000),
+(10, 21, 'Ibadah I', 1, 10),
+(11, 21, 'Ibadah II', 2, 20),
+(12, 21, 'Ibadah III', 3, 30),
+(13, 21, 'Ibadah IV', 4, 40),
+(14, 21, 'Ibadah V', 5, 50);
 
 -- --------------------------------------------------------
 
@@ -225,7 +230,7 @@ CREATE TABLE `tkebaktian` (
 
 INSERT INTO `tkebaktian` (`kebaktian_id`, `tanggal`) VALUES
 (1, '2026-08-23'),
-(3, '2026-08-16');
+(21, '2026-08-30');
 
 -- --------------------------------------------------------
 
@@ -494,7 +499,7 @@ ALTER TABLE `tanggotaorganisasi`
 -- AUTO_INCREMENT for table `tdatakebaktian`
 --
 ALTER TABLE `tdatakebaktian`
-  MODIFY `datakebaktian_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `datakebaktian_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `thistoryapp`
@@ -524,7 +529,7 @@ ALTER TABLE `tjemaat`
 -- AUTO_INCREMENT for table `tkebaktian`
 --
 ALTER TABLE `tkebaktian`
-  MODIFY `kebaktian_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `kebaktian_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tkegiatan`
