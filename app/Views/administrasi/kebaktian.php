@@ -106,7 +106,6 @@
                   <table class="table" id="tblInputKebaktian">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Sesi Ibadah</th>
                         <th scope="col">Jumlah Kehadiran</th>
                         <th scope="col">Jumlah Persembahan</th>

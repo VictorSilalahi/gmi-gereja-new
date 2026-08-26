@@ -1,5 +1,5 @@
 import { ajax_get, ajax_post, check_token } from "../ajx.js";
-import { set_tanggal, set_tanggal_indo } from "../format.js";
+import { set_tanggal, set_tanggal_database, set_tanggal_indo } from "../format.js";
 
 let base_url = $("#base_url").val()+"api/intern/"
 
@@ -27,6 +27,8 @@ $(document).on("click", ".btn-tambah-data-kebaktian", function() {
 
 $(document).on("click", "#btnOKKebaktian", function() {
 
+  let base_url = $("#base_url").val()+"api/intern/";
+
   let ask = confirm("Input data kebaktian minggu?");
 
   let data = [];
@@ -47,10 +49,16 @@ $(document).on("click", "#btnOKKebaktian", function() {
 
   }
 
-  data['tanggal'] = $("#txtTanggalMinggu").text();
+  data['tanggal'] = set_tanggal_database($("#txtTanggalMinggu").text());
   data['kebaktian'] = kebaktian;
   
-  
+  let jawab = ajax_post(base_url+"kebaktian/add", {"tanggal": data['tanggal'], "data": data['kebaktian']});
+
+  if (jawab.msg=='ok') {
+
+    loadKebaktianBulanIni();
+
+  }
 
 });
 
@@ -84,6 +92,7 @@ function loadKebaktianBulanIni() {
   }
 
   $("#tblKebaktian tbody").html(str);
+  $("#AddKebaktian").modal("hide");
 
 }
 

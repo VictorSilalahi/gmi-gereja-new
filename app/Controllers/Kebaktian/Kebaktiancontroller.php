@@ -105,6 +105,37 @@ class Kebaktiancontroller extends BaseController
     }
 
 
+    public function kebaktian_add()
+    {
+
+        $tanggal = $this->request->getPost("tanggal");
+        $data = $this->request->getPost("data");
+
+        $sql = "insert into tkebaktian (tanggal) values ('".$tanggal."')";
+
+        $db = $this->set_db();
+        
+        $query = $db->query($sql);
+
+        $kebaktian_id = $db->insertID();
+
+        // print_r($data);
+        foreach($data as $d) {
+            // print_r($d['sesi_kebaktian']);
+            $sql = "insert into tdatakebaktian (kebaktian_id, no_ibadah, kehadiran, persembahan) values (".$kebaktian_id.",'".$d['sesi_kebaktian']."',".$d['kehadiran'].",".$d['persembahan'].")";
+            // echo($sql);
+            $db->query($sql);
+
+        }
+
+        return $this->respond([
+            "msg"=>"ok", 
+            "data"=>""
+        ]);
+
+
+
+    }
     
     public function set_db()
     {
