@@ -62,7 +62,7 @@ $routes->get('/api/intern/jemaat/anggota/all', 'Jemaat\Jemaatcontroller::jemaat_
 $routes->get('/api/intern/jemaat/nik', 'Jemaat\Jemaatcontroller::jemaat_nik');
 $routes->post('/api/intern/jemaat/nik/change', 'Jemaat\Jemaatcontroller::jemaat_nik_ubah_simpan');
 
-// Jabatan
+// Jabatan/Pelayanan
 $routes->get('/api/intern/jabatan/all', 'Jabatan\Jabatancontroller::jabatan_all');
 $routes->post('/api/intern/jabatan/add', 'Jabatan\Jabatancontroller::jabatan_add');
 $routes->post('/api/intern/jabatan/change', 'Jabatan\Jabatancontroller::jabatan_change');
@@ -84,6 +84,9 @@ $routes->post('/api/intern/organisasi/anggota/del', 'Organisasi\Organisasicontro
 $routes->get('/api/intern/kegiatan/all', 'Kegiatan\Kegiatancontroller::kegiatan_all');
 $routes->post('/api/intern/kegiatan/add', 'Kegiatan\Kegiatancontroller::kegiatan_add');
 $routes->post('/api/intern/kegiatan/del', 'Kegiatan\Kegiatancontroller::kegiatan_del');
+
+// Kebaktian
+$routes->get('/api/intern/kebaktian/bulanini', 'Kebaktian\Kebaktiancontroller::kebaktian_bulan_ini');
 
 // Seting
 $routes->post('/api/intern/seting/password/change', 'Seting\Setingcontroller::password_change');

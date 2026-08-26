@@ -52,11 +52,8 @@
                 <br>
 
                 <div class="row">
-                    <div class="col-3"></div>
-                    <div class="col-3"></div>
-                    <div class="col-3"></div>
+                    <div class="col-9"></div>
                     <div class="col-3">
-                      <button type="button" class="btn btn-primary" id="btnTambahKegiatan">Tambah Data Kebaktian</button>
                     </div>
 
                 </div>
@@ -65,22 +62,17 @@
 
                 <div class="row">
 
-                  <table class="table" id="tblKegiatan">
+                  <table class="table" id="tblKebaktian">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Tanggal</th>
-                        <th scope="col">Judul</th>
+                        <th scope="col">Tanggal Ibadah</th>
+                        <th scope="col">Data</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Mark</td>
-                        <td><button type="button" class="btn btn-secondary">Edit</button>&nbsp;<button type="button" class="btn btn-danger">Hapus</button></td>
-                      </tr>
+
                     </tbody>
                   </table>                  
 
@@ -95,7 +87,7 @@
 
     </div>
 
-    <div class="modal fade" id="AddEditKegiatan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="AddEditKebaktian" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
