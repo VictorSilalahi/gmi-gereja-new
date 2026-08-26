@@ -61,6 +61,10 @@
                 <br>
 
                 <div class="row">
+                  <h3>Data Kebaktian Bulan Ini</h3>
+                </div>
+                <hr>
+                <div class="row">
 
                   <table class="table" id="tblKebaktian">
                     <thead>
@@ -87,34 +91,62 @@
 
     </div>
 
-    <div class="modal fade" id="AddEditKebaktian" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+    <div class="modal fade" id="AddKebaktian" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="opKegiatan">New message</h1>
+            <h1 class="modal-title fs-5" id="opKebaktian">Input Data Kebaktian</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+            <div id="txtTanggalMinggu"></div>
             <form>
-              <div class="mb-3">
-                <label for="txtTanggal" class="col-form-label">Tanggal:</label>
-                <input type="date" class="form-control" id="txtTanggal">
+              <div>
+
+                  <table class="table" id="tblInputKebaktian">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Sesi Ibadah</th>
+                        <th scope="col">Jumlah Kehadiran</th>
+                        <th scope="col">Jumlah Persembahan</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Ibadah I</td>
+                        <td><input type="number" value="0" /></td>
+                        <td><input type="number" value="0" /></td>
+                      </tr>
+                      <tr>
+                        <td>Ibadah II</td>
+                        <td><input type="number" value="0" /></td>
+                        <td><input type="number" value="0" /></td>
+                      </tr>
+                      <tr>
+                        <td>Ibadah III</td>
+                        <td><input type="number" value="0" /></td>
+                        <td><input type="number" value="0" /></td>
+                      </tr>
+                      <tr>
+                        <td>Ibadah IV</td>
+                        <td><input type="number" value="0" /></td>
+                        <td><input type="number" value="0" /></td>
+                      </tr>
+                      <tr>
+                        <td>Ibadah V</td>
+                        <td><input type="number" value="0" /></td>
+                        <td><input type="number" value="0" /></td>
+                      </tr>
+                    </tbody>
+                  </table>
+
               </div>
-              <div class="mb-3">
-                <label for="txtJudul" class="col-form-label">Judul Kegiatan:</label>
-                <input type="text" class="form-control" id="txtJudul">
-              </div>
-              <div class="mb-3">
-                <label for="txtDeskripsi" class="col-form-label">Deskripsi:</label>
-                <textarea class="form-control" id="txtDeskripsi" rows="16"></textarea>
-              </div>
-              <input type="hidden" value="" id="txtJenisOpKegiatan">
-              <input type="hidden" value="" id="txtKegiatanID">
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="button" class="btn btn-primary" id="btnOKKegiatan">OK</button>
+            <button type="button" class="btn btn-primary" id="btnOKKebaktian">OK</button>
           </div>
         </div>
       </div>

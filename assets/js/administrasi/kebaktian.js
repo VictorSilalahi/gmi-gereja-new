@@ -9,36 +9,73 @@ $(document).ready(function () {
   
   $.LoadingOverlay("show");
   
-  // loadDataKegiatan();
-  lihatKebaktianBulanIni();
+  loadKebaktianBulanIni();
 
   $.LoadingOverlay("hide");
 
 });
 
 
-function lihatKebaktianBulanIni() {
+$(document).on("click", ".btn-tambah-data-kebaktian", function() {
+
+  let tanggal = $(this).parent().prev().prev().text();
+  $("#txtTanggalMinggu").html("<h4><span class='badge text-bg-secondary'>"+tanggal+"</span></h4>");
+  $("#AddKebaktian").modal("show");
+
+});
+
+
+$(document).on("click", "#btnOKKebaktian", function() {
+
+  let ask = confirm("Input data kebaktian minggu?");
+
+  let data = [];
+  
+  let kebaktian = null;
+  
+  if (ask) {
+
+    kebaktian = [];
+    for (let i=0; i<5; i++) {
+
+      let no_kebaktian = $("#tblInputKebaktian tbody tr:eq("+i+") td:eq(0)").text();
+      let kehadiran = $("#tblInputKebaktian tbody tr:eq("+i+") td:eq(1) input").val();
+      let persembahan = $("#tblInputKebaktian tbody tr:eq("+i+") td:eq(2) input").val();
+      kebaktian.push({"sesi_kebaktian": no_kebaktian, "kehadiran": kehadiran, "persembahan": persembahan});
+
+    }
+
+  }
+
+  data['tanggal'] = $("#txtTanggalMinggu").text();
+  data['kebaktian'] = kebaktian;
+  
+  
+
+});
+
+function loadKebaktianBulanIni() {
 
   var jawab = ajax_get(base_url+"kebaktian/bulanini", "");
 
   console.log(jawab);
 
   var data = jawab.data;
-
   var str = '';
   var no = 1;
   for (var i=0; i<data.length; i++) {
 
-    str = str + "<tr id='"+data[i]['kebaktian_id']+"'><td>"+no+"</td><td>"+set_tanggal(data[i]['tanggal'])+"</td>";
 
     var kebaktian = data[i]['data'];
 
     if (kebaktian!==null) {
 
+      str = str + "<tr id='"+data[i]['kebaktian_id']+"'><td>"+no+"</td><td>"+set_tanggal(data[i]['tanggal'])+"</td>";
       str = str + "<td>&#10004;</td><td></td></tr>";
 
     } else {
 
+      str = str + "<tr id='"+data[i]['kebaktian_id']+"' class='table-warning text-white'><td>"+no+"</td><td>"+set_tanggal(data[i]['tanggal'])+"</td>";
       str = str + "<td></td><td><button class='btn btn-info btn-tambah-data-kebaktian'>Isi Data Kebaktian</button></td></tr>";
     }
 
@@ -48,33 +85,5 @@ function lihatKebaktianBulanIni() {
 
   $("#tblKebaktian tbody").html(str);
 
-}
-
-function loadDataKegiatan() {
-  $("#tblKegiatan tbody tr").remove();
-
-  var data = ajax_get(base_url+"kegiatan/all", "");
-
-  // console.log(data);
-
-  if (data.msg == "ok") {
-    var isi_tabel = "";
-    var no = 1;
-    for (var i = 0; i < data.data.length; i++) {
-      isi_tabel =
-        isi_tabel +
-        "<tr id='" +
-        data.data[i]["kegiatan_id"] +
-        "'><td>" +
-        no +
-        "</td><td>" +
-        set_tanggal(data.data[i]["tanggal"]) +
-        "</td><td>" +
-        data.data[i]["judul_kegiatan"] +
-        "<td><button class='btn btn-secondary btn-edit'>Edit</button>&nbsp;<button class='btn btn-danger btn-delete'>Hapus</button></td></tr>";
-      no++;
-    }
-    $("#tblKegiatan tbody").html(isi_tabel);
-  }
 }
 
