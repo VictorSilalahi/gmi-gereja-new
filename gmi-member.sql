@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2026 at 12:31 PM
+-- Generation Time: Aug 26, 2026 at 06:51 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -56,6 +56,7 @@ CREATE TABLE `tgereja` (
   `password` varchar(100) NOT NULL,
   `nama_gereja` varchar(200) NOT NULL,
   `alamat` varchar(200) NOT NULL,
+  `kabupaten_id` int(11) NOT NULL,
   `lat` varchar(100) NOT NULL,
   `lng` varchar(100) NOT NULL,
   `kondisi_bangunan` varchar(20) NOT NULL,
@@ -71,8 +72,8 @@ CREATE TABLE `tgereja` (
 -- Dumping data for table `tgereja`
 --
 
-INSERT INTO `tgereja` (`gereja_id`, `distrik`, `email`, `password`, `nama_gereja`, `alamat`, `lat`, `lng`, `kondisi_bangunan`, `kepemilikan`, `db_id`, `identity_link`, `path_sk`, `created_at`, `updated_at`) VALUES
-('9beaf151-63ee-4d4a-8520-8918f74db30b', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah', '', '', 'Permanen', 'Milik Sendiri', 'g-dnja1q', 'QBPh9aPWLoUv', 'public/uploads/sk/1781845451_629fb7490b55adac04f9.jpg', '2026-06-19', '2026-06-19');
+INSERT INTO `tgereja` (`gereja_id`, `distrik`, `email`, `password`, `nama_gereja`, `alamat`, `kabupaten_id`, `lat`, `lng`, `kondisi_bangunan`, `kepemilikan`, `db_id`, `identity_link`, `path_sk`, `created_at`, `updated_at`) VALUES
+('e2946a7f-fc77-459b-82de-d6c544529f4e', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah', 1077, '3.543855', '98.600521', 'Permanen', 'Milik Sendiri', 'g-dnja1q', 'NFe1YNSUiblB', 'public/uploads/sk/1787650212_8cd89eb81abf9d9839d5.jpg', '2026-08-25', '2026-08-25');
 
 -- --------------------------------------------------------
 
@@ -616,15 +617,35 @@ INSERT INTO `tkabupaten` (`kabupaten_id`, `provinsi_id`, `kabupaten`, `id`) VALU
 CREATE TABLE `tpendeta` (
   `pendeta_id` bigint(20) UNSIGNED NOT NULL,
   `nama` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL
+  `email` varchar(100) NOT NULL,
+  `mobile_phone` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tpendeta`
 --
 
-INSERT INTO `tpendeta` (`pendeta_id`, `nama`, `email`) VALUES
-(3, 'Pdt Lubis', 'silalahitotok@gmail.com');
+INSERT INTO `tpendeta` (`pendeta_id`, `nama`, `email`, `mobile_phone`) VALUES
+(4, 'Pdt Lubis', 'silalahitotok@gmail.com', '0860867087');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tpenempatan`
+--
+
+CREATE TABLE `tpenempatan` (
+  `penempatan_id` bigint(20) UNSIGNED NOT NULL,
+  `gereja_id` varchar(100) NOT NULL,
+  `pendeta_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tpenempatan`
+--
+
+INSERT INTO `tpenempatan` (`penempatan_id`, `gereja_id`, `pendeta_id`) VALUES
+(1, 'e2946a7f-fc77-459b-82de-d6c544529f4e', 4);
 
 -- --------------------------------------------------------
 
@@ -705,6 +726,12 @@ ALTER TABLE `tpendeta`
   ADD UNIQUE KEY `pendeta_id` (`pendeta_id`);
 
 --
+-- Indexes for table `tpenempatan`
+--
+ALTER TABLE `tpenempatan`
+  ADD UNIQUE KEY `penempatan_id` (`penempatan_id`);
+
+--
 -- Indexes for table `tprovinsi`
 --
 ALTER TABLE `tprovinsi`
@@ -730,7 +757,13 @@ ALTER TABLE `tkabupaten`
 -- AUTO_INCREMENT for table `tpendeta`
 --
 ALTER TABLE `tpendeta`
-  MODIFY `pendeta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `pendeta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tpenempatan`
+--
+ALTER TABLE `tpenempatan`
+  MODIFY `penempatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tprovinsi`
