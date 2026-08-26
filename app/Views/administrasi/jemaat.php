@@ -43,7 +43,7 @@
                             <div class="navbar-nav">
                               <a class="nav-link active" aria-current="page" href="<?php echo(base_url()); ?>jemaat">Jemaat</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>sektor">Sektor</a>
-                              <a class="nav-link" href="<?php echo(base_url()); ?>jabatan">Jabatan</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>jabatan">Pelayanan</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>organisasi">Organisasi</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>kegiatan">Program Kerja</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>kebaktian">Kebaktian</a>
@@ -425,31 +425,31 @@
 
                 <hr>
 
-                <label for="txtTanggalLahir" class="col-form-label col-sm-1">Tanggal Lahir:</label>
+                <label for="txtTanggalLahir" class="col-form-label col-sm-1">Lahir:</label>
                 <div class="col-sm-2">
-                  <input type="date" class="form-control" id="txtTanggalLahirEdit">
+                  <input type="date" id="txtTanggalLahirEdit">
                 </div>
 
-
-                <label for="txtTanggalBaptis" class="col-form-label col-sm-1">Tanggal Baptis:</label>
                 <div class="col-sm-2">
-                  <input type="date" class="form-control" id="txtTanggalBaptisEdit">
+                  <input type="checkbox" id="chkBaptisEdit" value="no">
+                  <label for="chkBaptis" class="col-form-label col-sm-2">Baptis</label>
+                  <input type="date" id="txtTanggalBaptisEdit" disabled />
                 </div>
 
-                <label for="txtTanggalSidiEdit" class="col-form-label col-sm-1">Tanggal Sidi:</label>
                 <div class="col-sm-2">
-                  <input type="date" class="form-control" id="txtTanggalSidiEdit">
+                  <input type="checkbox" id="chkSidiEdit" value="no">
+                  <label for="chkSidi" class="col-form-label col-sm-2">Sidi</label>
+                  <input type="date" id="txtTanggalSidiEdit" disabled />
                 </div>
 
-
-                <label for="txtTanggalBaptis" class="col-form-label col-sm-1">Tanggal Menikah:</label>
-                <div class="col-sm-2">
-                  <input type="date" class="form-control" id="txtTanggalMenikahEdit">
+                <label for="txtTanggalMenikah" class="col-form-label col-sm-1">Menikah:</label>
+                <div class="col-sm-3">
+                  <input type="date" id="txtTanggalMenikahEdit">
                 </div>
 
                 <hr>
 
-                <label class="col-form-label col-sm-1">Posisi:</label>
+                <label for="slcPosisi" class="col-form-label col-sm-1">Posisi:</label>
                 <div class="col-sm-2">
                   <select class="form-select" aria-label="Default select example" id="slcPosisiEdit">
                       <option value="Mandiri">Mandiri</option>
@@ -461,9 +461,10 @@
                 </div>
 
 
-                <label for="slcPendidikanTerakhirEdit" class="col-form-label col-sm-1">Pendidikan Terakhir:</label>
+                <label for="slcPendidikanTerakhir" class="col-form-label col-sm-1">Pendidikan Terakhir:</label>
                 <div class="col-sm-2">
                   <select class="form-select" aria-label="Default select example" id="slcPendidikanTerakhirEdit">
+                      <option value="None">None</option>
                       <option value="SD">SD</option>
                       <option value="SMP">SMP</option>
                       <option value="SMA-SMK">SMA-SMK</option>
@@ -471,13 +472,13 @@
                       <option value="S1">S1</option>
                       <option value="S2">S2</option>
                       <option value="S3">S3</option>
-                      <option value="None">None</option>
                   </select>
                 </div>
                 
-                <label for="slcPekerjaanEdit" class="col-form-label col-sm-1">Pekerjaan:</label>
+                <label for="slcPekerjaan" class="col-form-label col-sm-1">Pekerjaan:</label>
                 <div class="col-sm-2">
                   <select class="form-select" aria-label="Default select example" id="slcPekerjaanEdit">
+                      <option value="None">None</option>
                       <option value="ASN">ASN</option>
                       <option value="TNI-Polri">TNI-Polri</option>
                       <option value="Karyawan-Swasta">Karyawan Swasta</option>
@@ -488,7 +489,6 @@
                       <option value="Guru-Injil">Guru Injil</option>
                       <option value="Pendeta">Pendeta</option>
                       <option value="Buruh-Harian-Lepas">Buruh Harian Lepas</option>
-                      <option value="None">None</option>
                   </select>
                 </div>
 
@@ -507,28 +507,28 @@
 
               <table class="table" id="tblDaftarCalonJemaatEdit">
                 <thead>
-                  <tr>
-                    <th colspan='4'></th>
-                    <th colspan='2' style="text-align: center;">Baptis</th>
-                    <th colspan='2' style="text-align: center;">Sidi</th>
-                    <th colspan='7'></th>
-                  </tr>
-                  <tr>
-                    <th scope="col">Nama</th>
-                    <th scope="col">JK</th>
-                    <th scope="col">Gol Darah</th>
-                    <th scope="col">Lahir</th>
-                    <th scope="col">Telah Dibaptis</th>
-                    <th scope="col">Tanggal Baptis</th>
-                    <th scope="col">Telah Sidi</th>
-                    <th scope="col">Tanggal Sidi</th>
-                    <th scope="col">Menikah</th>
-                    <th scope="col">Wafat</th>
-                    <th scope="col">Posisi</th>
-                    <th scope="col">Pend.Terakhir</th>
-                    <th scope="col">Pekerjaan</th>
-                    <th scope="col">Action</th>
-                  </tr>
+                <tr>
+                  <th colspan='4'></th>
+                  <th colspan='2' style="text-align: center;">Baptis</th>
+                  <th colspan='2' style="text-align: center;">Sidi</th>
+                  <th colspan='7'></th>
+                </tr>
+                <tr>
+                  <th scope="col">Nama</th>
+                  <th scope="col">JK</th>
+                  <th scope="col">Gol Darah</th>
+                  <th scope="col">Lahir</th>
+                  <th scope="col">Telah Dibaptis</th>
+                  <th scope="col">Tanggal Baptis</th>
+                  <th scope="col">Telah Sidi</th>
+                  <th scope="col">Tanggal Sidi</th>
+                  <th scope="col">Menikah</th>
+                  <th scope="col">Wafat</th>
+                  <th scope="col">Posisi</th>
+                  <th scope="col">Pend.Terakhir</th>
+                  <th scope="col">Pekerjaan</th>
+                  <th scope="col">Action</th>
+                </tr>
                 </thead>
                 <tbody>
                 </tbody>

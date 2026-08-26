@@ -274,6 +274,24 @@ $(document).on("click", "#btnOKJemaat", function () {
 });
 
 
+$(document).on("change", "#chkBaptisEdit", function() {
+
+    if ($("#chkBaptisEdit").is(':checked')) {
+        $("#txtTanggalBaptisEdit").prop("disabled", false);
+    } else {
+        $("#txtTanggalBaptisEdit").prop("disabled", true);
+    }
+});
+
+$(document).on("change", "#chkSidiEdit", function() {
+
+    if ($("#chkSidiEdit").is(':checked')) {
+        $("#txtTanggalSidiEdit").prop("disabled", false);
+    } else {
+        $("#txtTanggalSidiEdit").prop("disabled", true);
+    }
+});
+
 $(document).on("click", ".btn-tambah-calon-anggota-edit", function() {
 
   let base_url = $("#base_url").val()+"api/intern/";
@@ -284,12 +302,19 @@ $(document).on("click", ".btn-tambah-calon-anggota-edit", function() {
     return false;
   }
 
+  if ($("#txtTanggalLahirEdit").val()=='') {
+    alert("Masukkan tamggal lahir calon anggota!");
+    $("#txtTanggalLahirEdit").focus();
+    return false;
+  }
 
   var nama = $("#txtNamaEdit").val();
   var jk = $("#slcJenisKelaminEdit").val();
   var gol_darah = $("#slcGolonganDarahEdit").val();
   var tgl_lahir = $("#txtTanggalLahirEdit").val();
+  var chk_baptis = $("#chkBaptisEdit").prop("checked");
   var tgl_baptis = $("#txtTanggalBaptisEdit").val();
+  var chk_sidi = $("#chkSidiEdit").prop("checked");
   var tgl_sidi = $("#txtTanggalSidiEdit").val();
   var tgl_menikah = $("#txtTanggalMenikahEdit").val();
   var posisi_keluarga = $("#slcPosisiEdit").val();
@@ -297,16 +322,18 @@ $(document).on("click", ".btn-tambah-calon-anggota-edit", function() {
   var pekerjaan = $("#slcPekerjaanEdit").val();
   var jemaat_id = $("#txtJemaatIDEdit").val();
 
+  // console.log(gol_darah);
 
-  var jawab = ajax_post(base_url+"jemaat/anggota/add", {"nama": nama, "jk": jk, "golongan_darah": gol_darah, "tgl_lahir": tgl_lahir, "tgl_baptis": tgl_baptis, "tgl_sidi": tgl_sidi, "tgl_menikah": tgl_menikah, "posisi": posisi_keluarga, "pendidikan_terakhir": pendidikan_terakhir, "pekerjaan": pekerjaan, "jemaat_id": jemaat_id} );
-
+  var jawab = ajax_post(base_url+"jemaat/anggota/add", {"nama": nama, "jk": jk, "golongan_darah": gol_darah, "tgl_lahir": tgl_lahir, "chk_baptis": chk_baptis, "tgl_baptis": tgl_baptis, "chk_sidi": chk_sidi, "tgl_sidi": tgl_sidi, "tgl_menikah": tgl_menikah, "posisi": posisi_keluarga, "pendidikan_terakhir": pendidikan_terakhir, "pekerjaan": pekerjaan, "jemaat_id": jemaat_id} );
 
   if (jawab["msg"]=="ok") {
 
     loadDataAnggotaKeluarga(jemaat_id);
     $("#txtNamaEdit").val("");
     $("#txtTanggalLahirEdit").val("");
+    $("chkBaptisEdit").prop("checked", false);
     $("#txtTanggalBaptisEdit").val("");
+    $("chkSidiEdit").prop("checked", false);
     $("#txtTanggalSidiEdit").val("");
     $("#txtTanggalMenikahEdit").val("");
 
@@ -445,10 +472,12 @@ $(document).on("click", ".btn-simpan-perubahan-anggota", function () {
   let base_url = $("#base_url").val()+"api/intern/";
 
   var anggotajemaat_id = $(this).parent().parent().attr("id");
-  var jk = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().find("option:selected").val();
-  var gol_darah = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().find("option:selected").val();
-  var tgl_lahir = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().find("input").val();
-  var tgl_baptis = $(this).parent().prev().prev().prev().prev().prev().prev().prev().find("input").val();
+  var jk = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().find("option:selected").val();
+  var gol_darah = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().find("option:selected").val();
+  var tgl_lahir = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().find("input").val();
+  var chk_baptis = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().find("input").prop("checked");
+  var tgl_baptis = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().find("input").val();
+  var chk_sidi = $(this).parent().prev().prev().prev().prev().prev().prev().prev().find("input").prop("checked");
   var tgl_sidi = $(this).parent().prev().prev().prev().prev().prev().prev().find("input").val();
   var tgl_menikah = $(this).parent().prev().prev().prev().prev().prev().find("input").val();
   var tgl_wafat = $(this).parent().prev().prev().prev().prev().find("input").val();
@@ -460,7 +489,9 @@ $(document).on("click", ".btn-simpan-perubahan-anggota", function () {
               "jk": jk, 
               "gol_darah": gol_darah, 
               "tgl_lahir": tgl_lahir, 
+              "chk_baptis": chk_baptis,
               "tgl_baptis": tgl_baptis, 
+              "chk_sidi": chk_sidi,
               "tgl_sidi": tgl_sidi, 
               "tgl_menikah": tgl_menikah, 
               "tgl_wafat": tgl_wafat, 
@@ -469,6 +500,8 @@ $(document).on("click", ".btn-simpan-perubahan-anggota", function () {
               "pekerjaan": pekerjaan,
               "anggotajemaat_id": anggotajemaat_id
   };
+
+  console.log(data);
 
   const ask = confirm("Simpan perubahan data anggota keluarga ini?"); 
   

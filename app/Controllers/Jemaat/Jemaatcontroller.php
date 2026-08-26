@@ -286,25 +286,32 @@ class Jemaatcontroller extends BaseController
                 // $meninggal = false;
 
                 $sql = "select tsidi.is_sidi, tsidi.tanggal_sidi from tsidi where tsidi.anggotajemaat_id=".$row->anggotajemaat_id;
+                // echo($sql);
                 $query = $db->query($sql);
-                if ($query) {
+                if ($query->getNumRows()>0) {
                     $res = $query->getRow();
                     $is_sidi = $res->is_sidi;
                     $tanggal_sidi = $res?->tanggal_sidi;
 
+                } else {
+                    $is_sidi = 0;
+                    $tanggal_sidi = "0000-00-00";
                 }
                 
                 $sql = "select tmenikah.tanggal_menikah from tmenikah where tmenikah.anggotajemaat_id=".$row->anggotajemaat_id;
                 $query = $db->query($sql);
-                if ($query) {
+                if ($query->getNumRows()>0) {
                     $res = $query->getRow();
                     $tanggal_menikah = $res?->tanggal_menikah;
 
+                } else {
+                    $is_menikah = 0;
+                    $tanggal_menikah = "0000-00-00";
                 }
 
                 $sql = "select twafat.tanggal_wafat from twafat where twafat.anggotajemaat_id=".$row->anggotajemaat_id;
                 $query = $db->query($sql);
-                if ($query) {
+                if ($query->getNumRows()>0) {
                     $res = $query->getRow();
 
                     // print_r($res);
@@ -362,15 +369,18 @@ class Jemaatcontroller extends BaseController
         $jk = $this->request->getPost("jk");
         $gol_darah = $this->request->getPost("golongan_darah");
         $tgl_lahir = $this->request->getPost("tgl_lahir");
+        $chk_baptis = $this->request->getPost("chk_baptis");
         $tgl_baptis = $this->request->getPost("tgl_baptis");
+        $chk_sidi = $this->request->getPost("chk_sidi");
         $tgl_sidi = $this->request->getPost("tgl_sidi");
         $tgl_menikah = $this->request->getPost("tgl_menikah");
         $posisi = $this->request->getPost("posisi");
         $pendidikan_terakhir = $this->request->getPost("pendidikan_terakhir");
         $pekerjaan = $this->request->getPost("pekerjaan");
 
-        $sql = "insert into tanggotajemaat (nama, jk, golongan_darah, tanggal_lahir, tanggal_baptis, posisi, pendidikan_terakhir, pekerjaan, jemaat_id) values ";
-        $sql = $sql . "('".$nama."','".$jk."','".$gol_darah."','".$tgl_lahir."','".$tgl_baptis."','".$posisi."','".$pendidikan_terakhir."','".$pekerjaan."',".$jemaat_id.")";
+        $sql = "insert into tanggotajemaat (nama, jk, golongan_darah, tanggal_lahir, is_baptis, tanggal_baptis, posisi, pendidikan_terakhir, pekerjaan, jemaat_id) values ";
+        $sql = $sql . "('".$nama."','".$jk."','".$gol_darah."','".$tgl_lahir."',".$chk_baptis.",'".$tgl_baptis."','".$posisi."','".$pendidikan_terakhir."','".$pekerjaan."',".$jemaat_id.")";
+        // echo($sql);
 
         $db = $this->set_db();
 
@@ -378,10 +388,18 @@ class Jemaatcontroller extends BaseController
 
         $anggotajemaat_id = $db->insertID();
 
-        if ($tgl_sidi) {
+        if ($chk_sidi) {
+            if ($tgl_sidi) {
+                $sql = "insert into tsidi (anggotajemaat_id, is_sidi, tanggal_sidi) values (".$anggotajemaat_id.",".$chk_sidi.",'".$tgl_sidi."')";
+                $db->query($sql);
 
-            $sql = "insert into tsidi (anggotajemaat_id, tanggal_sidi) values (".$anggotajemaat_id.",'".$tgl_sidi."')";
-            $db->query($sql);
+            } else {
+
+                $sql = "insert into tsidi (anggotajemaat_id, is_sidi) values (".$anggotajemaat_id.",".$chk_sidi.")";
+                $db->query($sql);
+            
+            }
+
         }
 
         if ($tgl_menikah) {
@@ -411,7 +429,9 @@ class Jemaatcontroller extends BaseController
         $jk = $data['jk'];
         $gol_darah = $data['gol_darah'];
         $tgl_lahir = $data['tgl_lahir'];
+        $chk_baptis = $data['chk_baptis'];
         $tgl_baptis = $data['tgl_baptis'];
+        $chk_sidi = $data['chk_sidi'];
         $tgl_sidi = $data['tgl_sidi'];
         $tgl_menikah = $data['tgl_menikah'];
         $tgl_wafat = $data['tgl_wafat'];
@@ -450,6 +470,13 @@ class Jemaatcontroller extends BaseController
         }
 
 
+        if ($chk_baptis) {
+
+            $sql = "update tanggotajemaat set is_baptis=".$chk_baptis." where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+        }
 
         if ($tgl_baptis) {
 
@@ -459,6 +486,36 @@ class Jemaatcontroller extends BaseController
 
         }
 
+
+        if ($chk_sidi) {
+
+            $sql = "select count(*) as jumlah from tsidi where anggotajemaat_id=".$anggotajemaat_id;
+            // echo($sql);
+            $query = $db->query($sql);
+
+            // update status sidi
+            if ($query) {
+
+                $row = $query->getRow();
+
+                if ($row->jumlah==0) {
+
+                    $sql = "insert into tsidi (anggotajemaat_id, is_sidi) values (".$anggotajemaat_id.",".$chk_sidi.")";
+                    $db->query($sql);
+
+                }
+
+                if ($row->jumlah==1) {
+
+                    $sql = "update tsidi set is_sidi=".$chk_sidi." where anggotajemaat_id=".$anggotajemaat_id;
+                    $db->query($sql);
+
+                }
+
+            }
+
+
+        }
 
         if ($tgl_sidi) {
 
@@ -582,6 +639,18 @@ class Jemaatcontroller extends BaseController
         $anggotajemaat_id = $this->request->getPost("anggotajemaat_id");
 
         $db = $this->set_db();
+
+        $sql = "delete from tsidi where anggotajemaat_id=".$anggotajemaat_id;
+
+        $db->query($sql);
+
+        $sql = "delete from tmenikah where anggotajemaat_id=".$anggotajemaat_id;
+
+        $db->query($sql);
+
+        $sql = "delete from twafat where anggotajemaat_id=".$anggotajemaat_id;
+
+        $db->query($sql);
 
         $sql = "delete from tanggotajemaat where anggotajemaat_id=".$anggotajemaat_id;
 

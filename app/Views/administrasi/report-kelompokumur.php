@@ -32,7 +32,7 @@
                             <div class="navbar-nav">
                               <a class="nav-link" href="<?php echo(base_url()); ?>jemaat">Jemaat</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>sektor">Sektor</a>
-                              <a class="nav-link" href="<?php echo(base_url()); ?>jabatan">Jabatan</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>jabatan">Pelayanan</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>organisasi">Organisasi</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>kegiatan">Program Kerja</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>kebaktian">Kebaktian</a>                              
