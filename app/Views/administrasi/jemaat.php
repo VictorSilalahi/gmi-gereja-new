@@ -156,7 +156,7 @@
 
                 <label for="txtNIK" class="col-form-label col-sm-1">NIK:</label>
                 <div class="col-sm-1">
-                  <input type="text" class="form-control" id="txtNIKAwal">
+                  <input type="text" class="form-control" id="txtNIKAwal" disabled>
                 </div>
                 -
                 <div class="col-sm-1">
@@ -349,7 +349,7 @@
 
                 <label for="txtNIK" class="col-form-label col-sm-2">NIK:</label>
                 <div class="col-sm-2">
-                  <input type="text" class="form-control" id="txtNIKAwalEdit">
+                  <input type="text" class="form-control" id="txtNIKAwalEdit" disabled>
                 </div>
                 -
                 <div class="col-sm-2">
