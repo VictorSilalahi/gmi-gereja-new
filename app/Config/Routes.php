@@ -88,6 +88,7 @@ $routes->post('/api/intern/kegiatan/del', 'Kegiatan\Kegiatancontroller::kegiatan
 // Kebaktian
 $routes->get('/api/intern/kebaktian/bulanini', 'Kebaktian\Kebaktiancontroller::kebaktian_bulan_ini');
 $routes->post('/api/intern/kebaktian/add', 'Kebaktian\Kebaktiancontroller::kebaktian_add');
+$routes->get('/api/intern/kebaktian/checkminggu', 'Kebaktian\Kebaktiancontroller::check_kebaktian_hari_minggu');
 
 // Seting
 $routes->post('/api/intern/seting/password/change', 'Seting\Setingcontroller::password_change');

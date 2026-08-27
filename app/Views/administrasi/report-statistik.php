@@ -54,13 +54,10 @@
                                 <a class="nav-link" href="<?php echo(base_url()); ?>report/sektor">Sektor</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?php echo(base_url()); ?>report/jabatan">Jabatan</a>
+                                <a class="nav-link" href="<?php echo(base_url()); ?>report/jabatan">Pelayanan</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo(base_url()); ?>report/kelompokumur">Kelompok Umur</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?php echo(base_url()); ?>report/statuskeanggotaan">Status Keanggotaan</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?php echo(base_url()); ?>report/ulangtahun">Ulang Tahun</a>

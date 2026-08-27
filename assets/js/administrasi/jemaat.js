@@ -18,6 +18,8 @@ $(document).ready(function () {
 
   $.LoadingOverlay("hide");
 
+  check_kebaktian();
+
 });
 
 $(document).on("click", ".ul-edit li", function() {
@@ -630,6 +632,32 @@ function loadDataUmum(jemaat_id) {
 
 }
 
+function check_kebaktian() {
+
+    let base_url = $("#base_url").val()+"api/intern/";
+
+    var jawab = ajax_get(base_url+"kebaktian/checkminggu", {});
+
+    console.log(jawab.data);
+
+
+    if (jawab.data.data==false) {
+
+      let tanggal = set_tanggal(jawab.data.tanggal);
+
+      let pesan = '';
+
+      $("#modalKosongKebaktian").modal("show");
+
+      pesan = "<p><h3>Data Kebaktian pada tanggal : <span class='badge bg-warning text-dark'>"+tanggal+"</span> masih kosong!</h3></p>";
+      pesan = pesan + "<p>Mohon Diisi melalui menu Kebaktian</p>";
+      
+      $("#pesanKebaktian").html(pesan);
+
+    }
+
+}
+
 function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
 
     let base_url = $("#base_url").val()+"api/intern/";
@@ -821,7 +849,9 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
 
           for (var i=0; i<data.length; i++) {
             var tgl_lahir = "...";
+            var chk_baptis = false;
             var tgl_baptis = "...";
+            var chk_sidi = false;
             var tgl_sidi = "...";
             var tgl_menikah = "...";
             var tgl_wafat = "...";
@@ -831,8 +861,20 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
               tgl_lahir = set_tanggal(data[i]['tgl_lahir']);
             }
 
+            if (data[i]['chk_baptis']==true) {
+              chk_baptis = "&#10004;";
+            } else {
+              chk_baptis = "";
+            }
+
             if (data[i]['tgl_baptis']!=='0000-00-00' && data[i]['tgl_baptis']!=='') {
               tgl_baptis = set_tanggal(data[i]['tgl_baptis']);
+            }
+
+            if (data[i]['chk_sidi']==true) {
+              chk_sidi = "&#10004;";
+            } else {
+              chk_sidi = "";
             }
 
             if (data[i]['tgl_sidi']!=='0000-00-00' && data[i]['tgl_sidi']!=='') {
@@ -847,7 +889,7 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
               tgl_wafat = set_tanggal(data[i]['tgl_wafat']);
             }
 
-            isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td>"+data[i]['jk']+"</td><td>"+data[i]['golongan_darah']+"</td><td>"+tgl_lahir+"</td><td>"+tgl_baptis+"</td><td>"+tgl_sidi+"</td><td>"+tgl_menikah+"</td><td>"+data[i]['posisi']+"</td><td>"+data[i]['pendidikan_terakhir']+"</td><td>"+data[i]['pekerjaan']+"</td><td>";
+            isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td>"+data[i]['jk']+"</td><td>"+data[i]['golongan_darah']+"</td><td>"+tgl_lahir+"</td><td>"+chk_baptis+"</td><td>"+tgl_baptis+"</td><td>"+chk_sidi+"</td><td>"+tgl_sidi+"</td><td>"+tgl_menikah+"</td><td>"+tgl_wafat+"</td><td>"+data[i]['posisi']+"</td><td>"+data[i]['pendidikan_terakhir']+"</td><td>"+data[i]['pekerjaan']+"</td><td>";
             if (data[i]['tgl_wafat']===null || data[i]['tgl_wafat']==='' ) {
               isi = isi + "</div></td></tr>";
             } else {
@@ -857,13 +899,13 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
 
           $("#txtJemaatIDEdit").val(jemaat_id);
           $("#tblDaftarCalonJemaatEdit tbody").html(isi);
-          $("#tblDaftarCalonJemaatEdit thead tr th:eq(8)").text("Posisi");
+          // $("#tblDaftarCalonJemaatEdit thead tr th:eq(8)").text("Posisi");
           $("#editJemaatAnggota").modal("show");
 
           $("#titleShow").text("Data Anggota Keluarga Jemaat")
           $("#btnEditDataKeluarga").hide();
           $("#formEditJemaat").hide();
-          $("#tblDaftarCalonJemaatEdit thead tr").find("th:eq(7)").hide();
+          $("#tblDaftarCalonJemaatEdit thead tr").find("th:eq(13)").hide();
 
 
         }

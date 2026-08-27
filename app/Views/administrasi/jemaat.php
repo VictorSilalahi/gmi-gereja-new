@@ -578,6 +578,31 @@
         </div>
     </div>    
 
+
+    <div class="modal fade" id="modalKosongKebaktian" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Data Kebaktian</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+                    <p>
+
+                        <div id="pesanKebaktian">
+
+                        </div>
+                      
+                    </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+
+                </div>
+            </div>
+        </div>
+    </div>        
+    
     <input type="hidden" id="base_url" value="<?php echo(base_url()); ?>">
 </body>
   <script src="<?php echo(base_url()); ?>assets/js/administrasi/jemaat.js" type="module"></script>

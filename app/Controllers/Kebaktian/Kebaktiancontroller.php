@@ -128,6 +128,9 @@ class Kebaktiancontroller extends BaseController
 
         }
 
+        // catat log
+        $this->catat_log($db, "tambah", "kebaktian");
+
         return $this->respond([
             "msg"=>"ok", 
             "data"=>""
@@ -137,6 +140,34 @@ class Kebaktiancontroller extends BaseController
 
     }
     
+    public function check_kebaktian_hari_minggu()
+    {
+
+        $date = new \DateTime('last sunday');
+        $hari_minggu = $date->format('Y-m-d');
+
+        // ambil data kebaktian pada hari minggu barusan
+        $sql = "select kebaktian_id, tanggal from tkebaktian where tanggal='".$hari_minggu."'";
+        $db = $this->set_db();
+        $query = $db->query($sql);
+
+        $ada_data = false;
+
+        if ($query->getNumRows()>0) {
+
+            $ada_data = true;
+        
+        }
+
+        return $this->respond([
+            "msg"=>"ok", 
+            "data"=>array("tanggal"=>$hari_minggu, "data"=>$ada_data)
+        ]);
+        
+
+    }
+
+
     public function set_db()
     {
 
