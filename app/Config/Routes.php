@@ -106,7 +106,6 @@ $routes->get('/api/intern/report/statistik/getdata', 'Report\Reportcontroller::g
 // API (V1)
 // +++++++++++++++++++++++++++++++++++++++++++++++++
 
-// Jemaat
 $routes->group('webapi', static function ($routes) {
         $routes->group('v1', static function ($routes) {
             $routes->post('distrik/jemaat/all', 'Webapi\V1\Distrik\Jemaat::jemaat_all');
