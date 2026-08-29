@@ -25,6 +25,7 @@ $(document).on("click", ".btn-tambah-data-kebaktian", function() {
 });
 
 
+
 $(document).on("click", "#btnOKKebaktian", function() {
 
   let base_url = $("#base_url").val()+"api/intern/";

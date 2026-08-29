@@ -49,6 +49,16 @@
                         </div>
 
                         <div class="row mb-3">
+                            <label for="slcTipe" class="col-sm-8 col-form-label">Tipe </label>
+                            <div class="col-sm-10">
+                                <select id="slcTipe" name="slcTipe" class="form-control">
+                                    <option value='Gereja'>Gereja</option>
+                                    <option value='Pospel'>Pospel</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
                             <label for="txtAlamatGereja" class="col-sm-8 col-form-label">Alamat Gereja</label>
                             <div class="col-sm-10">
                                 <input type="email" class="form-control" name="txtAlamatGereja" id="txtAlamatGereja">
@@ -92,6 +102,17 @@
                                     <option value="D-X">D-X</option>
                                     <option value="D-XI">D-XI</option>
                                     <option value="D-XII">D-XII</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="slcWilayah" class="col-sm-8 col-form-label">Wilayah</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="slcWilayah" id="slcWilayah">
+                                    <option value="W1" selected>Wilayah 1</option>
+                                    <option value="W2">Wilayah 2</option>
+                                    <option value="WP">Wilayah Pengembangan</option>
                                 </select>
                             </div>
                         </div>
@@ -154,7 +175,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="fileSK" class="col-sm-8 col-form-label">SK Penempatan (file:jpeg/max:256kb)</label>
+                            <label for="fileSK" class="col-sm-8 col-form-label">SK Penempatan (file:jpg/jpeg/max:1024kb)</label>
                             <div class="col-sm-10">
                                 <input type="file" class="form-control" name="fileSK" id="fileSK">
                             </div>

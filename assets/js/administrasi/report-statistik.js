@@ -9,7 +9,7 @@ $(document).ready(function () {
 
     var jawab = ajax_get(base_url+"report/statistik/getdata", {});
 
-    // console.log(jawab.data);
+    console.log(jawab.data);
 
     $.LoadingOverlay("show");
 
@@ -152,6 +152,39 @@ $(document).ready(function () {
         }
 
         new Chart(ctx_sebaran_pendidikan, {
+                type: 'pie',
+                data: {
+                    labels: kolom_graph,
+                    datasets: [{
+                        label: '#',
+                        data: nilai,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                        beginAtZero: true
+                        }
+                    }
+                }
+        });
+
+
+        // grafik janda duda
+        const ctx_sebaran_janda_duda = document.getElementById('PersentaseJandaDuda');
+        const data_sebaran_janda_duda = jawab.data[0]['sebaran_janda_duda'];
+        var kolom_graph = [];
+        var nilai = [];
+
+        for (const key in data_sebaran_janda_duda) {
+            if (data_sebaran_janda_duda.hasOwnProperty(key)) { // Ensures the key belongs to the object itself
+                kolom_graph.push(key);
+                nilai.push(data_sebaran_janda_duda[key]);
+            }            
+        }
+
+        new Chart(ctx_sebaran_janda_duda, {
                 type: 'pie',
                 data: {
                     labels: kolom_graph,

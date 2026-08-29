@@ -157,8 +157,10 @@ class Pendaftaran extends BaseController
 
         $gereja_id = $uuid->toString();
         $gereja = $this->request->getPost("txtNamaGereja");
+        $tipe = $this->request->getPost("slcTipe");
         $alamat = $this->request->getPost("txtAlamatGereja");
         $distrik = $this->request->getPost("slcDistrik");
+        $wilayah = $this->request->getPost("slcWilayah");
         $kabupaten_id = $this->request->getPost("slcKabKota");
         $email_gereja = $this->request->getPost("txtEmailGereja");
         $kondisi_bangunan = $this->request->getPost("slcKondisi");
@@ -191,9 +193,9 @@ class Pendaftaran extends BaseController
         $lng = $this->request->getPost("txtLong");
         
         // simpan ke tgereja 
-        $sql = "insert into tgereja (gereja_id, distrik, email, password, nama_gereja, alamat, kondisi_bangunan, kepemilikan, db_id, identity_link, path_sk, lat, lng, kabupaten_id, created_at, updated_at)";
+        $sql = "insert into tgereja (gereja_id, distrik, email, password, nama_gereja, alamat, kondisi_bangunan, kepemilikan, db_id, identity_link, path_sk, lat, lng, kabupaten_id, tipe, wilayah, created_at, updated_at)";
         $sql = $sql . " values ('".$gereja_id."','".$distrik."','".$email_gereja."','".$pwd."','".$gereja."','".$alamat."','".$kondisi_bangunan."','".$kepemilikan_bangunan."','".$db_id."'";
-        $sql = $sql . ",'".$identity_link."','".$path_img_sk."','".$lat."','".$lng."',".$kabupaten_id.",'".$created_at."','".$updated_at."')";
+        $sql = $sql . ",'".$identity_link."','".$path_img_sk."','".$lat."','".$lng."',".$kabupaten_id.",'".$tipe."','".$wilayah."','".$created_at."','".$updated_at."')";
 
         $db->query($sql);
 

@@ -115,27 +115,27 @@
                       <tr>
                         <td>Ibadah I</td>
                         <td><input type="number" value="0" /></td>
-                        <td><input type="number" value="0" /></td>
+                        <td><input type="number" min="1" step="1" max="10000000" value="0" class="uang" /></td>
                       </tr>
                       <tr>
                         <td>Ibadah II</td>
                         <td><input type="number" value="0" /></td>
-                        <td><input type="number" value="0" /></td>
+                        <td><input type="number" min="1" step="1" max="10000000" value="0" class="uang" /></td>
                       </tr>
                       <tr>
                         <td>Ibadah III</td>
                         <td><input type="number" value="0" /></td>
-                        <td><input type="number" value="0" /></td>
+                        <td><input type="number" min="1" step="1" max="10000000" value="0" class="uang" /></td>
                       </tr>
                       <tr>
                         <td>Ibadah IV</td>
                         <td><input type="number" value="0" /></td>
-                        <td><input type="number" value="0" /></td>
+                        <td><input type="number" min="1" step="1" max="10000000" value="0" class="uang" /></td>
                       </tr>
                       <tr>
                         <td>Ibadah V</td>
                         <td><input type="number" value="0" /></td>
-                        <td><input type="number" value="0" /></td>
+                        <td><input type="number" min="1" step="1" max="10000000" value="0" class="uang" /></td>
                       </tr>
                     </tbody>
                   </table>

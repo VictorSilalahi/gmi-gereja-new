@@ -105,13 +105,13 @@ $(document).on("click", ".btn-daftar", function() {
     nama_file = $("#fileSK").val();
     let cek_is_jpg = nama_extension(nama_file);
 
-    if (cek_is_jpg!="jpg") {
+    if (cek_is_jpg!="jpg" && cek_is_jpg!="jpeg") {
         pesan_error("Format file SK salah. Harus menggunakan format JPG!");
         return false;
     }
 
     // cek ukuran file
-    if (fileSize>0.25) {
+    if (fileSize>1.1) {
         pesan_error("Ukuran file terlalu besar!");
         return false;
     }
@@ -165,6 +165,7 @@ $(document).on("change", "#fileSK", function() {
         let fileSizeInBytes = this.files[0].size;
         let fileSizeInMB = (fileSizeInBytes / (1024 * 1024)).toFixed(2);
         fileSize = fileSizeInMB;
+        console.log(fileSize);
     }    
 
 });

@@ -168,6 +168,18 @@
                     </div>                  
                   </div>
 
+                  <div class="col-6">
+                    <div class="card">
+                      <div class="card-header">
+                        Grafik Persentase Janda Duda
+                      </div>
+                      <div class="card-body">
+                        <div style="height: 500px;">
+                          <canvas id="PersentaseJandaDuda"></canvas>
+                        </div>
+                      </div>
+                    </div>                  
+                  </div>
 
                 </div>
 

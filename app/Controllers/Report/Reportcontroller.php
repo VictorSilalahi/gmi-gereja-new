@@ -535,7 +535,10 @@ class Reportcontroller extends BaseController
         $jumlah_pendidikan_D3 = 0;
         $jumlah_pendidikan_S1 = 0;
         $jumlah_pendidikan_S2 = 0;
-        $jumlah_pendidikan_S3 = 0;
+        $jumlah_pendidikan_S3 = 0;  
+
+        $jumlah_janda = 0;
+        $jumlah_duda = 0;
 
         $db = $this->set_db();
 
@@ -690,7 +693,6 @@ class Reportcontroller extends BaseController
 
 
         // jemaat per sektor
-        // $sql = "select count(*) as jumlah, tsektor.no_sektor, tsektor.nama_sektor from tanggotajemaat, tjemaat, tsektor where tanggotajemaat.jemaat_id=tjemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id group by tsektor.nama_sektor and tanggotajemaat.anggotajemaat_id not in (select twafat.anggotajemaat_id from twafat)";
         $sql = "select count(*) as jumlah, tsektor.nama_sektor from tanggotajemaat, tjemaat, tsektor where tanggotajemaat.jemaat_id=tjemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id and tanggotajemaat.anggotajemaat_id not in (select twafat.anggotajemaat_id from twafat)";
 
         $sql = "select tsektor.no_sektor, tsektor.nama_sektor from tsektor";
@@ -887,6 +889,61 @@ class Reportcontroller extends BaseController
         }        
 
 
+        // janda duda
+        $sql = "select anggotajemaat_id, jemaat_id, posisi from tanggotajemaat where tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getResult();
+
+            foreach ($result as $row) {
+
+                if ($row->posisi=='Suami') {
+
+                    $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.jemaat_id=".$row->jemaat_id." and tanggotajemaat.posisi='Istri' and tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+                    
+                    $query = $db->query($sql);
+
+                    if ($query) {
+
+                        $result2 = $query->getRow();
+                        
+                        if ($result2->jumlah==0) {
+
+                            $jumlah_duda = $jumlah_duda + 1;
+
+                        }
+
+                    }
+
+                }
+
+                if ($row->posisi=='Istri') {
+
+                    $sql = "select count(*) as jumlah from tanggotajemaat where tanggotajemaat.jemaat_id=".$row->jemaat_id." and tanggotajemaat.posisi='Suami' and tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+                    
+                    $query = $db->query($sql);
+
+                    if ($query) {
+
+                        $result2 = $query->getRow();
+                        
+                        if ($result2->jumlah==0) {
+
+                            $jumlah_janda = $jumlah_janda + 1;
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }        
+
         array_push($data, 
             array(
                 "kk"=>array(
@@ -931,6 +988,10 @@ class Reportcontroller extends BaseController
                     "S2"=>$jumlah_pendidikan_S2,
                     "S3"=>$jumlah_pendidikan_S3,
                     "None"=>$jumlah_pendidikan_None
+                ),
+                "sebaran_janda_duda"=>array(
+                    "janda"=>$jumlah_janda,
+                    "duda"=>$jumlah_duda
                 )
             )
         );
