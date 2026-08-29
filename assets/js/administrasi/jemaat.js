@@ -53,11 +53,32 @@ $(document).on("change", "#slcSektor", function() {
 });
 
 
-$(document).on("click", "#slcSektorForm", function() {
+$(document).on("change", "#slcSektorForm", function() {
+
+  let base_url = $("#base_url").val()+"api/intern/";
 
   var temp = $("#slcSektorForm option:selected").text();
-  var str_sektor = temp.split("|");
-  $("#txtNIKAwal").val(str_sektor[0]);
+
+  if (temp!=='') {
+
+    var str_sektor = temp.split("|");
+
+    $("#txtNIKAwal").val(str_sektor[0]);
+
+    let sektor_id = $("#slcSektorForm").val();
+
+    let data = ajax_post(base_url+"jemaat/sektor/newkknumber", {"sektor_id": sektor_id});
+    
+    $("#txtNIKAkhir").val(data.data);
+
+
+  } else {
+
+    $("#txtNIKAwal").val("");
+    $("#txtNIKAkhir").val("");
+
+  }
+  
 
 });
 
@@ -552,7 +573,7 @@ function loadDataSektorForm() {
 
   var data = ajax_get(base_url+"sektor/all", "");
 
-  var opt = "";
+  var opt = "<option value=''></option>";
   for (var i=0; i<data['data'].length; i++) {
     opt = opt + "<option value='"+data['data'][i]['sektor_id']+"'>"+data['data'][i]['no_sektor']+"|"+data['data'][i]['nama_sektor']+"</option>";
   }

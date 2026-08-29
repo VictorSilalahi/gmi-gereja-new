@@ -4,6 +4,7 @@ namespace Config;
 
 use CodeIgniter\Config\BaseService;
 use App\Services\Catatlog;
+use App\Services\Kknumber;
 
 
 /**
@@ -40,4 +41,14 @@ class Services extends BaseService
 
         return new Catatlog();
     }
+
+    public static function kknumber(bool $getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('kknumber');
+        }
+
+        return new Kknumber();
+    }
+
 }

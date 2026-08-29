@@ -92,6 +92,22 @@ class Jemaatcontroller extends BaseController
 
     }
 
+    public function jemaat_new_kk_number()
+    {
+        $sektor_id = $this->request->getPost("sektor_id");
+        $db = $this->set_db();
+        $kknumber = Services::kknumber();
+        $kknumber->setDb($db);
+        $newkknumber = $kknumber->new_number($sektor_id);
+        return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$newkknumber
+        ]);
+
+
+
+    }
+
 
     public function jemaat_add()
     {

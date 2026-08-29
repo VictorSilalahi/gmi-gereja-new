@@ -160,7 +160,7 @@
                 </div>
                 -
                 <div class="col-sm-1">
-                  <input type="text" class="form-control" id="txtNIKAkhir">
+                  <input type="text" class="form-control" id="txtNIKAkhir" disabled>
                 </div>
 
 
@@ -353,7 +353,7 @@
                 </div>
                 -
                 <div class="col-sm-2">
-                  <input type="text" class="form-control" id="txtNIKAkhirEdit">
+                  <input type="text" class="form-control" id="txtNIKAkhirEdit" disabled>
                 </div>
 
                 <label for="txtMobilePhoneEdit" class="col-form-label col-sm-1">Mobile Phone:</label>
@@ -368,14 +368,6 @@
                 <div class="col-sm-6">
                   <input type="text" class="form-control" id="txtAlamatEdit">
                 </div>
-                <label for="slcStatusEdit" class="col-form-label col-sm-2">Status Keanggotaan Gereja:</label>
-                <div class="col-sm-2">
-                  <select class="form-select" aria-label="Default select example" id="slcStatusEdit">
-                      <option value="Aktif">Aktif</option>
-                      <option value="Tidak Aktif">Tidak Aktif</option>
-                  </select>
-                </div>
-
               </div>            
               <input type="hidden" id="txtJemaatEdit"/>
           </div>
