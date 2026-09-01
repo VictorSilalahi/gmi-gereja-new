@@ -483,6 +483,12 @@ class Jemaatcontroller extends BaseController
 
             $query = $db->query($sql);
 
+        } else {
+
+            $sql = "update tanggotajemaat set tanggal_lahir='' where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
         }
 
 
@@ -497,6 +503,12 @@ class Jemaatcontroller extends BaseController
         if ($tgl_baptis) {
 
             $sql = "update tanggotajemaat set tanggal_baptis='".$tgl_baptis."' where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+        } else {
+
+            $sql = "update tanggotajemaat set tanggal_baptis='' where anggotajemaat_id=".$anggotajemaat_id;
 
             $query = $db->query($sql);
 
@@ -526,6 +538,7 @@ class Jemaatcontroller extends BaseController
                     $sql = "update tsidi set is_sidi=".$chk_sidi." where anggotajemaat_id=".$anggotajemaat_id;
                     $db->query($sql);
 
+
                 }
 
             }
@@ -554,6 +567,26 @@ class Jemaatcontroller extends BaseController
                 if ($row->jumlah==1) {
 
                     $sql = "update tsidi set tanggal_sidi='".$tgl_sidi."' where anggotajemaat_id=".$anggotajemaat_id;
+                    $db->query($sql);
+
+                }
+
+            }
+
+        } else {
+
+            $sql = "select count(*) as jumlah from tsidi where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+            // update status sidi
+            if ($query) {
+
+                $row = $query->getRow();
+
+                if ($row->jumlah==1) {
+
+                    $sql = "update tsidi set tanggal_sidi='' where anggotajemaat_id=".$anggotajemaat_id;
                     $db->query($sql);
 
                 }
