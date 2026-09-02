@@ -121,6 +121,43 @@ class Pendaftaran extends BaseController
     }
 
 
+    public function cek_email_pendeta($email_pendeta)
+    {
+
+        $db = \Config\Database::connect();
+
+        $email = $email_pendeta;
+
+        $query = $db->query("select count(*) as jumlah from tpendeta where email='".$email."'");
+        
+        if ($query) {
+            $result = $query->getResult();
+
+            return $result->jumlah;
+        }
+
+
+    }
+
+    public function get_pendeta_id($email_pendeta)
+    {
+
+        $db = \Config\Database::connect();
+
+        $email = $email_pendeta;
+
+        $query = $db->query("select pendeta_id as jumlah from tpendeta where email='".$email_pendeta."'");
+        
+        if ($query) {
+            $result = $query->getResult();
+
+            return $result->pendeta_id;
+        }
+
+
+    }
+
+
     public function cek_gereja()
     {
 
@@ -199,9 +236,25 @@ class Pendaftaran extends BaseController
 
         $db->query($sql);
 
-        // simpan ke tpendeta 
-        $sql = "insert into tpendeta (nama, email, mobile_phone) values ('".$nama_pendeta."','".$email_pendeta."','".$mobile_phone_pendeta."')";
 
+        $check_email_pendeta = $this->cek_email_pendeta($email_pendeta);
+
+        if ($check_email_pendeta==1) {
+
+            $pendeta_id = $this->get_pendeta_id($email_pendeta);
+
+            $sql = "insert into tpenempatan (gereja_id, pendeta_id) values ('".$gereja_id."',".$pendeta_id.")";
+
+            $db->query($sql);
+
+        } else {
+
+            // simpan ke tpendeta 
+            $sql = "insert into tpendeta (nama, email, mobile_phone) values ('".$nama_pendeta."','".$email_pendeta."','".$mobile_phone_pendeta."')";
+
+            $db->query($sql);
+
+        }
         $db->query($sql);
 
         $sql = "select pendeta_id from tpendeta where email='".$email_pendeta."' and mobile_phone='".$mobile_phone_pendeta."'";
