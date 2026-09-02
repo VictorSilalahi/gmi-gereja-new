@@ -212,24 +212,24 @@
 
                 <label for="txtTanggalLahir" class="col-form-label col-sm-1">Lahir:</label>
                 <div class="col-sm-2">
-                  <input type="date" id="txtTanggalLahir">
+                  <input type="date" id="txtTanggalLahir" onkeydown="return false">
                 </div>
 
                 <div class="col-sm-2">
                   <input type="checkbox" id="chkBaptis" value="no">
                   <label for="chkBaptis" class="col-form-label col-sm-2">Baptis</label>
-                  <input type="date" id="txtTanggalBaptis" disabled />
+                  <input type="date" id="txtTanggalBaptis" onkeydown="return false" disabled />
                 </div>
 
                 <div class="col-sm-2">
                   <input type="checkbox" id="chkSidi" value="no">
                   <label for="chkSidi" class="col-form-label col-sm-2">Sidi</label>
-                  <input type="date" id="txtTanggalSidi" disabled />
+                  <input type="date" id="txtTanggalSidi" onkeydown="return false" disabled />
                 </div>
 
                 <label for="txtTanggalMenikah" class="col-form-label col-sm-1">Menikah:</label>
                 <div class="col-sm-3">
-                  <input type="date" id="txtTanggalMenikah">
+                  <input type="date" id="txtTanggalMenikah" onkeydown="return false">
                 </div>
 
                 <hr>
@@ -419,24 +419,24 @@
 
                 <label for="txtTanggalLahir" class="col-form-label col-sm-1">Lahir:</label>
                 <div class="col-sm-2">
-                  <input type="date" id="txtTanggalLahirEdit">
+                  <input type="date" id="txtTanggalLahirEdit" onkeydown='return false'>
                 </div>
 
                 <div class="col-sm-2">
                   <input type="checkbox" id="chkBaptisEdit" value="no">
                   <label for="chkBaptis" class="col-form-label col-sm-2">Baptis</label>
-                  <input type="date" id="txtTanggalBaptisEdit" disabled />
+                  <input type="date" id="txtTanggalBaptisEdit" disabled onkeydown='return false' />
                 </div>
 
                 <div class="col-sm-2">
                   <input type="checkbox" id="chkSidiEdit" value="no">
                   <label for="chkSidi" class="col-form-label col-sm-2">Sidi</label>
-                  <input type="date" id="txtTanggalSidiEdit" disabled />
+                  <input type="date" id="txtTanggalSidiEdit" disabled  onkeydown='return false'/>
                 </div>
 
                 <label for="txtTanggalMenikah" class="col-form-label col-sm-1">Menikah:</label>
                 <div class="col-sm-3">
-                  <input type="date" id="txtTanggalMenikahEdit">
+                  <input type="date" id="txtTanggalMenikahEdit" onkeydown='return false'>
                 </div>
 
                 <hr>
