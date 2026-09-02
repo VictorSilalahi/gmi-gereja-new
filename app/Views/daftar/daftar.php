@@ -52,8 +52,9 @@
                             <label for="slcTipe" class="col-sm-8 col-form-label">Tipe </label>
                             <div class="col-sm-10">
                                 <select id="slcTipe" name="slcTipe" class="form-control">
-                                    <option value='Gereja'>Gereja</option>
-                                    <option value='Pospel'>Pospel</option>
+                                    <option value='JPen'>Jemaat Penuh</option>
+                                    <option value='JPer'>Jemaat Persiapan</option>
+                                    <option value='Pospel'>Pos Pelayanan</option>
                                 </select>
                             </div>
                         </div>
