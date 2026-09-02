@@ -711,11 +711,6 @@ class Reportcontroller extends BaseController
 
 
                 }
-                // if (is_null($row->tanggal_baptis) || $row->tanggal_baptis==='0000-00-00' || $row->tanggal_baptis==='') {
-                //     $persiapan = $persiapan + 1;
-                // } else {
-                //     $penuh = $penuh + 1;
-                // }
 
             }
 
