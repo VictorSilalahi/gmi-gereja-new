@@ -16,13 +16,13 @@ class Administrasi extends BaseController
 
     public function index()
     {
-        // return view('administrasi/login');
-        return view('administrasi/under_construction');        
+        return view('administrasi/login');
+        // return view('administrasi/under_construction');        
     }
 
     public function index2()
     {
-        return view('administrasi/login');
+        // return view('administrasi/login');
     }
 
     public function logout()
