@@ -255,22 +255,6 @@ class Pendaftaran extends BaseController
             $db->query($sql);
 
         }
-        $db->query($sql);
-
-        $sql = "select pendeta_id from tpendeta where email='".$email_pendeta."' and mobile_phone='".$mobile_phone_pendeta."'";
-
-        $query = $db->query($sql);
-
-        if ($query) {
-
-            $result = $query->getRow();
-
-            // simpan ke tpenempatan 
-            $sql = "insert into tpenempatan (gereja_id, pendeta_id) values ('".$gereja_id."',".$result->pendeta_id.")";
-
-            $db->query($sql);
-
-        }
 
         $db->close();
 
