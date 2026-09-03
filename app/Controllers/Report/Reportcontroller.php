@@ -671,7 +671,7 @@ class Reportcontroller extends BaseController
 
 
         // sifat keanggotaan
-        $sql = "select tanggal_lahir, tanggal_baptis from tanggotajemaat where tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+        $sql = "select tanggotajemaat.anggotajemaat_id from tanggotajemaat where tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
 
         $query = $db->query($sql);
 
@@ -681,10 +681,35 @@ class Reportcontroller extends BaseController
 
             foreach ($result as $row) {
 
-                if (is_null($row->tanggal_baptis) || $row->tanggal_baptis==='0000-00-00' || $row->tanggal_baptis==='') {
-                    $persiapan = $persiapan + 1;
-                } else {
-                    $penuh = $penuh + 1;
+                $sql = "select tsidi.is_sidi, tsidi.tanggal_sidi from tsidi where tsidi.anggotajemaat_id=".$row->anggotajemaat_id;
+
+                $query = $db->query($sql);
+
+                // echo($query->getNumRows());
+
+                if ($query->getNumRows()==1) {
+
+                    $result2 = $query->getRow();
+
+                    if ($result2->is_sidi==true) {
+                        
+                        $penuh = $penuh + 1;  
+                    
+                    } else {
+
+                        if ($result2->tanggal_sidi!='0000-00-00') {
+
+                            $penuh = $penuh + 1;
+
+                        } else {
+
+                            $persiapan = $persiapan + 1;
+
+                        }
+
+                    }
+
+
                 }
 
             }
