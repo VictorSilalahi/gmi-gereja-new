@@ -131,7 +131,7 @@ class Pendaftaran extends BaseController
         $query = $db->query("select count(*) as jumlah from tpendeta where email='".$email."'");
         
         if ($query) {
-            $result = $query->getResult();
+            $result = $query->getRow();
 
             return $result->jumlah;
         }
@@ -146,10 +146,10 @@ class Pendaftaran extends BaseController
 
         $email = $email_pendeta;
 
-        $query = $db->query("select pendeta_id as jumlah from tpendeta where email='".$email_pendeta."'");
+        $query = $db->query("select pendeta_id from tpendeta where email='".$email_pendeta."'");
         
         if ($query) {
-            $result = $query->getResult();
+            $result = $query->getRow();
 
             return $result->pendeta_id;
         }
@@ -249,10 +249,16 @@ class Pendaftaran extends BaseController
 
         } else {
 
-            // simpan ke tpendeta 
             $sql = "insert into tpendeta (nama, email, mobile_phone) values ('".$nama_pendeta."','".$email_pendeta."','".$mobile_phone_pendeta."')";
 
             $db->query($sql);
+
+            $pendeta_id = $db->insertID();
+
+            $sql = "insert into tpenempatan (gereja_id, pendeta_id) values ('".$gereja_id."',".$pendeta_id.")";
+
+            $db->query($sql);
+
 
         }
 

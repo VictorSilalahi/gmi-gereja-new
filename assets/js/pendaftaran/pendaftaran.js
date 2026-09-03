@@ -126,12 +126,12 @@ $(document).on("click", ".btn-daftar", function() {
     }
 
     // cek keberadaan email pendeta
-    cek_ada_email = cek_keberadaan_email("pendeta", email_pendeta);
+    // cek_ada_email = cek_keberadaan_email("pendeta", email_pendeta);
     
-    if (cek_ada_email==true) {
-        pesan_error("Email Pendeta sudah terdaftar!");
-        return false;
-    }
+    // if (cek_ada_email==true) {
+    //     pesan_error("Email Pendeta sudah terdaftar!");
+    //     return false;
+    // }
 
     // cek keberadaan nama gereja di dalam distrik
     let sudah_ada_nama_gereja = cek_keberadaan_gereja(nama_gereja, distrik);
