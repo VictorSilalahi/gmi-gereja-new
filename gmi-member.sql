@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 27, 2026 at 05:43 AM
+-- Generation Time: Sep 09, 2026 at 02:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,8 +40,7 @@ CREATE TABLE `tdistrik` (
 --
 
 INSERT INTO `tdistrik` (`distrik_id`, `distrik`, `password`, `email`, `tanggal_terdaftar`) VALUES
-(4, 'D-II', 'test', 'silalahitotok@gmail.com', '2026-07-29'),
-(5, 'D-III', 'test', 'silalahitotok@gmail.com', '2026-08-04');
+(4, 'D-II', 'test', 'silalahitotok@gmail.com', '2026-07-29');
 
 -- --------------------------------------------------------
 
@@ -64,6 +63,8 @@ CREATE TABLE `tgereja` (
   `db_id` varchar(10) NOT NULL,
   `identity_link` varchar(20) NOT NULL,
   `path_sk` varchar(100) NOT NULL,
+  `tipe` varchar(20) NOT NULL,
+  `wilayah` varchar(20) NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -72,8 +73,9 @@ CREATE TABLE `tgereja` (
 -- Dumping data for table `tgereja`
 --
 
-INSERT INTO `tgereja` (`gereja_id`, `distrik`, `email`, `password`, `nama_gereja`, `alamat`, `kabupaten_id`, `lat`, `lng`, `kondisi_bangunan`, `kepemilikan`, `db_id`, `identity_link`, `path_sk`, `created_at`, `updated_at`) VALUES
-('e2946a7f-fc77-459b-82de-d6c544529f4e', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah', 1077, '3.543855', '98.600521', 'Permanen', 'Milik Sendiri', 'g-dnja1q', 'NFe1YNSUiblB', 'public/uploads/sk/1787650212_8cd89eb81abf9d9839d5.jpg', '2026-08-25', '2026-08-25');
+INSERT INTO `tgereja` (`gereja_id`, `distrik`, `email`, `password`, `nama_gereja`, `alamat`, `kabupaten_id`, `lat`, `lng`, `kondisi_bangunan`, `kepemilikan`, `db_id`, `identity_link`, `path_sk`, `tipe`, `wilayah`, `created_at`, `updated_at`) VALUES
+('e2946a7f-fc77-459b-82de-d6c544529f4e', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah', 1077, '3.543855', '98.600521', 'Permanen', 'Milik Sendiri', 'g-f9kyfz', 'NFe1YNSUiblB', 'public/uploads/sk/1787650212_8cd89eb81abf9d9839d5.jpg', '', '', '2026-08-25', '2026-08-25'),
+('7cbcd34a-af7d-48b7-9efa-1a41d441154c', 'D-II', 'victorbiz766hi@gmail.com', 'Op4AHpFM', 'GMI AAAAA', 'Jl Madong Lubis no 9 Medan', 1029, '3.5787638435716866', '98.6709907631618', 'Permanen', 'Milik Sendiri', 'g-ercy6i', 'JDKKM7yGIA64', 'public/uploads/sk/1788407774_71426211fd9ca4708cb0.jpg', 'JPen', 'W1', '2026-09-03', '2026-09-03');
 
 -- --------------------------------------------------------
 
@@ -626,7 +628,8 @@ CREATE TABLE `tpendeta` (
 --
 
 INSERT INTO `tpendeta` (`pendeta_id`, `nama`, `email`, `mobile_phone`) VALUES
-(4, 'Pdt Lubis', 'silalahitotok@gmail.com', '0860867087');
+(4, 'Pdt Lubis', 'silalahitotok@gmail.com', '0860867087'),
+(5, 'Pdt Lubis', 'batakanalyzer@gmail.com', '888777');
 
 -- --------------------------------------------------------
 
@@ -645,7 +648,8 @@ CREATE TABLE `tpenempatan` (
 --
 
 INSERT INTO `tpenempatan` (`penempatan_id`, `gereja_id`, `pendeta_id`) VALUES
-(1, 'e2946a7f-fc77-459b-82de-d6c544529f4e', 4);
+(1, 'e2946a7f-fc77-459b-82de-d6c544529f4e', 4),
+(4, '7cbcd34a-af7d-48b7-9efa-1a41d441154c', 5);
 
 -- --------------------------------------------------------
 
@@ -703,6 +707,18 @@ INSERT INTO `tprovinsi` (`provinsi_id`, `provinsi`, `id`) VALUES
 (153, 'Papua Pegunungan', '95'),
 (154, 'Papua Barat Daya', '96');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tresort`
+--
+
+CREATE TABLE `tresort` (
+  `resort_id` bigint(20) UNSIGNED NOT NULL,
+  `nama_resort` varchar(100) NOT NULL,
+  `distrik_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 --
 -- Indexes for dumped tables
 --
@@ -738,6 +754,12 @@ ALTER TABLE `tprovinsi`
   ADD UNIQUE KEY `provinsi_id` (`provinsi_id`);
 
 --
+-- Indexes for table `tresort`
+--
+ALTER TABLE `tresort`
+  ADD UNIQUE KEY `resort_id` (`resort_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -757,19 +779,25 @@ ALTER TABLE `tkabupaten`
 -- AUTO_INCREMENT for table `tpendeta`
 --
 ALTER TABLE `tpendeta`
-  MODIFY `pendeta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `pendeta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tpenempatan`
 --
 ALTER TABLE `tpenempatan`
-  MODIFY `penempatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `penempatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tprovinsi`
 --
 ALTER TABLE `tprovinsi`
   MODIFY `provinsi_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+
+--
+-- AUTO_INCREMENT for table `tresort`
+--
+ALTER TABLE `tresort`
+  MODIFY `resort_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
