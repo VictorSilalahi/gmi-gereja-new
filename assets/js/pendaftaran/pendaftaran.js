@@ -141,8 +141,18 @@ $(document).on("click", ".btn-daftar", function() {
         return false;
     }
 
-    let latLang = centerMarker.getLatLng();
+    let latLang = null;
+
+    if (centerMarker) {
+        latLang = centerMarker.getLatLng();
+        // Do something with latLng
+    } else {
+        pesan_error("Koordinat gereja pada peta tidak ada!");
+        return false;
+    }
     
+    console.log(latLang);
+
     if (latLang == null) {
         pesan_error("Koordinat gereja harus ada!");
         return false;
