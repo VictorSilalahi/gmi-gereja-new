@@ -10,6 +10,7 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>    
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
 
 <body>
     <div class="container-fluid">
@@ -122,8 +123,9 @@
                     <div class="card-body">
 
                       <div id="map" style="width:100%; height:500px"></div>
+                      <br>
                       <div>
-                        <button class="btn btn-success btn-update-koordinat-gereja">Simpan Perubahan</button>
+                        <button class="btn btn-success float-end btn-update-koordinat-gereja">Simpan Perubahan</button>
                       </div>
                     </div>
                   </div>

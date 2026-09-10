@@ -8,13 +8,31 @@ let kab_kota_per_provinsi = [];
 let lat = 0;
 let long = 0;
 
+let centerMarker = null;
+let latLang = null;
+
+let gereja_id = null;
+let nama_gereja = null;
+let alamat = null;
+let kabupaten_id = null;
+let provinsi_id = null;
+
+
 $(document).ready(function() {
 
+
   check_token();
-  
+
+  $.LoadingOverlay("show");
+
   setProvinsi();
 
+  getInfoGereja();
+
   setMap();
+
+  $.LoadingOverlay("hide");
+
 
   $(".btn-update-password").on("click", function() {
     
@@ -55,6 +73,93 @@ $(document).ready(function() {
 
 });
 
+$(document).on("click", ".btn-update-nama-gereja", function() {
+
+    let nama_gereja = '';
+
+    if ($("#txtNamaGereja").val()=='') {
+
+      alert("Masukkan nama gereja!");
+      $("#txtNamaGereja").focus();
+      return false;
+      
+    }
+
+    if (confirm("Apakah akan mengubah nama gereja?")==true) {
+
+      nama_gereja = $("#txtNamaGereja").val();
+      let temp = ajax_post(base_url+"seting/simpannamagereja", {"gereja_id": gereja_id, "nama_gereja": nama_gereja});
+
+    }
+
+
+
+});
+
+
+
+$(document).on("click", ".btn-update-alamat-gereja", function() {
+
+    let alamat_gereja = '';
+
+    if ($("#txtAlamatGereja").val()=='') {
+
+      alert("Masukkan alamat gereja!");
+      $("#txtAlamatGereja").focus();
+      return false;
+      
+    }
+
+    if (confirm("Apakah akan mengubah alamat gereja?")==true) {
+
+      alamat_gereja = $("#txtAlamatGereja").val();
+      let temp = ajax_post(base_url+"seting/simpanalamatgereja", {"gereja_id": gereja_id, "alamat_gereja": alamat_gereja});
+
+    }
+
+
+
+});
+
+
+$(document).on("click", ".btn-update-kabkota-gereja", function() {
+
+    let kabkota_gereja = $("#slcKabKota").val();
+
+    if (confirm("Apakah akan mengubah kabupaten/kota gereja?")==true) {
+
+      let temp = ajax_post(base_url+"seting/simpankabkotagereja", {"gereja_id": gereja_id, "kabkota_id": kabkota_gereja});
+
+    }
+
+
+
+});
+
+
+$(document).on("click", ".btn-update-koordinat-gereja", function() {
+
+    if (centerMarker) {
+        latLang = centerMarker.getLatLng();
+        // Do something with latLng
+    } else {
+        pesan_error("Koordinat gereja pada peta tidak ada!");
+        return false;
+    }
+    
+
+    if (confirm("Apakah akan mengubah koordinat gereja?")==true) {
+
+      let lat = latLang.lat;
+      let lng = latLang.lng;
+
+      let temp = ajax_post(base_url+"seting/simpankoordinatgereja", {"gereja_id": gereja_id, "lat": lat, "lng": lng});
+
+    }
+
+
+
+});
 
 
 function setProvinsi() {
@@ -147,8 +252,12 @@ function setMap() {
 
 function success(position) {
 
-    lat = position.coords.latitude;
-    long = position.coords.longitude;
+    // lat = position.coords.latitude;
+    // long = position.coords.longitude;
+
+    lat = lat;
+    long = long;
+    // console.log(lat, long);
 
     let map = L.map('map').setView([lat, long], 13);
 
@@ -168,4 +277,32 @@ function success(position) {
 
 function error_map() {
   alert("Sorry, posisi tidak bisa didapatkan.");
+}
+
+
+function getInfoGereja()
+{
+
+    let base_url = $("#base_url").val()+"api/intern";
+
+    let token = localStorage.getItem('4pp_t0k3n');
+    
+    var jawab = ajax_post(base_url+"/seting/getinfogereja", {"token": token});
+
+    console.log(jawab);
+
+    lat = jawab.pesan.lat;
+    long = jawab.pesan.lng;
+
+    gereja_id = jawab.pesan.gereja_id;
+    nama_gereja = jawab.pesan.nama_gereja;
+    alamat = jawab.pesan.alamat;
+    kabupaten_id = jawab.pesan.kabupaten_id;
+    provinsi_id = jawab.pesan.provinsi_id;
+
+    $("#txtNamaGereja").val(nama_gereja);
+    $("#txtAlamatGereja").val(alamat);
+    $("#slcProvinsi").val(provinsi_id).change();
+    $("#slcKabKota").val(kabupaten_id).change();
+
 }

@@ -93,6 +93,11 @@ $routes->get('/api/intern/kebaktian/checkminggu', 'Kebaktian\Kebaktiancontroller
 
 // Seting
 $routes->post('/api/intern/seting/password/change', 'Seting\Setingcontroller::password_change');
+$routes->post('/api/intern/seting/getinfogereja', 'Seting\Setingcontroller::get_info_gereja');
+$routes->post('/api/intern/seting/simpannamagereja', 'Seting\Setingcontroller::simpan_nama_gereja');
+$routes->post('/api/intern/seting/simpanalamatgereja', 'Seting\Setingcontroller::simpan_alamat_gereja');
+$routes->post('/api/intern/seting/simpankabkotagereja', 'Seting\Setingcontroller::simpan_kabkota_gereja');
+$routes->post('/api/intern/seting/simpankoordinatgereja', 'Seting\Setingcontroller::simpan_koordinat_gereja');
 
 // Report
 $routes->get('/api/intern/report/jemaat/sektor', 'Report\Reportcontroller::jemaat_sektor');
