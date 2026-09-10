@@ -35,6 +35,7 @@ $routes->get('/report/jabatan', 'Administrasi::report_jabatan');
 $routes->get('/report/kelompokumur', 'Administrasi::report_kelompok_umur');
 $routes->get('/report/pernikahan', 'Administrasi::report_pernikahan');
 $routes->get('/report/sektor', 'Administrasi::report_sektor');
+$routes->get('/report/wafat', 'Administrasi::report_wafat');
 $routes->get('/report/statistik', 'Administrasi::report_statistik');
 $routes->get('/report/statuskeanggotaan', 'Administrasi::report_status_keanggotaan');
 $routes->get('/report/ulangtahun', 'Administrasi::report_ulang_tahun');

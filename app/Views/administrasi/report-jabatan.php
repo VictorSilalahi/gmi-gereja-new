@@ -79,6 +79,9 @@
                                 <a class="nav-link" href="<?php echo(base_url()); ?>report/pernikahan">Pernikahan</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="<?php echo(base_url()); ?>report/wafat">Wafat</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="<?php echo(base_url()); ?>report/statistik">Statistik</a>
                             </li>
                         </ul>                    

@@ -207,6 +207,11 @@ class Administrasi extends BaseController
         return view('administrasi/report-pernikahan');
     }
 
+    public function report_wafat() 
+    {
+        return view('administrasi/report-wafat');
+    }
+
     public function report_statistik() 
     {
         return view('administrasi/report-statistik');
