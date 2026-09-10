@@ -8,6 +8,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>    
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 
 <body>
     <div class="container-fluid">
@@ -74,8 +76,57 @@
                     </div>
                   </div>
 
+                  <div class="card">
+                    <div class="card-header">
+                      <h2>Data Gereja</h2>
+                    </div>
+                    <div class="card-body">
 
-              
+                      <table class="table">
+                        <thead>
+                          <tr>
+                            <td>Field</td>
+                            <td>Data</td>
+                            <td>Action</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Nama Gereja</td>
+                            <td><input class="form-control" type="text" value="" id="txtNamaGereja"></td>
+                            <td><button class="btn btn-success btn-update-nama-gereja">Simpan Perubahan</button></td>
+                          </tr>
+                          <tr>
+                            <td>Alamat Gereja</td>
+                            <td><input class="form-control" type="text" value="" id="txtAlamatGereja"></td>
+                            <td><button class="btn btn-success btn-update-alamat-gereja">Simpan Perubahan</button></td>
+                          </tr>
+                          <tr>
+                            <td>Provinsi/Kab-Kota</td>
+                            <td>
+                              <select id="slcProvinsi"></select>
+                              <select id="slcKabKota"></select>
+                            </td>
+                            <td><button class="btn btn-success btn-update-kabkota-gereja">Simpan Perubahan</button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="card-header">
+                      <h2>Koordinat Lokasi Gereja</h2>
+                    </div>
+                    <div class="card-body">
+
+                      <div id="map" style="width:100%; height:500px"></div>
+                      <div>
+                        <button class="btn btn-success btn-update-koordinat-gereja">Simpan Perubahan</button>
+                      </div>
+                    </div>
+                  </div>
 
                 </div>
 
