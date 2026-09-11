@@ -93,6 +93,11 @@
                         </thead>
                         <tbody>
                           <tr>
+                            <td>Distrik</td>
+                            <td><h3><span class="badge bg-primary" id="txtDistrik"></span></h3></td>
+                            <td></td>
+                          </tr>
+                          <tr>
                             <td>Nama Gereja</td>
                             <td><input class="form-control" type="text" value="" id="txtNamaGereja"></td>
                             <td><button class="btn btn-success btn-update-nama-gereja">Simpan Perubahan</button></td>

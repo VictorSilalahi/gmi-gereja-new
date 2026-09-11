@@ -27,7 +27,7 @@ $(document).on("click", ".btn-print", function(e) {
 
 function loadDataWafat() {
 
-  var jawab = ajax_get(base_url+"report/wafat", {});
+  var jawab = ajax_get(base_url+"report/jemaat/wafat", {});
 
   $("#tblWafat tbody").html("");
   $(".btn-print").hide();
@@ -42,13 +42,15 @@ function loadDataWafat() {
     
     var no = 1;
     for (var i=0; i<jumlah; i++) {
-        isi = isi + "<tr><td>"+no+"</td><td>"+jawab['data'][i]['nama']+"</td><td>"+jawab['data'][i]['jabatan']+"</td></tr>";
+        isi = isi + "<tr><td>"+no+"</td><td>"+jawab['data'][i]['nama']+"</td><td>"+jawab['data'][i]['jk']+"</td><td>"+set_tanggal(jawab['data'][i]['tanggal_lahir'])+"</td><td>"+set_tanggal(jawab['data'][i]['tanggal_wafat'])+"</td><td>"+jawab['data'][i]['sektor']+"</td></tr>";
         no++;
     }
 
     $("#tblWafat tbody").html(isi);
   
     $(".btn-print").show();
+
+
   }
 
 

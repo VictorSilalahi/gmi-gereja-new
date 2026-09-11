@@ -11,6 +11,7 @@ let long = 0;
 let centerMarker = null;
 let latLang = null;
 
+let distrik = null;
 let gereja_id = null;
 let nama_gereja = null;
 let alamat = null;
@@ -294,12 +295,14 @@ function getInfoGereja()
     lat = jawab.pesan.lat;
     long = jawab.pesan.lng;
 
+    distrik = jawab.pesan.distrik;
     gereja_id = jawab.pesan.gereja_id;
     nama_gereja = jawab.pesan.nama_gereja;
     alamat = jawab.pesan.alamat;
     kabupaten_id = jawab.pesan.kabupaten_id;
     provinsi_id = jawab.pesan.provinsi_id;
 
+    $("#txtDistrik").text(distrik);
     $("#txtNamaGereja").val(nama_gereja);
     $("#txtAlamatGereja").val(alamat);
     $("#slcProvinsi").val(provinsi_id).change();

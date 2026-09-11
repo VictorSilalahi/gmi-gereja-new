@@ -107,6 +107,7 @@ $routes->post('/api/intern/report/jemaat/kelompokumur', 'Report\Reportcontroller
 $routes->post('/api/intern/report/jemaat/statuskeanggotaan', 'Report\Reportcontroller::status_keanggotaan');
 $routes->post('/api/intern/report/jemaat/berulangtahun', 'Report\Reportcontroller::ulang_tahun');
 $routes->post('/api/intern/report/jemaat/pernikahan', 'Report\Reportcontroller::pernikahan');
+$routes->get('/api/intern/report/jemaat/wafat', 'Report\Reportcontroller::wafat');
 $routes->get('/api/intern/report/statistik/getdata', 'Report\Reportcontroller::get_data_statistik');
 
 

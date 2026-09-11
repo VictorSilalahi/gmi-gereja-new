@@ -114,8 +114,9 @@
                             <tr>
                               <th scope="col">#</th>
                               <th scope="col">Nama</th>
+                              <th scope="col">JK</th>
                               <th scope="col">Tanggal Lahir</th>
-                              <th scope="col">Umur saat wafat</th>
+                              <th scope="col">Tanggal wafat</th>
                               <th scope="col">Sektor</th>
                             </tr>
                           </thead>

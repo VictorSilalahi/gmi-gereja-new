@@ -151,7 +151,7 @@ class Setingcontroller extends BaseController
 
             $db = \Config\Database::connect();
 
-            $sql = "select nama_gereja, alamat, lat, lng, kabupaten_id from tgereja where gereja_id='".$gereja_id."'";
+            $sql = "select nama_gereja, alamat, lat, lng, kabupaten_id, distrik from tgereja where gereja_id='".$gereja_id."'";
 
             $query = $db->query($sql);
 
@@ -163,6 +163,7 @@ class Setingcontroller extends BaseController
             $data['lat'] = $result->lat;
             $data['lng'] = $result->lng;
             $data['kabupaten_id'] = $result->kabupaten_id;
+            $data['distrik'] = $result->distrik;
 
             $sql = "select provinsi_id from tkabupaten where kabupaten_id=".$result->kabupaten_id;
 

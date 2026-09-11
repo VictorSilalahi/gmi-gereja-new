@@ -499,42 +499,58 @@ class Reportcontroller extends BaseController
     public function wafat()
     {
 
+        $data = [];
+
+        // echo("test");
+        $waktu = [];
+
+        for ($i = 0; $i < 12; $i++) {
+            // Subtract $i months from the first day of the current month
+            $timestamp = strtotime("first day of -$i months");
+            
+            // Store the formatted year and month
+            array_push($waktu, array("bulan"=>date('m', $timestamp), "tahun"=>date('Y', $timestamp)));
+            // $waktu[] = date('F Y', $timestamp);
+        }
+
+        // print_r($waktu);
         $db = $this->set_db();
 
-        $sql = "";
-        $query = $db->query($sql);
 
-        if ($query) {
+        foreach($waktu as $w) {
 
-            $result = $query->getResult();
-            $data = [];
+            $sql = "select tanggotajemaat.nama, tanggotajemaat.jk, tanggotajemaat.tanggal_lahir, twafat.tanggal_wafat, tsektor.nama_sektor from tanggotajemaat, tjemaat, twafat, tsektor where tsektor.sektor_id=tjemaat.sektor_id and tjemaat.jemaat_id=tanggotajemaat.jemaat_id and tanggotajemaat.anggotajemaat_id=twafat.anggotajemaat_id and MONTH(twafat.tanggal_wafat)='".$w['bulan']."' and YEAR(twafat.tanggal_wafat)='".$w['tahun']."'";
+            $query = $db->query($sql);
 
-            foreach($result as $row) {
+            if ($query) {
 
-                array_push($data, array(
-                        "nama"=>$row->nama, 
-                        "jabatan"=>$row->jabatan
-                    )
-                );
+                $result = $query->getResult();
 
+                $daftar = [];
+
+                foreach($result as $row) {
+
+                    array_push($data, array(
+                            "nama"=>$row->nama,
+                            "jk"=>$row->jk,
+                            "tanggal_lahir"=>$row->tanggal_lahir,
+                            "tanggal_wafat"=>$row->tanggal_wafat,
+                            "sektor"=>$row->nama_sektor
+                        )
+                    );
+
+                }
+
+                // array_push($data, array("waktu"=>$w, "meninggal"=>$daftar));
             }
 
-            return $this->respond([
-                "msg"=>"ok", 
-                "data"=>$data
-            ]);
-
-        } else {
-
-            $error = $db->error(); 
-            log_message('error', 'Query failed: ' . $error['message']);
-            return $this->respond([
-                "msg"=>"error", 
-                "pesan"=>$error['message']
-            ]);
-
-
         }
+
+        
+        return $this->respond([
+            "msg"=>"ok", 
+            "data"=>$data
+        ]);
 
 
     }
