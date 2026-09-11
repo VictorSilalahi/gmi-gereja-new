@@ -124,11 +124,12 @@ class Reportcontroller extends BaseController
         
         } else {
 
-            // log_message('error', $e->getMessage());
-            // return $this->respond([
-            //     "msg"=>"error", 
-            //     "pesan"=>$e->getMessage()
-            // ]);
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
 
         }
 
@@ -164,11 +165,12 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            // log_message('error', $e->getMessage());
-            // return $this->respond([
-            //     "msg"=>"error", 
-            //     "pesan"=>$e->getMessage()
-            // ]);
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
 
 
         }
@@ -241,11 +243,12 @@ class Reportcontroller extends BaseController
         
         } else {
 
-            // log_message('error', $e->getMessage());
-            // return $this->respond([
-            //     "msg"=>"error", 
-            //     "pesan"=>$e->getMessage()
-            // ]);
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
 
         }
 
@@ -358,11 +361,12 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            // log_message('error', $e->getMessage());
-            // return $this->respond([
-            //     "msg"=>"error", 
-            //     "pesan"=>$e->getMessage()
-            // ]);
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
 
 
         }
@@ -418,15 +422,12 @@ class Reportcontroller extends BaseController
 
         } else {
 
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
             return $this->respond([
                 "msg"=>"error", 
-                "data"=>"Error Operation"
+                "pesan"=>$error['message']
             ]);
-            // log_message('error', $e->getMessage());
-            // return $this->respond([
-            //     "msg"=>"error", 
-            //     "pesan"=>$e->getMessage()
-            // ]);
         
         }
     
@@ -482,14 +483,59 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            // log_message('error', $e->getMessage());
-            // return $this->respond([
-            //     "msg"=>"error", 
-            //     "pesan"=>$e->getMessage()
-            // ]);
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
 
         }
     
+
+    }
+
+
+    public function wafat()
+    {
+
+        $db = $this->set_db();
+
+        $sql = "";
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getResult();
+            $data = [];
+
+            foreach($result as $row) {
+
+                array_push($data, array(
+                        "nama"=>$row->nama, 
+                        "jabatan"=>$row->jabatan
+                    )
+                );
+
+            }
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$data
+            ]);
+
+        } else {
+
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
+
+
+        }
+
 
     }
 
@@ -556,11 +602,13 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            // log_message('error', $e->getMessage());
-            // return $this->respond([
-            //     "msg"=>"error", 
-            //     "pesan"=>$e->getMessage()
-            // ]);
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
+
 
         }
 
@@ -576,11 +624,12 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            // log_message('error', $e->getMessage());
-            // return $this->respond([
-            //     "msg"=>"error", 
-            //     "pesan"=>$e->getMessage()
-            // ]);
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
 
         }
 
@@ -596,11 +645,12 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            // log_message('error', $e->getMessage());
-            // return $this->respond([
-            //     "msg"=>"error", 
-            //     "pesan"=>$e->getMessage()
-            // ]);
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
 
         }
 
@@ -616,11 +666,12 @@ class Reportcontroller extends BaseController
 
         } else {
 
-            // log_message('error', $e->getMessage());
-            // return $this->respond([
-            //     "msg"=>"error", 
-            //     "pesan"=>$e->getMessage()
-            // ]);
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
 
         }
 

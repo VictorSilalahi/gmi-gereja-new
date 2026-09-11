@@ -109,22 +109,14 @@
                       <div id="bodyReport">
                         <div id="headerReport">
                         </div>
-                        <table class="table" id="tblJemaat">
+                        <table class="table" id="tblWafat">
                           <thead>
                             <tr>
-                              <th scope="col" rowspan="2">#</th>
-                              <th scope="col" rowspan="2">NIK</th>
-                              <th scope="col" rowspan="2">Alamat</th>
-                              <th scope="col" colspan="5">Anggota Keluarga</th>
-                              <th scope="col" rowspan="2">Jumlah</th>
-                              <th scope="col" rowspan="2">Status Keanggotaan</th>
-                            </tr>
-                            <tr>
+                              <th scope="col">#</th>
                               <th scope="col">Nama</th>
-                              <th scope="col">Tgl Lahir</th>
-                              <th scope="col">Tgl Baptis</th>
-                              <th scope="col">Tgl Sidi</th>
-                              <th scope="col">Tgl Menikah</th>
+                              <th scope="col">Tanggal Lahir</th>
+                              <th scope="col">Umur saat wafat</th>
+                              <th scope="col">Sektor</th>
                             </tr>
                           </thead>
                           <tbody>
