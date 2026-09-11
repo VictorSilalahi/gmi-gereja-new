@@ -541,7 +541,15 @@ class Reportcontroller extends BaseController
 
                 }
 
-                // array_push($data, array("waktu"=>$w, "meninggal"=>$daftar));
+            } else {
+
+                $error = $db->error(); 
+                log_message('error', 'Query failed: ' . $error['message']);
+                return $this->respond([
+                    "msg"=>"error", 
+                    "pesan"=>$error['message']
+                ]);
+
             }
 
         }
