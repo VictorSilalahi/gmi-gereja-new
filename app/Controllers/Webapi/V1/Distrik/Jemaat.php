@@ -35,6 +35,38 @@ class Jemaat extends BaseController
             $jumlah_kk = 0;
             $jumlah_jiwa = 0;
 
+            $gol_A = 0;
+            $gol_B = 0;
+            $gol_AB = 0;
+            $gol_O = 0;
+
+            $SD = 0;
+            $SMP = 0;
+            $SMA_SMK = 0;
+            $D3 = 0;
+            $S1 = 0;
+            $S2 = 0;
+            $S3 = 0;
+            $P_None = 0;
+
+            $ASN = 0;
+            $TNI_Polri = 0;
+            $Karyawan_Swasta = 0;
+            $Pedagang = 0;
+            $Wiraswasta = 0;
+            $Dokter = 0;
+            $Petani = 0;
+            $Pek_None = 0;
+
+            $anak_anak = 0;
+            $remaja = 0;
+            $pemuda = 0;
+            $dewasa = 0;
+            $lansia = 0;
+
+            $penuh = 0;
+            $persiapan = 0;
+
             foreach($result as $row) {
 
                 // pindah database menjadi database gereja di dalam distrik
@@ -64,37 +96,6 @@ class Jemaat extends BaseController
 
                     $result = $query->getResult();
 
-                    $gol_A = 0;
-                    $gol_B = 0;
-                    $gol_AB = 0;
-                    $gol_O = 0;
-
-                    $SD = 0;
-                    $SMP = 0;
-                    $SMA_SMK = 0;
-                    $D3 = 0;
-                    $S1 = 0;
-                    $S2 = 0;
-                    $S3 = 0;
-                    $P_None = 0;
-
-                    $ASN = 0;
-                    $TNI_Polri = 0;
-                    $Karyawan_Swasta = 0;
-                    $Pedagang = 0;
-                    $Wiraswasta = 0;
-                    $Dokter = 0;
-                    $Petani = 0;
-                    $Pek_None = 0;
-
-                    $anak_anak = 0;
-                    $remaja = 0;
-                    $pemuda = 0;
-                    $dewasa = 0;
-                    $lansia = 0;
-
-                    $penuh = 0;
-                    $persiapan = 0;
 
                     foreach($result as $row) {
 
@@ -125,7 +126,7 @@ class Jemaat extends BaseController
                             $SMP = $SMP + 1;
                         }
 
-                        if ($row->pendidikan_terakhir == 'SMA=SMK') {
+                        if ($row->pendidikan_terakhir == 'SMA-SMK') {
                             $SMA_SMK = $SMA_SMK + 1;
                         }
 
@@ -227,44 +228,44 @@ class Jemaat extends BaseController
 
                     }
 
+                    $data['jumlah_kk'] = $jumlah_kk;
+                    $data['jumlah_jiwa'] = $jumlah_jiwa;
+
+                    $data['gol_darah']['A'] = $gol_A;
+                    $data['gol_darah']['B'] = $gol_B;
+                    $data['gol_darah']['AB'] = $gol_AB;
+                    $data['gol_darah']['O'] = $gol_O;
+
+                    $data['pendidikan']['SD'] = $SD;
+                    $data['pendidikan']['SMP'] = $SMP;
+                    $data['pendidikan']['SMA_SMK'] = $SMA_SMK;
+                    $data['pendidikan']['D3'] = $D3;
+                    $data['pendidikan']['S1'] = $S1;
+                    $data['pendidikan']['S2'] = $S2;
+                    $data['pendidikan']['S3'] = $S3;
+                    $data['pendidikan']['None'] = $P_None;
+
+                    $data['pekerjaan']['ASN'] = $ASN;
+                    $data['pekerjaan']['TNI-Polri'] = $TNI_Polri;
+                    $data['pekerjaan']['Karyawan-Swasta'] = $Karyawan_Swasta;
+                    $data['pekerjaan']['Pedagang'] = $Pedagang;
+                    $data['pekerjaan']['Wiraswasta'] = $Wiraswasta;
+                    $data['pekerjaan']['Dokter'] = $Dokter;
+                    $data['pekerjaan']['Petani'] = $Petani;
+                    $data['pekerjaan']['None'] = $Pek_None;
+
+                    $data['kelompok_usia']['anak-anak'] = $anak_anak;
+                    $data['kelompok_usia']['remaja'] =  $remaja;
+                    $data['kelompok_usia']['pemuda'] = $pemuda;
+                    $data['kelompok_usia']['dewasa'] = $dewasa;
+                    $data['kelompok_usia']['lansia'] = $lansia;
+                    
+                    $data['tipe_jemaat']['penuh'] = $penuh;
+                    $data['tipe_jemaat']['persiapan'] = $persiapan;
 
 
                 }
 
-                $data['jumlah_kk'] = $jumlah_kk;
-                $data['jumlah_jiwa'] = $jumlah_jiwa;
-
-                $data['gol_darah']['A'] = $gol_A;
-                $data['gol_darah']['B'] = $gol_B;
-                $data['gol_darah']['AB'] = $gol_AB;
-                $data['gol_darah']['O'] = $gol_O;
-
-                $data['pendidikan']['SD'] = $SD;
-                $data['pendidikan']['SMP'] = $SMP;
-                $data['pendidikan']['SMA_SMK'] = $SMA_SMK;
-                $data['pendidikan']['D3'] = $D3;
-                $data['pendidikan']['S1'] = $S1;
-                $data['pendidikan']['S2'] = $S2;
-                $data['pendidikan']['S3'] = $S3;
-                $data['pendidikan']['None'] = $P_None;
-
-                $data['pekerjaan']['ASN'] = $ASN;
-                $data['pekerjaan']['TNI-Polri'] = $TNI_Polri;
-                $data['pekerjaan']['Karyawan-Swasta'] = $Karyawan_Swasta;
-                $data['pekerjaan']['Pedagang'] = $Pedagang;
-                $data['pekerjaan']['Wiraswasta'] = $Wiraswasta;
-                $data['pekerjaan']['Dokter'] = $Dokter;
-                $data['pekerjaan']['Petani'] = $Petani;
-                $data['pekerjaan']['None'] = $Pek_None;
-
-                $data['kelompok_usia']['anak-anak'] = $anak_anak;
-                $data['kelompok_usia']['remaja'] =  $remaja;
-                $data['kelompok_usia']['pemuda'] = $pemuda;
-                $data['kelompok_usia']['dewasa'] = $dewasa;
-                $data['kelompok_usia']['lansia'] = $lansia;
-                
-                $data['tipe_jemaat']['penuh'] = $penuh;
-                $data['tipe_jemaat']['persiapan'] = $persiapan;
 
 
             }
