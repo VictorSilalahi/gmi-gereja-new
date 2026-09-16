@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 09, 2026 at 02:38 PM
+-- Generation Time: Sep 16, 2026 at 02:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,6 +32,8 @@ CREATE TABLE `tdistrik` (
   `distrik` varchar(10) NOT NULL,
   `password` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `alamat` varchar(100) NOT NULL,
+  `kabupaten_id` int(11) NOT NULL,
   `tanggal_terdaftar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -39,8 +41,8 @@ CREATE TABLE `tdistrik` (
 -- Dumping data for table `tdistrik`
 --
 
-INSERT INTO `tdistrik` (`distrik_id`, `distrik`, `password`, `email`, `tanggal_terdaftar`) VALUES
-(4, 'D-II', 'test', 'silalahitotok@gmail.com', '2026-07-29');
+INSERT INTO `tdistrik` (`distrik_id`, `distrik`, `password`, `email`, `alamat`, `kabupaten_id`, `tanggal_terdaftar`) VALUES
+(6, 'D-II', 'testing', 'silalahitotok@gmail.com', 'Jl Hang Tuah no 8', 1077, '2026-09-15');
 
 -- --------------------------------------------------------
 
@@ -74,7 +76,7 @@ CREATE TABLE `tgereja` (
 --
 
 INSERT INTO `tgereja` (`gereja_id`, `distrik`, `email`, `password`, `nama_gereja`, `alamat`, `kabupaten_id`, `lat`, `lng`, `kondisi_bangunan`, `kepemilikan`, `db_id`, `identity_link`, `path_sk`, `tipe`, `wilayah`, `created_at`, `updated_at`) VALUES
-('e2946a7f-fc77-459b-82de-d6c544529f4e', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah', 1077, '3.543855', '98.600521', 'Permanen', 'Milik Sendiri', 'g-f9kyfz', 'NFe1YNSUiblB', 'public/uploads/sk/1787650212_8cd89eb81abf9d9839d5.jpg', '', '', '2026-08-25', '2026-08-25'),
+('e2946a7f-fc77-459b-82de-d6c544529f4e', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah No 8', 1077, '3.5912055651852026', '98.62692832946777', 'Permanen', 'Milik Sendiri', 'g-f9kyfz', 'NFe1YNSUiblB', 'public/uploads/sk/1787650212_8cd89eb81abf9d9839d5.jpg', '', '', '2026-08-25', '2026-08-25'),
 ('7cbcd34a-af7d-48b7-9efa-1a41d441154c', 'D-II', 'victorbiz766hi@gmail.com', 'Op4AHpFM', 'GMI AAAAA', 'Jl Madong Lubis no 9 Medan', 1029, '3.5787638435716866', '98.6709907631618', 'Permanen', 'Milik Sendiri', 'g-ercy6i', 'JDKKM7yGIA64', 'public/uploads/sk/1788407774_71426211fd9ca4708cb0.jpg', 'JPen', 'W1', '2026-09-03', '2026-09-03');
 
 -- --------------------------------------------------------
@@ -767,7 +769,7 @@ ALTER TABLE `tresort`
 -- AUTO_INCREMENT for table `tdistrik`
 --
 ALTER TABLE `tdistrik`
-  MODIFY `distrik_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `distrik_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tkabupaten`

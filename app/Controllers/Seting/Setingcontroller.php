@@ -173,6 +173,15 @@ class Setingcontroller extends BaseController
 
             $data['provinsi_id'] = $result->provinsi_id;
 
+            $sql = "select tpendeta.nama, tpendeta.email from tpendeta, tpenempatan where tpendeta.pendeta_id=tpenempatan.pendeta_id and tpenempatan.gereja_id='".$gereja_id."'";
+
+            $query = $db->query($sql);
+
+            $result = $query->getRow();
+
+            $data['pimpinan_jemaat'] = array("nama"=>$result->nama, "email"=>$result->email);
+
+
             return $this->respond([
                     'msg'  => "ok",
                     'pesan' => $data

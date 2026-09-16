@@ -86,15 +86,20 @@
                       <table class="table">
                         <thead>
                           <tr>
-                            <td>Field</td>
-                            <td>Data</td>
-                            <td>Action</td>
+                            <td class="fw-bold">Field</td>
+                            <td class="fw-bold">Data</td>
+                            <td class="fw-bold">Action</td>
                           </tr>
                         </thead>
                         <tbody>
                           <tr>
                             <td>Distrik</td>
                             <td><h3><span class="badge bg-primary" id="txtDistrik"></span></h3></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <td>Pimpinan Jemaat</td>
+                            <td><h3><span class="badge bg-info" id="pimpinan_jemaat"></span></h3></td>
                             <td></td>
                           </tr>
                           <tr>
