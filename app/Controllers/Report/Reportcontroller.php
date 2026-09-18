@@ -805,7 +805,7 @@ class Reportcontroller extends BaseController
 
             foreach($result as $row) {
 
-                $sql = "select count(*) as jumlah from tanggotajemaat, tjemaat, tsektor where tanggotajemaat.jemaat_id=tjemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id and tsektor.no_sektor='".$row->no_sektor."'";
+                $sql = "select count(*) as jumlah from tanggotajemaat, tjemaat, tsektor where tanggotajemaat.jemaat_id=tjemaat.jemaat_id and tjemaat.sektor_id=tsektor.sektor_id and tsektor.no_sektor='".$row->no_sektor."' and tanggotajemaat.anggotajemaat_id not in (select twafat.anggotajemaat_id from twafat)";
 
                 $query2 = $db->query($sql);
 

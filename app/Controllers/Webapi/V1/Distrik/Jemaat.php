@@ -88,7 +88,7 @@ class Jemaat extends BaseController
 
                 $golongan_darah = [];
 
-                $sql = "select golongan_darah, pendidikan_terakhir, pekerjaan, tanggal_lahir, tanggal_baptis from tanggotajemaat where anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+                $sql = "select tanggotajemaat.golongan_darah, tanggotajemaat.pendidikan_terakhir, tanggotajemaat.pekerjaan, tanggotajemaat.tanggal_lahir, tanggotajemaat.tanggal_baptis, tsidi.is_sidi, tsidi.tanggal_sidi from tanggotajemaat, tsidi where tanggotajemaat.anggotajemaat_id=tsidi.anggotajemaat_id and tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
 
                 $query = $db->query($sql);
 
@@ -218,7 +218,7 @@ class Jemaat extends BaseController
 
                         
                         // tipe keaonggotaan (persiapan/penuh)
-                        if ($row->tanggal_baptis) {
+                        if ($row->is_sidi) {
                             $penuh = $penuh + 1;
                         } else {
                             $persiapan = $persiapan + 1;
