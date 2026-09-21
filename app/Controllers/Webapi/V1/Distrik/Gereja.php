@@ -65,6 +65,67 @@ class Gereja extends BaseController
 
     }
 
+
+    public function resort_all()
+    {
+
+        $distrik = $this->request->getPost("distrik");
+
+        $sql = "select distrik_id from tdistrik where distrik='".$distrik."'";
+
+        $db = $this->activate_db();
+
+        $query = $db->query($sql);
+
+        $data = [];
+
+        if ($query) {
+
+            $result = $query->getRow();
+
+            $sql = "select tresort.resort_id, tresort.nama_resort, count(tanggotaresort.anggotaresort_id) as jumlah_gereja from tresort, tanggotaresort where tresort.resort_id=tanggotaresort.resort_id and tresort.distrik_id=".$result->distrik_id." group by tresort.resort_id";
+
+            $query = $db->query($sql);
+
+            if ($query) {
+
+                $result = $query->getResult();
+
+                foreach($result as $res) {
+
+                    array_push($data, array(
+                        "resort_id"=>$res->resort_id,
+                        "nama_resort"=>$res->nama_resort,
+                        "jumlah_gereja"=>$res->jumlah_gereja
+                    ));
+                }
+
+                return $this->respond([
+                    "msg"=>"ok", 
+                    "data"=>$data
+                ]);
+
+
+            }
+
+        } else {
+
+            $error = $db->error();    
+
+            log_message('error', 'Query failed: ' . $error['message']);
+
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
+        
+        }
+
+
+    }
+
+
+
     public function activate_db()
     {
 
