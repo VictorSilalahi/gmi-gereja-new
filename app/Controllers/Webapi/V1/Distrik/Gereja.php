@@ -55,16 +55,132 @@ class Gereja extends BaseController
 
         } else {
 
-            log_message('error', $e->getMessage());
+            $error = $db->error();    
+            log_message('error', 'Query failed: ' . $error['message']);
             return $this->respond([
                 "msg"=>"error", 
-                "pesan"=>$e->getMessage()
+                "pesan"=>$error['message']
             ]);
 
         }
 
     }
 
+    public function resort_edit()
+    {
+
+        $nama_resort = $this->request->getPost("nama_resort");
+
+        $resort_id = $this->request->getPost("resort_id");
+
+        $db = $this->activate_db();
+
+        $sql = "update tresort set nama_resort='".$nama_resort."' where resort_id=".$resort_id;
+
+        $query = $db->query($sql);
+        
+        if ($query) {
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>""
+            ]);
+
+        } else {
+
+                $error = $db->error();    
+                log_message('error', 'Query failed: ' . $error['message']);
+                return $this->respond([
+                    "msg"=>"error", 
+                    "pesan"=>$error['message']
+                ]);
+
+        }
+
+
+    }
+
+
+   
+    public function resort_add()
+    {
+
+        $nama_resort = $this->request->getPost("nama_resort");
+
+        $distrik = $this->request->getPost("distrik");
+
+        $db = $this->activate_db();
+
+        $sql = "select distrik_id from tdistrik where distrik='".$distrik."'";
+
+        $query = $db->query($sql);
+        
+        if ($query) {
+
+            $result = $query->getRow();
+
+            $sql = "insert into tresort (nama_resort, distrik_id) values ('".$nama_resort."',".$result->distrik_id.")";
+
+            $query = $db->query($sql);
+
+            if ($query) {
+
+                return $this->respond([
+                    "msg"=>"ok", 
+                    "data"=>""
+                ]);
+
+            } else {
+
+                $error = $db->error();    
+                log_message('error', 'Query failed: ' . $error['message']);
+                return $this->respond([
+                    "msg"=>"error", 
+                    "pesan"=>$error['message']
+                ]);
+
+            }
+
+
+        }
+
+
+
+
+    }
+
+    public function resort_del()
+    {
+
+        $resort_id = $this->request->getPost("resort_id");
+
+        $sql = "delete from tresort where resort_id=".$resort_id;
+
+        $db = $this->activate_db();
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>""
+            ]);
+
+        } else {
+
+            $error = $db->error();    
+
+            log_message('error', 'Query failed: ' . $error['message']);
+
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
+
+        }
+
+    }
 
     public function resort_all()
     {

@@ -120,6 +120,9 @@ $routes->group('webapi', static function ($routes) {
             $routes->get('distrik/jemaat/gereja/(:segment)', 'Webapi\V1\Distrik\Jemaat::jemaat_gereja/$1');
             $routes->post('distrik/gereja/all', 'Webapi\V1\Distrik\Gereja::gereja_all');
             $routes->post('distrik/resort/all', 'Webapi\V1\Distrik\Gereja::resort_all');
+            $routes->post('distrik/resort/del', 'Webapi\V1\Distrik\Gereja::resort_del');
+            $routes->post('distrik/resort/add', 'Webapi\V1\Distrik\Gereja::resort_add');
+            $routes->post('distrik/resort/edit', 'Webapi\V1\Distrik\Gereja::resort_edit');
             $routes->post('distrik/gereja/aktifitas/all', 'Webapi\V1\Distrik\Jemaat::aktifitas_user');
         });
 });
