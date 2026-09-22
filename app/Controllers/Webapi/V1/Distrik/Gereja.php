@@ -83,7 +83,7 @@ class Gereja extends BaseController
 
             $result = $query->getRow();
 
-            $sql = "select tresort.resort_id, tresort.nama_resort, count(tanggotaresort.anggotaresort_id) as jumlah_gereja from tresort, tanggotaresort where tresort.resort_id=tanggotaresort.resort_id and tresort.distrik_id=".$result->distrik_id." group by tresort.resort_id";
+            $sql = "select tresort.resort_id, tresort.nama_resort from tresort where tresort.distrik_id=".$result->distrik_id;
 
             $query = $db->query($sql);
 
@@ -93,10 +93,16 @@ class Gereja extends BaseController
 
                 foreach($result as $res) {
 
+                    $sql = "select count(*) as jumlah_gereja from tanggotaresort where resort_id=".$res->resort_id;
+
+                    $query3 = $db->query($sql);
+
+                    $result3 = $query3->getRow();
+
                     array_push($data, array(
                         "resort_id"=>$res->resort_id,
                         "nama_resort"=>$res->nama_resort,
-                        "jumlah_gereja"=>$res->jumlah_gereja
+                        "jumlah_gereja"=>$result3->jumlah_gereja
                     ));
                 }
 
