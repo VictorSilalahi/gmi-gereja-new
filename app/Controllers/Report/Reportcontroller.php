@@ -1136,6 +1136,4 @@ class Reportcontroller extends BaseController
 
     }
 
-
-
 }
