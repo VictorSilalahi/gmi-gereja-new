@@ -305,6 +305,18 @@ class Gereja extends BaseController
 
         $data = [];
 
+        $jenis_gereja = '';
+
+        $pimpinan_jemaat = '';
+        $mobile_phone_pimpinan_jemaat = '';
+        $email_pimpinan_jemaat = '';
+
+        $nama_gereja = '';
+        $alamat = '';
+        $kondisi = '';
+        $kepemilikan = '';
+        $tipe = '';
+
         $jumlah_kk_aktif = 0;
         $jumlah_kk_tidak_aktif = 0;
 
@@ -349,10 +361,64 @@ class Gereja extends BaseController
 
         $gereja_id = $this->request->getPost("gereja_id");
 
-        $sql = "select db_id from tgereja where gereja_id='".$gereja_id."'";
 
         $db = $this->activate_db();
 
+        $sql = "select nama_gereja, alamat, kondisi_bangunan, kepemilikan, tipe from tgereja where gereja_id='".$gereja_id."'";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $kondisi = $result->kondisi_bangunan;
+            $kepemilikan = $result->kepemilikan;
+            if ($result->tipe=='JPen') {
+                $tipe = 'Jemaat Penuh';
+            }
+
+            if ($result->tipe=='JPer') {
+                $tipe = 'Jemaat Persiapan';
+            }
+
+            if ($result->tipe=='Pospel') {
+                $tipe = 'Pos Pelayanan';
+            }
+
+            $nama_gereja = $result->nama_gereja;
+            $alamat = $result->alamat;
+
+        } else {
+
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                    "msg"=>"error", 
+                    "pesan"=>$error['message']
+            ]);
+
+        }
+
+        $sql = "select tpendeta.nama, tpendeta.email, tpendeta.mobile_phone from tpendeta, tpenempatan where tpendeta.pendeta_id=tpenempatan.pendeta_id and tpenempatan.gereja_id='".$gereja_id."'";
+        $query = $db->query($sql);
+        if ($query) {
+
+            $result = $query->getRow();
+            $pimpinan_jemaat = $result->nama;
+            $mobile_phone_pimpinan_jemaat = $result->mobile_phone;
+            $email_pimpinan_jemaat = $result->email;
+
+        } else {
+
+            $error = $db->error(); 
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                    "msg"=>"error", 
+                    "pesan"=>$error['message']
+            ]);
+
+        }
+        
+
+        $sql = "select db_id from tgereja where gereja_id='".$gereja_id."'";
         $query = $db->query($sql);
 
         if ($query) {
@@ -494,7 +560,7 @@ class Gereja extends BaseController
             }
 
 
-        // sifat keanggotaan
+            // sifat keanggotaan
             $sql = "select tanggotajemaat.anggotajemaat_id from tanggotajemaat where tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
 
             $query = $db->query($sql);
@@ -793,9 +859,23 @@ class Gereja extends BaseController
 
             }                    
 
+            // data aktifitas per 12 bulan terakhir
+            $aktifitas = $this->aktifitas_gereja($db);
 
             array_push($data, 
                 array(
+                    "pimpinan_jemaat"=>array(
+                        "nama"=>$pimpinan_jemaat,
+                        "email"=>$email_pimpinan_jemaat,
+                        "mobile_phone"=>$mobile_phone_pimpinan_jemaat
+                    ),
+                    "gereja"=>array(
+                        "nama_gereja"=>$nama_gereja,
+                        "alamat"=>$alamat,
+                        "kepemilikan"=>$kepemilikan,
+                        "kondisi"=>$kondisi,
+                        "tipe"=>$tipe  
+                    ),
                     "kk"=>array(
                         "jumlah kk jemaat aktif"=>$jumlah_kk_aktif, 
                         "jumlah kk jemaat tidak aktif"=>$jumlah_kk_tidak_aktif
@@ -842,7 +922,8 @@ class Gereja extends BaseController
                     "sebaran_janda_duda"=>array(
                         "janda"=>$jumlah_janda,
                         "duda"=>$jumlah_duda
-                    )
+                    ),
+                    "aktifitas"=>$aktifitas
                 )
             );
 
@@ -853,9 +934,54 @@ class Gereja extends BaseController
 
         }
 
+    }
 
+
+    public function aktifitas_gereja($db)
+    {
+
+        $bulan_mundur = 12;
+        $waktu_sekarang = Time::now();
+
+        $data = [];
+
+        $operasi = ['tambah', 'ubah', 'hapus'];
+        $tujuan = ['jemaat', 'jabatan', 'pejabat', 'organisasi', 'anggota-organisasi', 'kegiatan', 'kebaktian'];
+        
+        for ($i=0; $i<$bulan_mundur; $i++) {
+
+            $waktu_hitung = $waktu_sekarang->subMonths($i);
+                                        
+            $m = $waktu_hitung->month;
+            $y = $waktu_hitung->year;
+
+            $deskripsi = [];
+
+            foreach($tujuan as $t) {
+            
+                        foreach($operasi as $o) {
+
+                            $sql = "select count(*) as jumlah from thistoryapp where tujuan='".$t."' and operasi='".$o."' and MONTH(tanggal_operasi)=".$m." and YEAR(tanggal_operasi)=".$y;
+                            $query = $db->query($sql);
+                            $result = $query->getRow();
+                            $deskripsi[$t][$o] = $result->jumlah;
+
+                        }
+
+            }
+
+            array_push($data, array(
+                            "masa_waktu"=>$m."-".$y,
+                            "data"=>$deskripsi
+            ));
+
+        }
+
+        return $data;
 
     }
+
+
 
     public function activate_db()
     {
