@@ -249,6 +249,59 @@ class Gereja extends BaseController
 
     }
 
+    public function gereja_non_resort()
+    {
+
+            $distrik = $this->request->getPost("distrik");
+
+
+            $data = [];
+
+            $db = $this->activate_db();
+
+            $sql = "select tgereja.gereja_id, tgereja.nama_gereja, tgereja.alamat from tgereja where tgereja.distrik='".$distrik."' and tgereja.gereja_id not in (select gereja_id from tanggotaresort)";
+
+            $query = $db->query($sql);
+
+            if ($query) {
+
+                $result = $query->getResult();
+
+                foreach($result as $res) {
+
+                    array_push($data, array(
+
+                        "gereja_id"=>$res->gereja_id,
+                        "nama_gereja"=>$res->nama_gereja,
+                        "alamat"=>$res->alamat
+
+                    ));
+                }
+
+                return $this->respond([
+                    "msg"=>"ok", 
+                    "data"=>$data
+                ]);
+
+
+            } else {
+
+                $error = $db->error();    
+
+                log_message('error', 'Query failed: ' . $error['message']);
+
+                return $this->respond([
+                    "msg"=>"error", 
+                    "pesan"=>$error['message']
+                ]);
+
+
+            }
+
+
+    }
+
+
     public function resort_gereja()
     {
 
