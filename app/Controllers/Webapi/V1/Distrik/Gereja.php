@@ -1036,6 +1036,70 @@ class Gereja extends BaseController
     }
 
 
+    public function provinsi()
+    {
+
+        $db = \Config\Database::connect();
+        $sql = "select provinsi_id, provinsi from tprovinsi";
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            
+            $result = $query->getResult();
+            $data_provinsi = [];
+
+            foreach($result as $row) {
+
+                array_push($data_provinsi, ["provinsi_id"=>$row->provinsi_id, "provinsi"=>$row->provinsi]);
+
+            }
+            $data = array("status"=>"ok", "judul"=>"data provinsi", "data"=>$data_provinsi);
+            return $this->respond($data, 200);
+
+
+        } else {
+            $data = array("status"=>"error", "judul"=>"data provinsi", "pesan"=>"Error operasi!");
+            return $this->respond($data, 422);
+        }
+
+
+    }
+
+    public function kabkota()
+    {
+
+        $provinsi_id = $this->request->getPost("provinsi_id");
+
+        $db = \Config\Database::connect();
+        $sql = "select kabupaten_id, kabupaten from tkabupaten where provinsi_id=".$provinsi_id;
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            
+            $result = $query->getResult();
+            $data_kabupaten = [];
+
+            foreach($result as $row) {
+
+                array_push($data_kabupaten, ["kabupaten_id"=>$row->kabupaten_id, "kabupaten"=>$row->kabupaten]);
+
+            }
+            $data = array("status"=>"ok", "judul"=>"data kabupaten", "data"=>$data_kabupaten);
+            return $this->respond($data, 200);
+
+
+        } else {
+            $data = array("status"=>"error", "judul"=>"data kabupaten", "pesan"=>"Error operasi!");
+            return $this->respond($data, 422);
+        }
+
+
+    }
+        
 
     public function activate_db()
     {
