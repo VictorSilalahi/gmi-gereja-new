@@ -503,6 +503,7 @@ class Gereja extends BaseController
         }
 
         $sql = "select tpendeta.nama, tpendeta.email, tpendeta.mobile_phone from tpendeta, tpenempatan where tpendeta.pendeta_id=tpenempatan.pendeta_id and tpenempatan.gereja_id='".$gereja_id."'";
+        // echo($sql);
         $query = $db->query($sql);
         if ($query) {
 
