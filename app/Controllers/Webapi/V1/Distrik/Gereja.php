@@ -364,7 +364,6 @@ class Gereja extends BaseController
         foreach($daftar as $d) {
             
             $sql = "delete from tanggotaresort where anggotaresort_id=".$d['anggotaresort_id'];
-            echo($sql);
 
             $db->query($sql);
 
