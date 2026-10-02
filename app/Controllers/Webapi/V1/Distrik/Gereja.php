@@ -354,6 +354,58 @@ class Gereja extends BaseController
     }
 
 
+    public function resort_member_out()
+    {
+
+        $daftar = $this->request->getPost("daftar");
+
+        $db = $this->activate_db();
+
+        foreach($daftar as $d) {
+            
+            $sql = "delete from tanggotaresort where anggotaresort_id=".$d['anggotaresort_id'];
+            echo($sql);
+
+            $db->query($sql);
+
+        }
+
+        return $this->respond([
+                "msg"=>"ok", 
+                "data"=>"Penghapusan anggota resort berhasil."
+        ]);
+
+
+    }
+
+
+   public function resort_member_in()
+    {
+
+        $daftar = $this->request->getPost("daftar");
+
+        $resort_id = $this->request->getPost("resort_id");
+
+        $db = $this->activate_db();
+
+        foreach($daftar as $d) {
+            
+            $sql = "insert into tanggotaresort (gereja_id, resort_id) values ('".$d['gereja_id']."',".$resort_id.")";
+
+            $db->query($sql);
+
+        }
+
+        return $this->respond([
+                "msg"=>"ok", 
+                "data"=>"Penginputan anggota resort berhasil."
+        ]);
+
+
+    }
+    
+    
+
     public function gereja_detail()
     {
 
