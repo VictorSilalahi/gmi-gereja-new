@@ -463,6 +463,8 @@ class Gereja extends BaseController
         $jumlah_janda = 0;
         $jumlah_duda = 0;
 
+        $jumlah_jemaat_perbulan = null;
+
 
         $gereja_id = $this->request->getPost("gereja_id");
 
@@ -524,6 +526,9 @@ class Gereja extends BaseController
         }
         
 
+        $jumlah_jemaat_perbulan = $this->jumlah_jemaat_perbulan($gereja_id, $db);
+
+
         $sql = "select db_id from tgereja where gereja_id='".$gereja_id."'";
         $query = $db->query($sql);
 
@@ -532,7 +537,6 @@ class Gereja extends BaseController
             $result = $query->getRow();
 
             $db->setDatabase($result->db_id);
-
 
             // mencari anggota KK aktif/tidak aktif dan anggota KK aktif/tidak aktif
             // kk aktif
@@ -1029,7 +1033,8 @@ class Gereja extends BaseController
                         "janda"=>$jumlah_janda,
                         "duda"=>$jumlah_duda
                     ),
-                    "aktifitas"=>$aktifitas
+                    "aktifitas"=>$aktifitas,
+                    "jumlah_jemaat_perbulan"=>$jumlah_jemaat_perbulan
                 )
             );
 
@@ -1042,6 +1047,56 @@ class Gereja extends BaseController
 
     }
 
+
+    public function jumlah_jemaat_perbulan($gereja_id, $db)
+    {
+
+        $bulan_mundur = 12;
+        $waktu_sekarang = Time::now();
+
+        $data = [];
+
+        for ($i=0; $i<$bulan_mundur; $i++) {
+
+            $waktu_hitung = $waktu_sekarang->subMonths($i);
+                                        
+            $m = $waktu_hitung->month;
+            $y = $waktu_hitung->year;
+
+            $jumlah = 0;
+
+            $sql = "select jumlah from tjumlahjemaat where gereja_id='".$gereja_id."' and MONTH(tanggal)=".$m." and YEAR(tanggal)=".$y;
+
+            $query = $db->query($sql);
+
+            if ($query->getNumRows()==1) {
+
+                $result = $query->getRow();
+
+                array_push($data, array(
+                        "masa_waktu"=>$m."-".$y,
+                        "jumlah"=>(int)$result->jumlah
+                ));
+                
+            } else {
+
+                array_push($data, array(
+                        "masa_waktu"=>$m."-".$y,
+                        "jumlah"=>0
+                ));
+
+
+            } 
+
+
+
+
+        }
+
+        return $data;
+
+
+    }
 
     public function aktifitas_gereja($db)
     {
