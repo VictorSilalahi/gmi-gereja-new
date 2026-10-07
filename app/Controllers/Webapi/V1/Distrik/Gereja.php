@@ -39,7 +39,7 @@ class Gereja extends BaseController
                 array_push($data, array(
                     "gereja_id"=>$row->gereja_id,
                     "email"=>$row->email,
-                    "nama_gereja"=>$row->email,
+                    "nama_gereja"=>$row->nama_gereja,
                     "alamat"=>$row->alamat,
                     "kondisi_bangunan"=>$row->kondisi_bangunan,
                     "kepemilikan"=>$row->kepemilikan,
