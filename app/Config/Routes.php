@@ -93,6 +93,10 @@ $routes->get('/api/intern/kebaktian/bulanini', 'Kebaktian\Kebaktiancontroller::k
 $routes->post('/api/intern/kebaktian/add', 'Kebaktian\Kebaktiancontroller::kebaktian_add');
 $routes->get('/api/intern/kebaktian/checkminggu', 'Kebaktian\Kebaktiancontroller::check_kebaktian_hari_minggu');
 
+// Fasilitas
+$routes->post('/api/intern/fasilitas', 'Fasilitas\Fasilitascontroller::fasilitas');
+
+
 // Seting
 $routes->post('/api/intern/seting/password/change', 'Seting\Setingcontroller::password_change');
 $routes->post('/api/intern/seting/getinfogereja', 'Seting\Setingcontroller::get_info_gereja');

@@ -131,6 +131,6 @@
 
     <input type="hidden" id="base_url" value="<?php echo(base_url()); ?>">
 </body>
-  <script src="<?php echo(base_url()); ?>assets/js/administrasi/kegiatan.js" type="module"></script>
+  <script src="<?php echo(base_url()); ?>assets/js/administrasi/fasilitas.js" type="module"></script>
 
 </html>
