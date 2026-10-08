@@ -21,7 +21,7 @@ $(document).on("click", ".form-check-input", function () {
 
   let field_name = $(this).attr("id");
 
-  
+    
 
 
 });
