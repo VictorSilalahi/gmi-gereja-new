@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 16, 2026 at 02:08 PM
+-- Generation Time: Oct 08, 2026 at 11:42 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `gmi-member`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tanggotaresort`
+--
+
+CREATE TABLE `tanggotaresort` (
+  `anggotaresort_id` bigint(20) UNSIGNED NOT NULL,
+  `resort_id` int(11) NOT NULL,
+  `gereja_id` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tanggotaresort`
+--
+
+INSERT INTO `tanggotaresort` (`anggotaresort_id`, `resort_id`, `gereja_id`) VALUES
+(15, 6, '7cbcd34a-af7d-48b7-9efa-1a41d441154f'),
+(16, 6, '7cbcd34a-af7d-48b7-9efa-1a41d441154g'),
+(32, 1, '7cbcd34a-af7d-48b7-9efa-1a41d441154c'),
+(34, 5, 'e2946a7f-fc77-459b-82de-d6c544529f4e'),
+(35, 5, '7cbcd34a-af7d-48b7-9efa-1a41d441154e');
 
 -- --------------------------------------------------------
 
@@ -42,7 +65,7 @@ CREATE TABLE `tdistrik` (
 --
 
 INSERT INTO `tdistrik` (`distrik_id`, `distrik`, `password`, `email`, `alamat`, `kabupaten_id`, `tanggal_terdaftar`) VALUES
-(6, 'D-II', 'testing', 'silalahitotok@gmail.com', 'Jl Hang Tuah no 8', 1077, '2026-09-15');
+(6, 'D-II', 'testing', 'silalahitotok@gmail.com', 'Jl Hang Tuah no 8666', 1077, '2026-09-15');
 
 -- --------------------------------------------------------
 
@@ -67,6 +90,13 @@ CREATE TABLE `tgereja` (
   `path_sk` varchar(100) NOT NULL,
   `tipe` varchar(20) NOT NULL,
   `wilayah` varchar(20) NOT NULL,
+  `Gedung_Gereja` tinyint(1) NOT NULL,
+  `Pastori` tinyint(1) NOT NULL,
+  `Gedung_Sekolah_Minggu` tinyint(1) NOT NULL,
+  `Sekolah` tinyint(1) NOT NULL,
+  `Gedung_Serba_Guna` tinyint(1) NOT NULL,
+  `Lahan_Kosong` tinyint(1) NOT NULL,
+  `Pemakaman` tinyint(1) NOT NULL,
   `created_at` date NOT NULL,
   `updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -75,9 +105,32 @@ CREATE TABLE `tgereja` (
 -- Dumping data for table `tgereja`
 --
 
-INSERT INTO `tgereja` (`gereja_id`, `distrik`, `email`, `password`, `nama_gereja`, `alamat`, `kabupaten_id`, `lat`, `lng`, `kondisi_bangunan`, `kepemilikan`, `db_id`, `identity_link`, `path_sk`, `tipe`, `wilayah`, `created_at`, `updated_at`) VALUES
-('e2946a7f-fc77-459b-82de-d6c544529f4e', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah No 8', 1077, '3.5912055651852026', '98.62692832946777', 'Permanen', 'Milik Sendiri', 'g-f9kyfz', 'NFe1YNSUiblB', 'public/uploads/sk/1787650212_8cd89eb81abf9d9839d5.jpg', '', '', '2026-08-25', '2026-08-25'),
-('7cbcd34a-af7d-48b7-9efa-1a41d441154c', 'D-II', 'victorbiz766hi@gmail.com', 'Op4AHpFM', 'GMI AAAAA', 'Jl Madong Lubis no 9 Medan', 1029, '3.5787638435716866', '98.6709907631618', 'Permanen', 'Milik Sendiri', 'g-ercy6i', 'JDKKM7yGIA64', 'public/uploads/sk/1788407774_71426211fd9ca4708cb0.jpg', 'JPen', 'W1', '2026-09-03', '2026-09-03');
+INSERT INTO `tgereja` (`gereja_id`, `distrik`, `email`, `password`, `nama_gereja`, `alamat`, `kabupaten_id`, `lat`, `lng`, `kondisi_bangunan`, `kepemilikan`, `db_id`, `identity_link`, `path_sk`, `tipe`, `wilayah`, `Gedung_Gereja`, `Pastori`, `Gedung_Sekolah_Minggu`, `Sekolah`, `Gedung_Serba_Guna`, `Lahan_Kosong`, `Pemakaman`, `created_at`, `updated_at`) VALUES
+('e2946a7f-fc77-459b-82de-d6c544529f4e', 'D-II', 'silalahitotok@gmail.com', 'testing', 'GMI Kasih Karunia', 'Jl Hang Tuah no 8666', 1077, '3.5912055651852026', '98.62692832946777', 'Permanen', 'Milik Sendiri', 'g-f9kyfz', 'NFe1YNSUiblB', 'public/uploads/sk/1787650212_8cd89eb81abf9d9839d5.jpg', '', '', 0, 0, 0, 0, 0, 0, 0, '2026-08-25', '2026-08-25'),
+('7cbcd34a-af7d-48b7-9efa-1a41d441154c', 'D-II', 'victorbiz766hi@gmail.com', 'Op4AHpFM', 'GMI AAAAA', 'Jl Hang Tuah no 8666', 1029, '3.5787638435716866', '98.6709907631618', 'Permanen', 'Milik Sendiri', 'g-ercy6i', 'JDKKM7yGIA64', 'public/uploads/sk/1788407774_71426211fd9ca4708cb0.jpg', 'JPen', 'W1', 0, 0, 0, 0, 0, 0, 0, '2026-09-03', '2026-09-03'),
+('7cbcd34a-af7d-48b7-9efa-1a41d441154e', 'D-II', 'silalahitotok@gmail.com', 'test222', 'GMI XBB', 'Jl Hang Tuah no 8666', 1077, '', '', 'Permanen', 'Milik Sendiri', 'g-g8kpmb', '', '', 'JPen', '', 0, 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00'),
+('7cbcd34a-af7d-48b7-9efa-1a41d441154f', 'D-II', 'silalahitotok@gmail.com', 'test333', 'GMI XCC', 'Jl Hang Tuah no 8666', 1077, '', '', 'Permanen', 'Milik Sendiri', 'g-qxntrb', '', '', 'JPen', '', 0, 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00'),
+('7cbcd34a-af7d-48b7-9efa-1a41d441154g', 'D-II', 'silalahitotok@gmail.com', 'test444', 'GMI XDD', 'Jl Hang Tuah no 8666', 1077, '', '', 'Permanen', 'Milik Sendiri', 'g-tswqvq', '', '', 'JPen', '', 0, 0, 0, 0, 0, 0, 0, '0000-00-00', '0000-00-00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tjumlahjemaat`
+--
+
+CREATE TABLE `tjumlahjemaat` (
+  `gereja_id` varchar(100) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `tanggal` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tjumlahjemaat`
+--
+
+INSERT INTO `tjumlahjemaat` (`gereja_id`, `jumlah`, `tanggal`) VALUES
+('e2946a7f-fc77-459b-82de-d6c544529f4e', 40, '2026-10-01'),
+('e2946a7f-fc77-459b-82de-d6c544529f4e', 30, '2026-09-01');
 
 -- --------------------------------------------------------
 
@@ -631,7 +684,7 @@ CREATE TABLE `tpendeta` (
 
 INSERT INTO `tpendeta` (`pendeta_id`, `nama`, `email`, `mobile_phone`) VALUES
 (4, 'Pdt Lubis', 'silalahitotok@gmail.com', '0860867087'),
-(5, 'Pdt Lubis', 'batakanalyzer@gmail.com', '888777');
+(5, 'Pdt Lubis B', 'batakanalyzer@gmail.com', '888777');
 
 -- --------------------------------------------------------
 
@@ -651,7 +704,10 @@ CREATE TABLE `tpenempatan` (
 
 INSERT INTO `tpenempatan` (`penempatan_id`, `gereja_id`, `pendeta_id`) VALUES
 (1, 'e2946a7f-fc77-459b-82de-d6c544529f4e', 4),
-(4, '7cbcd34a-af7d-48b7-9efa-1a41d441154c', 5);
+(4, '7cbcd34a-af7d-48b7-9efa-1a41d441154c', 5),
+(5, '7cbcd34a-af7d-48b7-9efa-1a41d441154e', 4),
+(6, '7cbcd34a-af7d-48b7-9efa-1a41d441154f', 5),
+(7, '7cbcd34a-af7d-48b7-9efa-1a41d441154g', 5);
 
 -- --------------------------------------------------------
 
@@ -722,8 +778,23 @@ CREATE TABLE `tresort` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data for table `tresort`
+--
+
+INSERT INTO `tresort` (`resort_id`, `nama_resort`, `distrik_id`) VALUES
+(1, 'Resort Hang Tuah', 6),
+(5, 'Resort Medan Baru', 6),
+(6, 'Resort Tuntungan', 6);
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `tanggotaresort`
+--
+ALTER TABLE `tanggotaresort`
+  ADD UNIQUE KEY `anggotaresort_id` (`anggotaresort_id`);
 
 --
 -- Indexes for table `tdistrik`
@@ -766,6 +837,12 @@ ALTER TABLE `tresort`
 --
 
 --
+-- AUTO_INCREMENT for table `tanggotaresort`
+--
+ALTER TABLE `tanggotaresort`
+  MODIFY `anggotaresort_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+
+--
 -- AUTO_INCREMENT for table `tdistrik`
 --
 ALTER TABLE `tdistrik`
@@ -787,7 +864,7 @@ ALTER TABLE `tpendeta`
 -- AUTO_INCREMENT for table `tpenempatan`
 --
 ALTER TABLE `tpenempatan`
-  MODIFY `penempatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `penempatan_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tprovinsi`
@@ -799,7 +876,7 @@ ALTER TABLE `tprovinsi`
 -- AUTO_INCREMENT for table `tresort`
 --
 ALTER TABLE `tresort`
-  MODIFY `resort_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `resort_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
