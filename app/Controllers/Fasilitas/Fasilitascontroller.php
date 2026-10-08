@@ -18,11 +18,12 @@ class Fasilitascontroller extends BaseController
 
     public function fasilitas()
     {
+        $session = session();
+        // $identity_link = $this->request->getPost("identity_link");
 
-        $identity_link = $this->request->getPost("identity_link");
-
+        $identity_link = $session->get('identity_link');
         $sql = "select Gedung_Gereja, Pastori, Gedung_Sekolah_Minggu, Sekolah, Gedung_Serba_Guna, Lahan_Kosong, Pemakaman from tgereja where identity_link='".$identity_link."'";
-
+        // echo($sql);
         // $db = $this->set_db();
 
         $db = \Config\Database::connect();

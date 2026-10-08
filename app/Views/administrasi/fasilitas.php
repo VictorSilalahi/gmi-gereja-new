@@ -80,32 +80,32 @@
                       <tr>
                         <th scope="row">2</th>
                         <td>Pastori</td>
-                        <td><input class="form-check-input" type="checkbox" value="" id="Gedung_Sekolah_Minggu"></td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Pastori"></td>
                       </tr>
                       <tr>
                         <th scope="row">3</th>
                         <td>Gedung Sekolah Minggu</td>
-                        <td><input class="form-check-input" type="checkbox" value="" id="Gedung_Serba_Guna"></td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Gedung_Sekolah_Minggu"></td>
                       </tr>
                       <tr>
                         <th scope="row">4</th>
                         <td>Sekolah</td>
-                        <td><input class="form-check-input" type="checkbox" value="" id="Lahan_Kosong"></td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Sekolah"></td>
                       </tr>
                       <tr>
                         <th scope="row">5</th>
                         <td>Gedung Serba Guna</td>
-                        <td><input class="form-check-input" type="checkbox" value="" id="Pastori"></td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Gedung_Serba_Guna"></td>
                       </tr>
                       <tr>
                         <th scope="row">6</th>
                         <td>Lahan Kosong</td>
-                        <td><input class="form-check-input" type="checkbox" value="" id="Pemakaman"></td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Lahan_Kosong"></td>
                       </tr>
                       <tr>
                         <th scope="row">7</th>
                         <td>Pemakaman</td>
-                        <td><input class="form-check-input" type="checkbox" value="" id="Sekolah"></td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Pemakaman"></td>
                       </tr>
                     </tbody>
                   </table>                  

@@ -17,10 +17,12 @@ $(document).ready(function () {
 
 
 
-$(document).on("click", "#btnTambahKegiatan", function () {
-  $("#opKegiatan").text("Tambah Kegiatan");
-  $("#txtJenisOpKegiatan").val("tambah");
-  $("#AddEditKegiatan").modal("show");
+$(document).on("click", ".form-check-input", function () {
+
+  let field_name = $(this).attr("id");
+
+  
+
 
 });
 
@@ -28,18 +30,34 @@ $(document).on("click", "#btnTambahKegiatan", function () {
 
 function loadDataFasilitas() {
 
-  // let identity_link = sessionStorage.getItem("identity_link");
-
-  // console.log(identity_link);
-
-  // var data = ajax_post(base_url+"fasilitas", {"identity_link": identity_link});
+  var temp = ajax_post(base_url+"fasilitas", {});
 
   // console.log(data);
 
-  if (data.msg == "ok") {
-      // console.log(data["Gedung_Gereja"]);
-
-      $("#Gedung_Gereja").prop("checked", data["Gedung_Gereja"]);
+  if (temp.msg == "ok") {
+      let data = temp.data;
+      // alert(data["Gedung_Gereja"]);
+      if (data["Gedung_Gereja"]==1) {
+        $("#Gedung_Gereja").prop("checked", true);
+      } 
+      if (data["Pastori"]==1) {
+        $("#Pastori").prop("checked", true);
+      } 
+      if (data["Gedung_Sekolah_Minggu"]==1) {
+        $("#Gedung_Sekolah_Minggu").prop("checked", true);
+      } 
+      if (data["Sekolah"]==1) {
+        $("#Sekolah").prop("checked", true);
+      } 
+      if (data["Gedung_Serba_Guna"]==1) {
+        $("#Gedung_Serba_Guna").prop("checked", true);
+      } 
+      if (data["Lahan_Kosong"]==1) {
+        $("#Lahan_Kosong").prop("checked", true);
+      } 
+      if (data["Pemakaman"]==1) {
+        $("#Pemakaman").prop("checked", true);
+      } 
 
   }
 
