@@ -182,6 +182,11 @@ class Administrasi extends BaseController
         return view('administrasi/kegiatan');
     }
 
+    public function fasilitas() 
+    {
+        return view('administrasi/fasilitas');
+    }
+
     public function kebaktian() 
     {
         return view('administrasi/kebaktian');

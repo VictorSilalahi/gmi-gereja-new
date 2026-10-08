@@ -47,6 +47,7 @@
                               <a class="nav-link" href="<?php echo(base_url()); ?>organisasi">Organisasi</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>kegiatan">Program Kerja</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>kebaktian">Kebaktian</a>
+                              <a class="nav-link" href="<?php echo(base_url()); ?>fasilitas">Fasilitas</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>report/sektor">Report</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>seting">Seting</a>
                               <a class="nav-link" href="<?php echo(base_url()); ?>logout"><span class="badge text-bg-danger">Logout</span></a>
