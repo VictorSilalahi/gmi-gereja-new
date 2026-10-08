@@ -56,31 +56,56 @@
                     <div class="col-3"></div>
                     <div class="col-3"></div>
                     <div class="col-3"></div>
-                    <div class="col-3">
-                      <button type="button" class="btn btn-primary" id="btnTambahKegiatan">Tambah Kegiatan</button>
-                    </div>
+                    <div class="col-3"></div>
 
                 </div>
 
-                <br>
 
                 <div class="row">
 
-                  <table class="table" id="tblKegiatan">
+                  <table class="table">
                     <thead>
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Tanggal</th>
-                        <th scope="col">Judul</th>
+                        <th scope="col">Fasilitas</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Mark</td>
-                        <td><button type="button" class="btn btn-secondary">Edit</button>&nbsp;<button type="button" class="btn btn-danger">Hapus</button></td>
+                        <td>Gedung Gereja</td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Gedung_Gereja"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Pastori</td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Gedung_Sekolah_Minggu"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Gedung Sekolah Minggu</td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Gedung_Serba_Guna"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4</th>
+                        <td>Sekolah</td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Lahan_Kosong"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5</th>
+                        <td>Gedung Serba Guna</td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Pastori"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">6</th>
+                        <td>Lahan Kosong</td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Pemakaman"></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">7</th>
+                        <td>Pemakaman</td>
+                        <td><input class="form-check-input" type="checkbox" value="" id="Sekolah"></td>
                       </tr>
                     </tbody>
                   </table>                  
@@ -96,38 +121,7 @@
 
     </div>
 
-    <div class="modal fade" id="AddEditKegiatan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="opKegiatan">New message</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="txtTanggal" class="col-form-label">Tanggal:</label>
-                <input type="date" class="form-control" id="txtTanggal">
-              </div>
-              <div class="mb-3">
-                <label for="txtJudul" class="col-form-label">Judul Kegiatan:</label>
-                <input type="text" class="form-control" id="txtJudul">
-              </div>
-              <div class="mb-3">
-                <label for="txtDeskripsi" class="col-form-label">Deskripsi:</label>
-                <textarea class="form-control" id="txtDeskripsi" rows="16"></textarea>
-              </div>
-              <input type="hidden" value="" id="txtJenisOpKegiatan">
-              <input type="hidden" value="" id="txtKegiatanID">
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-            <button type="button" class="btn btn-primary" id="btnOKKegiatan">OK</button>
-          </div>
-        </div>
-      </div>
-    </div>
+
 
     <input type="hidden" id="base_url" value="<?php echo(base_url()); ?>">
 </body>
