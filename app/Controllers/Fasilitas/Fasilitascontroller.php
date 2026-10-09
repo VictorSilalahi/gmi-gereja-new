@@ -19,7 +19,6 @@ class Fasilitascontroller extends BaseController
     public function fasilitas()
     {
         $session = session();
-        // $identity_link = $this->request->getPost("identity_link");
 
         $identity_link = $session->get('identity_link');
         $sql = "select Gedung_Gereja, Pastori, Gedung_Sekolah_Minggu, Sekolah, Gedung_Serba_Guna, Lahan_Kosong, Pemakaman from tgereja where identity_link='".$identity_link."'";
@@ -53,50 +52,31 @@ class Fasilitascontroller extends BaseController
 
     }
 
-
-    public function kegiatan_add()
+    public function fasilitas_ubah()
     {
 
-        $tanggal = $this->request->getPost("tanggal");
-        $judul = $this->request->getPost("judul");
-        $deskripsi = $this->request->getPost("deskripsi");
+        $session = session();
 
-        $sql = "insert into tkegiatan (tanggal, judul_kegiatan, deskripsi) values ('".$tanggal."','".$judul."','".$deskripsi."')";
+        $identity_link = $session->get('identity_link');
+        $field_name = $this->request->getPost("field_name");
+        $nilai = $this->request->getPost("nilai");
 
-        $db = $this->set_db();
+        $sql = "update tgereja set ".$field_name."=".$nilai." where identity_link='".$identity_link."'";
+        // echo($sql);
+        // $db = $this->set_db();
 
-        $db->query($sql);
+        $db = \Config\Database::connect();
 
-        // catat log
-        $this->catat_log($db, "tambah", "kegiatan");
+        $query = $db->query($sql);
 
-        return $this->respond([
-            "msg"=>"ok", 
-            "data"=>"data kegiatan berhasil diinput"
-        ]);
+        if ($query) {
 
-
-    }
-
-
-    public function kegiatan_del() 
-    {
-
-        $kegiatan_id = $this->request->getPost("kegiatan_id");
-
-        $sql = "delete from tkegiatan where kegiatan_id=".$kegiatan_id;
-
-        $db = $this->set_db();
-
-        $db->query($sql);
-
-        // catat log
-        $this->catat_log($db, "hapus", "kegiatan");
-
-        return $this->respond([
-            "msg"=>"ok", 
-            "data"=>"data kegiatan berhasil dihapus"
-        ]);
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>""
+            ]);
+            
+        }
 
     }
 

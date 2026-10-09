@@ -17,11 +17,13 @@ $(document).ready(function () {
 
 
 
-$(document).on("click", ".form-check-input", function () {
+$(document).on("change", ".form-check-input", function () {
 
   let field_name = $(this).attr("id");
 
-    
+  let nilai = $("#"+field_name).is(":checked");
+
+  let temp = ajax_post(base_url+"fasilitas/ubah", {"field_name": field_name, "nilai": nilai});
 
 
 });

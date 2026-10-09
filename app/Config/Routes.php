@@ -95,6 +95,7 @@ $routes->get('/api/intern/kebaktian/checkminggu', 'Kebaktian\Kebaktiancontroller
 
 // Fasilitas
 $routes->post('/api/intern/fasilitas', 'Fasilitas\Fasilitascontroller::fasilitas');
+$routes->post('/api/intern/fasilitas/ubah', 'Fasilitas\Fasilitascontroller::fasilitas_ubah');
 
 
 // Seting
