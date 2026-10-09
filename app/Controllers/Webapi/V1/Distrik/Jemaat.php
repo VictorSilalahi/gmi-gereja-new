@@ -67,11 +67,26 @@ class Jemaat extends BaseController
             $penuh = 0;
             $persiapan = 0;
 
+            $seksi = [];
+            $nama_seksi = ['P2MI', 'P3MI', 'PWMI', 'PRMI'];
+            foreach($nama_seksi as $ns) {
+                $seksi[$ns] = 0;
+            }
+
             foreach($result as $row) {
 
                 // pindah database menjadi database gereja di dalam distrik
                 $db = $this->set_db($row->db_id);
-    
+
+                // jumlah anggota seksi-seksi
+
+                foreach($nama_seksi as $ns) {
+                    $sql = "SELECT count(*) as jumlah from tanggotaorganisasi, torganisasi where tanggotaorganisasi.organisasi_id=torganisasi.organisasi_id and torganisasi.organisasi='".$ns."'";
+                    $query = $db->query($sql);
+                    $result = $query->getRow();
+                    $seksi[$ns] = $seksi[$ns] + $result->jumlah;
+                }
+
                 // cari jumlah KK
                 $sql = "select count(*) as jumlah from tjemaat";
                 $result = $db->query($sql);
@@ -88,7 +103,7 @@ class Jemaat extends BaseController
 
                 $golongan_darah = [];
 
-                $sql = "select tanggotajemaat.golongan_darah, tanggotajemaat.pendidikan_terakhir, tanggotajemaat.pekerjaan, tanggotajemaat.tanggal_lahir, tanggotajemaat.tanggal_baptis, tsidi.is_sidi, tsidi.tanggal_sidi from tanggotajemaat, tsidi where tanggotajemaat.anggotajemaat_id=tsidi.anggotajemaat_id and tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+                $sql = "select tanggotajemaat.anggotajemaat_id, tanggotajemaat.golongan_darah, tanggotajemaat.pendidikan_terakhir, tanggotajemaat.pekerjaan, tanggotajemaat.tanggal_lahir, tanggotajemaat.tanggal_baptis, tsidi.is_sidi, tsidi.tanggal_sidi from tanggotajemaat, tsidi where tanggotajemaat.anggotajemaat_id=tsidi.anggotajemaat_id and tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
 
                 $query = $db->query($sql);
 
@@ -225,7 +240,6 @@ class Jemaat extends BaseController
                         }
                         
 
-
                     }
 
                     $data['jumlah_kk'] = $jumlah_kk;
@@ -262,7 +276,7 @@ class Jemaat extends BaseController
                     
                     $data['tipe_jemaat']['penuh'] = $penuh;
                     $data['tipe_jemaat']['persiapan'] = $persiapan;
-
+                    $data['seksi'] = $seksi;
 
                 }
 
