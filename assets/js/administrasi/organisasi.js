@@ -10,7 +10,7 @@ $(document).ready(function () {
   $.LoadingOverlay("show");
 
   loadDataOrganisasi();
-  loadDataAnggotaOrganisasi();
+  // loadDataAnggotaOrganisasi();
   loadAutoComplete();
 
   $.LoadingOverlay("hide");
@@ -165,7 +165,9 @@ function loadDataOrganisasi() {
     }
 
     $("#tblOrganisasi tbody").html(isi_tabel);
-    $("#slcOrganisasiForm").html(isi_select);
+    // $("#slcOrganisasiForm").html(isi_select);
+    $("#slcSeksi").html(isi_select);
+
 
   }
 

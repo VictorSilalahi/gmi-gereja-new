@@ -67,6 +67,8 @@ class Jemaat extends BaseController
             $penuh = 0;
             $persiapan = 0;
 
+            $pelayan = 0;
+
             $seksi = [];
             $nama_seksi = ['P2MI', 'P3MI', 'PWMI', 'PRMI'];
             foreach($nama_seksi as $ns) {
@@ -239,6 +241,17 @@ class Jemaat extends BaseController
                             $persiapan = $persiapan + 1;
                         }
                         
+                        // mencari jumlah anggota seksi
+                        // $sql = "select count(*) from tanggotaorganisasi where anggotajemaat_id=".$row->anggotajemaat_id;
+
+                        // $query = $db->query($sql);
+
+                        // if ($query) {
+
+                        //     $temp = $query->getRow();
+
+                        //     if ($temp->)
+                        // }
 
                     }
 
