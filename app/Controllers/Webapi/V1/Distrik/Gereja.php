@@ -428,6 +428,11 @@ class Gereja extends BaseController
         $jumlah_anggota_kk_aktif = 0;
         $jumlah_anggota_kk_tidak_aktif = 0;
 
+        $jumlah_p2mi = 0;
+        $jumlah_p3mi = 0;
+        $jumlah_pwmi = 0;
+        $jumlah_prmi = 0;
+
         $anak_anak = 0;
         $remaja = 0;
         $pemuda = 0;
@@ -624,6 +629,51 @@ class Gereja extends BaseController
 
             }
 
+
+            // P2MI, P3MI, PWMI, PRMI
+            $sql = "select count(*) as jumlah from tanggotajemaat, tanggotaorganisasi, torganisasi where tanggotajemaat.anggotajemaat_id=tanggotaorganisasi.anggotajemaat_id and tanggotaorganisasi.organisasi_id=torganisasi.organisasi_id and torganisasi.organisasi='P2MI' and tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+
+            $query = $db->query($sql);
+
+            if ($query) {
+
+                $result = $query->getRow();
+                $jumlah_p2mi = $result->jumlah;
+            
+            }
+
+            $sql = "select count(*) as jumlah from tanggotajemaat, tanggotaorganisasi, torganisasi where tanggotajemaat.anggotajemaat_id=tanggotaorganisasi.anggotajemaat_id and tanggotaorganisasi.organisasi_id=torganisasi.organisasi_id and torganisasi.organisasi='P3MI' and tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+
+            $query = $db->query($sql);
+
+            if ($query) {
+
+                $result = $query->getRow();
+                $jumlah_p3mi = $result->jumlah;
+            
+            }
+
+            $sql = "select count(*) as jumlah from tanggotajemaat, tanggotaorganisasi, torganisasi where tanggotajemaat.anggotajemaat_id=tanggotaorganisasi.anggotajemaat_id and tanggotaorganisasi.organisasi_id=torganisasi.organisasi_id and torganisasi.organisasi='PWMI' and tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+
+            $query = $db->query($sql);
+
+            if ($query) {
+
+                $result = $query->getRow();
+                $jumlah_pwmi = $result->jumlah;
+            
+            }
+
+            $sql = "select count(*) as jumlah from tanggotajemaat, tanggotaorganisasi, torganisasi where tanggotajemaat.anggotajemaat_id=tanggotaorganisasi.anggotajemaat_id and tanggotaorganisasi.organisasi_id=torganisasi.organisasi_id and torganisasi.organisasi='PRMI' and tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
+
+            $query = $db->query($sql);
+
+            if ($query) {
+
+                $result = $query->getRow();
+                $jumlah_prmi = $result->jumlah;
+            
+            }
 
             // kelompok umur
             $sql = "select tanggal_lahir from tanggotajemaat where tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
@@ -993,6 +1043,12 @@ class Gereja extends BaseController
                     "anggota"=>array(
                         "jumlah anggota jemaat kk aktif"=>$jumlah_anggota_kk_aktif, 
                         "jumlah anggota jemaat kk tidak aktif"=>$jumlah_anggota_kk_tidak_aktif
+                    ),
+                    "seksi"=>array(
+                        "P2MI"=>$jumlah_p2mi,
+                        "P3MI"=>$jumlah_p3mi,
+                        "PWMI"=>$jumlah_pwmi,
+                        "PRWMI"=>$jumlah_prmi
                     ),
                     "kelompok umur"=>array(
                         "anak-anak"=>$anak_anak,
