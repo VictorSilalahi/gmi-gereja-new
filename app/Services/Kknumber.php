@@ -45,6 +45,10 @@ class Kknumber
                 $new_numb = "0".strval($numb+1); 
             }
 
+            if ($numb+1>99 && $numb+1<1000) {
+                $new_numb = strval($numb+1); 
+            }
+
             return $new_numb;
 
         } else {
