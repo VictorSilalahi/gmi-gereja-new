@@ -21,7 +21,12 @@ class Jemaat extends BaseController
         
         $distrik = $this->request->getPost("distrik");
 
-        $sql = "select db_id from tgereja where distrik='".$distrik."'";
+        if ($distrik=='') {
+            $sql = "select db_id from tgereja";
+        } else {
+            $sql = "select db_id from tgereja where distrik='".$distrik."'";
+        }
+
         $db = $this->activate_db();
 
         $query = $db->query($sql);
