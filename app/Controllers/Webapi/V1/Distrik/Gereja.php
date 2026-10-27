@@ -22,7 +22,15 @@ class Gereja extends BaseController
 
         $distrik = $this->request->getPost("distrik");
 
-        $sql = "select gereja_id, email, nama_gereja, alamat, lat, lng, kondisi_bangunan, kepemilikan, tipe from tgereja where distrik='".$distrik."'";
+        if ($distrik!='') {
+
+            $sql = "select gereja_id, email, nama_gereja, alamat, lat, lng, kondisi_bangunan, kepemilikan, tipe from tgereja where distrik='".$distrik."'";
+
+        } else {
+
+            $sql = "select gereja_id, email, nama_gereja, alamat, lat, lng, kondisi_bangunan, kepemilikan, tipe from tgereja";
+
+        }
 
         $db = $this->activate_db();
 
