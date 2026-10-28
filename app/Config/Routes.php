@@ -137,6 +137,8 @@ $routes->group('webapi', static function ($routes) {
             $routes->post('distrik/resort/memberout', 'Webapi\V1\Distrik\Gereja::resort_member_out');
             $routes->post('distrik/resort/memberin', 'Webapi\V1\Distrik\Gereja::resort_member_in');
 
+            $routes->post('wilayah/cari', 'Webapi\V1\Distrik\Gereja::cari_gereja');
+
             $routes->get('provinsi', 'Webapi\V1\Distrik\Gereja::provinsi');
             $routes->post('kabupaten', 'Webapi\V1\Distrik\Gereja::kabkota');
 

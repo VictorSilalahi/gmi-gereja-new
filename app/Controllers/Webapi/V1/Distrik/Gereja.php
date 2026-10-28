@@ -76,6 +76,57 @@ class Gereja extends BaseController
 
     }
 
+
+    public function cari_gereja()
+    {
+
+        $cari = $this->request->getPost("cari");
+
+        $sql = "select gereja_id, email, nama_gereja, alamat, tipe, distrik from tgereja where nama_gereja like '%".$cari."%' or nama_gereja like '%".$cari."' or nama_gereja like '".$cari."%' order by distrik";
+
+        $db = $this->activate_db();
+
+        $query = $db->query($sql);
+
+        $data = [];
+
+        if ($query) {
+
+            $result = $query->getResult();
+
+            foreach($result as $row) {
+
+                array_push($data, array(
+                    "gereja_id"=>$row->gereja_id,
+                    "email"=>$row->email,
+                    "nama_gereja"=>$row->nama_gereja,
+                    "alamat"=>$row->alamat,
+                    "tipe"=>$row->tipe,
+                    "distrik"=>$row->distrik
+                ));
+            }
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$data
+            ]);
+
+
+        } else {
+
+            $error = $db->error();    
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
+
+        }
+
+    }
+
+
+
     public function resort_edit()
     {
 
