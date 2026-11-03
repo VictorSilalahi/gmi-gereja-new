@@ -854,6 +854,8 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
           $("#tblDaftarCalonJemaatEdit tbody").html(isi);
           $("#formEditJemaat").show();
           $("#editJemaatAnggota").modal("show");
+
+          
         }
     
     } else {
