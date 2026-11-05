@@ -75,7 +75,7 @@ class Jemaat extends BaseController
             $pelayan = 0;
 
             $seksi = [];
-            $nama_seksi = ['P2MI', 'P3MI', 'PWMI', 'PRMI'];
+            $nama_seksi = ['P2MI', 'P3MI', 'PWMI', 'PRMI', 'SM'];
             foreach($nama_seksi as $ns) {
                 $seksi[$ns] = 0;
             }
@@ -219,7 +219,7 @@ class Jemaat extends BaseController
                         } 
 
                         // remaja
-                        if ($interval->format('%y')<=17 && $interval->format('%y')>=13) {
+                        if ($interval->format('%y')<=17 && $interval->format('%y')>=14) {
                             $remaja = $remaja + 1;
                         } 
 
