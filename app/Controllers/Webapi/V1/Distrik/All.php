@@ -42,7 +42,7 @@ class All extends BaseController
 
             return $this->respond([
                     "msg"=>"ok", 
-                    "data"=>$data
+                    "data"=>sort($data)
             ]);
             
         }
