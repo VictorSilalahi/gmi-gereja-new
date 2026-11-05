@@ -40,9 +40,12 @@ class All extends BaseController
 
             }
 
+            sort($data);
+            // print_r($data_sort);
+
             return $this->respond([
                     "msg"=>"ok", 
-                    "data"=>sort($data)
+                    "data"=>$data
             ]);
             
         }
