@@ -491,6 +491,7 @@ class Gereja extends BaseController
         $jumlah_p3mi = 0;
         $jumlah_pwmi = 0;
         $jumlah_prmi = 0;
+        $jumlah_sm = 0;
 
         $anak_anak = 0;
         $remaja = 0;
@@ -689,7 +690,7 @@ class Gereja extends BaseController
             }
 
 
-            // P2MI, P3MI, PWMI, PRMI
+            // P2MI, P3MI, PWMI, PRMI, SM
             $sql = "select count(*) as jumlah from tanggotajemaat, tanggotaorganisasi, torganisasi where tanggotajemaat.anggotajemaat_id=tanggotaorganisasi.anggotajemaat_id and tanggotaorganisasi.organisasi_id=torganisasi.organisasi_id and torganisasi.organisasi='P2MI' and tanggotajemaat.anggotajemaat_id not in (select anggotajemaat_id from twafat)";
 
             $query = $db->query($sql);
@@ -773,6 +774,12 @@ class Gereja extends BaseController
                     if ($interval->format('%y')>=65) {
                         $lansia = $lansia + 1;
                     }  
+
+                    // jumlah SM
+                    if ($interval->format('%y')<=14 && $interval->format('%y')>=2) {
+                        $jumlah_sm = $jumlah_sm + 1;
+                    }  
+
 
                 }
 
@@ -1107,7 +1114,8 @@ class Gereja extends BaseController
                         "P2MI"=>$jumlah_p2mi,
                         "P3MI"=>$jumlah_p3mi,
                         "PWMI"=>$jumlah_pwmi,
-                        "PRWMI"=>$jumlah_prmi
+                        "PRWMI"=>$jumlah_prmi,
+                        "SM"=>$jumlah_sm
                     ),
                     "kelompok umur"=>array(
                         "anak-anak"=>$anak_anak,

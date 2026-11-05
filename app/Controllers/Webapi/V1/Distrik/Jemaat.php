@@ -214,7 +214,7 @@ class Jemaat extends BaseController
                         $interval = date_diff($tanggal_lahir, $tanggal_sekarang);
 
                         // anak-anak
-                        if ($interval->format('%y')<=12) {
+                        if ($interval->format('%y')<=13) {
                             $anak_anak = $anak_anak + 1;
                         } 
 
@@ -246,17 +246,11 @@ class Jemaat extends BaseController
                             $persiapan = $persiapan + 1;
                         }
                         
-                        // mencari jumlah anggota seksi
-                        // $sql = "select count(*) from tanggotaorganisasi where anggotajemaat_id=".$row->anggotajemaat_id;
+                        // jumlah sekolah minggu
+                        if ($interval->format('%y')<=13 && $interval->format('%y')>=2) {
+                            $seksi['SM'] = $seksi['SM'] + 1;
+                        } 
 
-                        // $query = $db->query($sql);
-
-                        // if ($query) {
-
-                        //     $temp = $query->getRow();
-
-                        //     if ($temp->)
-                        // }
 
                     }
 
