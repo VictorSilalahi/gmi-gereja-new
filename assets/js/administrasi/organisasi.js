@@ -9,7 +9,7 @@ $(document).ready(function () {
 
   $.LoadingOverlay("show");
 
-  loadDataOrganisasi();
+  // loadDataOrganisasi();
   // loadDataAnggotaOrganisasi();
   loadAutoComplete();
 
@@ -215,4 +215,6 @@ function loadAutoComplete() {
     source: daftar_nama,
     autoFocus:true
   });
+
+
 }

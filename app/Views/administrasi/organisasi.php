@@ -53,33 +53,11 @@
                     <div class="col-3"></div>
                     <div class="col-3"></div>
                     <div class="col-3"></div>
-                    <div class="col-3">
-                      <button type="button" class="btn btn-primary" id="btnTambahOrganisasi">Tambah Organisasi</button>
-                    </div>
+                    <div class="col-3"></div>
 
                 </div>
 
 
-                <div class="row">
-
-                  <table class="table" id="tblOrganisasi">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Nama</th>
-                        <th scope="col">Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td><button type="button" class="btn btn-secondary">Edit</button>&nbsp;<button type="button" class="btn btn-danger">Hapus</button></td>
-                      </tr>
-                    </tbody>
-                  </table>                  
-
-                </div>
 
                 <div class="row">
 
@@ -93,7 +71,11 @@
 
                       <div class="col-sm-4">
                         <select class="form-control" id="slcSeksi">
-
+                          <option value="P2MI">P2MI</option>
+                          <option value="P3MI">P3MI</option>
+                          <option value="PWMI">PWMI</option>
+                          <option value="PRMI">PRMI</option>
+                          <option value="SM">SM</option>
                         </select>
                       </div>
                       <button type="button" class="btn btn-info col-sm-2 btn-ok-lihat-anggota">Lihat Data</button>
