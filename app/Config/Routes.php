@@ -79,7 +79,7 @@ $routes->get('/api/intern/organisasi/all', 'Organisasi\Organisasicontroller::org
 $routes->post('/api/intern/organisasi/add', 'Organisasi\Organisasicontroller::organisasi_add');
 $routes->post('/api/intern/organisasi/change', 'Organisasi\Organisasicontroller::organisasi_change');
 $routes->post('/api/intern/organisasi/del', 'Organisasi\Organisasicontroller::organisasi_del');
-$routes->get('/api/intern/organisasi/anggota', 'Organisasi\Organisasicontroller::organisasi_anggota');
+$routes->post('/api/intern/organisasi/anggota', 'Organisasi\Organisasicontroller::organisasi_anggota');
 $routes->post('/api/intern/organisasi/anggota/add', 'Organisasi\Organisasicontroller::organisasi_anggota_add');
 $routes->post('/api/intern/organisasi/anggota/del', 'Organisasi\Organisasicontroller::organisasi_anggota_del');
 

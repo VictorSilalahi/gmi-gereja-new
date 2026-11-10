@@ -64,12 +64,12 @@
                   <hr>
                   <h3><span class="badge bg-secondary">Data Anggota Seksi</span></h3>
 
-                  <div class="row">
+                  <div class="row align-self-end">
                     
                     <div class="mb-3 row">
                       <label class="col-form-label col-sm-2">Nama Seksi:</label>
 
-                      <div class="col-sm-4">
+                      <div class="col-sm-3">
                         <select class="form-control" id="slcSeksi">
                           <option value="P2MI">P2MI</option>
                           <option value="P3MI">P3MI</option>
@@ -78,17 +78,44 @@
                           <option value="SM">SM</option>
                         </select>
                       </div>
-                      <button type="button" class="btn btn-info col-sm-2 btn-ok-lihat-anggota">Lihat Data</button>
 
                     </div>
 
                   </div>
 
+                  <hr>
+
                   <div class="row">
 
-                    <div class="d-flex justify-content-end">                  
-                      <button type="button" class="btn btn-primary col-sm-2 btn-ok-tambah-anggota-organisasi">Tambah</button>
+                    <div class="mb-3 row">
+
+                      <div class="col-sm-3">
+
+                        <label>Nama Calon Anggota Seksi</label>
+                        <input type="text" id="txtNamaCalonAnggota">
+
+                      </div>
+
+                      <div class="col-sm-3">
+
+                        <label>Seksi</label>
+                        <select class="form-control" id="slcSeksiForm">
+                          <option value="P2MI">P2MI</option>
+                          <option value="P3MI">P3MI</option>
+                          <option value="PWMI">PWMI</option>
+                          <option value="PRMI">PRMI</option>
+                        </select>
+
+                      </div>
+
+
+                      <div class="col-sm-3">
+
+                        <button class="btn btn-primary btn-ok-tambah-anggota-organisasi">Input</button>
+                      </div>
+
                     </div>
+
 
                   </div>
 
@@ -98,7 +125,7 @@
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">Nama</th>
-                          <th scope="col">Organisasi</th>
+                          <th scope="col">Seksi</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>

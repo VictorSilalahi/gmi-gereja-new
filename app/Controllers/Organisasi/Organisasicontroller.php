@@ -5,6 +5,8 @@ namespace App\Controllers\Organisasi;
 use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use CodeIgniter\I18n\Time;
+use DateTime;
 use Config\Services;
 use Exception;
 
@@ -138,39 +140,94 @@ class Organisasicontroller extends BaseController
     public function organisasi_anggota()
     {
 
+        $organisasi = $this->request->getPost("organisasi");
+
         $sql = "select tanggotaorganisasi.anggotaorganisasi_id, tanggotajemaat.nama, torganisasi.organisasi from tanggotaorganisasi, tanggotajemaat, torganisasi ";
         $sql = $sql . "where tanggotaorganisasi.anggotajemaat_id=tanggotajemaat.anggotajemaat_id and tanggotaorganisasi.organisasi_id=torganisasi.organisasi_id";
-        $sql = $sql . " order by torganisasi.organisasi";
+        $sql = $sql . "  and torganisasi.organisasi='".$organisasi."' order by tanggotajemaat.nama";
 
-        // echo($sql);
+        if ($organisasi!='SM') {
 
-        $db = $this->set_db();
 
-        $query = $db->query($sql);
+            $db = $this->set_db();
 
-        if ($query) {
+            $query = $db->query($sql);
 
-            $data = [];
+            if ($query) {
 
-            $result = $query->getResult();
+                $data = [];
 
-            foreach($result as $row) {
+                $result = $query->getResult();
 
-                array_push($data, array(
-                        "anggotaorganisasi_id"=>$row->anggotaorganisasi_id,
-                        "nama"=>$row->nama,
-                        "organisasi"=>$row->organisasi
-                    )
-                );
+                foreach($result as $row) {
+
+                    array_push($data, array(
+                            "anggotaorganisasi_id"=>$row->anggotaorganisasi_id,
+                            "nama"=>$row->nama,
+                            "organisasi"=>$row->organisasi
+                        )
+                    );
+
+                }
+
+                return $this->respond([
+                        "msg"=>"ok", 
+                        "data"=>$data
+                ]);  
 
             }
 
-            return $this->respond([
+
+        } else {
+
+
+            $sql = "select tanggotajemaat.nama, tanggotajemaat.tanggal_lahir from tanggotajemaat where tanggotajemaat.anggotajemaat_id not in (select twafat.anggotajemaat_id from twafat)";
+            
+            $db = $this->set_db();
+
+            $query = $db->query($sql);
+
+
+            if ($query) {
+
+                $result = $query->getResult();
+
+                $data = [];
+                $SM = [];
+
+                foreach ($result as $row) {
+
+                    $tanggal_lahir = date_create($row->tanggal_lahir);
+                    $tanggal_sekarang = Time::now();
+
+                    $interval = date_diff($tanggal_lahir, $tanggal_sekarang);
+
+
+                    // cari antara umur 2 ke 13 tahun
+                    if ($interval->format('%y')<=13 && $interval->format('%y')>=2) {
+                        array_push($SM, 
+                            array(
+                                "nama"=>$row->nama,
+                                "organisasi"=>"SM"
+                            )
+                        );
+                    } 
+
+                    
+                }
+
+                $data = array("SM"=>$data);
+
+                return $this->respond([
                     "msg"=>"ok", 
-                    "data"=>$data
-            ]);  
+                    "data"=>$SM
+                ]);
+
+
+            }
 
         }
+
 
 
     }
@@ -180,11 +237,35 @@ class Organisasicontroller extends BaseController
     {
 
         $nama = $this->request->getPost("nama");
-        $organisasi_id = $this->request->getPost("organisasi_id");
+        $organisasi = $this->request->getPost("organisasi");
 
-        $sql = "select anggotajemaat_id from tanggotajemaat where nama='".$nama."'";
 
         $db = $this->set_db();
+
+        $sql = "select count(*) as jumlah from torganisasi where organisasi='".$organisasi."'";
+
+        $query = $db->query($sql);
+
+        $result = $query->getRow();
+
+        if ($result->jumlah==0) {
+
+            $sql = "insert into torganisasi (organisasi) values ('".$organisasi."')";
+
+            $db->query($sql);
+            
+        } 
+
+        $sql = "select organisasi_id from torganisasi where organisasi='".$organisasi."'";
+
+        $query = $db->query($sql);
+
+        $result = $query->getRow();
+
+        $organisasi_id = $result->organisasi_id;
+
+
+        $sql = "select anggotajemaat_id from tanggotajemaat where nama='".$nama."'";
 
         $query = $db->query($sql);
 
