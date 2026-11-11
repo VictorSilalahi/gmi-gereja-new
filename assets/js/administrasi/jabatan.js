@@ -9,55 +9,23 @@ $(document).ready(function () {
 
   $.LoadingOverlay("show");
 
-  loadDataJabatan();
-  loadDataPejabat();
   loadAutoComplete();
 
   $.LoadingOverlay("hide");
 
 });
 
-$(document).on("click", ".btn-delete", function () {
 
-  let base_url = $("#base_url").val()+"api/intern/";
-  
-  if (confirm("Apakah akan menghapus data jabatan ini?")) {
-    var jabatan_id = $(this).parent().parent().attr("id");
-    var jawab = ajax_post(base_url+"jabatan/del", { jabatan_id: jabatan_id });
+$(document).on("change", "#slcPelayan", function() {
 
-    if (jawab.msg == "error") {
-      alert("Data jabatan ini tidak bisa dihapus! Telah dipakai!");
-      return false;
 
-    } else {
-      loadDataJabatan();
-      loadDataPejabat();
+  let jabatan = $(this).val();
 
-    }
-
-  }
-
-});
-
-$(document).on("click", ".btn-edit", function () {
-
-  var jabatan_id = $(this).parent().parent().attr("id");
-  var jabatan = $(this).parent().parent().find("td:eq(1)").text();
-  
-  $("#opJabatan").text("Edit Jabatan");
-  $("#txtJenisOpJabatan").val("edit");
-  $("#txtNamaJabatan").val(jabatan);
-  $("#txtJabatanID").val(jabatan_id);
-  $("#AddEditJabatan").modal("show");
+  loadDataPejabat(jabatan);  
 
 
 });
 
-$(document).on("click", "#btnTambahJabatan", function () {
-  $("#opJabatan").text("Tambah Jabatan");
-  $("#txtJenisOpJabatan").val("tambah");
-  $("#AddEditJabatan").modal("show");
-});
 
 $(document).on("click", ".btn-delete-pejabat", function() {
 
@@ -81,60 +49,14 @@ $(document).on("click", ".btn-delete-pejabat", function() {
 });
 
 
-$(document).on("click", "#btnOKJabatan", function () {
 
-
-  let base_url = $("#base_url").val()+"api/intern/";
-
-  if ($("#txtNamaJabatan").val() == "") {
-    alert("Masukkan nama jabatan!");
-    $("#txtNamaJabatan").focus();
-    return false;
-  }
-
-
-  if ($("#txtJenisOpJabatan").val() == "tambah") {
-
-    var data = ajax_post(base_url+"jabatan/add", {jabatan: $("#txtNamaJabatan").val()});
-
-    if (data.msg == "error") {
-      alert(data.data);
-
-    } else {
-      loadDataJabatan();
-      loadDataPejabat();
-      $("#txtNamaJabatan").val("");
-      $("#AddEditJabatan").modal("hide");
-
-    }
-
-  } else {
-
-    var data = ajax_post(base_url+"jabatan/change", { jabatan_id: $("#txtJabatanID").val(), jabatan: $("#txtNamaJabatan").val() });
-
-    if (data.msg == "error") {
-
-      alert(data.data);
-
-    } else {
-      loadDataJabatan();
-      loadDataPejabat();
-      $("#txtNamaJabatan").val("");
-      $("#AddEditJabatan").modal("hide");
-
-    }
-  }
-
-
-});
-
-$(".btn-ok-tambah-pejabat").on("click", function() {
+$(".btn-ok-tambah-anggota-pelayan").on("click", function() {
   
   let base_url = $("#base_url").val()+"api/intern/";
 
-  if ($("#txtNamaPejabat").val()=='') {
-    alert("Masukkan nama pejabat!");
-    $("#txtNamaPejabat").focus();
+  if ($("#txtNamaCalonPelayan").val()=='') {
+    alert("Masukkan nama calon pelayan!");
+    $("#txtNamaCalonPelayan").focus();
     return false;
   
   }
@@ -146,16 +68,16 @@ $(".btn-ok-tambah-pejabat").on("click", function() {
 
   }
 
-  var nama_pejabat = $("#txtNamaPejabat").val();
-  var jabatan_id = $("#slcJabatanForm").val();
+  var nama_pejabat = $("#txtNamaCalonPelayan").val();
+  // var jabatan_id = $("#slcJabatanForm").val();
   var tgl_pengangkatan = $("#tglPengangkatan").val();
-  let jabatan = $("#slcJabatanForm option:selected").text();
+  let jabatan = $("#slcFormPelayan option:selected").text();
 
-  var data = ajax_post(base_url+"jabatan/pejabat/add", { "nama": nama_pejabat, "jabatan_id": jabatan_id, "tanggal_pengangkatan": tgl_pengangkatan });
+  var data = ajax_post(base_url+"jabatan/pejabat/add", { "nama": nama_pejabat, "jabatan": jabatan, "tanggal_pengangkatan": tgl_pengangkatan });
 
   if (data.msg=='ok') {
-    $("#txtNamaPejabat").val("");
-    loadDataPejabat()
+    $("#txtNamaCalonPelayan").val("");
+    loadDataPejabat(jabatan)
   
   } else {
 
@@ -164,6 +86,7 @@ $(".btn-ok-tambah-pejabat").on("click", function() {
   }
 
 });
+
 
 
 $(document).on("click", ".btn-berhenti-pejabat", function() {
@@ -180,6 +103,7 @@ $(document).on("click", ".btn-berhenti-pejabat", function() {
 
 $(document).on("click", "#btnBerhentiJabatan", function() {
 
+  let jabatan = $("#slcFormPelayan option:selected").val();
   let nama_pejabat = $("#nama_pejabat").val();
   let pejabat_id = $("#pejabat_id").val();
 
@@ -206,45 +130,19 @@ $(document).on("click", "#btnBerhentiJabatan", function() {
 
 });
 
-function loadDataJabatan() {
 
-  let base_url = $("#base_url").val()+"api/intern/";
-  
 
-  var data = ajax_get(base_url+"jabatan/all", "");
 
-  if (data.msg == "ok") {
-    var isi_tabel = "";
-    var isi_select = "";
-    var no = 1;
-    for (var i = 0; i < data.data.length; i++) {
-      isi_tabel =
-        isi_tabel +
-        "<tr id='" +
-        data.data[i]["jabatan_id"] +
-        "'><td>" +
-        no +
-        "</td><td>" +
-        data.data[i]["jabatan"] +
-        "</td><td><button class='btn btn-secondary btn-edit'>Edit</button>&nbsp;<button class='btn btn-danger btn-delete'>Hapus</button></td></tr>";
-      no++;
-
-      isi_select = isi_select + "<option value='"+data.data[i]['jabatan_id']+"'>"+data.data[i]['jabatan']+"</option>";
-
-    }
-    $("#tblJabatan tbody").html(isi_tabel);
-    $("#slcJabatanForm").html(isi_select);
-
-  }
-}
-
-function loadDataPejabat() {
+function loadDataPejabat(jabatan) {
 
   let base_url = $("#base_url").val()+"api/intern/";
 
   $("#tblPejabat tbody").html("");
 
-  var data = ajax_get(base_url+"jabatan/pejabat/all", "");
+
+  var data = ajax_post(base_url+"jabatan/pejabat/all", {"jabatan": jabatan});
+
+  // console.log(data);
 
   if (data.msg == "ok") {
     var isi_tabel = "";
@@ -255,9 +153,10 @@ function loadDataPejabat() {
       isi_tabel = isi_tabel+"<td>&nbsp;<button class='btn btn-warning btn-berhenti-pejabat'>Berhenti</button></td></tr>";
       no++;
 
-
     }
+
     $("#tblPejabat tbody").html(isi_tabel);
+
   }
 
 }
@@ -275,7 +174,7 @@ function loadAutoComplete() {
     daftar_nama.push(data.data[i]['nama']);
   }
   
-  $("#txtNamaPejabat").autocomplete({
+  $("#txtNamaCalonPelayan").autocomplete({
     source: daftar_nama,
     autoFocus:true
   });

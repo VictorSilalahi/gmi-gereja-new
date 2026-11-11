@@ -70,7 +70,7 @@ $routes->get('/api/intern/jabatan/all', 'Jabatan\Jabatancontroller::jabatan_all'
 $routes->post('/api/intern/jabatan/add', 'Jabatan\Jabatancontroller::jabatan_add');
 $routes->post('/api/intern/jabatan/change', 'Jabatan\Jabatancontroller::jabatan_change');
 $routes->post('/api/intern/jabatan/del', 'Jabatan\Jabatancontroller::jabatan_del');
-$routes->get('/api/intern/jabatan/pejabat/all', 'Jabatan\Jabatancontroller::pejabat_all');
+$routes->post('/api/intern/jabatan/pejabat/all', 'Jabatan\Jabatancontroller::pejabat_all');
 $routes->post('/api/intern/jabatan/pejabat/add', 'Jabatan\Jabatancontroller::pejabat_add');
 $routes->post('/api/intern/jabatan/pejabat/del', 'Jabatan\Jabatancontroller::pejabat_del');
 

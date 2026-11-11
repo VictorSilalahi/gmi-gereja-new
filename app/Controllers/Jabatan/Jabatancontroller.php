@@ -141,9 +141,11 @@ class Jabatancontroller extends BaseController
     public function pejabat_all()
     {
 
+        $jabatan = $this->request->getPost("jabatan");
+
         $db = $this->set_db();
 
-        $sql = "select tpejabat.pejabat_id, tanggotajemaat.nama, tjabatan.jabatan from tanggotajemaat, tjabatan, tpejabat where tanggotajemaat.anggotajemaat_id=tpejabat.anggotajemaat_id and tpejabat.jabatan_id=tjabatan.jabatan_id";
+        $sql = "select tpejabat.pejabat_id, tanggotajemaat.nama, tjabatan.jabatan from tanggotajemaat, tjabatan, tpejabat where tanggotajemaat.anggotajemaat_id=tpejabat.anggotajemaat_id and tpejabat.jabatan_id=tjabatan.jabatan_id and tjabatan.jabatan='".$jabatan."'";
 
         $query = $db->query($sql);
 
@@ -178,11 +180,25 @@ class Jabatancontroller extends BaseController
     {
 
         $nama = $this->request->getPost("nama");
-        $jabatan_id = $this->request->getPost("jabatan_id");
+        $jabatan = $this->request->getPost("jabatan");
         $tanggal_pengangkatan = $this->request->getPost("tanggal_pengangkatan");
         // echo($tanggal_pengangkatan);
 
         $db = $this->set_db();
+
+        $sql = "select count(*) as jumlah from tjabatan where jabatan='".$jabatan."'";
+
+        $query = $db->query($sql);
+
+        $result = $query->getRow();
+
+        if ($result->jumlah==0) {
+
+            $sql = "insert into tjabatan (jabatan) values ('".$jabatan."')";
+
+            $db->query($sql);
+            
+        } 
 
         $sql = "select anggotajemaat_id from tanggotajemaat where nama='".$nama."'";
 
@@ -192,7 +208,13 @@ class Jabatancontroller extends BaseController
 
             $result = $query->getRow();
 
-            $sql = "select count(*) as jumlah from tpejabat where anggotajemaat_id=".$result->anggotajemaat_id." and jabatan_id=".$jabatan_id;
+            $sql = "select jabatan_id from tjabatan where jabatan='".$jabatan."'";
+
+            $query_jabatan = $db->query($sql);
+
+            $res_jabatan = $query_jabatan->getRow();
+
+            $sql = "select count(*) as jumlah from tpejabat where anggotajemaat_id=".$result->anggotajemaat_id." and jabatan_id=".$res_jabatan->jabatan_id;
 
             $res_jumlah = $db->query($sql);
 
@@ -200,11 +222,11 @@ class Jabatancontroller extends BaseController
 
             if ($row_jumlah->jumlah==0) {
 
-                $sql = "insert into tpejabat (anggotajemaat_id, jabatan_id) values (".$result->anggotajemaat_id.",".$jabatan_id.")";
+                $sql = "insert into tpejabat (anggotajemaat_id, jabatan_id) values (".$result->anggotajemaat_id.",".$res_jabatan->jabatan_id.")";
 
                 $db->query($sql);
 
-                $sql = "select jabatan from tjabatan where jabatan_id=".$jabatan_id;
+                $sql = "select jabatan from tjabatan where jabatan_id=".$res_jabatan->jabatan_id;
 
                 $query = $db->query($sql);
 
@@ -215,7 +237,7 @@ class Jabatancontroller extends BaseController
                     $jabatan = $result->jabatan;
 
                     // masukkan ke history jabatan
-                    $sql = "insert into thistorypejabat (nama, jabatan_id, tanggal_pengangkatan) values ('".$nama."','".$jabatan_id."','".$tanggal_pengangkatan."')";
+                    $sql = "insert into thistorypejabat (nama, jabatan_id, tanggal_pengangkatan) values ('".$nama."','".$res_jabatan->jabatan_id."','".$tanggal_pengangkatan."')";
 
                     $db->query($sql);
 
