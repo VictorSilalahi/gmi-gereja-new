@@ -492,9 +492,19 @@ $(document).on("click", ".btn-hapus-anggota", function () {
 
 $(document).on("click", ".btn-simpan-perubahan-anggota", function () {
 
+
   let base_url = $("#base_url").val()+"api/intern/";
 
   var anggotajemaat_id = $(this).parent().parent().attr("id");
+  var nama = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().find("input").val();
+
+  if (nama=='') {
+
+    alert("Nama jemaat tidak boleh kosong!");
+    return false;
+
+  } 
+
   var jk = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().find("option:selected").val();
   var gol_darah = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().find("option:selected").val();
   var tgl_lahir = $(this).parent().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().find("input").val();
@@ -509,6 +519,7 @@ $(document).on("click", ".btn-simpan-perubahan-anggota", function () {
   var pekerjaan = $(this).parent().prev().find("option:selected").val();
 
   var data = {
+              "nama": nama,
               "jk": jk, 
               "gol_darah": gol_darah, 
               "tgl_lahir": tgl_lahir, 
@@ -832,12 +843,12 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
             }
 
             if (data[i]['jk']==undefined) {
-              isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td><select><option></option><option value='L'>L</option><option value='P'>P</option></select></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"'></td><td>"+chk_baptis+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"'></td><td>"+chk_sidi+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
+              isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td><input type='text' value='"+data[i]['nama']+"'></td><td><select><option></option><option value='L'>L</option><option value='P'>P</option></select></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"'></td><td>"+chk_baptis+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"'></td><td>"+chk_sidi+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
             } else {
               if (data[i]['jk']=='L') {
-                isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td><select><option value='L' selected>L</option><option value='P'>P</option></selec></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"' onkeydown='return false'></td><td>"+chk_baptis+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"' onkeydown='return false'></td><td>"+chk_sidi+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"' onkeydown='return false'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"' onkeydown='return false'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"' onkeydown='return false'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
+                isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td><input type='text' value='"+data[i]['nama']+"'></td><td><select><option value='L' selected>L</option><option value='P'>P</option></selec></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"' onkeydown='return false'></td><td>"+chk_baptis+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"' onkeydown='return false'></td><td>"+chk_sidi+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"' onkeydown='return false'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"' onkeydown='return false'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"' onkeydown='return false'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
               } else {
-                isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td>"+data[i]['nama']+"</td><td><select><option value='L'>L</option><option value='P' selected>P</option></selec></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"' onkeydown='return false'></td><td>"+chk_baptis+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"' onkeydown='return false'></td><td>"+chk_sidi+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"' onkeydown='return false'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"' onkeydown='return false'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"' onkeydown='return false'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
+                isi = isi + "<tr id='"+data[i]['anggotajemaat_id']+"'><td><input type='text' value='"+data[i]['nama']+"'></td><td><select><option value='L'>L</option><option value='P' selected>P</option></selec></td><td>"+slcGolonganDarah+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_lahir']+"' onkeydown='return false'></td><td>"+chk_baptis+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_baptis']+"' onkeydown='return false'></td><td>"+chk_sidi+"</td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_sidi']+"' onkeydown='return false'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_menikah']+"' onkeydown='return false'></td><td><input type='date' style='width:90px;' value='"+data[i]['tgl_wafat']+"' onkeydown='return false'></td><td>"+slcPosisi+"</td><td>"+slcPendidikanTerakhir+"</td><td>"+slcPekerjaan+"</td><td>";
               }
             }
             if (data[i]['tgl_wafat']===null || data[i]['tgl_wafat']==='') {

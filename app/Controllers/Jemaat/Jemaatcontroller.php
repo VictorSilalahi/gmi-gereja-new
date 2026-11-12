@@ -442,6 +442,7 @@ class Jemaatcontroller extends BaseController
 
         $data = $this->request->getPost("data");
 
+        $nama = $data['nama'];
         $jk = $data['jk'];
         $gol_darah = $data['gol_darah'];
         $tgl_lahir = $data['tgl_lahir'];
@@ -458,6 +459,13 @@ class Jemaatcontroller extends BaseController
 
         $db = $this->set_db();
 
+        if ($nama) {
+
+            $sql = "update tanggotajemaat set nama='".$nama."' where anggotajemaat_id=".$anggotajemaat_id;
+
+            $query = $db->query($sql);
+
+        }
 
         if ($jk) {
 
