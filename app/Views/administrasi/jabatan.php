@@ -75,6 +75,7 @@
                           <option value="Lay Leader">Lay Leader</option>
                           <option value="Lay Speaker">Lay Speaker</option>
                           <option value="Bendahara">Bendahara</option>
+                          <option value="Majelis">Majelis</option>
                           <option value="Guru SM">Guru SM</option>
                         </select>
                       </div>
@@ -101,6 +102,7 @@
                           <option value="Lay Leader">Lay Leader</option>
                           <option value="Lay Speaker">Lay Speaker</option>
                           <option value="Bendahara">Bendahara</option>
+                          <option value="Majelis">Majelis</option>
                           <option value="Guru SM">Guru SM</option>
                         </select>
                       </div>
