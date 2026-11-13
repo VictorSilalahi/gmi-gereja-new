@@ -86,6 +86,9 @@ $(document).on("change", "#slcSektorForm", function() {
 $(document).on("click", "#btnTambahJemaat", function () {
   $("#opJemaat").text("Tambah Jemaat");
   $("#txtJenisOpSektor").val("tambah");
+  $("#slcSektorForm").val("");
+  $("#txtNIKAwal").val("");
+  $("#txtNIKAkhir").val("");
   $("#AddEditJemaat").modal("show");
 });
 
