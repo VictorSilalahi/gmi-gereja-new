@@ -1114,7 +1114,7 @@ class Gereja extends BaseController
                         "P2MI"=>$jumlah_p2mi,
                         "P3MI"=>$jumlah_p3mi,
                         "PWMI"=>$jumlah_pwmi,
-                        "PRWMI"=>$jumlah_prmi,
+                        "PRMI"=>$jumlah_prmi,
                         "SM"=>$jumlah_sm
                     ),
                     "kelompok umur"=>array(
