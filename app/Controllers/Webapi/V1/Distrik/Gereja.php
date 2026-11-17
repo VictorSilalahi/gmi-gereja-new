@@ -16,6 +16,63 @@ class Gereja extends BaseController
 
     use ResponseTrait;
     
+    public function gereja_in_distrik()
+    {
+
+        $distrik = $this->request->getPost("distrik");
+
+        $db = $this->activate_db();
+
+        $sql = "select tgereja.gereja_id, tgereja.email, tgereja.nama_gereja, tgereja.alamat, tgereja.tipe from tgereja where tgereja.distrik='".$distrik."' order by tgereja.nama_gereja";
+
+        $query = $db->query($sql);
+
+        $data = [];
+
+        if ($query) {
+
+            $result = $query->getResult();
+
+            foreach($result as $r) {
+
+                $sql = "select tpenempatan.penempatan_id, tpendeta.nama, tpendeta.email, tpendeta.mobile_phone from tpenempatan, tpendeta where tpenempatan.pendeta_id=tpendeta.pendeta_id and tpenempatan.gereja_id='".$r->gereja_id."'";
+
+                $query = $db->query($sql);
+
+                $result2 = $query->getRow();
+
+                array_push($data, array(
+                    "gereja_id"=>$r->gereja_id,
+                    "nama_gereja"=>$r->nama_gereja,
+                    "alamat"=>$r->alamat,
+                    "email_gereja"=>$r->email,
+                    "penempatan_id"=>$result2->penempatan_id,
+                    "nama_pendeta"=>$result2->nama, 
+                    "email_pendeta"=>$result2->email,
+                    "mobile_phone"=>$result2->mobile_phone
+                ));
+
+
+            }
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>$data
+            ]);
+
+
+        } else {
+
+            $error = $db->error();    
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
+
+        }
+
+    }
 
     public function gereja_all()
     {
@@ -24,11 +81,11 @@ class Gereja extends BaseController
 
         if ($distrik!='') {
 
-            $sql = "select gereja_id, email, nama_gereja, alamat, lat, lng, kondisi_bangunan, kepemilikan, tipe from tgereja where distrik='".$distrik."'";
+            $sql = "select tgereja.gereja_id, tgereja.email, tgereja.nama_gereja, tgereja.alamat, tgereja.lat, tgereja.lng, tgereja.kondisi_bangunan, tgereja.kepemilikan, tgereja.tipe from tgereja where tgereja.distrik='".$distrik."'";
 
         } else {
 
-            $sql = "select gereja_id, email, nama_gereja, alamat, lat, lng, kondisi_bangunan, kepemilikan, tipe from tgereja";
+            $sql = "select tgereja.gereja_id, tgereja.email, tgereja.nama_gereja, tgereja.alamat, tgereja.lat, tgereja.lng, tgereja.kondisi_bangunan, tgereja.kepemilikan, tgereja.tipe from tgereja";
 
         }
 
