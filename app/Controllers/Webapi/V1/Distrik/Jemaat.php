@@ -576,7 +576,7 @@ class Jemaat extends BaseController
 
         } else {
 
-            log_message('error', $e->getMessage());
+            log_message('error', $db->error());
             return $this->respond([
                 "msg"=>"error", 
                 "pesan"=>$e->getMessage()
