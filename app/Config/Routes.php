@@ -142,6 +142,7 @@ $routes->group('webapi', static function ($routes) {
             $routes->get('pekerja/(:segment)', 'Webapi\V1\Distrik\Pekerja::pekerja/$1');
             $routes->post('pekerja/add', 'Webapi\V1\Distrik\Pekerja::pekerja_add');
             $routes->post('pekerja/del', 'Webapi\V1\Distrik\Pekerja::pekerja_del');
+            $routes->post('pekerja/ubah', 'Webapi\V1\Distrik\Pekerja::pekerja_ubah_simpan');
 
 
             $routes->post('wilayah/cari', 'Webapi\V1\Distrik\Gereja::cari_gereja');
