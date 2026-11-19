@@ -74,6 +74,48 @@ class Gereja extends BaseController
 
     }
 
+
+    public function kebaktian_all()
+    {
+
+        $distrik = $this->request->getPost("distrik");
+
+
+        $data = [];
+
+        if ($distrik!='') {
+
+            $sql = "select tgereja.gereja_id from tgereja where tgereja.distrik='".$distrik."'";
+
+        } else {
+
+            $sql = "select tgereja.gereja_id from tgereja";
+
+        }
+
+        $db = $this->activate_db();
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getResult();
+
+            foreach($result as $r) {
+
+                // $sql = 
+
+            }
+
+        }
+
+
+
+
+    }
+
+
+
     public function gereja_all()
     {
 
