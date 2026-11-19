@@ -138,9 +138,11 @@ $routes->group('webapi', static function ($routes) {
             $routes->post('distrik/resort/memberout', 'Webapi\V1\Distrik\Gereja::resort_member_out');
             $routes->post('distrik/resort/memberin', 'Webapi\V1\Distrik\Gereja::resort_member_in');
 
-
-            $routes->post('pekerja/add', 'Webapi\V1\Distrik\Pekerja::pekerja_add');
             $routes->get('pekerja/all', 'Webapi\V1\Distrik\Pekerja::pekerja_all');
+            $routes->get('pekerja/(:segment)', 'Webapi\V1\Distrik\Pekerja::pekerja/$1');
+            $routes->post('pekerja/add', 'Webapi\V1\Distrik\Pekerja::pekerja_add');
+            $routes->post('pekerja/del', 'Webapi\V1\Distrik\Pekerja::pekerja_del');
+
 
             $routes->post('wilayah/cari', 'Webapi\V1\Distrik\Gereja::cari_gereja');
 

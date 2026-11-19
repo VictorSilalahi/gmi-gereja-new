@@ -71,6 +71,70 @@ class Pekerja extends BaseController
 
     }
 
+    function pekerja()
+    {
+
+        $pekerja_id = $this->request->getGet("pekerja_id");
+
+        $sql = "select from tpekerja where pekerja_id=".$pekerja_id;
+
+        $db = $this->activate_db();
+        
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>""
+            ]);
+
+
+        } else {
+
+            $error = $db->error();    
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
+
+        }
+
+
+    }
+
+    function pekerja_del()
+    {
+
+        $pekerja_id = $this->request->getPost("pekerja_id");
+
+        $sql = "delete from tpekerja where pekerja_id=".$pekerja_id;
+
+        $db = $this->activate_db();
+        
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            return $this->respond([
+                "msg"=>"ok", 
+                "data"=>""
+            ]);
+
+
+        } else {
+
+            $error = $db->error();    
+            log_message('error', 'Query failed: ' . $error['message']);
+            return $this->respond([
+                "msg"=>"error", 
+                "pesan"=>$error['message']
+            ]);
+
+        }
+    
+    }
 
     function pekerja_all() 
     {

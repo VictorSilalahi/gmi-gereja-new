@@ -34,7 +34,9 @@ export function pesan_tanya(pesan) {
                 title: "Deleted!",
                 text: "Your file has been deleted.",
                 icon: "success"
+        
         });
+        return true;
     });
 
 }
