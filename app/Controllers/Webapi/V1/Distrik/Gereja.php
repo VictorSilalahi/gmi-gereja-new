@@ -78,37 +78,26 @@ class Gereja extends BaseController
     public function kebaktian_all()
     {
 
+    
         $distrik = $this->request->getPost("distrik");
-
 
         $data = [];
 
-        if ($distrik!='') {
+        $bulan_mundur = 12;
+        $waktu_sekarang = Time::now();
 
-            $sql = "select tgereja.gereja_id from tgereja where tgereja.distrik='".$distrik."'";
+        for ($i=0; $i<$bulan_mundur; $i++) {
 
-        } else {
+                    $waktu_hitung = $waktu_sekarang->subMonths($i);
+                                                
+                    $m = $waktu_hitung->month;
+                    $y = $waktu_hitung->year;
 
-            $sql = "select tgereja.gereja_id from tgereja";
+                    $jumlah = 0;
 
-        }
 
-        $db = $this->activate_db();
-
-        $query = $db->query($sql);
-
-        if ($query) {
-
-            $result = $query->getResult();
-
-            foreach($result as $r) {
-
-                // $sql = 
-
-            }
 
         }
-
 
 
 
@@ -1270,6 +1259,7 @@ class Gereja extends BaseController
     }
 
 
+ 
     public function jumlah_jemaat_perbulan($gereja_id, $db)
     {
 
