@@ -82,24 +82,86 @@ class Gereja extends BaseController
         $distrik = $this->request->getPost("distrik");
 
         $data = [];
+        $db_list = [];
+
+        $db = $this->activate_db();
+
+        $sql = "select db_id from tgereja where distrik='".$distrik."'";
+
+        $query = $db->query($sql);
+
+        if ($query) {
+
+            $result = $query->getResult();
+
+            foreach($result as $r) {
+
+                array_push($db_list, $r->db_id);
+
+            }
+
+        }
+
+        // $db->close();
 
         $bulan_mundur = 12;
         $waktu_sekarang = Time::now();
 
+        
         for ($i=0; $i<$bulan_mundur; $i++) {
 
-                    $waktu_hitung = $waktu_sekarang->subMonths($i);
+            $waktu_hitung = $waktu_sekarang->subMonths($i);
                                                 
-                    $m = $waktu_hitung->month;
-                    $y = $waktu_hitung->year;
-
-                    $jumlah = 0;
+            $m = $waktu_hitung->month;
+            $y = $waktu_hitung->year;
 
 
+            $jumlah_kehadiran = 0;
+            $jumlah_persembahan = 0;
+
+            foreach($db_list as $dbi) {
+
+
+                $db->setDatabase($dbi);
+
+                $sql = "select kebaktian_id from tkebaktian where MONTH(tanggal)=".$m." and YEAR(tanggal)=".$y;
+
+                $query = $db->query($sql);
+
+                if ($query) {
+
+                    $result2 = $query->getResult();
+
+                    foreach($result2 as $r2) {
+
+                        $sql = "select sum(kehadiran) as jumlah_kehadiran, sum(persembahan) as jumlah_persembahan from tdatakebaktian where kebaktian_id=".$r2->kebaktian_id;
+
+                        $query = $db->query($sql);
+
+                        $result3 = $query->getRow();
+
+                        $jumlah_kehadiran = $result3->jumlah_kehadiran;
+
+                        $jumlah_persembahan = $result3->jumlah_persembahan;
+
+                    }
+
+                }
+
+            }
+            
+            array_push($data, array(
+                "masa_waktu"=>$m."-".$y,
+                "jumlah_kehadiran"=>$jumlah_kehadiran,
+                "jumlah_persembahan"=>$jumlah_persembahan
+            ));
 
         }
 
-
+        return $this->respond([
+            "msg"=>"ok", 
+            "data"=>$data
+        ]);
 
     }
 
@@ -533,6 +595,7 @@ class Gereja extends BaseController
         $resort_id = $this->request->getPost("resort_id");
 
         $db = $this->activate_db();
+
 
         foreach($daftar as $d) {
             
