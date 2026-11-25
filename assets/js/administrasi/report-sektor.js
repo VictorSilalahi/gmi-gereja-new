@@ -36,7 +36,8 @@ function loadDataSektor() {
   var data = ajax_get(base_url+"sektor/all", "");
 
   if (data.msg == "ok") {
-    var isi_select = "<option value=''>ALL</option>";
+
+    var isi_select = "<option value=''></option><option value=''>ALL</option>";
 
     for (var i = 0; i < data.data.length; i++) {
 
