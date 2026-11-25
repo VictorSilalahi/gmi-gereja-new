@@ -104,7 +104,7 @@
                       <tr>
                         <th scope="col">NIK</th>
                         <th scope="col">Mobile Phone</th>
-                        <th scope="col">Pimpinan Keluarga</th>
+                        <th scope="col">Nama Keluarga</th>
                         <th scope="col">Alamat</th>
                         <th scope="col">Jumlah Anggota Keluarga</th>
                         <th scope="col">Status Keanggotaan</th>
