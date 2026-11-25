@@ -64,7 +64,7 @@ function loadDataPerSektor(sektor_id) {
     
     var no = 1;
     for (var i=0; i<jumlah; i++) {
-        isi = isi + "<tr class='table-primary'><td></td><td>"+jawab['data'][i]['nik']+"</td><td colspan='6'>Alamat : "+jawab['data'][i]['alamat']+"</td><td>"+jawab['data'][i]['jumlah']+"</td><td>"+jawab['data'][i]['status_keanggotaan']+"</td></tr>";
+        isi = isi + "<tr class='table-primary'><td></td><td>"+jawab['data'][i]['nik']+"</td><td colspan='6'>Alamat : "+jawab['data'][i]['alamat']+"</td><td>"+jawab['data'][i]['jumlah']+"</td></tr>";
         // console.log("Jumlah anggota keluarga = ", jawab['data'][i]['jumlah']);
         for (var j=0; j<parseInt(jawab['data'][i]['jumlah']); j++) {
           

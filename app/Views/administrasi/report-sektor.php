@@ -132,7 +132,6 @@
                               <th scope="col" rowspan="2">Alamat</th>
                               <th scope="col" colspan="5">Anggota Keluarga</th>
                               <th scope="col" rowspan="2">Jumlah</th>
-                              <th scope="col" rowspan="2">Status Keanggotaan</th>
                             </tr>
                             <tr>
                               <th scope="col">Nama</th>
