@@ -107,7 +107,6 @@
                         <th scope="col">Nama Keluarga</th>
                         <th scope="col">Alamat</th>
                         <th scope="col">Jumlah Anggota Keluarga</th>
-                        <th scope="col">Status Keanggotaan</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>

@@ -617,7 +617,7 @@ function loadDataJemaat(sektor_id) {
     for (var i=0; i<jumlah; i++) {
       let nama_keluarga = temp['data'][i]['keluarga'][0]['pasangan'];
       let jumlah = temp['data'][i]['keluarga'][0]['jumlah'];
-      isi = isi + "<tr id='"+temp['data'][i]['jemaat_id']+"'><td><h5 class='nick'>"+temp['data'][i]['nik']+"</h5></td><td>"+temp['data'][i]['mobile_phone']+"</td><td>"+nama_keluarga+"</td><td>"+temp['data'][i]['alamat']+"</td><td>"+jumlah+"</td><td>"+temp['data'][i]['status_keanggotaan']+"</td><td>";
+      isi = isi + "<tr id='"+temp['data'][i]['jemaat_id']+"'><td><h5 class='nick'>"+temp['data'][i]['nik']+"</h5></td><td>"+temp['data'][i]['mobile_phone']+"</td><td>"+nama_keluarga+"</td><td>"+temp['data'][i]['alamat']+"</td><td>"+jumlah+"</td><td>";
       isi = isi + "<div class='dropdown'>";
       isi = isi + "<button class='btn btn-secondary dropdown-toggle' type='button' data-bs-toggle='dropdown' aria-expanded='false'>";
       isi = isi + "Edit</button>";
