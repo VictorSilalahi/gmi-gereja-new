@@ -96,8 +96,9 @@ function loadDataPerSektor(sektor_id) {
           no++;
         }
 
-
     }
+    
+    isi = isi + "<tr style='font-size:14px'><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td><p class='fw-bold fs-3'>T O T A L</p></td><td><p class='fw-bold fs-3'>"+no+"</p></td></tr>";
 
     $("#tblJemaat tbody").html(isi);
     
