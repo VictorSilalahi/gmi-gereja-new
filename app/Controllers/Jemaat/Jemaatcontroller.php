@@ -442,7 +442,7 @@ class Jemaatcontroller extends BaseController
 
         $data = $this->request->getPost("data");
 
-        // print_r($data);
+        print_r($data);
 
         $nama = $data['nama'];
         $jk = $data['jk'];
