@@ -442,6 +442,8 @@ class Jemaatcontroller extends BaseController
 
         $data = $this->request->getPost("data");
 
+        // print_r($data);
+
         $nama = $data['nama'];
         $jk = $data['jk'];
         $gol_darah = $data['gol_darah'];
@@ -523,6 +525,7 @@ class Jemaatcontroller extends BaseController
         }
 
 
+
         if ($chk_sidi) {
 
             $sql = "select count(*) as jumlah from tsidi where anggotajemaat_id=".$anggotajemaat_id;
@@ -551,8 +554,9 @@ class Jemaatcontroller extends BaseController
 
             }
 
-
         }
+
+
 
         if ($tgl_sidi) {
 
