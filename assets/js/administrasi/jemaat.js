@@ -835,7 +835,7 @@ function loadDataAnggotaKeluarga(jemaat_id, jenis='') {
             if (data[i]['pekerjaan'] == 'Petani') {
               slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani' selected>Petani</option><option value='Guru Injil'>Guru Injil</option><option value='Pendeta'>Pendeta</option><option value='Buruh Harian Lepas'>Buruh Harian Lepas</option><option value='None'>None</option></select>";
             }
-            if (data[i]['pekerjaan'] == 'Guru Injil') {
+            if (data[i]['pekerjaan'] == 'Guru-Injil') {
               slcPekerjaan = "<select style='width:70px;'><option value='ASN'>ASN</option><option value='TNI-Polri'>TNI-Polri</option><option value='Karyawan-Swasta'>Karyawan Swasta</option><option value='Pedagang'>Pedagang</option><option value='Wiraswasta'>Wiraswasta</option><option value='Dokter'>Dokter</option><option value='Petani'>Petani</option><option value='Guru Injil' selected>Guru Injil</option><option value='Pendeta'>Pendeta</option><option value='Buruh Harian Lepas'>Buruh Harian Lepas</option><option value='None'>None</option></select>";
             }
             if (data[i]['pekerjaan'] == 'Pendeta') {
