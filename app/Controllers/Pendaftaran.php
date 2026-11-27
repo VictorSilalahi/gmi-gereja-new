@@ -109,8 +109,8 @@ class Pendaftaran extends BaseController
         }
         
         if ($query) {
-            $result = $query->getResultArray();
-            $data = array("status"=>"ok", "judul"=>"cek keberadaan email", "jumlah"=>$result[0]['jumlah']);
+            $result = $query->getRow();
+            $data = array("status"=>"ok", "judul"=>"cek keberadaan email", "jumlah"=>$result->jumlah);
             return $this->respond($data, 200);
         } else {
             $data = array("status"=>"error", "judul"=>"cek keberadaan email", "pesan"=>"Error operasi!");
@@ -358,6 +358,84 @@ class Pendaftaran extends BaseController
 
     }
 
+    public function kirim_ulang_password()
+    {
+
+        $e = $this->request->getPost("email");
+
+        $sql = "select email, password from tgereja where email='".$e."'";
+
+        $db = \Config\Database::connect();
+
+        $query = $db->query($sql);
+
+        $result = $query->getRow();
+
+        $email_gereja = $result->email;
+        $pass_gereja = $result->password;
+
+        $email = \Config\Services::email();
+
+        $pengirim = getenv('email.SMTPUser');
+
+        $email->setFrom($pengirim, "Riset & Pengembangan | GMI Wil-I");
+        $email->setTo($email_gereja);
+        $email->setSubject('Status Pendaftaran Resort GMI Wil-I');
+
+        $message = '<!DOCTYPE html>';
+        $message = $message . '<html lang="en">';
+        $message = $message . '<head>';
+        $message = $message . '<meta charset="UTF-8">';
+        $message = $message . '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
+        $message = $message . '<title>Research and Development GMI Wil-I</title>';
+        $message = $message . '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">';
+        $message = $message . '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">';
+        $message = $message . '</head>';
+        $message = $message . '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>';
+        $message = $message . '<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>';
+        $message = $message . '<body>';
+        $message = $message . '<div class="container-fluid">';
+        $message = $message . '     <div class="row">';
+        $message = $message . '         <div class="col-4"></div>';
+        $message = $message . '         <div class="col-4">';
+        $message = $message . '             <p><h2>Proses Pengiriman ulang password telah selesai.</h2></p>';
+        $message = $message . '             <p>Anda dapat melakukan login ke aplikasi dengan menggunakan keterangan di bawah ini:</p>';
+        $message = $message . '             <hr>';
+        $message = $message . '             <p>Link: https://38.103.171.34/sigmi/gereja/</p>';
+        $message = $message . '             <p>Login: ' .$email_gereja. '</p>';
+        $message = $message . '             <p>Password: ' .$pass_gereja. '</p>';
+        $message = $message . '             <hr>';
+        $message = $message . '             <p>Catatan: password dapat di ubah di dalam aplikasi melalui menu Seting > Password</p>';
+        $message = $message . '         </div>';    
+        $message = $message . '         <div class="col-4"></div>';
+        $message = $message . '     </div>';
+        $message = $message . '</div>';
+        $message = $message . '</body>';
+        $message = $message . '</html>';
+
+        $email->setMessage($message);
+        $email->setMailType('html');  
+
+
+        if ($email->send(false)) {
+
+            return view('terima_kasih');    
+            return redirect()->to('terima_kasih');
+            // $data = array("status"=>"ok", "judul"=>"kirim ulang password gereja");
+            // return $this->respond($data, 200);
+
+
+        } else {
+
+            log_message('error', $email->printDebugger());
+            // error_log($this->email->print_debugger());
+            // echo($email->printDebugger(['headers', 'subject', 'body']));
+    
+        }
+
+
+    }
+
     public function kirim_email($email_gereja, $pwd)
     {
 
@@ -411,7 +489,7 @@ class Pendaftaran extends BaseController
 
         } else {
 
-            log_message('error', $this->email->print_debugger());
+            log_message('error', $this->email->printDebugger());
             // error_log($this->email->print_debugger());
             // echo($email->printDebugger(['headers', 'subject', 'body']));
     

@@ -25,6 +25,17 @@ class Administrasi extends BaseController
         // return view('administrasi/login');
     }
 
+    public function index3()
+    {
+        return view('administrasi/login2');
+    }
+
+    public function reclaim()
+    {
+        return view('reclaim/reclaim');
+    }
+
+
     public function logout()
     {
         $session = session();

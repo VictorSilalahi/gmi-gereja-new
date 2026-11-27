@@ -15,13 +15,16 @@ $routes->get('/daftar/terima_kasih', 'Pendaftaran::terima_kasih');
 $routes->post('/daftar/cek_email', 'Pendaftaran::cek_email');
 $routes->post('/daftar/cek_gereja', 'Pendaftaran::cek_gereja');
 $routes->post('/daftar/tambah_gereja', 'Pendaftaran::tambah_gereja');
+$routes->post('/repostpasswrd', 'Pendaftaran::kirim_ulang_password');
 
 
 // Backend Internal
 // ++++++++++++++++++++++++++++++++++++++++++++++++
 // route ke dalam aplikasi
-$routes->get('/', 'Administrasi::index');
-$routes->get('/index2', 'Administrasi::index2');
+$routes->get('/', 'Administrasi::index3');
+// $routes->get('/index2', 'Administrasi::index2');
+// $routes->get('/index3', 'Administrasi::index3');
+$routes->get('/reclaim', 'Administrasi::reclaim');
 $routes->get('/logout', 'Administrasi::logout');
 $routes->post('/validasi', 'Administrasi::validasi');
 $routes->get('/jemaat', 'Administrasi::jemaat');
